@@ -1,0 +1,12 @@
+title								url
+------------------------------------------------------------------------------------------------------------------------------------------------------
+meet: 						https://meet.google.com/nau-whcs-kke
+screen flow: 					https://miro.com/app/board/uXjVPzn3Qas=/
+screen detail:					https://docs.google.com/spreadsheets/d/1dJFt09bu6H8J1XJWYRspZEDMXWutRu7Y4C9ovkRKbiE/edit?pli=1#gid=0
+erd and class structure:			https://app.diagrams.net/?src=about#G1YYxBaUNcdUNVt1rGIoPMRYa_25LgZ9BN
+
+
+
+
+
+

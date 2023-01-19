@@ -1,0 +1,68 @@
+CUSTOMER
+- cần đi du lịch 
+	-> truy cập web 
+	-> tìm các nơi có lưu trú chim 
+	-> các cơ sở hiện ra với đánh giá (theo sao) + độ uy tín + cấp độ dịch vụ(C, B, A)
+	-> tìm được cơ sở "A" phù hợp
+	-> bấm vào detail của A
+	-> A show: tên, địa chỉ, độ uy tín, cấp dịch vụ, địa chỉ, hotline, trang web riêng của doanh nghiệp, 
+			các dịch vụ chi tiết, hình ảnh thực tế, feedback, 
+	-> ấn Booking Now
+(1)	-> nhập thông tin về: tên*, địa chỉ*, sđt*, email*, description*(cho bên quản lí chim), loại chim, growth -> tự hiện giá trung bình
+			ngày gửi chim đến*, lựa chọn dịch vụ ship*(YES), lựa chọn phương thức thanh toán(tiền mặt khi shipper chim đến)	
+	-> bấm Book
+	-> nhận thông báo book thành công
+
+	-> kiểm tra mail, (option)có người gọi đt đến đưa thông tin:
+		+ mã transaction
+		+ ngày giao hàng
+		+ đơn vị ship, trạng thái hiện tại ( đag bàn giao,... )
+		+ thông tin của customer: (1)
+		+ thông tin người quản lí chim đó (sđt, tên, avatar, email)
+	-> chờ và có shiper đến nhận chim (bên THIS)
+	-> gửi chim cho shipper -> bắt đầu đi du lịch
+(*)	-> trong tgian đi:
+		+ web -> vào mục profile -> transaction -> bấm vào thông tin của transaction hiện tại -> (nếu web thì nhập thông tin(mã) transaction)
+		+ show: hình ảnh con chim + trạng thái(đã ăn?, vận động?(hót), tình trạng sức khỏe?(bình thường), 
+			* list dịch vụ: 
+				= đã tắm 			0/1
+				= đã cắt móng, tỉa lông 	1/1
+				= tgian thả trong "vườn" 	12m
+				= dọn lồng chim định kỳ		1/1
+				= ăn 				1/3
+				= uống 				1/3
+
+		+ web -> profile -> edit profile -> bấm vào avatar -> change Avatar (dùng fileIO)
+		+ web -> profile -> transaction -> kéo dài tgian lưu trữ (expand time) -> kéo ô select thành 4 ngày -> update -> thông tin bill cập nhật chi phí phát sinh dự tính(trung bình + phí phát sinh)
+	-> đi du lịch về
+	-> web -> profile -> transaction -> chọn tgian chi tiết (giờ:phút) để tiến hành giao chim(nếu ko update default 20:00)
+	-> chim về -> thanh toán phí phát sinh
+	-> đánh giá phí dịch vụ (sao + feedback)
+	-> END.
+
+
+
+
+
+
+
+
+
+class Contract{
+	private static final cons_id;
+	... provider_id;
+	... admin_id;
+	private static final ContractService service;// composition
+	private static double price;
+
+
+
+}
+
+
+class ContractService{
+	... contract_service_id;
+	... name
+	... description
+	... price
+}

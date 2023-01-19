@@ -1,0 +1,72 @@
+- this project là bên thứ 3
+- lợi nhuận lấy từ %bill hoặc từ việc ưu tiên lên top trang quảng cáo
+- project sẽ show ra các "cơ sở lưu trú" only chim
+	+ có 1 vài nơi có nhận chim nhưng chỉ 1 vài loại như: chỉ nhận đại bàng, chỉ nhận các loại chim nhỏ
+	+ dịch vụ lưu trú là thuộc các dịch vụ của "cơ sở lưu trú"
+	+ có thể kiểm tra trạng thái "bird" = cách truy cập trang web của bên ta vào mục Progress trên thanh taskbar
+
+
+- lưu trú -> khách sạn
+SCOPE: topic "bird accommodation"
+- WHY: tại sao phải làm app này ?
+	-> người dùng cần lưu trú chim, trong quá trình lưu trú họ có thể xem trạng thái của chim trong khi họ đang đi du lịch/ công tác xa
+- WHAT: app cung cấp nh tính năng gì ?
+	
+
+- WHO: ai/ thiết bị/ hệ thống nào sẽ cùng tham gia vào việc vận hành app
+
+==User story==
+draft
+	<người cần lưu trú chim>
+	-> t muốn xem trạng thái của chim được lưu trữ được update mỗi 4 tiếng -> để biết được state/emotion của bird thế nào 
+	-> t muốn mua thêm các gói dịch vụ chăm sóc bird đặc biệt -> để có thể an tâm hơn 
+	-> t muốn kéo dài thời gian lưu trú khi có công việc/ sự kiện đột xuất
+ 	-> t muốn việc thanh toán có thể trả qua online 		để tiết kiệm tgian đi lại
+	-> t muốn có dịch vụ gửi bird tới nơi lưu trú			để tiết kiệm tgian đi lại
+	-> t muốn con chim có không gian để vui chơi(bay nhảy), hót, mà ko bị bó hẹp trong lồng chim
+	-> t muốn tùy vào tình trạng của chim t, t có thể lựa chọn và đặt "phòng phù hợp" : bình dân, cao cấp(stress)
+			#thú cưng khi bị bệnh
+
+
+	<as a "con chim">
+	-> được ăn/ uống ngày N bữa
+	-> tắm 1 lần 1 ngày 
+	-> có người dọn shit t 1 ngày 1 lần
+	-> có người cắt tỉa móng tay, tỉa lông
+	
+
+	<nơi cung cấp dịch vụ lưu trú>
+	-> t muốn việc đăng ký dịch vụ để được đăng trên web phải thao tác đơn giản(non-func)
+	-> thả trong "khu vườn" là có tính phí dịch vụ: 25k / tiếng
+	-> tại nơi chuyên về lưu trú chim họ có 1 khu vườn(cái lồng lớn như cái nhà kính) để cho những con chim tự do bay lượng
+		hình của khu vườn phải xuất hiện như avatar của nơi này 
+	-> các nhân viên ở cửa hàng chỉ có nhiệm vụ quản lý và cung cấp dịch vụ cho những thú cưng (chim_) chứ ko update hệ thống
+		-> solution: việc update đc tiến hành = việc lắp camera giám sát ở "khu vườn" và <AI> để theo dõi tiến độ
+	-> t muốn trang mình có thể lên top nhanh để hút nhiều khách (thêm $$)
+	-> t muốn ghi lại các transaction để dễ quản lý
+	-> t muốn bảng giá giành cho các loại thú cưng(chim) trong cửa hàng theo:  bird type : growth(baby,mature) => tiền(1 ngày)
+	-> có một cái chỗ nào đó để các thông tin liện lạc ( (option) facebook, Hotline, address )
+	-> khách hàng khi sử dụng dịch vụ bên t sẽ đc chăm sóc 24/7 -> dùng số điện thoại để nhận tư vấn 
+	-> t muốn có nơi để người dùng gửi những câu hỏi thắc mắc về shop (request ticket)
+	-> có nơi để người dùng đánh giá dịch vụ bên t (start + description): feedback
+	-> t muốn nhân việc biết được khách hàng nào đã đặt dịch vụ(sđt) để gọi điện cho chủ thú cưng(chim) về sức khỏe hiện thời(nguy cấp)
+	
+
+
+
+
+
+
+
+
+X	-> t muốn có hệ thống lọc(filter) giá tiền và tên ((option) thương hiệu) các sản phẩm trong cửa hàng trên web
+X	-> (option) t muốn bán các loại thức ăn, những dụng cụ chăm sóc thú cưng(như cây dọn shit cho mấy con mèo), gift for pet, đồ chơi 
+		cho thú cưng (chim cảnh) để kiếm thêm lợi nhuận
+X	-> t muốn có thể tùy chỉnh các "sales" option (5%, 10%,..) trên các mục sản phẩm kèm theo tgian (hết sales)
+X	-> (ko rõ) đặt lịch hẹn
+X	-> max limit storage offline online 
+
+
+	<This>
+	-> t muốn có thể đăng những bài news về thú cưng (tự cập nhật/show mỗi tuần)	-> cẩm nang thú cưng 
+	-> đưa đón tận đơn và freeship (trong bán kính 5km chẳng hạn, nếu trên -> 10k/1km)
