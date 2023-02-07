@@ -1,5 +1,9 @@
 const express = require('express')
-const { getAllCustomer, updateCustomerStatus  } = require('../modules/user_M')
+const { getAllCustomer } = require('../modules/user_M')
+// const { updateCustomer } = require('../modules/user_M')
+const { deleteCustomer } = require('../modules/user_M')
+const { updateCustomerStatus } = require('../modules/user_M')
+const { getCustomerById } = require('../modules/user_M')
 const router = express.Router();
 
 
@@ -11,21 +15,37 @@ router.get('/', async (req, res) => {
     res.json(await getAllCustomer())
 })
 
-
-// this code will run on localhost:5000/users/:userId
+//this code will run on localhost:5000/users/:userId/:status
 router.put('/:userId/:status', async (req, res) => {
-    // status 0: unban
-    // status 1: banned
-
-    // YOUR CODE GOES THERE
-    res.json(await updateCustomerStatus(req.params.userId, req.params.status == 0 ? 'unban' : 'banned'))
+    //status 0: unban, 1: ban
+    res.json(await updateCustomerStatus(req.params.userId, req.params.status == 0 ? 'unban' : 'ban'))
 })
 
+// this code will run on localhost:5000/users/:userId
+router.put('/:userId', async (req, res) => {
+    // YOUR CODE GOES THERE
+    //update data of user with id = userId
+    // require body (json account format)
+
+    res.json(await updateCustomer(req.params.userId, req.body))
+
+
+})
+
+//this code will run on localhost:5000/users/:userId
+router.get('/:userId', async (req, res) => {
+    //get user with id = userId
+
+    res.json(await getCustomerById(req.params.userId))
+})
 
 // this code will run on localhost:5000/users/:userId
 router.delete('/:userId', async (req, res) => {
+    // YOUR CODE GOES THERE
+    //delete user with id = userId
+
+    res.json(await deleteCustomer(req.params.userId))
     
 
-    // YOUR CODE GOES THERE
 })
 module.exports = router
