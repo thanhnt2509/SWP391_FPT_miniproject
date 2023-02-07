@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllCustomer } = require('../modules/user_M')
+const { getAllCustomer, updateCustomerStatus  } = require('../modules/user_M')
 const router = express.Router();
 
 
@@ -13,10 +13,12 @@ router.get('/', async (req, res) => {
 
 
 // this code will run on localhost:5000/users/:userId
-router.put('/:userId', async (req, res) => {
-    
+router.put('/:userId/:status', async (req, res) => {
+    // status 0: unban
+    // status 1: banned
 
     // YOUR CODE GOES THERE
+    res.json(await updateCustomerStatus(req.params.userId, req.params.status == 0 ? 'unban' : 'banned'))
 })
 
 

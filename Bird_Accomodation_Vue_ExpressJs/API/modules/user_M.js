@@ -7,6 +7,17 @@ async function getAllCustomer(){
     return (await data).recordset
 }
 
-// getAllCustomer()
+async function updateCustomerStatus(userId, status){
+    let con = connection()
+    const query = `update Accounts set status = '${status}' where userId = '${userId}'`
+    const data = con.then(pool => pool.request().query(query))
+    console.log(await data);
+    return (await data).recordset
+}
 
-module.exports = { getAllCustomer }
+async function deleteCustomer(id){
+    let con = connection()
+    const query = 'delete from Accounts where id = ?'
+}
+
+module.exports = { getAllCustomer, updateCustomerStatus, deleteCustomer }
