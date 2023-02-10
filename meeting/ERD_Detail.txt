@@ -1,0 +1,33 @@
+User
+	- username, userid, status(ban/unban), address, phone, birthday, roleid, birdId*
+		email, password, avatar __ token
+
+Bird
+	- birdId, birdName, bird type, bird age, image, description, status, userId
+
+
+Service
+	- serviceId, serviceName, description, service-image, price, status(on/off)
+
+
+Booking
+	- bookingId, userId, arrivalDate, departureDate, status(on-going, cancel, complete)
+	
+
+Booking Detail
+	- b_detailId, bookingId, serviceId, birdId
+
+
+Daily Booking Report(update)
+	- db_reportId, b_detailId, issue, bird-image-update, date
+
+
+Daily feedback
+	- db_reportId, b_detailId, feedback-content
+
+
+Bill
+	- billId, b_detailId, final-feedback , pay_method, checkout-date, *card
+
+
+	

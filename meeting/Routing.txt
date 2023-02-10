@@ -1,0 +1,54 @@
+
+/ 			#homepage
+
+/service: 		#list all service
+
+/about-us:		----
+
+/booking: 		
+	- GET: birdId of user
+	- POST: post data to BE to process #		
+
+/register
+	- GET/POST
+
+/login
+	- GET/POST
+
+/user-homepage
+	- GET: get all data of user
+		+ ./list-booking (filter ..., booking status)
+			- GET: booking, 
+		+ ./edit-profile
+			- POST: 
+		+ ./booking-detail/:b_detailId
+			- GET: Detail data
+		+ ./bird-register
+			- GET: page
+			- POST: post data to store
+		+ ./bird-list
+			- GET: all bird of user
+
+
+/admin-homepage
+		+ ./list-booking (on-going booking as default page - sort(complete, cancel))
+			- GET: all current booking data
+			- POST: create new booking
+			- PUT: update data{status, daily_report} on booking
+			- DELETE: ___
+		+ ./list-post
+			- GET: list all post
+			- POST: creat new post
+			- PUT: update post
+			- DELETE: delete post
+		+ ./list-service
+			- GET: list all service
+			- POST: creat new service
+			- PUT: update service
+			- DELETE: delete service
+
+		+ ./list-account
+			- GET: list all account
+			- POST: creat new account
+			- PUT: update account{ban/unban}
+			- DELETE: delete account
