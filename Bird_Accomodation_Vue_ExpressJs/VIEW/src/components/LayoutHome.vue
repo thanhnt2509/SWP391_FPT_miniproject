@@ -9,8 +9,8 @@
 
 
         <!-- SERVICE -->
-        <div class="service" v-for="service in ServiceList">
-            <div class="each_service" :key="service.id">
+        <div class="service" v-for="service in ServiceList.serviceList" :key="service.id ">
+            <div class="each_service">
                 <div class="service_header">
                     <h3>{{ service.name }}</h3>
                 </div>
@@ -98,6 +98,4 @@
 <script setup>
 import {ref} from 'vue'
 import ServiceList from '../dum_data/ServiceList'
-
-
 </script>

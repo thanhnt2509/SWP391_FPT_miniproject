@@ -18,16 +18,16 @@ Booking Detail
 	- b_detailId, bookingId, serviceId, birdId
 
 
-Daily Booking Report(update)
-	- db_reportId, b_detailId, issue, bird-image-update, date
+Daily Report(update)
+	- dreportId, bookingId, bird-image-update, date
 
 
 Daily feedback
-	- db_reportId, b_detailId, feedback-content
+	- dfeedback_id, bookingId, title, content
 
 
 Bill
-	- billId, b_detailId, final-feedback , pay_method, checkout-date, *card
+	- billId, bookingId, final-feedback , pay_method, checkout-date, *card
 
 
 	
