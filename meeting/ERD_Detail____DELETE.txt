@@ -1,11 +1,11 @@
 User
-	- username, userid, status(ban/unban), address, phone, birthday, roleid, birdId*
+	- username, userid, status(ban/unban), address, phone, birthday, roleid
 		email, password, avatar __ token
 
 Bird
 	- birdId, birdName, bird type, bird age, image, description, status, userId
 
-
+	
 Service
 	- serviceId, serviceName, description, service-image, price, status(on/off)
 

@@ -1,0 +1,20 @@
+User:
+	=> user_id, username, email, password, name, address
+
+Birds:
+	=> bird_id, species, breed(phan biet neu 2 con co cung loai), age, gender, description
+
+Accommodation:
+	=> accommodation_id, type, capacity, location, price_per_night, description
+
+Bookings:
+	=> booking_id, user_id, bird_id, accommodation_id, date_from, date_to, total_price, service_id
+
+Services:
+	=> service_id, name, description, price
+
+Bills
+	=> bill_id, accommodation_id, total_ammount, date
+
+Reviews
+	=> review_id, user_id, bird_id, accommodation_id, rating, comment
