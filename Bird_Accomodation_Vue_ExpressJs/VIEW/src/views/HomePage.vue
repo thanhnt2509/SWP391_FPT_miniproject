@@ -7,11 +7,12 @@
         </a-layout>
         <Footer />
     </a-layout>
+    
 </template>
 
 
 <script setup>
 import Header from '../components/Header.vue'
-import Body from '../components/LayoutHome.vue'
+import Body from '../components/Content_Home.vue'
 import Footer from '../components/Footer.vue'
 </script>

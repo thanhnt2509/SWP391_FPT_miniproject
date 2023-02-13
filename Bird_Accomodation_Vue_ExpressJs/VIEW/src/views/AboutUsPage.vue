@@ -11,5 +11,5 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
-import Body from '../components/Content_Service.vue'
+import Body from '../components/Content_Aboutus.vue'
 </script>
