@@ -1,0 +1,65 @@
+1
+- Add User: register account
+- Update User: update name, phone, password
+- Delete User: set status of user to banned
+- Get User by ID: get user object contetn full information
+- Get User by username: get user object by name
+- Get all Users: get array content all user account
+
+2( 1 )
+- Add Bird: register new bird 
+- Update Bird: update bird species, age, description, breed
+- Delete Bird: delete bird
+- Get Bird by ID: get bird obj by id
+- Get Bird by name: get bird obj by name
+- Get all Birds: get all bird of user based on userId
+
+3
+- Add Service: register new service contain info about name, description, price, status(ON/OFF)
+- Update Service: update service based on service_id, update name, descripiton, status, price
+- Delete Service: delete service
+- Get Service by ID: get service obj by name
+- Get Service by name: get service obj by name
+- Get all Services: list all service
+
+4(5-1)
+- Add Booking: add a booking to user_id, contain info about date_from, date_to, total_price(can update later), status
+- Update Booking: update date_to, total_price, status
+- Cancel Booking: update status booking to cancel
+- Get Booking by ID: get booking obj by id
+- Get all Bookings: list all booking obj
+
+5
+- Add Booking Detail: based on booking_id, contain info about services_id, bird_id
+- Update Booking Detail: based on bdetail_id, update service_id, bird_id
+- Delete Booking Detail: get bdetail_id
+- Get Booking Detail by ID: get obj bdetail by id
+- Get all Booking Details: list all bdetail_id
+
+6
+- Add Daily Report: based on booking_id, contain bird_images, date-update
+- Update Daily Report: based on dreport_id, update bird_images
+- Delete Daily Report: delete reportb 
+- Get Daily Report by ID: get dreport obj by id
+- Get all Daily Reports: list all dereport obj
+
+7
+- Add Daily Feedback: based on dreport_id, add title, content
+- Update Daily Feedback: based on dfeedback_id, update content, title
+- Delete Daily Feedback: delete feedback
+- Get Daily Feedback by ID: get dfeedback obj by id
+- Get all Daily Feedback: list all dfeedback obj
+
+8
+- Add Bill: based booking_id, total_ammount, date, payment_method, payment_status
+- Update Bill: based on bill_id, update total_ammount, date, payment method, payment status
+- Delete Bill: based on bill_id
+- Get Bill by ID: get bill obj by id
+- Get all Bills: list all bill obj
+
+9
+- get average month income: get ...
+- add news: create news/post
+- update news: based on new_id, update title, content 
+- get news by id: get news obj by id
+- delete news: delete news
