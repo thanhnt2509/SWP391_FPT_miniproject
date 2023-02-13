@@ -1,6 +1,6 @@
 const express = require('express')
 const connection = require('./database/Connection')
-const userRoute = require('./routes/userRoute')
+const userRoute = require('./routes/test/userRoute')
 const app = express()
 
 // only to monitor web -> don't need to care about this thing
@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 // to test purpose only, normally we only need json obj return back
-app.set('view engine', 'ejs')
+// app.set('view engine', 'ejs')
 
 
 app.get('/', async (req, res) => {

@@ -2,25 +2,29 @@
     <div class="body_home">
         <!-- SLOGAN - BRIEF ABOUT -->
         <div class="slogan text_center">
-            <h5>Creating a warm and welcoming environment for birds of all types</h5>
-            <h1 class="slogan_header">Treat with care</h1>
-            <p>The place where you found the Oasis for bird !!!</p>
+            <div class="slogan_content">
+                <h5>Creating a warm and welcoming environment for birds of all types</h5>
+                <h1 class="slogan_header">Treat with care</h1>
+                <p>The place where you found the Oasis for bird !!!</p>
+            </div>
+            <div class="slogan_empty">
+            
+            </div>
         </div>
 
 
         <!-- SERVICE -->
-        <div class="service" v-for="service in ServiceList.serviceList" :key="service.id ">
+        <div class="service" v-for="{name, description, service_id} in ServiceList.serviceList" :key="service_id">
             <div class="each_service">
                 <div class="service_header">
-                    <h3>{{ service.name }}</h3>
+                    <h3>{{ name }}</h3>
                 </div>
                 <div class="service_content">
-                    <p>{{ service.description }}</p>
+                    <p>{{ description }}</p>
                 </div>
             </div>
 
         </div>
-        <!-- End service -->
 
     
         <!-- About us -->
@@ -38,12 +42,11 @@
         </div>
 
 
-
-
-
         <!-- Realife Images and feedback from customer -->
         <div class="checkin">
+
             <!-- with images from customer: sliding images -->
+            <div class="checkin_header"> <h2>IMAGES FROM CUSTOMER</h2> </div>
             <div class="checkin_images">
                 <div class="checkin_images_each_img">
                     img1, img2, img3, ...
@@ -54,40 +57,17 @@
             </div>
 
             <!-- feedback and star from customer -->
-            <div class="checkin_feedback">
+            <div class="checkin_header"> <h2>REVIEW</h2>  </div>
+            <div class="checkin_feedback" v-for="{review_id, rating, comment, user_name} in ReviewList.reviewList" :key="review_id">
                 <div class="checkin_feedback_each">
                     <div class="checkin_feedback_start">
-                        4.5
+                        Rating point: {{rating}}
                     </div>
                     <div class="checkin_feedback_content">
-                        Very good
+                        Comment: {{ comment }}
                     </div>
                     <div class="checkin_feedback_name">
-                    
-                    </div>
-                </div>
-
-                <div class="checkin_feedback_each">
-                    <div class="checkin_feedback_start">
-                        5
-                    </div>
-                    <div class="checkin_feedback_content">
-                        The best service
-                    </div>
-                    <div class="checkin_feedback_name">
-                    
-                    </div>
-                </div>
-
-                <div class="checkin_feedback_each">
-                    <div class="checkin_feedback_start">
-                        5
-                    </div>
-                    <div class="checkin_feedback_content">
-                        my bird become so HIGH when she come back home 
-                    </div>
-                    <div class="checkin_feedback_name">
-                    
+                        Name: {{ user_name }}
                     </div>
                 </div>
             </div>
@@ -97,5 +77,91 @@
 
 <script setup>
 import {ref} from 'vue'
-import ServiceList from '../dum_data/ServiceList'
+import ServiceList from '../dum_data/Service'
+import ReviewList from '../dum_data/Review'
 </script>
+
+<style scoped>
+.body_home{
+    
+}
+.slogan{
+    height: 400px;
+
+
+}
+.slogan_content{
+    font-size: larger;
+    height: 40%;
+    width: 60%;
+}
+.slogan_content *{
+    margin: auto;
+    
+} 
+.slogan_empty{
+    height: 60%;
+    background-color: rgb(230, 230, 230);
+}
+.text_center{
+    text-align: center;
+}
+.slogan_header{
+    font-weight: bolder;
+    font-size: xx-large;
+}
+.service{
+
+}
+.each_service{
+
+}
+.service_header{
+
+}
+.service_content{
+
+}
+.about{
+
+}
+.about_header{
+
+}
+.about_content{
+
+}
+.about_detail_button{
+
+}
+.checkin{
+
+}
+.checkin_header{
+
+}
+.checkin_images{
+
+}
+.checkin_images_each_img{
+
+}
+.checkin_images_pagination{
+
+}
+.checkin_feedback{
+
+}
+.checkin_feedback_each{
+
+}
+.checkin_feedback_start{
+
+}
+.checkin_feedback_content{
+
+}
+.checkin_feedback_name{
+
+}
+</style>
