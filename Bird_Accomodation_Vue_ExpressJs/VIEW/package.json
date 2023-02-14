@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.2.15",
     "vue": "^3.2.45",
