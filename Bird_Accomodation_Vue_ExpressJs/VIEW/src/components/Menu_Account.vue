@@ -2,7 +2,7 @@
     
       <a-layout-sider width="200" style="background: #fff">
         <a-menu
-          v-model:selectedKeys="selectedKeys2"
+          v-model:selectedKeys="selectedKeys"
           v-model:openKeys="openKeys"
           mode="inline"
           :style="{ height: '100%', borderRight: 0 }"
@@ -10,19 +10,19 @@
           <a-sub-menu key="sub1">
             <template #title>
               <span>
-                <user-outlined />
+                
                 BIRD
               </span>
             </template>
-            <a-menu-item key="1">My Birds</a-menu-item>
-            <a-menu-item key="2">Register</a-menu-item>
-            <a-menu-item key="3">Checking Birds</a-menu-item>
+            <a-menu-item @click="$emit('ListBird')" key="1">My Birds</a-menu-item>
+            <a-menu-item @click="$emit('Registration')" key="2">Register</a-menu-item>
+            <a-menu-item @click="$emit('CheckingBird')" key="3">Checking Birds</a-menu-item>
             <!-- <a-menu-item key="4">option4</a-menu-item> -->
           </a-sub-menu>
           <a-sub-menu key="sub2">
             <template #title>
               <span>
-                <laptop-outlined />
+                
                 subnav 2
               </span>
             </template>
@@ -34,7 +34,7 @@
           <a-sub-menu key="sub3">
             <template #title>
               <span>
-                <notification-outlined />
+                
                 subnav 3
               </span>
             </template>

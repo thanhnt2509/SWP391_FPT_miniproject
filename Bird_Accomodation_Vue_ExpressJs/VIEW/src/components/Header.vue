@@ -4,7 +4,7 @@
         <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
             <div style="width: 85%;">
                 <a-menu-item style="width: fit-content;">
-                    LOGO - BirdCastle
+                    <aliwangwang-outlined /> - BirdCastle 
                 </a-menu-item>
                 
             </div>
@@ -22,7 +22,7 @@
 
 <script setup>
     import { ref } from 'vue'
-
+    import { AliwangwangOutlined  } from '@ant-design/icons-vue'
 </script>
 
 <style scoped>
