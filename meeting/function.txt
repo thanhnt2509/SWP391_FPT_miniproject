@@ -22,13 +22,6 @@
 - Get Service by name: get service obj by name
 - Get all Services: list all service
 
-4(5-1)
-- Add Booking: add a booking to user_id, contain info about date_from, date_to, total_price(can update later), status
-- Update Booking: update date_to, total_price, status
-- Cancel Booking: update status booking to cancel
-- Get Booking by ID: get booking obj by id
-- Get all Bookings: list all booking obj
-
 5
 - Add Booking Detail: based on booking_id, contain info about services_id, bird_id
 - Update Booking Detail: based on bdetail_id, update service_id, bird_id
@@ -63,3 +56,10 @@
 - update news: based on new_id, update title, content 
 - get news by id: get news obj by id
 - delete news: delete news
+
+4(5-1)
+- Add Booking: add a booking to user_id, contain info about date_from, date_to, total_price(can update later), status
+- Update Booking: update date_to, total_price, status
+- Cancel Booking: update status booking to cancel
+- Get Booking by ID: get booking obj by id
+- Get all Bookings: list all booking obj
