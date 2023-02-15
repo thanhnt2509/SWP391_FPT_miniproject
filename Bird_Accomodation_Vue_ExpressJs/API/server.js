@@ -1,7 +1,8 @@
 const express = require('express')
 const connection = require('./database/Connection')
-const userRoute = require('./routes/test/userRoute')
+const userRoute = require('./routes/userRoute')
 const app = express()
+
 
 // only to monitor web -> don't need to care about this thing
 app.use(logger)
@@ -26,4 +27,11 @@ app.get('/', async (req, res) => {
 
 app.use('/users', userRoute)
 
-app.listen(5000)
+port = process.env.PORT || 5000
+
+app.listen(port, () => {
+    console.log(`server is running on port ${port}`)
+})
+
+
+
