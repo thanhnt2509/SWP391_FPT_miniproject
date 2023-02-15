@@ -15,33 +15,30 @@
               </span>
             </template>
             <a-menu-item @click="$emit('ListBird')" key="1">My Birds</a-menu-item>
-            <a-menu-item @click="$emit('Registration')" key="2">Register</a-menu-item>
-            <a-menu-item @click="$emit('CheckingBird')" key="3">Checking Birds</a-menu-item>
+            <a-menu-item @click="$emit('Registration')" key="2">Bird Register</a-menu-item>
+            <a-menu-item @click="$emit('Tracking')" key="3">Bird Tracking</a-menu-item>
             <!-- <a-menu-item key="4">option4</a-menu-item> -->
           </a-sub-menu>
           <a-sub-menu key="sub2">
             <template #title>
               <span>
-                
-                subnav 2
+                TRANSACTION
               </span>
             </template>
-            <a-menu-item key="5">option5</a-menu-item>
-            <a-menu-item key="6">option6</a-menu-item>
-            <a-menu-item key="7">option7</a-menu-item>
-            <a-menu-item key="8">option8</a-menu-item>
+            <a-menu-item @click="$emit('BookTracking')" key="4">TRACKING</a-menu-item>
+            <a-menu-item @click="$emit('Booknow')" key="5">BOOK NOW</a-menu-item>
+            <!-- <a-menu-item key="7">option7</a-menu-item>
+            <a-menu-item key="8">option8</a-menu-item> -->
           </a-sub-menu>
           <a-sub-menu key="sub3">
             <template #title>
-              <span>
-                
-                subnav 3
+              <span> 
+                ACCOUNT
               </span>
             </template>
-            <a-menu-item key="9">option9</a-menu-item>
-            <a-menu-item key="10">option10</a-menu-item>
-            <a-menu-item key="11">option11</a-menu-item>
-            <a-menu-item key="12">option12</a-menu-item>
+            <a-menu-item key="9">Edit Profile</a-menu-item>
+            <a-menu-item key="10">Feedback</a-menu-item>
+            <a-menu-item key="11">Review</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>

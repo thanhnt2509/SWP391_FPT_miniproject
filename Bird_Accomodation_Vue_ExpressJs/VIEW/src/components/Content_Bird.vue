@@ -6,7 +6,8 @@
       <a-breadcrumb-item>Bird</a-breadcrumb-item>
     </a-breadcrumb>
     <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
-        <a-row type="flex" v-for="{ bird_id, bird_name, species, age, breed, gender, description } in data.birdList"
+        <h2 class="text_center xxlarge">Bird List</h2>
+        <a-row class="bird_row" type="flex" v-for="{ bird_id, bird_name, species, age, breed, gender, description } in data.birdList"
         :key="bird_id">
         <a-col flex="1 1 200px">
             <div class="birdlist">
@@ -21,9 +22,12 @@
             </div>
         </a-col>
         <a-col flex="0 1 100px">
-            <a-button>EDIT</a-button>
+            <a-button class="btn">EDIT</a-button>
+            <a-button class="btn" danger>DELETE</a-button>
         </a-col>
     </a-row>
+
+    <!-- <a-button class="btn_register" type="primary"><RouterLink to="">Register new Bird</RouterLink></a-button> -->
     </a-layout-content>
   </a-layout>
 
@@ -41,9 +45,31 @@ function ageConvert(age) {
     else if (age >= 3 && age <= 4) return 'Mature'
     else return 'Old'
 }
+
 </script>
 
 <style scoped>
+.btn{
+    width: 100px;
+    margin-top: 20px;
+}
+.btn_register{
+    margin-top: 20px;
+    width: 200px;
+    margin-left: 40%;
+}
+.bird_row{
+    border: 1px solid black;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 10px 10px rgb(129, 124, 124);
+    border-radius: 20px;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 20px;
+}
 .box_sizing {
     width: 100%;
     padding-left: 20%;
@@ -63,8 +89,8 @@ function ageConvert(age) {
     font-family: Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    text-align: justify;
     padding: 20px;
+    text-align: justify;
 }
 
 .eachBird {
