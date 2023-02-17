@@ -2,12 +2,18 @@
     <a-layout>
         <Header />
         <a-layout>
-            <Menu @ListBird="nav = 1" @Registration="nav = 2" @Tracking="nav = 3" @Booknow="nav = 5" @BookTracking="nav = 4"/>
-            <BirdList v-if="nav == 1" />
-            <BirdRegistration v-else-if="nav == 2" />
-            <BirdTracking v-else-if="nav == 3"/>
-            <BookingTracking v-else-if="nav == 4" />
-            <Booking v-else-if="nav == 5" />
+            <Menu 
+                @ListBird="nav = 1" 
+                @Registration="nav = 2" 
+                @Tracking="nav = 3" 
+                @Booknow="nav = 5" 
+                @BookTracking="nav = 4"/>
+                
+                <BirdList v-if="nav == 1" />
+                <BirdRegistration v-else-if="nav == 2" />
+                <BirdTracking v-else-if="nav == 3"/>
+                <BookingTracking v-else-if="nav == 4" />
+                <Booking v-else-if="nav == 5" />
         </a-layout>
         <Footer />
     </a-layout>

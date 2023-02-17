@@ -7,13 +7,13 @@
     </a-breadcrumb>
     <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
         <h2 class="text_center xxlarge">Bird List</h2>
-        <a-row class="bird_row" type="flex" v-for="{ bird_id, bird_name, species, age, breed, gender, description } in data.birdList"
+        <a-row class="bird_row" type="flex" v-for="{ bird_id, bird_name, type_id, age, breed, gender, description } in birdData"
         :key="bird_id">
         <a-col flex="1 1 200px">
             <div class="birdlist">
                 <a-descriptions :title="bird_name" class="each_bird">
                     <a-descriptions-item label="BirdName">{{ bird_name }}</a-descriptions-item>
-                    <a-descriptions-item label="Species">{{ species }}</a-descriptions-item>
+                    <a-descriptions-item label="Species"> {{  }}</a-descriptions-item>
                     <a-descriptions-item label="Age">{{ ageConvert(age) }}</a-descriptions-item>
                     <a-descriptions-item label="Breed">{{ breed }}</a-descriptions-item>
                     <a-descriptions-item label="Gender">{{ gender }}</a-descriptions-item>
@@ -26,9 +26,9 @@
             <a-button class="btn" danger>DELETE</a-button>
         </a-col>
     </a-row>
+    </a-layout-content>
 
     <!-- <a-button class="btn_register" type="primary"><RouterLink to="">Register new Bird</RouterLink></a-button> -->
-    </a-layout-content>
   </a-layout>
 
     
@@ -37,15 +37,18 @@
 </template>
 
 <script setup>
-import data from '../dum_data/Bird'
-import { } from '@ant-design/icons-svg'
+import { ref, onMounted } from 'vue'
+import userM from '../module/user_M'
+const birdData = ref([])
+
 
 function ageConvert(age) {
-    if (age >= 0 && age < 3) return 'Young'
-    else if (age >= 3 && age <= 4) return 'Mature'
-    else return 'Old'
+    return (age >= 1 && age <= 3 ? 'Young' : age == 4 ? 'Mature' : 'Old')
 }
 
+onMounted(async () => {
+    birdData.value = await userM.getAllBirdOfUser(2)
+})
 </script>
 
 <style scoped>

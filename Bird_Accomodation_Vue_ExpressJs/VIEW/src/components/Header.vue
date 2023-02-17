@@ -15,7 +15,7 @@
             <!-- <a-menu-item key="5">CONTACT US</a-menu-item> -->
             <a-menu-item key="6">NEWS</a-menu-item>
             <a-menu-item key="7">FAQ</a-menu-item>
-            <a-menu-item key="8"><RouterLink to="/account">ACCOUNT</RouterLink></a-menu-item>
+            <a-menu-item key="8"><RouterLink to="/user">ACCOUNT</RouterLink></a-menu-item>
         </a-menu>
     </a-layout-header>
 </template>
