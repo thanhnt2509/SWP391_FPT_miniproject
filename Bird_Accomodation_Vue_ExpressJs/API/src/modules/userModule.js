@@ -64,7 +64,7 @@ async function addBird(bodyData){
     let query = `insert into Birds(user_id, bird_name, species, breed, age, gender, description)
                 values ('${bodyData.user_id}', '${bodyData.bird_name}', '${bodyData.species}', '${bodyData.breed}', '${bodyData.age}', '${bodyData.gender}', '${bodyData.description}')`
     con.then(pool => pool.request().query(query))
-    
+
 }
 
 async function updateBird(bird_id, bodyData){
@@ -274,7 +274,7 @@ async function addDailyFeedback(dreport_id, bodyData){
     con.then(pool => pool.request().query(query))
 }
 
-async function updateDailyFeedback(){
+async function updateDailyFeedback(bodyData){
     let con = await connection()
     let query = `update DailyFeedback set title = '${bodyData.title}', 
                 content = '${bodyData.content}' where dfeedback_id = '${dfeedback_id}'`
@@ -356,19 +356,19 @@ async function getAvgMonthIncome() {
 }
 
 async function addNews(dreport_id, bodyData) {
-    
+
 }
 
 async function updateNews(dfeedback_id, bodyData) {
-    
+
 }
 
 async function getNewsById(dfeedback_id) {
-    
+
 }
 
 async function deleteNews(dfeedback_id) {
-    
+
 }
 
 
@@ -427,7 +427,7 @@ module.exports = {
     deleteBill,
     getBillById,
     getAllBills,
-    // F9, need double check
+    // F9, need double-check
     getAvgMonthIncome,
     addNews,
     updateNews,

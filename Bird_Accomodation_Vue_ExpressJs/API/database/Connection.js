@@ -1,21 +1,23 @@
 const sql = require('mssql')
 
 const config = {
-    server: 'localhost',
-    database: 'BirdAccommodation',
-    user: 'sa',
-    password: '145632897',
+    server: process.env.SQL_SERVER,
+    database: process.env.SQL_DB,
+    user: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
     port: 1433,
-    trustServerCertificate: true
+    trustServerCertificate: false,
+    encrypt: true,
+    connectionTimeout: 30000,
+
+
 }
 
-// if error occur when import mssql
-sql.on('error', err => { console.log(err); })
-
-
-
+// if error occur when import mssql module, please run this command in terminal
+// npm install mssql --save
+sql.on('error', err => { console.log(err.message); })
 /**
- * EX: 
+ * EX:
  *  const con = connection()
  *  con.then(pool => {
  *      const query = 'select * from Accounts'
@@ -23,14 +25,37 @@ sql.on('error', err => { console.log(err); })
  * }).then(data => {
  *      return data.recordSet
  * })
- * 
- * 
+ *
+ *
  * @returns Promise object provide request and query data
  */
 async function connection(){
-    const con = await sql.connect(config)
-    return con
+   try {
+       await sql.connect(config);
+       return sql;
+   }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+//console log on success connection
+async function testConnection(){
+    try {
+        await sql.connect(config);
+        console.log('connected')
+        //query user table
+        const query = 'select * from [User]'
+        sql.query(query).then(data => {
+            console.log(data.recordset)
+        })
+
+
+    }
+    catch (err) {
+        console.log(err.message)
+    }
 }
 
+testConnection();
 
 module.exports = {connection}
