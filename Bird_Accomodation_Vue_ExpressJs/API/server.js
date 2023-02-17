@@ -1,7 +1,7 @@
-const express = require('express')
-const connection = require('./database/Connection')
-const userRoute = require('./routes/userRoute')
-const app = express()
+const express = require('express');
+require('dotenv').config();
+const userRoute = require('./routes/userRoute');
+const app = express();
 
 
 // only to monitor web -> don't need to care about this thing

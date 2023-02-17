@@ -3,7 +3,7 @@ const { getAllCustomer } = require('../../modules/test/user_M')
 // const { updateCustomer } = require('../modules/user_M')
 const { deleteCustomer } = require('../../modules/test/user_M')
 const { updateCustomerStatus } = require('../../modules/test/user_M')
-const { getCustomerById } = require('../../modules/test/user_M')
+const { getCustomerById } = require('../../src/modules/test/user_M')
 const router = express.Router();
 
 
@@ -45,7 +45,7 @@ router.delete('/:userId', async (req, res) => {
     //delete user with id = userId
 
     res.json(await deleteCustomer(req.params.userId))
-    
+
 
 })
 module.exports = router
