@@ -39,6 +39,7 @@
             <a-menu-item key="9">Edit Profile</a-menu-item>
             <a-menu-item key="10">Feedback</a-menu-item>
             <a-menu-item key="11">Review</a-menu-item>
+            <a-menu-item key="12">Notification</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
