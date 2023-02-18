@@ -39,22 +39,22 @@ async function connection(){
     }
 }
 //console log on success connection
-async function testConnection(){
-    try {
-        await sql.connect(config);
-        console.log('connected')
-        //query user table
-        const query = 'select * from [User]'
-        sql.query(query).then(data => {
-            console.log(data.recordset)
-        })
-
-
-    }
-    catch (err) {
-        console.log(err.message)
-    }
-}
+// async function testConnection(){
+//     try {
+//         await sql.connect(config);
+//         console.log('connected')
+//         //query user table
+//         const query = 'select * from [User]'
+//         sql.query(query).then(data => {
+//             console.log(data.recordset)
+//         })
+//
+//
+//     }
+//     catch (err) {
+//         console.log(err.message)
+//     }
+// }
 
 
 module.exports = {connection}
