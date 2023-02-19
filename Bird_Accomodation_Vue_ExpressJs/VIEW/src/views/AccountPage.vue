@@ -23,14 +23,24 @@
 
 <script setup>
 import { ref } from 'vue'
-import Header from '../components/Header.vue'
+import Header from '../components/Base/Header.vue'
 import BirdList from '../components/Content_Bird.vue'
 import BirdRegistration from '../components/Content_BirdRegistration.vue'
 import BirdTracking from '../components/Content_BirdTracking.vue'
 import Booking from '../components/Content_Booking.vue'
 import BookingTracking from '../components/Content_Tracking.vue'
 import Menu from '../components/Menu_Account.vue'
-import Footer from '../components/Footer.vue'
+import Footer from '../components/Base/Footer.vue'
 
+
+const tabs = {
+    BirdList,
+    BirdRegistration,
+    BirdTracking,
+    Booking,
+    BookingTracking
+}
+
+const current_tab = ref('BirdList')
 const nav = ref(['1'])
 </script>

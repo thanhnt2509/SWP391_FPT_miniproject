@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
+import Header from '../components/Base/Header.vue'
+import Footer from '../components/Base/Footer.vue'
 import Body from '../components/Content_Aboutus.vue'
 </script>
