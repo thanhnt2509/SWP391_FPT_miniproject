@@ -1,65 +1,126 @@
-1
-- Add User: register account
-- Update User: update name, phone, password
-- Delete User: set status of user to banned
-- Get User by ID: get user object contetn full information
-- Get User by username: get user object by name
-- Get all Users: get array content all user account
+- POST: /login: 
+	+ body: email (text), password(text) 
+	+ -> validate the account with corrent Email and pass ? return page with status 200 and user account json : return page with 404
 
-2( 1 )
-- Add Bird: register new bird 
-- Update Bird: update bird species, age, description, breed
-- Delete Bird: delete bird
-- Get Bird by ID: get bird obj by id
-- Get Bird by name: get bird obj by name
-- Get all Birds: get all bird of user based on userId
+- POST: /register
+	+ body: username, password, email, phone, address, remember = true(add token if this property exist as true)
+	+ token, user_img default as NULL, role = 0(user), status = 1(active)
+	+ -> validate email if dupplicate ? return 404 : return 200 -> json
 
-3
-- Add Service: register new service contain info about name, description, price, status(ON/OFF)
-- Update Service: update service based on service_id, update name, descripiton, status, price
-- Delete Service: delete service
-- Get Service by ID: get service obj by name
-- Get Service by name: get service obj by name
-- Get all Services: list all service
+CRUD POST
+- GET: /posts
+	+ body: none
+	+ -> return all post from database by an array json [ {}, {} ]
+- POST: /posts/newPost
+	+ body: title, content, reference
+	+ add a post to database successful ? -> json : -> 400
+- PUT: /posts/:post_id
+	+ body: title, content, reference
+	+ update post ? -> json : -> 400
+- DELETE: /posts/:post_id
+	+ body: none
+	+ delete post ? -> json : -> 400
 
-5
-- Add Booking Detail: based on booking_id, contain info about services_id, bird_id
-- Update Booking Detail: based on bdetail_id, update service_id, bird_id
-- Delete Booking Detail: get bdetail_id
-- Get Booking Detail by ID: get obj bdetail by id
-- Get all Booking Details: list all bdetail_id
 
-6
-- Add Daily Report: based on booking_id, contain bird_images, date-update
-- Update Daily Report: based on dreport_id, update bird_images
-- Delete Daily Report: delete reportb 
-- Get Daily Report by ID: get dreport obj by id
-- Get all Daily Reports: list all dereport obj
+CRUD SERVICES
+- GET: /services
+	+ body: none
+	+ -> return all service from database by array json 
+- GET: /services/:service_name
+	+ body: none
+	+ -> return service json ? -> json : -> 404
+- POST: /services/:service_name
+	+ body: name, description, price
+	+ status = 1(on-use and 0 mean off-use)
+	+ add new service successful ? -> json : -> 400
+- PUT: /services/:service_name
+	+ body: name, descripton, status, price
+	+ update status of service, update name, des, price successfull ? -> json : -> 400
+- DELETE: /services/:service_name
+	+ body: none
+	+ update status of service from on -> off
+	+ update successful ? -> json : -> 400
+---------------------------------------------------------------------------------------------------------------------
 
-7
-- Add Daily Feedback: based on dreport_id, add title, content
-- Update Daily Feedback: based on dfeedback_id, update content, title
-- Delete Daily Feedback: delete feedback
-- Get Daily Feedback by ID: get dfeedback obj by id
-- Get all Daily Feedback: list all dfeedback obj
+- GET: /account/:accId
+	+ body: accId
+	+ -> return the acc json with accId params ? -> json : -> 404
 
-8
-- Add Bill: based booking_id, total_ammount, date, payment_method, payment_status
-- Update Bill: based on bill_id, update total_ammount, date, payment method, payment status
-- Delete Bill: based on bill_id
-- Get Bill by ID: get bill obj by id
-- Get all Bills: list all bill obj
+- GET: /account/:accId/birds
+	+ body: accId
+	+ -> return the array bird json of accId ? -> [ json ] -> 404
 
-9
-- get average month income: get ...
-- add news: create news/post
-- update news: based on new_id, update title, content 
-- get news by id: get news obj by id
-- delete news: delete news
+- GET: /account/:accId/:birdId
+	+ body: accId, birdId
+	+ -> return the bird json of accId ? -> json : -> 404
 
-4(5-1)
-- Add Booking: add a booking to user_id, contain info about date_from, date_to, total_price(can update later), status
-- Update Booking: update date_to, total_price, status
-- Cancel Booking: update status booking to cancel
-- Get Booking by ID: get booking obj by id
-- Get all Bookings: list all booking obj
+- POST: /account/:accId/newBird
+	+ body: bird_name, species, breed, age, gender, description
+	+ -> add successful and bird_name different ? -> bird json : -> 404
+
+- PUT: /account/:accId/:birdId
+	+ body: bird_name, bird_type(text), breed, age, gender, description
+	+ this api will check btype_id and add to Birds -> update successful and bird_name different ? -> bird json : -> 404
+
+- DELETE: /account/:accId/:birdId
+	+ body: none
+	+ -> delete successful ? -> bird json (deleted) : -> 400
+
+- POST: /account/:accId/newBooking (7)
+	+ body: accId, birdId, serviceId: ['1', '2', '3' (example)], date_from, date_to
+	+ -> set status default as 0: pending, create BookingDetail information(link booking_id, service_id, booked_price(get from Service table)) -> transaction add successful ? -> json Booking : -> 400
+
+- GET: /account/:accId/bookings
+	 +body: none
+	+ return array transaction of acc_id by array json, each include [{ Bookings(fulltable), services: [{service_name, booked_price}]}]
+	+ return successful ? -> json : -> 404
+
+- GET: /account/:accId/:booking_id/services
+	+ body: accId, booking_id
+	+ return all services of booking_id as [json], include {booking_id, services: [{service_id, service_name, booked_price}]}
+
+- GET: /account/:accId/:bookingId/reports
+	+ body: none
+	+ return detail report information of booking_id
+	+ include an array of report json and each json include {date, service_report_image, service_report_text, feedback_content} -> [{}, {}, {}]
+	
+- POST:  /account/:accId/:bookingId/newReport
+	+ body: service_report_image, service_report_text
+	+ post a report of 1 day 
+	+ date will be current date add to this "date" field when call this api
+	+ add new report successful ? -> json : -> 400
+- GET/PUT/DELETE: /account/:accId/:bookingId/:dreport_id
+	+ get fail -> 404
+	+ put: update image and text (service_report_image, service_report_text)
+	+ delete: delete this report (nearly never use) (dreport_id)
+	+ put/ delete fail -> 400
+- POST: /account/:accId/:bookingId/:dreport_id 
+	+ body: content
+	+ add an feedback to a day of dreport_id
+	+ successful ? -> json : -> 400
+
+----------------------------------------------------------------------------------
+STATE Booking
+- PUT: /account/:accId/:bookingId
+	+ body: status
+	+ from admin change status of booking id of user (ex: from pending -> accepted -> ongoing -> complete -> cancel)
+
+----------------------------------------------------------------------------------
+BILL
+(bill will be automatically created when use POST /newBooking)
+
+- GET /account/:accId/:bookingId/bill
+	+ body: none
+	+ return a bill of this booking_id
+	+ include json {payment_status, payment_method, date(paymentDate), Booking: {(Bookings fulltable)} }
+
+
+
+
+
+
+
+
+
+
+
