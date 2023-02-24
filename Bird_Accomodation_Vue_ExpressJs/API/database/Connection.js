@@ -1,16 +1,16 @@
 const sql = require('mssql')
+require('dotenv').config({ path: '.././.env' })
 
 const config = {
     server: process.env.SQL_SERVER,
     database: process.env.SQL_DB,
     user: process.env.SQL_USERNAME,
     password: process.env.SQL_PASSWORD,
-    port: 1433,
-    trustServerCertificate: false,
-    encrypt: true,
-    connectionTimeout: 30000,
-
-
+    port: parseInt(process.env.SQL_PORT),
+    options: {
+        encrypt: false,
+        trustServerCertificate: true
+    }
 }
 
 // if error occur when import mssql module, please run this command in terminal
