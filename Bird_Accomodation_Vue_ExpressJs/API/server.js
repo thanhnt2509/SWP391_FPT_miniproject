@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const userRoute = require('./routes/userRoute');
+const routes = require('./src/routes/index.routes');
 const app = express();
 
 
@@ -20,16 +20,8 @@ app.use(express.urlencoded({extended: true}))
 
 // allow FE send json request and server can parse that json
 app.use(express.json())
+app.use(routes);
 
-// to test purpose only, normally we only need json obj return back
-// app.set('view engine', 'ejs')
-
-
-app.get('/', async (req, res) => {
-    res.send('Hello go <a href="/users">here</a> to list all users')
-})
-
-app.use('/users', userRoute)
 
 port = process.env.PORT || 5000
 
