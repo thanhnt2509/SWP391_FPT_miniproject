@@ -14,6 +14,10 @@ const { getBirdType } = require('../models/account.model');
 const { getNewBirdByUserID } = require('../models/account.model');
 const { updateBirdType } = require('../models/account.model');
 const { addNewBooking } = require('../models/account.model');
+const { getAllBirdType } = require('../models/account.model');
+const { getAllBooking } = require('../models/account.model');
+const { getBookingService_booking_id } = require('../models/account.model');
+const { getBookingReport_booking_id } = require('../models/account.model');
 
 const router = express.Router();
 
@@ -58,6 +62,35 @@ router.route('/birdType')
         }
     })
 
+router.route('/:user_id/bookings')
+    .get(async (req, res) => {
+        try {
+            let data = await getAllBooking(req.params.user_id);
+            res.status(200).json(data.recordset);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    })
+
+router.route('/:booking_id/services')
+    .get(async (req, res) => {
+        try {
+            let data = await getBookingService_booking_id(req.params.booking_id);
+            res.status(200).json(data.recordset);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    })
+
+router.route('/:booking_id/reports')
+    .get(async (req, res) => {
+        try {
+            let data = await getBookingReport_booking_id(req.params.booking_id);
+            res.status(200).json(data.recordset);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    })
 
 router.route('/:user_id')
     .get(async (req, res) => {

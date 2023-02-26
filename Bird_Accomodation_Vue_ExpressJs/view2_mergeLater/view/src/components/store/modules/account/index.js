@@ -15,7 +15,8 @@ const mutations = {
     },
     UPDATE_BOOKINGS(state, payload){
         state.bookings = payload
-    }
+    },
+
 }
 
 const actions = {
@@ -25,6 +26,8 @@ const actions = {
         console.log('after login user: ', state.user);
         await this.dispatch('getAllBirds')
         console.log('after get all birds: ', state.birds);
+        await this.dispatch('getAllBooking')
+        console.log('after get all bookings: ', state.bookings);
     },
     async logout({ commit }) {
         commit('UPDATE_USER', undefined)
@@ -39,20 +42,23 @@ const actions = {
         commit('UPDATE_BIRDS', response.data)
         await this.dispatch('getAllBirds')
     },
-    async getAllBirds({ commit }) {
-        const response = await axios.get(`/api/account/${state.user.user_id}/birds`)
-        commit('UPDATE_BIRDS', response.data)
-    },
     async getAllBooking({ commit }) {
         const response = await axios.get(`/api/account/${state.user.user_id}/bookings`)
+        response.data.map(async booking => 
+            {booking.bird_id = (await axios.get(`/api/account/${state.user.user_id}/${booking.bird_id}`)).data
+            booking.date_from = new Date(booking.date_from).toISOString().slice(0, 10);
+            booking.date_to = new Date(booking.date_to).toISOString().slice(0, 10);
+            booking.services = (await axios.get(`/api/account/${booking.booking_id}/services`)).data 
+            booking.reports = (await axios.get(`/api/account/${booking.booking_id}/reports`)).data
+        })
         commit('UPDATE_BOOKINGS', response.data)
-    }
+    },
 }
 
 const getters = {
     getUser: state => state.user,
     getBirds: state => state.birds,
-    getBookingg: state => state.bookings,
+    getBookings: state => state.bookings,
 }
 
 const accountModule = {

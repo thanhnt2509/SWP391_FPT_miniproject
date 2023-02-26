@@ -159,4 +159,38 @@ module.exports = {
             throw error;
         }
     },
+    getAllBooking: async (user_id) => {
+        try {
+            let con = await connection();
+            let sql = `SELECT * FROM [Bookings] WHERE user_id = ${user_id}`;
+            return con.query(sql);
+        } catch (error) {
+            throw error;
+        }
+    },
+    getBookingService_booking_id: async (booking_id) => {
+        try {
+            let con = await connection();
+            let sql = `select bd.*, s.name 
+                    from Bookings b join BookingDetail bd on b.booking_id = bd.booking_id
+                    join Services s on bd.service_id = s.service_id 
+                    where b.booking_id = ${booking_id}`;
+            return con.query(sql);
+        } catch (error) {
+            throw error;
+        }
+    },
+    getBookingReport_booking_id: async (booking_id) => {
+        try {
+            let con = await connection();
+            let sql = `select s.service_id, s.name,  drd.service_report_image, drd.service_report_text, dr.date, dr.booking_id
+                    from BookingDetail bd join Services s on bd.service_id = s.service_id
+                        join DailyReportDetail drd on bd.bdetail_id = drd.bdetail_id
+                        join DailyReport dr on drd.dreport_id = dr.dreport_id
+                    where dr.booking_id = ${booking_id}`;
+            return con.query(sql);
+        } catch (error) {
+            throw error;
+        }
+    }
 }
