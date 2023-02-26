@@ -1,0 +1,3 @@
+- currently routes is call directly to model
+- after another restructure, routes will call through controller (after passing verify at middlewares if have)
+- controller will then call function at model and decided the respone output
