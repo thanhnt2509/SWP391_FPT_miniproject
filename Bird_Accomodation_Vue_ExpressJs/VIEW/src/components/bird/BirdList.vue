@@ -7,12 +7,9 @@
         </div>
     </div>
     <!-- birdlist -->
-    <div>
+    <div v-for="bird in getBirds">
         <!-- eachbird -->
-        <Bird_Info />
-        <Bird_Info />
-        <Bird_Info />
-        <Bird_Info />
+        <Bird_Info :bird="bird"/>
     </div>
     <!-- register new bird -->
     <BirdRegister />
@@ -21,8 +18,12 @@
 <script>
 import BirdRegister from './BirdRegister.vue'
 import Bird_Info from './Bird_Info.vue'
+import { mapGetters } from 'vuex'
 export default {
     name: 'BirdList',
+    computed: {
+        ...mapGetters(['getUser', 'getBirds'])
+    },
     components: {
         BirdRegister,
         Bird_Info

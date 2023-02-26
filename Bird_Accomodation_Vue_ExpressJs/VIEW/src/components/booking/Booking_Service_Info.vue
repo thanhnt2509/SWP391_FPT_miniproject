@@ -4,17 +4,25 @@
         <ul>
             <!-- List of service that booked with price at the moment -->
             <!-- can select more service and submit: will be next iteration -->
-            <li><input type="checkbox" name="service" checked disabled>Food and supplies </li>
-            <li><input type="checkbox" name="service" checked disabled>Training</li>
-            <li><input type="checkbox" name="service" checked disabled>Play areas</li>
-            <li><input type="checkbox" name="service" checked disabled>Enrichment activities</li>
+            <li v-for="service in serviceItems">
+                <input type="checkbox" name="service" :checked="services.find(item => item.service_id === service.service_id)" disabled>
+                <label>{{ service.name }}</label>
+            </li>
+
 
         </ul>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'Booking_Service_Info',
+    computed: {
+        ...mapGetters(['serviceItems'])
+    },
+    props: {
+        services: Array,
+    }
 }
 </script>

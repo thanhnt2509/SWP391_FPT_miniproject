@@ -3,35 +3,55 @@
     <div>
         <!-- bird header -->
         <div>
-            <h2>BirdName</h2>
-            <button>Edit</button>
-            <button>Delete</button>
+            <h2>Name: {{ bird?.bird_name || '' }}</h2>
+            <div v-if="!noAction">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+
         </div>
 
         <!-- bird image -->
         <div>
-            Bird images goes here if exist
+            <img :src="bird?.image || ''" alt="bird image goes here">
         </div>
 
         <!-- bird property -->
         <div>
             <ul>
-                <li>Species: </li>
-                <li>Age: </li>
-                <li>Breed: </li>
-                <li>Gender: </li>
-                <li>Description: </li>
-                <li>Status: <button disabled>On-service</button></li>
+                <li>Species: {{ birdTypeItems[bird?.type_id -1]?.name || ''}}</li>
+                <li>Age: {{ ageType[bird?.age -1]  || ''}}</li>
+                <li>Breed: {{ bird?.breed || '' }}</li>
+                <li>Gender: {{ bird?.gender || ''}}</li>
+                <li>Description: {{ bird?.description || ''}}</li>
+                <!-- <li>Status: <button disabled>On-service</button></li> -->
             </ul>
         </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'Bird_Info',
-    components: {
-
-    }
+    data() {
+        return {
+            ageType: [
+                'Baby',
+                'Young',
+                'Mature',
+            ]
+        }
+    },
+    computed: {
+        ...mapGetters(['getBirds', 'birdTypeItems'])
+    },
+    props: {
+        bird: {
+            type: Object,
+            // required: true
+        },
+        noAction: Boolean
+    },
 }
 </script>

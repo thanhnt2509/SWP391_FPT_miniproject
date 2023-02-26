@@ -6,22 +6,22 @@
 
         <div>
             <label>Fullname</label>
-            <input disabled type="text" value="Nguyen Van A">
+            <input disabled type="text" :value="getUser.name">
         </div>
 
         <div>
             <label>Email</label>
-            <input disabled type="email" value="example@gmail.com">
+            <input disabled type="email" :value="getUser.email">
         </div>
 
         <div>
             <label>Phone</label>
-            <input disabled type="tel" value="0989765231">
+            <input disabled type="tel" :value="getUser.phone">
         </div>
 
         <div>
             <label>Address</label>
-            <input disabled type="text" value="9 District HCM city">
+            <input disabled type="text" :value="getUser.address">
         </div>
 
         <div>
@@ -31,7 +31,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'Profile',
+    data() {
+        return {
+            
+        }
+    },
+    computed: {
+        ...mapGetters(['getUser'])
+    }
 }
 </script>

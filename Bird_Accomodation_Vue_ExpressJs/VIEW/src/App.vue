@@ -1,13 +1,29 @@
 <template>
-    <RouterView/>
+  <!-- nav bar -->
+  <Header />
+  <div>
+    <router-view></router-view>
+  </div>
+  <!-- footer -->
+  <Footer />
+  
 </template>
 
+<script>
+import Homepage from './views/Hompage.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+export default {
+  name: 'App',
+  data() {
+    return {
 
-<script setup>
-import { RouterView } from 'vue-router'
-import { defineComponent, ref } from 'vue';
+    }
+  },
+  components: {
+    Homepage,
+    Header,
+    Footer
+  }
+}
 </script>
-
-
-
-
