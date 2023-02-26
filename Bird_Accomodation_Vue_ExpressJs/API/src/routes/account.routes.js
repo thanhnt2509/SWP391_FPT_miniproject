@@ -10,6 +10,10 @@ const { getBirdByUserID } = require('../models/account.model');
 const { getBirdByBirdID_UserID } = require('../models/account.model');
 const { addNewBird_UserID } = require('../models/account.model');
 const { deleteBirdID_UserID } = require('../models/account.model');
+const { getBirdType } = require('../models/account.model');
+const { getNewBirdByUserID } = require('../models/account.model');
+const { updateBirdType } = require('../models/account.model');
+const { addNewBooking } = require('../models/account.model');
 
 const router = express.Router();
 
@@ -103,9 +107,22 @@ router.route('/:user_id/:bird_id')
             res.status(500).json(error);
         }
     })
-    .put(async (req, res) => {
-        // code here
-        // this one to update bird or kind of...
+    .patch(async (req, res) => {
+        try {
+            let bTypeID = await getBirdType(req.body.bird_type);
+            if (bTypeID.recordset.length === 0) {
+                res.status(404).json({ message: 'Bird type not found' });
+            }else {
+                let data = await updateBirdType(req.params.bird_id, await bTypeID.recordset[0].btype_id);
+                if (data.rowsAffected[0] === 0) {
+                    res.status(404).json({ message: 'Cannot update bird type' });
+                } else {
+                    res.status(200).json({ message: 'Bird type updated' });
+                }
+            }
+        } catch (error) {
+            res.status(500).json(error);
+        }
     })
     .delete(async (req, res) => {
         try {
@@ -123,9 +140,35 @@ router.route('/:user_id/:bird_id')
 router.route('/:user_id/newBird')
     .post(async (req, res) => {
         try {
-            let data = await addNewBird_UserID(req.body, req.params.user_id);
-            res.status(200).json(data);
+            let bTypeID = await getBirdType(req.body.bird_type);
+            if (bTypeID.recordset.length === 0) {
+                res.status(404).json({ message: 'Bird type not found' });
+            }else {
+                req.body.type_id = await bTypeID.recordset[0].btype_id;
+                let checkAdd = await addNewBird_UserID(req.body, req.params.user_id);
+                if (checkAdd.rowsAffected[0] === 0) {
+                    res.status(400).json({ message: 'Add Bird failed' });
+                } else {
+                    let data = await getNewBirdByUserID(req.params.user_id);
+                    res.status(200).json(data.recordset[0]);
+                }
+            }
         } catch (error) {
+            res.status(500).json(error);
+        }
+    })
+
+router.route('/:user_id/newBooking')
+    .post(async (req, res) => {
+        try {
+            let check = await addNewBooking(req.body, req.params.user_id);
+            if (!check) {
+                res.status(400).json({ message: 'Add Booking failed' });
+            } else {
+                res.status(200).json({ message: 'Booking added' });
+            }
+        } catch (error) {
+            console.log(error);
             res.status(500).json(error);
         }
     })
