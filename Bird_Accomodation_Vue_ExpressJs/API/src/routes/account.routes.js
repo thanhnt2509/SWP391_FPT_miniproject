@@ -1,9 +1,11 @@
 const express = require('express');
 
-const { register } = require('../models/account.model');
+const { register, newBooking_userID } = require('../models/account.model');
 const { login } = require('../models/account.model');
 const { validateEmail } = require('../models/account.model');
+const { validateAccount } = require('../models/account.model');
 const { getAccountByID } = require('../models/account.model');
+// const { newBooking } = require('../models/account.model');   // error
 const { getBirdByUserID } = require('../models/account.model');
 const { getBirdByBirdID_UserID } = require('../models/account.model');
 const { addNewBird_UserID } = require('../models/account.model');
@@ -41,6 +43,24 @@ router.route('/register')
             res.status(500).json(error);
         }
     })
+
+
+    // error
+// router.route('/:user_id/newBooking')
+//     .post(async (req, res) => {
+//         try {
+//             let user = await getAccountByID(req.params.user_id);
+//             if (!user) {
+//                 res.status(404).json({ message: 'Account not found' });
+//             } else {
+//                 let data = await newBooking(req.body);
+//                 res.status(200).json(data.recordset[0]);
+//             }
+//         } catch (error) {
+//             console.log(error);
+//             res.status(500).json(error);
+//         }
+//     })
 
 router.route('/:user_id')
     .get(async (req, res) => {
@@ -81,7 +101,7 @@ router.route('/:user_id/:bird_id')
             }
         } catch (error) {
             res.status(500).json(error);
-        } 
+        }
     })
     .put(async (req, res) => {
         // code here

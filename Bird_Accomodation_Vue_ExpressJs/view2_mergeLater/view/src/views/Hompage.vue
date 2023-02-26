@@ -21,26 +21,14 @@
     <!-- Gallery -->
     <div>
         <div>
-            <h1>Gallery</h1>
+            <h1>Facilities</h1>
             <p>Our goal is to offer a comprehensive range of services and amenities to ensure that your pet bird thrives and lives a happy and healthy life.</p>
         </div>
         <div>
-            <!-- each gallery -->
-            <div>
-                <h3>Image title</h3>
-                <p>Show your image here</p>
-            </div>
-            <div>
-                <h3>Image title</h3>
-                <p>Show your image here</p>
-            </div>
-            <div>
-                <h3>Image title</h3>
-                <p>Show your image here</p>
-            </div>
-            <div>
-                <h3>Image title</h3>
-                <p>Show your image here</p>
+            <!-- each facility -->
+            <div v-for="service in serviceItems" :key="service.service_id">
+                <h3>{{ service.name }}</h3>
+                <img :src="'/images/'+ service.image +'.jpg'" :alt="service.image">
             </div>
         </div>
     </div>
@@ -53,25 +41,29 @@
         </div>
 
         <!-- each feedback -->
-        <div>
-            <h3>Customer name</h3>
-            <p>Customer feedback</p>
-            <p>Show your image here</p>
-        </div>
-        <div>
-            <h3>Customer name</h3>
-            <p>Customer feedback</p>
-            <p>Show your image here</p>
-        </div>
-        <div>
-            <h3>Customer name</h3>
-            <p>Customer feedback</p>
-            <p>Show your image here</p>
-        </div>
-        <div>
-            <h3>Customer name</h3>
-            <p>Customer feedback</p>
-            <p>Show your image here</p>
+        <div v-for="reviewer in reviewItems" :key="reviewer.review_id">
+            <p>Show images here {{ reviewer.user_img }}</p>
+            <h3>Customer: {{ reviewer.name }}</h3>
+            <p>Rating: {{ reviewer.rating }}</p>
+            <p>Feedback after services: {{ reviewer.comment }}</p>
         </div>
     </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+    name: 'Homepage',
+    computed: {
+        ...mapGetters(['serviceItems', 'reviewItems'])
+    }
+}
+</script>
+
+<style scoped>
+img {
+    width: 300px;
+    height: 300px;
+}
+</style>

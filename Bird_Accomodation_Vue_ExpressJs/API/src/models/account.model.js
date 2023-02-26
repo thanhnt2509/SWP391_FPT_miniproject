@@ -84,5 +84,23 @@ module.exports = {
             throw error;
         }
     },
-    
+    // error
+    // newBooking: async(body) => {
+    //     try {
+    //         let con = await connection();
+    //         const defaultBookingStatus = 0;
+    //         let sql = `insert into Booking(user_id, bird_id, date_from, date_to, booking_status) \n`
+    //             sql += `values (${body.user_id},${body.bird_id},'${body.date_from}','${body.date_to}',${defaultBookingStatus}) GO \n`;
+            
+    //         for(let i=0; i<body.services.length; i++){
+    //             sql += `insert into BookingDetail(booking_id, service_id, booked_price) \n`
+    //             sql += `values (SCOPE_IDENTITY(),${body.services[i].service_id},${body.services[i].booked_price}) GO \n`;
+    //         }
+
+
+    //         return con.query(sql);
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
 }
