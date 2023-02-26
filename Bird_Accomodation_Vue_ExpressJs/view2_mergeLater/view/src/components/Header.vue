@@ -9,7 +9,7 @@
         <!-- <li><router-link to="/login">Login</router-link></li> -->
         <li ><a href="#" name="booking" @click="patchLogin">Booking</a></li>
         <li ><a href="#" name="account" @click="patchLogin">Account</a></li>
-        <li ><a href="#" name="manager" @click="patchLogin">Manager</a></li>
+        <li v-if="getUser?.role === 1"><a href="#" name="manager" @click="patchLogin">Manager</a></li>
       </nav>
     </header>
   </div>
@@ -32,6 +32,7 @@ export default {
     // call api to sync data
     this.$store.dispatch('getServiceItem')
     this.$store.dispatch('getReviewItem')
+    this.$store.dispatch('getBirdTypeItem')
   }
 }
 </script>

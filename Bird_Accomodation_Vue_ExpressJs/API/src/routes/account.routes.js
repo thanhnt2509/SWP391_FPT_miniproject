@@ -10,6 +10,7 @@ const { getBirdByUserID } = require('../models/account.model');
 const { getBirdByBirdID_UserID } = require('../models/account.model');
 const { addNewBird_UserID } = require('../models/account.model');
 const { deleteBirdID_UserID } = require('../models/account.model');
+const { getAllBirdType } = require('../models/account.model');
 
 const router = express.Router();
 
@@ -44,23 +45,16 @@ router.route('/register')
         }
     })
 
+router.route('/birdType')
+    .get(async (req, res) => {
+        try {
+            let data = await getAllBirdType();
+            res.status(200).json(data.recordset);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    })
 
-    // error
-// router.route('/:user_id/newBooking')
-//     .post(async (req, res) => {
-//         try {
-//             let user = await getAccountByID(req.params.user_id);
-//             if (!user) {
-//                 res.status(404).json({ message: 'Account not found' });
-//             } else {
-//                 let data = await newBooking(req.body);
-//                 res.status(200).json(data.recordset[0]);
-//             }
-//         } catch (error) {
-//             console.log(error);
-//             res.status(500).json(error);
-//         }
-//     })
 
 router.route('/:user_id')
     .get(async (req, res) => {
@@ -126,9 +120,9 @@ router.route('/:user_id/newBird')
             let data = await addNewBird_UserID(req.body, req.params.user_id);
             res.status(200).json(data);
         } catch (error) {
+            console.log(error);
             res.status(500).json(error);
         }
     })
-
 
 module.exports = router

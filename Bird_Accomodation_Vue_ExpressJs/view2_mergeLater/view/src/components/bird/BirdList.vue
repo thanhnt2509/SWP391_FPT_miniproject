@@ -7,10 +7,10 @@
         </div>
     </div>
     <!-- birdlist -->
-    <!-- <div v-for="bird in getBirds"> -->
+    <div v-for="bird in getBirds">
         <!-- eachbird -->
-        <!-- <Bird_Info :bird="bird"/> -->
-    <!-- </div> -->
+        <Bird_Info :bird="bird"/>
+    </div>
     <!-- register new bird -->
     <BirdRegister />
 </template>
