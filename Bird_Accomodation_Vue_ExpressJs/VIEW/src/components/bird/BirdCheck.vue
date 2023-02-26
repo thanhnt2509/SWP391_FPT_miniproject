@@ -1,19 +1,21 @@
 <template>
-    <div>
+    <div class="main content">
         <h1>Bird check</h1>
         <!-- each bird in boarding-->
         <div v-for="booking in getBookings">
             <!-- overview -->
             <div>
                 <!-- {{ booking }} -->
-                <h2>Overview</h2> 
-                <Bird_Info :bird="booking.bird_id"/>
-                <Booking_Info :booking="booking"/>
-                <Booking_Service_Info :services="booking.services"/>
+                <h2>Overview</h2>
+                <div class="columns">
+                    <Bird_Info :bird="booking.bird_id" style="width: fit-content;" class="bird_info column" />
+                    <Booking_Info :booking="booking" style="width: fit-content;" class="bird_info column" />
+                    <Booking_Service_Info :services="booking.services" style="width: fit-content;" class="bird_info column" />
+                </div>
             </div>
             <!-- report -->
-            <div>
-                <Booking_Report :booking="booking"/>
+            <div class="bird_info column">
+                <Booking_Report :booking="booking" />
             </div>
         </div>
     </div>
@@ -38,3 +40,19 @@ export default {
     }
 }
 </script>
+<style scoped>
+.main {
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.bird_info {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 20px;
+}
+</style>

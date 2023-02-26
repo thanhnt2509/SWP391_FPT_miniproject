@@ -1,12 +1,12 @@
 <template>
     <!-- eachbird -->
-    <div>
+    <div class="container main">
         <!-- bird header -->
         <div>
-            <h2>Name: {{ bird?.bird_name || '' }}</h2>
+            <h4>Name: {{ bird?.bird_name || '' }}</h4>
             <div v-if="!noAction">
-                <button>Edit</button>
-                <button>Delete</button>
+                <button class="button is-link">Edit</button>
+                <button class="button is-danger">Delete</button>
             </div>
 
         </div>
@@ -55,3 +55,10 @@ export default {
     },
 }
 </script>
+<style scoped>
+.main{
+    /* border-radius: 20px; */
+    padding: 10px;
+    margin: 10px;
+}
+</style>

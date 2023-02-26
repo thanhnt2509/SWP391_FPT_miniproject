@@ -1,25 +1,24 @@
 <template>
-    <!-- service introduction -->
-    <div>
-        <h1>Welcome to Bird Oasis !!!</h1>
-        <p>We are dedicated to providing top-quality care for your feathered friends and understand the importance of
-            finding a comfortable and safe home for them. Our goal is to offer a comprehensive range of services and
-            amenities to ensure that your pet bird thrives and lives a happy and healthy life.</p>
-    </div>
+    <div class="container">
+        <!-- service introduction -->
+        <div class="content has-text-centered">
+            <h1>Welcome to Bird Oasis !!!</h1>
+            <p>We are dedicated to providing top-quality care for your feathered friends and understand the importance of
+                finding a comfortable and safe home for them. Our goal is to offer a comprehensive range of services and
+                amenities to ensure that your pet bird thrives and lives a happy and healthy life.</p>
+        </div>
 
-    <!-- services -->
-    <div>
-        <h2>Our Services</h2>
-        <p>At Bird Castle, we understand the special bond between pet and owner, and we are dedicated to providing your bird
-            with the best care possible. Contact us today to learn more about our services and to find the perfect home for
-            your feathered friend.</p>
-            
-        <!-- each service -->
-        <div v-for="service in serviceItems" :key="service.service_id">
-            <h3>{{ service.name }}</h3>
-            <img :src="'/images/' + service.image + '.jpg'" :alt="service.name">
-            <p>Description: {{ service.description }}</p>
-            <p>Price: {{ service.price }}</p>
+        <!-- services -->
+        <div >
+            <!-- each service -->
+            <div class="columns service" v-for="service in serviceItems" :key="service.service_id">
+                <div class="column"><img class="img_service" :src="'/images/' + service.image + '.jpg'" :alt="service.name"></div>
+                <div class="content column is-three-quarters">
+                    <h3 class="title is-4 is-spaced">{{ service.name }}</h3>
+                    <p >{{ service.description }}</p>
+                    <button disabled class="button is-info">Price: {{ service.price }}$</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -38,4 +37,17 @@ export default {
 img {
     width: 300px;
     height: 300px;
-}</style>
+}
+.service{
+    margin: 20px;
+    border-radius: 40px;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+.img_service{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 40px;
+}
+</style>

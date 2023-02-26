@@ -1,23 +1,25 @@
 <template>
-    <form @submit="submitForm">
+    <form @submit="submitForm" class="container main">
         <h1>Register new bird</h1>
-        <div>
-            <label>Name</label>
-            <input required v-model="fields.bird_name" type="tel" placeholder="Typhoon">
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+                <input class="input is-success" required v-model="fields.bird_name" type="tel" placeholder="Typhoon">
+            </div>
         </div>
 
-        <div>
-            <label>Species</label>
-            <select v-model="fields.type_id">
+        <div class="field">
+            <label lass="label">Species</label>
+            <select class="input select" v-model="fields.type_id">
                 <!-- list of bird_type -->
                 <option disabled>Select bird type</option>
                 <option v-for="type in birdTypeItems" :value="type.btype_id">{{ type.name }}</option>
             </select>
         </div>
 
-        <div>
-            <label>Age</label>
-            <select required v-model="fields.age">
+        <div class="field">
+            <label class="label">Age</label>
+            <select class="input select" required v-model="fields.age">
                 <!-- list of bird_age -->
                 <option disabled>Select bird age</option>
                 <option value="1">Young</option>
@@ -26,25 +28,27 @@
             </select>
         </div>
 
-        <div>
-            <label>Gender</label>
-            <input required v-model="fields.gender" type="radio" name="gender" value="Male">Male
-            <input required v-model="fields.gender" type="radio" name="gender" value="Female">Female
+        <div class="field">
+            <label class="label">Gender</label>
+            <div class="control">
+                <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="Male">Male
+                <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="Female">Female
+            </div>
 
         </div>
 
-        <div>
-            <label>Breed</label>
-            <input v-model="fields.breed" type="text" placeholder="peace face, blue tail">
+        <div class="field">
+            <label class="label">Breed</label>
+            <input class="input" v-model="fields.breed" type="text" placeholder="peace face, blue tail">
+        </div>
+
+        <div class="field">
+            <label class="label">Description</label>
+            <textarea class="textarea" v-model="fields.description" placeholder="Describe your bird"></textarea>
         </div>
 
         <div>
-            <label>Description</label>
-            <textarea v-model="fields.description" placeholder="Describe your bird"></textarea>
-        </div>
-
-        <div>
-            <button type="submit">Submit</button> {{ fields }}
+            <button class="button is-primary" type="submit">Submit</button>
         </div>
     </form>
 </template>
@@ -81,3 +85,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.main {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 40px;
+    margin: 20px;
+}
+</style>

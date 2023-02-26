@@ -1,80 +1,100 @@
 <template>
-    <div>
-        <div>
-            <h1>Booking</h1>
+    <div class="container content main">
+        <div class="has-text-centered">
+            <h1 class="title">Booking</h1>
             <p>Here you can book your bird's stay at Bird Castle.</p>
             <p>Information show as your account, edit your <router-link to="/account/profile">Profile</router-link> to
                 booking in different places !</p>
         </div>
         <!-- form -->
         <div>
-            <div>
-                <label>Fullname</label>
-                <input disabled type="text" :value="getUser.name">
+            <div class="field">
+                <label class="label">Fullname</label>
+                <div class="control">
+                    <input class="input is-success" disabled type="text" :value="getUser.name">
+                </div>
             </div>
 
-            <div>
-                <label>Email</label>
-                <input disabled type="email" :value="getUser.email">
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-danger" disabled type="email" :value="getUser.email">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                </div>
             </div>
 
-            <div>
-                <label>Phone</label>
-                <input disabled type="tel" :value="getUser.phone">
+            <div class="field">
+                <label class="label">Phone</label>
+                <div class="control">
+                    <input class="input is-success" disabled type="tel" :value="getUser.phone">
+                </div>
             </div>
 
-            <div>
-                <label>Address</label>
-                <input disabled type="text" :value="getUser.address">
+            <div class="field">
+                <label class="label">Address</label>
+                <div class="control">
+                    <input class="input is-success" disabled type="text" :value="getUser.address">
+                </div>
             </div>
 
             <!-- select bird -->
-            <div>
-                <label>Select bird to Boarding</label>
-                <select v-model="bird_selected">
-                    <!-- list of all bird registered from user -->
-                    <option disabled>Please select your bird</option>
-                    <option v-for="(bird, index) in getBirds" :key="bird.bird_id" :value="bird">{{ bird.bird_name }}</option>
-                </select>
-                <!-- bird select information -->
-                <Bird_Info v-if="bird_selected" :bird="bird_selected" noAction=true />
+            <div class="field">
+                <label class="label">Select bird to Boarding</label>
+                <div class="control">
+                    <select v-model="bird_selected">
+                        <!-- list of all bird registered from user -->
+                        <option disabled>Please select your bird</option>
+                        <option v-for="(bird, index) in getBirds" :key="bird.bird_id" :value="bird">{{ bird.bird_name }}
+                        </option>
+                    </select>
+                    <!-- bird select information -->
+                    <Bird_Info v-if="bird_selected" :bird="bird_selected" noAction=true />
+                </div>
             </div>
 
             <!-- select service pack or customer service pack -->
             <div>
                 <!-- list of service selected -->
-                <div>
-                    <label>Service option</label>
+                <div class="field">
+                    <label class="label">Service option</label>
                     <!-- list of service in our oasis -->
-                    <ul>
-                        <li v-for="service in serviceItems"> <input type="checkbox"
-                                @change="service_selected.indexOf(service.service_id) === -1 ? service_selected.push(service.service_id) : service_selected.splice(service_selected.indexOf(service.service_id), 1)">
-                            {{ service.name }}</li>
-                    </ul>
+                    <div>
+                        <ul>
+                            <li v-for="service in serviceItems"> <input type="checkbox"
+                                    @change="service_selected.indexOf(service.service_id) === -1 ? service_selected.push(service.service_id) : service_selected.splice(service_selected.indexOf(service.service_id), 1)">
+                                {{ service.name }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <p>{{ service_selected }}</p>
 
             <!-- select date_from and date_to to Boarding -->
             <div>
-                <div>
-                    <label>Arrival Date</label>
+                <div class="fields">
+                    <label class="label">Arrival Date</label>
                     <input v-model="date_from" type="date" name="date_from">
                 </div>
 
-                <div>
-                    <label>Departure Date</label>
+                <div class="fields">
+                    <label l class="label">Departure Date</label>
                     <input v-model="date_to" type="date" name="date_to">
                 </div>
             </div>
 
             <div>
-                <input type="checkbox" v-model="term_and_condition">
-                <label>Term and conditions</label>
+                <label class="checkbox">
+                    <input type="checkbox" v-model="term_and_condition">
+                    Term and conditions
+                </label>
             </div>
 
-            <div>
-                <button @click="submitForm">Book now</button>
+            <div class=" has-text-centered">
+                <button class="button is-primary" @click="submitForm">Book now</button>
             </div>
         </div>
     </div>
@@ -99,8 +119,8 @@ export default {
         ...mapGetters(['getUser', 'getBirds', 'serviceItems']),
     },
     methods: {
-        submitForm(){
-            if(this.bird_selected && this.service_selected.length > 0 && this.date_from && this.date_to && this.term_and_condition){
+        submitForm() {
+            if (this.bird_selected && this.service_selected.length > 0 && this.date_from && this.date_to && this.term_and_condition) {
                 // this.$store.dispatch('booking', {
                 //     user_id: this.getUser.user_id,
                 //     bird_id: this.bird_selected.bird_id,
@@ -115,7 +135,7 @@ export default {
                     date_from: this.date_from,
                     date_to: this.date_to
                 });
-            }else{
+            } else {
                 alert('Please fill all the form')
             }
         }
@@ -125,3 +145,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.main{
+    background-color: #f5f5f5;
+    padding: 40px;
+    border-radius: 40px;
+}
+.main div {
+    margin-top: 10px;
+}
+</style>

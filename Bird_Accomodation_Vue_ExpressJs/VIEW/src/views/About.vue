@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>Greeting !</h1>
+    <div class="content container main">
+        <h1 class=" has-text-centered">Greeting !</h1>
         <p>We are a team of bird lovers and experts, dedicated to providing top-quality care for pet birds. Our passion for
             birds started when we were young and has only grown over the years. We understand the importance of providing a
             safe, comfortable, and stimulating environment for your pet bird, and we are committed to making that a reality.
@@ -31,3 +31,16 @@ export default {
     name: 'About',
 }
 </script>
+
+<style scoped>
+.main{
+    /* margin: 20px; */
+    padding-left: 10%;
+    padding-right: 10%;
+    /* border-radius: 40px; */
+    /* background-color: #f5f5f5; */
+}
+.main *{
+    padding-top: 10px;
+}
+</style>
