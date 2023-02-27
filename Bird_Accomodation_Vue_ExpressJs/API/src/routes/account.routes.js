@@ -38,7 +38,7 @@ router.route('/:user_id/newBird')
     //post add new bird by user_id
     //bird_type in as string => need to query bird_type table to get btype_id
     //then add that birdtype_id to the bird table
-    .post(account.addBird_BirdType)
+    // .post(account.addBird_BirdType)
 
 
 module.exports = router

@@ -4,6 +4,7 @@ const account = require('./account.routes');
 const posts = require('./posts.routes');
 const services = require('./services.routes');
 const reviews = require('./review.routes');
+const auth = require('./auth.routes');
 
 // router path
 const router = express.Router();
@@ -15,8 +16,9 @@ const router = express.Router();
  */
 router.use('/user', user);
 router.use('/posts', posts);
+router.use('/auth', auth);
+router.use('/services', services);
 // router.use('/account', account);
-// router.use('/services', services);
 // router.use('/reviews', reviews);
 
 
