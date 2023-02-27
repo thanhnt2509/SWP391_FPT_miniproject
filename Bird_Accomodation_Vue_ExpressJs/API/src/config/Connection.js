@@ -13,6 +13,10 @@ module.exports = {
             trustServerCertificate: true
         }
     },
+    role: {
+        USER: "user",
+        ADMIN: "admin",
+    },
     //export connection
     connection: async () => {
         try {
