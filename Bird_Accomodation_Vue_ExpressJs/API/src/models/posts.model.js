@@ -1,4 +1,4 @@
-const { connection } = require("../../database/Connection");
+const { connection } = require("../../src/config/Connection");
 
 module.exports = {
     getAllPosts: async () => {
