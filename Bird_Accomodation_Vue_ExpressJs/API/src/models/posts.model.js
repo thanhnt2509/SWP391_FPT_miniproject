@@ -1,4 +1,3 @@
-const { request } = require("express");
 const DBConnect = require("../../src/config/Connection");
 
 module.exports = {
