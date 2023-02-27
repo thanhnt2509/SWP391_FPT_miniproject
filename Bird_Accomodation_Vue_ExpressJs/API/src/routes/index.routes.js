@@ -14,10 +14,10 @@ const router = express.Router();
     verifyLogin is a middleware function and will have next() called if the user is authenticated
  */
 router.use('/user', user);
-router.use('/account', account);
 router.use('/posts', posts);
-router.use('/services', services);
-router.use('/reviews', reviews);
+// router.use('/account', account);
+// router.use('/services', services);
+// router.use('/reviews', reviews);
 
 
 
