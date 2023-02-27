@@ -7,6 +7,12 @@ const reviews = require('./review.routes');
 
 // router path
 const router = express.Router();
+
+/*
+    if any of these routes need to pass an authentication check, it will be as follows:
+    router.use('/user', verifyLogin, user);
+    verifyLogin is a middleware function and will have next() called if the user is authenticated
+ */
 router.use('/user', user);
 router.use('/account', account);
 router.use('/posts', posts);
