@@ -12,6 +12,7 @@
             <router-link class="navbar-item" to="/service">Service</router-link>
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
             <router-link class="navbar-item" to="/about">About</router-link>
+            <router-link class="navbar-item" to="/post">Post</router-link>
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
             <!-- <a href="#" class="navbar-item" name="account" @click="patchLogin">Account</a> -->
             <a v-if="getUser?.role === 1"  class="navbar-item" href="#" name="manager" @click="patchLogin">Manager</a>
@@ -68,6 +69,7 @@ export default {
     this.$store.dispatch('getServiceItem')
     this.$store.dispatch('getReviewItem')
     this.$store.dispatch('getBirdTypeItem')
+    this.$store.dispatch('getPostItem')
   }
 }
 </script>

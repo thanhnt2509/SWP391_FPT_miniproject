@@ -4,6 +4,7 @@ const state = {
     services: [],
     reviews: [],
     birdType: [],
+    posts: [],
 }
 
 const mutations = {
@@ -15,6 +16,9 @@ const mutations = {
     },
     UPDATE_BIRD_TYPE_ITEM(state, payload){
         state.birdType = payload
+    },
+    UPDATE_POST_ITEM(state, payload){
+        state.posts = payload
     }
 }
 
@@ -32,12 +36,17 @@ const actions = {
         const response = await axios.get('/api/account/birdType')
         commit('UPDATE_BIRD_TYPE_ITEM', response.data)
     },
+    async getPostItem({commit}){
+        const response = await axios.get('/api/posts')
+        commit('UPDATE_POST_ITEM', response.data)
+    }
 }
 
 const getters = {
     serviceItems: state => state.services,
     reviewItems: state => state.reviews,
     birdTypeItems: state => state.birdType,
+    postItems: state => state.posts
 }
 
 const baseModule = {
