@@ -1,4 +1,6 @@
 const accountModel = require("../models/account.model");
+const jwt = require("jsonwebtoken");
+const config = require("../../src/config/Connection");
 
 module.exports = {
     login: async (req, res, next) => {
@@ -13,6 +15,9 @@ module.exports = {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Login successfully",
+                    token: jwt.sign(payload, config.JWT_SECRET, {
+                        expiresIn: config.JWT_EXP_TIME,
+                    }),
                     account: result
                 })
             } else {
