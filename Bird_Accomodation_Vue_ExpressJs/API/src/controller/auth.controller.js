@@ -11,7 +11,11 @@ module.exports = {
                 password: password
             }
             const result = await accountModel.login(loginDetail);
-            if (result.length > 0){
+            if (result.length > 0) {
+                // Create payload for encryption
+                const payload = {
+                    email: email,
+                };
                 res.status(200).send({
                     exitcode: 0,
                     message: "Login successfully",
@@ -32,10 +36,10 @@ module.exports = {
     },
     register: async (req, res, next) => {
         try {
-            const {email, password, name, address, phone, role, status, user_img} = req.body;
+            const { email, password, name, address, phone } = req.body;
             const validateEmail = await accountModel.validateEmail(email);
             // validate email
-            if (validateEmail){
+            if (validateEmail) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Email already exists"
@@ -44,7 +48,7 @@ module.exports = {
             }
             // validate phone
             const validatePhone = await accountModel.validatePhone(phone);
-            if (validatePhone){
+            if (validatePhone) {
                 res.status(200).send({
                     exitcode: 102,
                     message: "Phone already exists"
@@ -58,8 +62,8 @@ module.exports = {
                 address: address,
                 phone: phone
             }
-            const result = await accountModel.register(registerDetail); 
-            if (result > 0){
+            const result = await accountModel.register(registerDetail);
+            if (result > 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Register successfully"
