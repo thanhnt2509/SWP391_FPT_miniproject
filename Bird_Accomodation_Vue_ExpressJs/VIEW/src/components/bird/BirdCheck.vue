@@ -4,10 +4,10 @@
         <!-- each bird in boarding-->
         <div v-for="booking in getBookings">
             <!-- overview -->
-            <div class="container">
+            <div class="container main">
                 <!-- {{ booking }} -->
                 <h2>Overview</h2>
-                <div class="columns main">
+                <div class="columns ">
                     <Bird_Info :bird="booking?.bird_id" style="width: fit-content; height: fit-content;"
                         class="bird_info column" noAction="true" />
                     <div class="column">
@@ -20,8 +20,9 @@
                     <Booking_Service_Info :services="booking?.services" style="width: fit-content;"
                         class="bird_info column" />
                 </div>
-            </div>
+                <Booking_Report_Detail />
 
+            </div>
         </div>
     </div>
 </template>
@@ -31,6 +32,7 @@ import { mapGetters } from 'vuex'
 import Bird_Info from './Bird_Info.vue'
 import Booking_Info from '../booking/Booking_Info.vue'
 import Booking_Service_Info from '../booking/Booking_Service_Info.vue';
+import Booking_Report_Detail from '../booking/Booking_Report_Detail.vue';
 import Booking_Report from '../booking/Booking_Report.vue';
 export default {
     name: 'BirdCheck',
@@ -46,7 +48,8 @@ export default {
         Bird_Info,
         Booking_Info,
         Booking_Service_Info,
-        Booking_Report
+        Booking_Report,
+        Booking_Report_Detail
     }
 }
 </script>
@@ -54,8 +57,7 @@ export default {
 .main {
     border: 1px solid #ccc;
     border-radius: 14px;
-    padding: 10px;
-    margin: 10px;
+
 }
 
 .bird_info {

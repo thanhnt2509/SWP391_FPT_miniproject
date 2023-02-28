@@ -134,7 +134,7 @@ CRUD SERVICES
 		{
 			date_from: 2022-12-02
 			date_to: 2022-12-04
-			status: on-going
+			status: 0
 			service:[ 'name1', 'name2', 'name3']
 			bill: {
 				total_ammount:	9999$ (each day will be 50$, + service price/days)
@@ -149,11 +149,68 @@ CRUD SERVICES
 			}
 		},
 		
-		
+		{
+			date_from: 2022-11-02
+			date_to: 2022-11-04
+			status: 1
+			service:['name2', 'name3']
+			bill: {
+				total_ammount:	9999$ (each day will be 50$, + service price/days)
+				payment_status:	0
+				payment_method: COD
+				date: 
+				}
+			bird: {
+				name: RaeKyo
+				age: 2
+				image: death_bird.jpg
+			}
+		},
 	]
 
 
-	
+-POST /account/:accId/:bookingId/addService
+	+ body: [4, 3, 5] -> mean (4: Training, 4:Grooming, 5: Play areas)
+	+ add this service to current booking
+
+
+
+-GET /manager/transactions/on-going
+	+ return all transaction with status on-going (0)
+	+ as array json ex:
+    [
+        {
+            booking_id: 1
+            bird_id: 1
+            bird_image: death_bird.jpg
+            date_from: 2022-12-02
+            date_to: 2022-12-04
+            status: 1 (on-going -> remember: pending- ongoing -success-cancel)
+            payment_status: COD
+        }
+    ]
+-GET /manager/transactions/pending
+-GET /manager/transactions/success
+-GET /manager/transactions/cancel
+
+
+-PUT /manager/transaction/:bookingId/approve
+	+ change Booking with bookingId to "ongoing" status (0 -> 1)
+-PUT /manager/transaction/:bookingId/complete
+	+ change Booking with bookingId to "ongoing" status (1 -> 2)
+-PUT /manager/transaction/:bookingId/reject
+	+ change Booking with bookingId to "ongoing" status (0 -> 3)
+
+
+-POST /manager/post/newPost		<== replace - POST: /posts/newPost
+	body:
+{
+	title: how to drug your bird
+	content: just kill it
+	reference: http://how-to-death.org
+}
+
+
 
 ----------------------------------------------------------------------------------
 STATE Booking
