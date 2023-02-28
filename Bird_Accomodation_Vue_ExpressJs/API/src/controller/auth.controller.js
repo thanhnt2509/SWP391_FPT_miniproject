@@ -1,6 +1,6 @@
 const accountModel = require("../models/account.model");
 const jwt = require("jsonwebtoken");
-const config = require("../../src/config/Connection");
+const config = require("../../src/config/config");
 
 module.exports = {
     login: async (req, res, next) => {

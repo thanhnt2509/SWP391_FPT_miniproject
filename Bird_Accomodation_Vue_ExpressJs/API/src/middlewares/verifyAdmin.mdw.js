@@ -1,4 +1,4 @@
-const config = require("../../src/config/Connection");
+const config = require("../../src/config/config");
 const accountModel = require("../../src/models/account.model");
 const ErrorHandler  = require("../../src/middlewares/errorHandler.mdw");
 

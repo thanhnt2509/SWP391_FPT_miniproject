@@ -1,4 +1,4 @@
-const config = require('../config/Connection');
+const config = require('../config/config');
 const jwt = require('jsonwebtoken');
 const ErrorHandler = require('../middlewares/errorHandler.mdw');
 

@@ -1,4 +1,4 @@
-const DBConnect = require("../../src/config/Connection");
+const DBConnect = require("../../src/config/config");
 
 module.exports = {
     getUser: async () => {
