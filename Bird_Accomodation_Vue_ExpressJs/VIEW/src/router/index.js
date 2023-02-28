@@ -7,6 +7,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Booking from '../views/Booking.vue'
 import Account from '../views/Account.vue'
+import Post from '../views/Post.vue'
 import Profile from '../components/account/Profile.vue'
 import BirdList from '../components/bird/BirdList.vue'
 import BirdCheck from '../components/bird/BirdCheck.vue'
@@ -45,6 +46,16 @@ const router = createRouter({
       path: '/booking',
       name: 'booking',
       component: Booking
+    },
+    {
+      path: '/post',
+      name: 'post',
+      children: [
+        {
+          path: '/post',
+          component: Post,
+        }
+      ]
     },
     {
       path: '/service',
