@@ -1,0 +1,4 @@
+-middelwares will provide error handler, verify handler before accessing actual route
+- http req send to index route -> call middelwares handler -> next() to actual route
+ex: in index.routes.js
+        router.use('/account', verifyLogin, verifyEmailVerified, account)
