@@ -27,6 +27,9 @@ module.exports = {
         catch (err) {
             console.log(err.message)
         }
-    }
+    },
+
+    JWT_EXP_TIME: 60 * 60,
+    JWT_SECRET: process.env.JWT_SECRET,
 }
 
