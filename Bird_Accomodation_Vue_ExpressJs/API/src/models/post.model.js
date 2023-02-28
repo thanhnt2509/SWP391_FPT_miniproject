@@ -1,4 +1,4 @@
-const DBConnect = require("../../src/config/config");
+const DBConnect = require("../config/config");
 
 module.exports = {
     getAllPosts: async () => {
