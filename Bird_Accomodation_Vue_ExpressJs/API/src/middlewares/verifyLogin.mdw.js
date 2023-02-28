@@ -1,6 +1,6 @@
 const config = require('../config/config');
 const jwt = require('jsonwebtoken');
-const ErrorHandler = require('../middlewares/errorHandler.mdw');
+const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
 
 module.exports = {
     verifyLogin: (req, res, next) => {

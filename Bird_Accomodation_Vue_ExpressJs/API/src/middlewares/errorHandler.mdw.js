@@ -6,17 +6,15 @@ class ErrorHandler extends Error {
     }
 }
 
-const handleError = (err, req, res, next) => {
-    const { statusCode, message } = err;
-    console.error(err);
-
-    res.status(statusCode || 500).send({
-        exitcode: 1,
-        message: statusCode ? message : "An error occurred",
-    });
-};
-
-export {
+module.exports = {
     ErrorHandler,
-    handleError
-}
+    handleError: (err, req, res, next) => {
+        const { statusCode, message } = err;
+        console.error(err);
+
+        res.status(statusCode || 500).send({
+            exitcode: 1,
+            message: statusCode ? message : "An error occurred",
+        });
+    } 
+};
