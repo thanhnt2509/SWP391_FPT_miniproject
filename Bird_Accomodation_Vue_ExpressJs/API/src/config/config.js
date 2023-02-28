@@ -26,8 +26,8 @@ module.exports = {
     },
 
     role: {
-        USER: "user",
-        ADMIN: "admin",
+        USER: 0,
+        ADMIN: 1,
     },
     //jwt
     JWT_EXP_TIME: 60 * 60,
