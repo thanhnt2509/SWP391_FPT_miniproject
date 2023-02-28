@@ -181,8 +181,10 @@ CRUD SERVICES
     [
         {
             booking_id: 1
-            bird_id: 1
+	    customer_name: Tien
+	    bird_name: RaeKyo
             bird_image: death_bird.jpg
+	    address: death district HCM city
             date_from: 2022-12-02
             date_to: 2022-12-04
             status: 1 (on-going -> remember: pending- ongoing -success-cancel)
@@ -192,8 +194,9 @@ CRUD SERVICES
 -GET /manager/transactions/pending
 -GET /manager/transactions/success
 -GET /manager/transactions/cancel
-
-
+-GET /manager/transactions
+	+ return all transaction with the same format previous
+	
 -PUT /manager/transaction/:bookingId/approve
 	+ change Booking with bookingId to "ongoing" status (0 -> 1)
 -PUT /manager/transaction/:bookingId/complete
