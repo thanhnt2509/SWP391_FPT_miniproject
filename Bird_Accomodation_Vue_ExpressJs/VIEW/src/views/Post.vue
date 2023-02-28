@@ -2,28 +2,38 @@
   <div class="container content has-text-centered">
     <div class="title">Post</div>
     <div class="columns">
-      <div
-        v-for="post in postItems"
-        :key="`post_` + post.post_id"
-        class="column_content column is-one-third"
-      >
+      <div v-for="post in postItems" :key="`post_` + post?.post_id" class="column_content column is-one-third">
         <div>
-          <img
-            class="column_content_img"
-            src="https://img.freepik.com/free-vector/hand-drawn-bird-collection_52683-42321.jpg?w=740&t=st=1677462200~exp=1677462800~hmac=cc48a9a93694934a8fb88d88823eca7fbd6283e0b412646f3cfcc397895d877f"
-          />
+          <img class="column_content_img"
+            src="https://img.freepik.com/free-vector/hand-drawn-bird-collection_52683-42321.jpg?w=740&t=st=1677462200~exp=1677462800~hmac=cc48a9a93694934a8fb88d88823eca7fbd6283e0b412646f3cfcc397895d877f" />
         </div>
-        <label class="title">{{ post.title }}</label>
+        <label class="title">{{ post?.title }}</label>
         <div class="column_content_text">
-          {{ post.content }}
+          {{ post?.content }}
         </div>
         <div>
-          <button class="button is-primary" @click="postItem = post">Show more</button>
+          <button class="button is-primary" @click="isActive = true">Show more</button>
+          <div class="modal" :class="isActive ? 'is-active' : ''">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="delete" aria-label="close" @click="isActive = false"></button>
+              </header>
+              <section class="modal-card-body">
+                <PostDetail :post="post" />
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+              </footer>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-    <PostDetail :post="postItem" />
 </template>
 
 <script>
@@ -36,10 +46,10 @@ export default {
   },
   data() {
     return {
-        postItem: undefined
+      isActive: false,
     };
-  },components: {
-      PostDetail
+  }, components: {
+    PostDetail
   }
 };
 </script>
@@ -51,11 +61,13 @@ export default {
   border-radius: 20px;
   margin: 10px 20px;
 }
+
 .column_content_img {
   width: 400px;
   height: 400px;
   border-radius: 20px;
 }
+
 .column_content_text {
   text-align: left;
   padding: 20px;

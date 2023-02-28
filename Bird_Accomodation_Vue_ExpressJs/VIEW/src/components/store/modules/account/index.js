@@ -7,13 +7,13 @@ const state = {
 }
 
 const mutations = {
-    UPDATE_USER(state, payload){
+    UPDATE_USER(state, payload) {
         state.user = payload
     },
-    UPDATE_BIRDS(state, payload){
+    UPDATE_BIRDS(state, payload) {
         state.birds = payload
     },
-    UPDATE_BOOKINGS(state, payload){
+    UPDATE_BOOKINGS(state, payload) {
         state.bookings = payload
     },
 
@@ -24,10 +24,12 @@ const actions = {
         const response = await axios.post('/api/account/login', ac)
         commit('UPDATE_USER', response.data)
         console.log('after login user: ', state.user);
-        await this.dispatch('getAllBirds')
-        console.log('after get all birds: ', state.birds);
-        await this.dispatch('getAllBooking')
-        console.log('after get all bookings: ', state.bookings);
+        if (state.user.role === 0) {
+            await this.dispatch('getAllBirds')
+            console.log('after get all birds: ', state.birds);
+            await this.dispatch('getAllBooking')
+            console.log('after get all bookings: ', state.bookings);
+        }
     },
     async logout({ commit }) {
         commit('UPDATE_USER', undefined)
@@ -44,11 +46,11 @@ const actions = {
     },
     async getAllBooking({ commit }) {
         const response = await axios.get(`/api/account/${state.user.user_id}/bookings`)
-        response.data.map(async booking => 
-            {booking.bird_id = (await axios.get(`/api/account/${state.user.user_id}/${booking.bird_id}`)).data
+        response.data.map(async booking => {
+            booking.bird_id = (await axios.get(`/api/account/${state.user.user_id}/${booking.bird_id}`)).data
             booking.date_from = new Date(booking.date_from).toISOString().slice(0, 10);
             booking.date_to = new Date(booking.date_to).toISOString().slice(0, 10);
-            booking.services = (await axios.get(`/api/account/${booking.booking_id}/services`)).data 
+            booking.services = (await axios.get(`/api/account/${booking.booking_id}/services`)).data
             booking.reports = (await axios.get(`/api/account/${booking.booking_id}/reports`)).data
         })
         commit('UPDATE_BOOKINGS', response.data)

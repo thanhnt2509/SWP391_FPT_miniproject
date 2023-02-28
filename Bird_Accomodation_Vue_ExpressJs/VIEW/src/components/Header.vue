@@ -15,10 +15,10 @@
             <router-link class="navbar-item" to="/post">Post</router-link>
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
             <!-- <a href="#" class="navbar-item" name="account" @click="patchLogin">Account</a> -->
-            <a v-if="getUser?.role === 1"  class="navbar-item" href="#" name="manager" @click="patchLogin">Manager</a>
+            <a v-if="getUser?.role === 1" class="navbar-item" href="#" name="manager" @click="patchLogin">Manager</a>
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
-                More
+                <i class="fa-solid fa-bars"></i>
               </a>
 
               <div class="navbar-dropdown">
@@ -26,9 +26,9 @@
                 <router-link class="navbar-item" to="/account/bird/list">Bird List</router-link>
                 <router-link class="navbar-item" to="/account/bird/check">Bird Check</router-link>
                 <hr class="navbar-divider">
-                <!-- <a class="navbar-item">
-                  Report an issue
-                </a> -->
+                <a class="navbar-item">
+                  <a href="#" @click="logout">Logout</a>
+                </a>
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
 
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="buttons">
+            <div v-if="!getUser" class="buttons">
               <a class="button is-primary">
                 <router-link to="/register">Sign up</router-link>
               </a>
@@ -62,6 +62,12 @@ export default {
     patchLogin(evt) {
       if (this.getUser) this.$router.push('/' + evt.target.name)
       else this.$router.push('/login')
+    },
+    logout(){
+      if(this.getUser){
+        this.$store.dispatch('logout');
+        this.$router.push('/');
+      }
     }
   },
   created() {

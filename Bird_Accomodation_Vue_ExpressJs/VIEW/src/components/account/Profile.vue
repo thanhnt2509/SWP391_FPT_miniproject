@@ -8,7 +8,7 @@
         <div class="field">
             <label class="label">Fullname</label>
             <div class="control">
-                <input class="input is-success" :disabled="!isEdit" type="text" :value="getUser.name">
+                <input class="input is-success" :disabled="!isEdit" type="text" :value="getUser?.name">
             </div>
         </div>
 
@@ -16,7 +16,7 @@
         <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input is-danger" :disabled="!isEdit" type="email" :value="getUser.email">
+                <input class="input is-danger" :disabled="!isEdit" type="email" :value="getUser?.email">
                 <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                 </span>
@@ -29,14 +29,14 @@
         <div class="field">
             <label class="label">Phone</label>
             <div class="control">
-                <input  class="input is-success" :disabled="!isEdit" type="tel" :value="getUser.phone">
+                <input  class="input is-success" :disabled="!isEdit" type="tel" :value="getUser?.phone">
             </div>
         </div>
 
         <div class="field">
                 <label class="label">Address</label>
                 <div class="control">
-                    <input class="input is-success" :disabled="!isEdit" type="text" :value="getUser.address">
+                    <input class="input is-success" :disabled="!isEdit" type="text" :value="getUser?.address">
                 </div>
             </div>
 

@@ -61,8 +61,8 @@ export default {
         return {
             fields: {
                 bird_name: '',
-                type_id: '',
-                age: '',
+                type_id: '2',
+                age: '2',
                 gender: 'Male',
                 breed: '',
                 description: '',
@@ -71,7 +71,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getUser', 'birdTypeItems'])
+        ...mapGetters(['birdTypeItems'])
     },
     methods: {
         submitForm(evt) {
@@ -92,6 +92,5 @@ export default {
     border-radius: 10px;
     width: fit-content;
     padding: 40px;
-    margin: 20px;
 }
 </style>

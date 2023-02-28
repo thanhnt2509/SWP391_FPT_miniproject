@@ -8,14 +8,20 @@
             </div>
         </div><br>
         <!-- birdlist -->
-        <div class="columns is-multiline is-mobile">
-            <div class="column is-one-fifths bird_info_contain" v-for="bird in getBirds">
-                <!-- eachbird -->
-                <Bird_Info :bird="bird" />
+        <div class="columns">
+            <div class="column is-four-fifths columns is-multiline is-mobile">
+                <div class="column is-one-third bird_info_contain" v-for="bird in getBirds">
+                    <!-- eachbird -->
+                    <Bird_Info :bird="bird" />
+                </div>
+            </div>
+            <div class="column">
+                <!-- register new bird -->
+                <BirdRegister />
             </div>
         </div>
-        <!-- register new bird -->
-        <BirdRegister />
+
+
     </div>
 </template>
 
@@ -36,10 +42,5 @@ export default {
 </script>
 
 <style scoped>
-.bird_info_contain {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 10px;
-    margin: 10px;
-}
+
 </style>

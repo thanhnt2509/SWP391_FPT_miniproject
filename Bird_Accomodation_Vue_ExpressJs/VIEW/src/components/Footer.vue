@@ -1,10 +1,10 @@
 <template>
   <div>
-    <footer class="footer">
-      <div class="columns content has-text-centered">
+    <footer class="footer" style="text-align: left; padding-left: 300px;">
+      <div class="columns content">
         <div class="column">
           <h3><strong>Company</strong></h3>
-          <li>About us</li>
+          <li><i class="fa-solid fa-address-card"></i> About us</li>
           <li>Service</li>
           <li>Gallery</li>
         </div>
@@ -16,9 +16,9 @@
         </div>
         <div class="column">
           <h3><strong>Follow us</strong></h3>
-          <li>Facebook</li>
-          <li>Instagram</li>
-          <li>Twitter</li>
+          <li><i class="fa-brands fa-facebook"></i> Facebook</li>
+          <li><i class="fa-brands fa-instagram"></i> Instagram</li>
+          <li><i class="fa-brands fa-twitter"></i> Twitter</li>
         </div>
       </div>
     </footer>
