@@ -3,7 +3,7 @@
         <h1 class="has-text-centered title">Profile</h1>
         <p class="subtitle">Your information will show here, change it if you need to booking service in different address
             !!!</p>
-        <button @click="edit" class="button is-link">Edit</button>
+        <button @click="edit" style="float: right;" class="button is-link">Edit</button>
 
         <div class="field">
             <label class="label">Fullname</label>
