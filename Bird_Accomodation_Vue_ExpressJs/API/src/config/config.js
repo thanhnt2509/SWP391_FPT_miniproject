@@ -1,8 +1,8 @@
 module.exports = {
     sql: require('mssql'), // export mssql module
-    // dotenv and config will also be exported through this module, but most likely will not be used
+    // export dotenv and config
     dotenv: require('dotenv').config({ path: require('path').resolve(__dirname, '..', '..', '.env') }),
-    config: {
+    database: {
         server: process.env.SQL_SERVER,
         database: process.env.SQL_DB,
         user: process.env.SQL_USERNAME,
@@ -13,14 +13,10 @@ module.exports = {
             trustServerCertificate: true
         }
     },
-    role: {
-        USER: "user",
-        ADMIN: "admin",
-    },
     //export connection
     connection: async () => {
         try {
-            await module.exports.sql.connect(module.exports.config);
+            await module.exports.sql.connect(module.exports.database);
             module.exports.sql.on('error', err => { console.log(err.message); }); //handle error
             return module.exports.sql;
         }
@@ -29,7 +25,13 @@ module.exports = {
         }
     },
 
+    role: {
+        USER: "user",
+        ADMIN: "admin",
+    },
+    //jwt
     JWT_EXP_TIME: 60 * 60,
     JWT_SECRET: process.env.JWT_SECRET,
+
 }
 
