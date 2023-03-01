@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <h1 class="label has-text-centered" style="padding-bottom: 20px;">Transaction List</h1>
         <a-table :columns="columns" :data-source="data">
             <template #headerCell="{ column }">
                 <template v-if="column.key === 'transactionId'">
@@ -30,12 +31,12 @@
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <router-link class="navbar-item" :to="`/account/bird/check/${record.transactionId}`">Detail 一 {{ record.transactionId }}</router-link>
+                        <a><router-link :to="`/account/bird/check/${record.transactionId}`">
+                                <button class="button is-link is-light">Detail on #tr{{ record.transactionId }}</button>
+                            </router-link></a>
                         <a-divider type="vertical" />
-                        <div v-if="record.status === 'completed'">
-                            <a>View Bill</a>
-                            <a-divider type="vertical" />
-                        </div>
+                        <a v-if="record.status === 'completed'"><button class="button is-info">View Bill</button></a>
+                        <a v-else><button class="button is-primary" @click="showConfirm">Pay now</button></a>
                     </span>
                 </template>
             </template>
@@ -43,8 +44,9 @@
     </div>
 </template>
 <script>
-import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
+import { SmileOutlined, DownOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
+import { createVNode, defineComponent } from 'vue';
+import { Modal } from 'ant-design-vue';
 const columns = [{
     name: 'TransactionId',
     dataIndex: 'transactionId',
@@ -90,10 +92,26 @@ export default defineComponent({
         DownOutlined,
     },
     setup() {
+        const showConfirm = () => {
+            Modal.confirm({
+                title: 'Confirm Pay this transaction online ?',
+                icon: createVNode(ExclamationCircleOutlined),
+                content: 'Click the button below to pay this transaction online',
+                onOk() {
+                    return new Promise((resolve, reject) => {
+                        setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+                    }).catch(() => console.log('Oops errors!'));
+                },
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                onCancel() { },
+            });
+        };
         return {
+            showConfirm,
             data,
             columns,
         };
     },
+
 });
 </script>
