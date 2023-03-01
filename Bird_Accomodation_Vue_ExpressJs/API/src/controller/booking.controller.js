@@ -1,5 +1,6 @@
 const bookingModel = require('../models/booking.model');
 const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
+const { dateFormat } = require('../config/config');
 
 module.exports = {
     changeBookingStatus: async (req, res, next) => {
@@ -40,8 +41,8 @@ module.exports = {
                     booking_id: item.booking_id,
                     user_id: item.user_id,
                     bird_id: item.bird_id,
-                    date_from: item.date_from,
-                    date_to: item.date_to,
+                    date_from: dateFormat(item.date_from),
+                    date_to: dateFormat(item.date_to),
                     status: item.status,
                 }));
                 res.status(200).send({
