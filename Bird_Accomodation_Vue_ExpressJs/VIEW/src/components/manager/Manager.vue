@@ -14,7 +14,12 @@
                 <p>Year: 100000$</p>
             </div>
         </div>
-        <TransactionList />
+        <h1>List of transaction that status is Pending and need to processed</h1>
+        <TransactionList :isPending="true"/>
+
+
+        <h1>List of transaction that status is Accepted and need to reprot</h1>
+        <TransactionList :isOngoing="true"/>
     </div>
 </template>
 

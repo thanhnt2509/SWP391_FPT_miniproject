@@ -10,10 +10,10 @@
 
         <div class="field">
             <label lass="label">Species</label>
-            <select class="input select" v-model="fields.type_id">
+            <select class="input select" v-model="fields.bird_type">
                 <!-- list of bird_type -->
                 <option disabled>Select bird type</option>
-                <option v-for="type in birdTypeItems" :value="type.btype_id">{{ type.name }}</option>
+                <option v-for="type in birdTypeItems" :value="type.name">{{ type.name }}</option>
             </select>
         </div>
 
@@ -61,7 +61,7 @@ export default {
         return {
             fields: {
                 bird_name: '',
-                type_id: '2',
+                bird_type: '2',
                 age: '2',
                 gender: 'Male',
                 breed: '',
@@ -76,11 +76,14 @@ export default {
     methods: {
         submitForm(evt) {
             evt.preventDefault();
+            this.fields.user_id = this.$store.getters.getUser.user_id
             this.$store.dispatch('addNewBird', this.fields)
+                .then(() => {
+                    console.log(`Success`);
+                })
                 .catch((e) => {
-                    console.log(e);
+                    console.log(`Error: ${e}`);
                 }, 1000)
-            console.log(this.fields);
         }
     }
 }

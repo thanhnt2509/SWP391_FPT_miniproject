@@ -66,11 +66,6 @@ CRUD SERVICES
 	+ body: none
 	+ -> delete successful ? -> bird json (deleted) : -> 400
 
-- POST: /account/:accId/newBooking (7)
-	+ body: accId, birdId, serviceId: ['1', '2', '3' (example)], date_from, date_to
-	+ -> set status default as 0: pending, create BookingDetail information(link booking_id, service_id, booked_price(get from Service table)) -> transaction add successful ? -> json Booking : -> 400
-
-	+ return successful ? -> json : -> 404
 
 - GET: /account/:accId/:booking_id/services
 	+ body: accId, booking_id
@@ -172,6 +167,20 @@ CRUD SERVICES
 -POST /account/:accId/:bookingId/addService
 	+ body: [4, 3, 5] -> mean (4: Training, 4:Grooming, 5: Play areas)
 	+ add this service to current booking
+
+- POST: /account/:accId/newBooking (7)
+	+ body:
+	{
+		birdId: 2
+		services: ['1', '2', '3'],
+		date_from: 2022-12-02
+		date_to: 2022-12-4
+	}
+	+ require: khi tạo booking, tạo liên kết với các bookingDetail (vì có nhiều service đc chọn),
+		tạo các DailyReport tuple tương ứng với số lượng ngày của booking trong th trên sẽ là tạo ra 3 tuple: 2022-12-02, 2022-12-03, 2022-12-04
+		tương ứng với DailyFeedback
+
+	+ return successful ? -> return booking_id : -> 404
 
 
 

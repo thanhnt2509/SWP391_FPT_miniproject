@@ -15,14 +15,7 @@
             <router-link class="navbar-item" to="/post">Post</router-link>
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
             <!-- <a href="#" class="navbar-item" name="account" @click="patchLogin">Account</a> -->
-            <a
-              v-if="getUser?.role === 1"
-              class="navbar-item"
-              href="#"
-              name="manager"
-              @click="patchLogin"
-              >Manager</a
-            >
+
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 <i class="fa-solid fa-bars"></i>
@@ -30,20 +23,14 @@
 
               <div class="navbar-dropdown">
                 <div v-if="getUser?.role === 1">
-                  <router-link class="navbar-item" to="/manager/service"
-                    >Manage Service</router-link
-                  >
+                  <a class="navbar-item" href="#" name="manager" @click="patchLogin">Manage Transaction</a>
+                  <router-link class="navbar-item" to="/manager/service">Manage Service</router-link>
                 </div>
                 <div v-else>
-                  <router-link class="navbar-item" to="/account/profile"
-                    >Profile</router-link
-                  >
-                  <router-link class="navbar-item" to="/account/bird/list"
-                    >Bird List</router-link
-                  >
-                  <router-link class="navbar-item" to="/account/bird/check"
-                    >Bird Check</router-link
-                  >
+                  <router-link class="navbar-item" to="/account/profile">Profile</router-link>
+                  <router-link class="navbar-item" to="/account/transaction">Transaction</router-link>
+                  <router-link class="navbar-item" to="/account/bird/list">Bird List</router-link>
+                  <!-- <router-link class="navbar-item" to="/account/bird/check">Bird Check</router-link> -->
                 </div>
                 <hr class="navbar-divider" />
                 <a class="navbar-item">

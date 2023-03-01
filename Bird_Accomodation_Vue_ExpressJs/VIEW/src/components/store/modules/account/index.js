@@ -51,7 +51,7 @@ const actions = {
 			booking.date_from = new Date(booking.date_from).toISOString().slice(0, 10);
 			booking.date_to = new Date(booking.date_to).toISOString().slice(0, 10);
 			booking.services = (await axios.get(`/api/account/${booking.booking_id}/services`)).data;
-			booking.reports = (await axios.get(`/api/account/${booking.booking_id}/reports`)).data;
+			// booking.reports = (await axios.get(`/api/account/${booking.booking_id}/reports`)).data;
 		});
 		commit("UPDATE_BOOKINGS", response.data);
 	},

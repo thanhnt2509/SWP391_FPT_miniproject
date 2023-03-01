@@ -11,9 +11,11 @@ import Post from "../views/Post.vue";
 import Profile from "../components/account/Profile.vue";
 import BirdList from "../components/bird/BirdList.vue";
 import BirdCheck from "../components/bird/BirdCheck.vue";
+import Transaction from "../components/account/Transaction.vue";
 
 import Manager from "../components/manager/Manager.vue";
-import ManagerService from "../components/manager/Manager_Service.vue";
+import ManagerService from "../components/manager/Manage_Service.vue";
+import ManageReport from "../components/manager/Manage_Report.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,6 +75,11 @@ const router = createRouter({
 					component: Account
 				},
 				{
+					path: "transaction",
+					name: "transaction",
+					component: Transaction
+				},
+				{
 					path: "profile",
 					name: "profile",
 					component: Profile
@@ -87,7 +94,7 @@ const router = createRouter({
 							component: BirdList
 						},
 						{
-							path: "check",
+							path: "check/:id",
 							name: "bird-check",
 							component: BirdCheck
 						},
@@ -108,7 +115,12 @@ const router = createRouter({
 					path: "service",
 					name: "crud service",
 					component: ManagerService
-				}
+				},
+				{
+					path: "report/:id",
+					name: "update report",
+					component: ManageReport
+				},
 			]
 		}
 	]
