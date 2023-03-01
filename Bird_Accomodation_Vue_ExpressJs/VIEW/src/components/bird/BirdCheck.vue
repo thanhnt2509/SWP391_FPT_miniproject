@@ -21,13 +21,13 @@
         </div>
         <a-tabs v-model:activeKey="activeKey">
           <!-- each date -->
-          <a-tab-pane key="1" tab="Tab 1">
+          <a-tab-pane key="1" tab="2022-12-02">
             <div class="report_content" style="width: 100%;">
               <Booking_Report_Detail :booking="booking" />
             </div>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="Tab 2" force-render>Content of Tab Pane 2</a-tab-pane>
-          <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>
+          <a-tab-pane key="2" tab="2022-12-03" force-render>Content of Tab Pane 2</a-tab-pane>
+          <a-tab-pane key="3" tab="2022-12-04">Content of Tab Pane 3</a-tab-pane>
         </a-tabs>
       </div>
     </div>
