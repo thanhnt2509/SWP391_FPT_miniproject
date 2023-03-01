@@ -15,6 +15,7 @@
             </template>
         </template>
 
+<!-- action -->
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'name'">
                 <a>

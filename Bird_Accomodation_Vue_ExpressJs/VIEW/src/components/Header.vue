@@ -4,7 +4,7 @@
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <router-link class="navbar-item" to="/">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
           </router-link>
         </div>
         <div class="navbar-menu">
@@ -15,17 +15,37 @@
             <router-link class="navbar-item" to="/post">Post</router-link>
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
             <!-- <a href="#" class="navbar-item" name="account" @click="patchLogin">Account</a> -->
-            <a v-if="getUser?.role === 1" class="navbar-item" href="#" name="manager" @click="patchLogin">Manager</a>
+            <a
+              v-if="getUser?.role === 1"
+              class="navbar-item"
+              href="#"
+              name="manager"
+              @click="patchLogin"
+              >Manager</a
+            >
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 <i class="fa-solid fa-bars"></i>
               </a>
 
               <div class="navbar-dropdown">
-                <router-link class="navbar-item" to="/account/profile">Profile</router-link>
-                <router-link class="navbar-item" to="/account/bird/list">Bird List</router-link>
-                <router-link class="navbar-item" to="/account/bird/check">Bird Check</router-link>
-                <hr class="navbar-divider">
+                <div v-if="getUser?.role === 1">
+                  <router-link class="navbar-item" to="/manager/service"
+                    >Manage Service</router-link
+                  >
+                </div>
+                <div v-else>
+                  <router-link class="navbar-item" to="/account/profile"
+                    >Profile</router-link
+                  >
+                  <router-link class="navbar-item" to="/account/bird/list"
+                    >Bird List</router-link
+                  >
+                  <router-link class="navbar-item" to="/account/bird/check"
+                    >Bird Check</router-link
+                  >
+                </div>
+                <hr class="navbar-divider" />
                 <a class="navbar-item">
                   <a href="#" @click="logout">Logout</a>
                 </a>
@@ -52,30 +72,30 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'Header',
+  name: "Header",
   computed: {
-    ...mapGetters(['getUser']),
+    ...mapGetters(["getUser"]),
   },
   methods: {
     patchLogin(evt) {
-      if (this.getUser) this.$router.push('/' + evt.target.name)
-      else this.$router.push('/login')
+      if (this.getUser) this.$router.push("/" + evt.target.name);
+      else this.$router.push("/login");
     },
-    logout(){
-      if(this.getUser){
-        this.$store.dispatch('logout');
-        this.$router.push('/');
+    logout() {
+      if (this.getUser) {
+        this.$store.dispatch("logout");
+        this.$router.push("/");
       }
-    }
+    },
   },
   created() {
     // call api to sync data
-    this.$store.dispatch('getServiceItem')
-    this.$store.dispatch('getReviewItem')
-    this.$store.dispatch('getBirdTypeItem')
-    this.$store.dispatch('getPostItem')
-  }
-}
+    this.$store.dispatch("getServiceItem");
+    this.$store.dispatch("getReviewItem");
+    this.$store.dispatch("getBirdTypeItem");
+    this.$store.dispatch("getPostItem");
+  },
+};
 </script>

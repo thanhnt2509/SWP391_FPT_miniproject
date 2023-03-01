@@ -1,17 +1,17 @@
 const state = {
     
-}
+};
 
-const mutations = {}
+const mutations = {};
 
-const actions = {}
+const actions = {};
 
-const getters = {}
+const getters = {};
 
 const store = {
-    state,
-    mutations,
-    actions,
-    getters
-}
-export default store
+	state,
+	mutations,
+	actions,
+	getters
+};
+export default store;
