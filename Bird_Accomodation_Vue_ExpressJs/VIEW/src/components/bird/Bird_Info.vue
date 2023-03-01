@@ -56,7 +56,8 @@ export default {
             type: Object,
             // required: true
         },
-        noAction: String
+        noAction: String,
+        resize_width: String
     },
 }
 </script>
