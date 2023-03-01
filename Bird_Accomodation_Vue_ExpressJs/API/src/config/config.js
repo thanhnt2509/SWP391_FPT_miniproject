@@ -25,6 +25,12 @@ module.exports = {
         }
     },
 
+    //date format yyyy-mm-dd
+    dateFormat: (date) => {
+        let formattedDate = new Date(date)
+        return formattedDate.toISOString().slice(0, 10)
+    },
+
     role: {
         USER: 0,
         ADMIN: 1,
