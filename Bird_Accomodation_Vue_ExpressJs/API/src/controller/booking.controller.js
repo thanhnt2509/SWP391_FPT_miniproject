@@ -33,7 +33,6 @@ module.exports = {
     getAllBookings: async (req, res, next) => {
         try {
             const result = await bookingModel.getAllBookings();
-            console.log(result);
             if (result.length === 0) {
                 throw new ErrorHandler(404, 'No booking found');
             } else {
