@@ -2,13 +2,13 @@
     <!-- banner and image -->
     <section id="image_banner" class="hero is-large is-link">
         <div class="hero-body">
-            <p class="title">
+            <p class="title" style="padding-left: 55px;">
                 TREAT WITH CARE
             </p>
             <p class="subtitle">
                 The place where you found the bird oasis !
             </p>
-            <button @click="$router.push('/login')" class="button is-primary is-light">Book now</button>
+            <button @click="$router.push('/login')" class="button is-primary is-light has-text-centered" style="width: 375px;">Book now</button>
         </div>
     </section>
 
@@ -16,23 +16,31 @@
         <!-- Selft introduction -->
         <div class="content is-normal">
             <div>
-                <h1 class="title">Bird Oasis</h1>
+                <div class="columns">
+                    <div class="column is-four-fifths"><h1 class="title" style="padding-left: 200px;">Bird Oasis</h1></div>
+                    <div class="column"><button class="button is-primary" @click="$router.push('/about')">More Information</button></div>
+                </div>
+                
                 <p>Bird Oais is the pethouse for bird, provide various service and safe place for bird accommodation
                     With the well-trainer staff have experience in take care of various types of bird, we ensure that we
                     will
                     bring the best place and service for your bird</p>
-                <button class="button is-primary" @click="$router.push('/about')">More Information</button>
+                
             </div>
         </div>
 
         <!-- Gallery -->
         <div>
             <div>
-                <h1 class="title">Facilities</h1>
+                <div class="columns">
+                    <div class="column is-four-fifths"><h1 class="title" style="padding-left: 200px;">Services</h1></div>
+                    <div class="column"><button class="button is-light" @click="$router.push('/service')">Detail Serivice</button>    </div>
+                </div>
+                
                 <p>Our goal is to offer a comprehensive range of services and amenities to ensure that your pet bird thrives
                     and
                     lives a happy and healthy life.</p>
-                    <button class="button is-light" @click="$router.push('/service')">Detail Serivice</button>    
+                    
             </div>
             <div class="columns is-multiline is-mobile">
                 <!-- each facility -->

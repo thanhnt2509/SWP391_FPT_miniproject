@@ -37,6 +37,7 @@
             <div class="field">
                 <p class="control">
                     <button type="submit" class="button is-success">
+                        <div v-if="loading" class="ui text loader" />
                         Login
                     </button>
                     or <router-link to="/register">Sign up</router-link>
@@ -53,18 +54,21 @@ export default {
     data() {
         return {
             fields: {
-                email: 'U2@gmail.com',
-                password: '123456',
+                email: 'U1@gmail.com',
+                password: '12345',
                 remember_me: false
             },
-            isIncorrect: false
+            isIncorrect: false,
+            loading: false
         }
     },
     methods: {
         submitForm(evt) {
             evt.preventDefault();
+            this.loading = true;
             this.$store.dispatch('login', this.fields)
                 .then(() => {
+                    this.loading = false
                     this.$router.push('/account/profile')
                 })
                 .catch((e) => {

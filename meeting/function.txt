@@ -66,14 +66,6 @@ CRUD SERVICES
 	+ body: none
 	+ -> delete successful ? -> bird json (deleted) : -> 400
 
-- POST: /account/:accId/newBooking (7)
-	+ body: accId, birdId, serviceId: ['1', '2', '3' (example)], date_from, date_to
-	+ -> set status default as 0: pending, create BookingDetail information(link booking_id, service_id, booked_price(get from Service table)) -> transaction add successful ? -> json Booking : -> 400
-
-- GET: /account/:accId/bookings
-	 +body: none
-	+ return array transaction of acc_id by array json, each include [{ Bookings(fulltable), services: [{service_name, booked_price}]}]
-	+ return successful ? -> json : -> 404
 
 - GET: /account/:accId/:booking_id/services
 	+ body: accId, booking_id
@@ -98,6 +90,139 @@ CRUD SERVICES
 	+ body: content
 	+ add an feedback to a day of dreport_id
 	+ successful ? -> json : -> 400
+
+
+=============update
+- GET /account/:accId/:bookingId/bookingDate
+	+ body: none
+	+ get all date of report (no duplicate) from date_from -> date_to
+	+ format: yyyy-mm-dd
+	+ return as array json 
+	+ ex: (booking from 2022-12-02 to 2022-12-04) ['2022-12-02','2022-12-03', '2022-12-04']
+- GET /account/:accId/:bookingId/reportDate/:date
+	+ day: (yyyy-mm-dd) -> .../reportDate/2022-12-02
+	+ body: none
+	+ get all report of that day 
+	+ return as json
+	+ ex: [
+			{
+			service_name: Kill your bird Service
+			service_report_image: death_bird.jpg
+			service_report_text: your bird was fk death
+			booked_price: 200
+			},
+			{
+			service_name: Grave Service
+			service_report_image: death_bird_on_grave.jpg
+			service_report_text: R.I.P 
+			booked_price: 200
+			},
+			bird_name: RaeKyo
+			date: 2022-12-02
+		]
+
+- GET: /account/:accId/bookings
+	 +body: none
+	+ return array transaction of acc_id by array json
+	+ ex:
+	[
+		{
+			date_from: 2022-12-02
+			date_to: 2022-12-04
+			status: 0
+			service:[ 'name1', 'name2', 'name3']
+			bill: {
+				total_ammount:	9999$ (each day will be 50$, + service price/days)
+				payment_status:	0
+				payment_method: COD
+				date: 
+				}
+			bird: {
+				name: RaeKyo
+				age: 2
+				image: death_bird.jpg
+			}
+		},
+		
+		{
+			date_from: 2022-11-02
+			date_to: 2022-11-04
+			status: 1
+			service:['name2', 'name3']
+			bill: {
+				total_ammount:	9999$ (each day will be 50$, + service price/days)
+				payment_status:	0
+				payment_method: COD
+				date: 
+				}
+			bird: {
+				name: RaeKyo
+				age: 2
+				image: death_bird.jpg
+			}
+		},
+	]
+
+
+-POST /account/:accId/:bookingId/addService
+	+ body: [4, 3, 5] -> mean (4: Training, 4:Grooming, 5: Play areas)
+	+ add this service to current booking
+
+- POST: /account/:accId/newBooking (7)
+	+ body:
+	{
+		birdId: 2
+		services: ['1', '2', '3'],
+		date_from: 2022-12-02
+		date_to: 2022-12-4
+	}
+	+ require: khi tạo booking, tạo liên kết với các bookingDetail (vì có nhiều service đc chọn),
+		tạo các DailyReport tuple tương ứng với số lượng ngày của booking trong th trên sẽ là tạo ra 3 tuple: 2022-12-02, 2022-12-03, 2022-12-04
+		tương ứng với DailyFeedback
+
+	+ return successful ? -> return booking_id : -> 404
+
+
+
+-GET /manager/transactions/on-going
+	+ return all transaction with status on-going (0)
+	+ as array json ex:
+    [
+        {
+            booking_id: 1
+	    customer_name: Tien
+	    bird_name: RaeKyo
+            bird_image: death_bird.jpg
+	    address: death district HCM city
+            date_from: 2022-12-02
+            date_to: 2022-12-04
+            status: 1 (on-going -> remember: pending- ongoing -success-cancel)
+            payment_status: COD
+        }
+    ]
+-GET /manager/transactions/pending
+-GET /manager/transactions/success
+-GET /manager/transactions/cancel
+-GET /manager/transactions
+	+ return all transaction with the same format previous
+	
+-PUT /manager/transaction/:bookingId/approve
+	+ change Booking with bookingId to "ongoing" status (0 -> 1)
+-PUT /manager/transaction/:bookingId/complete
+	+ change Booking with bookingId to "ongoing" status (1 -> 2)
+-PUT /manager/transaction/:bookingId/reject
+	+ change Booking with bookingId to "ongoing" status (0 -> 3)
+
+
+-POST /manager/post/newPost		<== replace - POST: /posts/newPost
+	body:
+{
+	title: how to drug your bird
+	content: just kill it
+	reference: http://how-to-death.org
+}
+
+
 
 ----------------------------------------------------------------------------------
 STATE Booking

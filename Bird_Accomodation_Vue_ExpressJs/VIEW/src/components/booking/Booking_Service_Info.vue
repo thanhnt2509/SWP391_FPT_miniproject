@@ -5,7 +5,7 @@
             <!-- List of service that booked with price at the moment -->
             <!-- can select more service and submit: will be next iteration -->
             <li v-for="service in serviceItems">
-                <input type="checkbox" name="service" :checked="services.find(item => item.service_id === service.service_id)" disabled>
+                <input class="checkbox" type="checkbox" name="service" :checked="services.find(item => item.service_id === service.service_id)" disabled>
                 <label>{{ service.name }}</label>
             </li>
 
