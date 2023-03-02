@@ -185,5 +185,30 @@ router.route('/:user_id/newBird')
         }
     })
 
+router.route('/:user_id/newBooking')
+    .post(async (req, res) => {
+        try {
+            let check = await addNewBooking(req.body, req.params.user_id);
+            if (check === false) {
+                res.status(400).json({ message: 'Add Booking failed' });
+            } else {
+                res.status(200).json({
+                    message: 'Booking added',
+                    booking_id: check.recordset[0].booking_id
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json(error);
+        }
+    })
 
+router.route('/:user_id/:booking_id/:dreport_id')
+    .get(async (req, res) => {
+    })
+    .put(async (req, res) => {
+    })
+    .delete(async (req, res) => {
+    }) 
+    
 module.exports = router

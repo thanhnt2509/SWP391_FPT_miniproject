@@ -150,7 +150,7 @@ module.exports = {
                             + `VALUES (@booking_id, @service_id, @booked_price)`);
                 }
                 await transaction.commit();
-                return true;
+                return booking_id;
             } catch (error) {
                 await transaction.rollback();
                 return false;
