@@ -1,13 +1,10 @@
-const { connection } = require("../../src/config/Connection");
+const DBConnect = require("../../src/config/config");
 
 module.exports = {
-    getAllReviews: async() => {
-        try {
-            let con = await connection();
-            let sql = `select u.name, u.user_img, r.* from Reviews r join [User] u on r.user_id = u.user_id`;
-            return con.query(sql);
-        } catch (error) {
-            throw error;
-        }
+    getAllReviews: async () => {
+        //very sussy, need  more work
+        let con = await DBConnect.connection();
+        const returnData = con.query("select u.name, u.user_img, r.* from Reviews r join [User] u on r.user_id = u.user_id");
+        return (await returnData).recordset || null;
     }
 }
