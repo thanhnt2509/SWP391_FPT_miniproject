@@ -31,8 +31,8 @@
         <div class="field">
             <label class="label">Gender</label>
             <div class="control">
-                <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="Male">Male
-                <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="Female">Female
+                <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="1">Male
+                <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="0">Female
             </div>
 
         </div>

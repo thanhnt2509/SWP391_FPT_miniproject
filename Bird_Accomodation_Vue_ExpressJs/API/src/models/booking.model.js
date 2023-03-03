@@ -7,13 +7,13 @@ module.exports = {
         const returnData = request
             .input("booking_id", DBConnect.sql.Int, bookingId)
             .input("status", DBConnect.sql.Int, status)
-            .query("UPDATE [Bookings] SET status = @status WHERE booking_id = @booking_id");
+            .query("UPDATE [Booking] SET status = @status WHERE booking_id = @booking_id");
         return (await returnData).rowsAffected[0];
     },
     getAllBookings: async () => {
         let con = await DBConnect.connection();
         const request = new con.Request();
-        const returnData = request.query("SELECT * FROM [Bookings]");
+        const returnData = request.query("SELECT * FROM [Booking]");
         return (await returnData).recordset || null;
     },
     addNewBooking: async (body, user_id) => {
@@ -28,13 +28,13 @@ module.exports = {
                 .input('date_from', con.Date, body.date_from)
                 .input('date_to', con.Date, body.date_to)
                 .input('status', con.Int, defaultStatus)
-                .query(`INSERT INTO [Bookings] (user_id, bird_id, date_from, date_to, status) \n`
+                .query(`INSERT INTO [Booking] (user_id, bird_id, date_from, date_to, status) \n`
                     + `VALUES (@user_id, @bird_id, @date_from, @date_to, @status)`);
             const booking_id = await transaction.request()
-                .query(`SELECT TOP 1 booking_id FROM [Bookings] ORDER BY booking_id DESC`);
+                .query(`SELECT TOP 1 booking_id FROM [Booking] ORDER BY booking_id DESC`);
             for (let i = 0; i < body.services.length; i++) {
                 let booked_price = await transaction.request()
-                    .query(`SELECT price from [Services] WHERE service_id = ${body.services[i]}`);
+                    .query(`SELECT price from [Service] WHERE service_id = ${body.services[i]}`);
                 await transaction.request()
                     .input('booking_id', con.Int, booking_id.recordset[0].booking_id)
                     .input('service_id', con.Int, body.services[i])

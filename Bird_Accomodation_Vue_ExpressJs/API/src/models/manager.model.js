@@ -7,9 +7,9 @@ module.exports = {
         try {
             let con = await connection();
             let sql = `select b.booking_id, b.bird_id, bs.image as bird_image, b.date_from, b.date_to, b.status, bl.payment_method`
-            sql += ` from Bookings b`
-            sql += ` inner join Birds bs on b.bird_id = bs.bird_id`
-            sql += ` left join Bills bl on b.booking_id = bl.booking_id`
+            sql += ` from Booking b`
+            sql += ` inner join Bird bs on b.bird_id = bs.bird_id`
+            sql += ` left join Bill bl on b.booking_id = bl.booking_id`
             sql += ` where b.status = ${bookingStatus}`
             return con.query(sql);
         } catch (error) {
@@ -19,7 +19,7 @@ module.exports = {
     approveTransaction: async (booking_id) => {
         try {
             let con = await connection();
-            let sql = `update Bookings set status = 1 where booking_id = ${booking_id}`
+            let sql = `update Booking set status = 1 where booking_id = ${booking_id}`
             return con.query(sql);
         } catch (error) {
             throw error;
@@ -28,7 +28,7 @@ module.exports = {
     completeTransaction: async (booking_id) => {
         try {
             let con = await connection();
-            let sql = `update Bookings set status = 2 where booking_id = ${booking_id}`
+            let sql = `update Booking set status = 2 where booking_id = ${booking_id}`
             return con.query(sql);
         } catch (error) {
             throw error;
@@ -38,7 +38,7 @@ module.exports = {
     rejectTransaction: async (booking_id) => {
         try {
             let con = await connection();
-            let sql = `update Bookings set status = 3 where booking_id = ${booking_id}`
+            let sql = `update Booking set status = 3 where booking_id = ${booking_id}`
             return con.query(sql);
         } catch (error) {
             throw error;

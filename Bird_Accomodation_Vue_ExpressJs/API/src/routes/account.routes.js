@@ -13,12 +13,11 @@ router.route('/:user_id')
 router.route('/search')
     .post(account.getSearchAccount);
 
-router.route('/:user_id/:booking_id/:dreport_id')
-    .get(async (req, res) => {
-    })
-    .put(async (req, res) => {
-    })
-    .delete(async (req, res) => {
-    }) 
-    
+// router.route('/:user_id/:booking_id/:dreport_id')
+//     .get(async (req, res) => {
+//     })
+//     .put(async (req, res) => {
+//     })
+//     .delete(async (req, res) => {
+//     }) 
 module.exports = router

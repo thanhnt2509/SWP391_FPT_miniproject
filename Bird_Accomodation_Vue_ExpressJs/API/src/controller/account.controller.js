@@ -51,6 +51,9 @@ module.exports = {
                 email: email,
                 phone: phone
             }
+            if(!name && !email && !phone){
+                throw new ErrorHandler(400, "Missing search info")
+            } 
             const result = await accountModel.getSearchAccount(searchInfo);
             //[user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token]
             const accountList = result.map(item => ({

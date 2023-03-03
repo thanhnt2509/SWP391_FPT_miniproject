@@ -15,10 +15,12 @@ const { verifyAdmin } = require('../middlewares/verifyAdmin.mdw');
 // router
 const router = express.Router();
 
-router.use('/user', user);
-router.use('/post', verifyLogin, post);
+// base data
+router.use('/post', post);
 router.use('/auth', auth);
 router.use('/service', service);
+// router.use('/user', user);
+
 router.use('/account', verifyLogin, verifyAdmin, account);
 router.use('/user', verifyLogin, user);
 router.use('/bird', bird);
