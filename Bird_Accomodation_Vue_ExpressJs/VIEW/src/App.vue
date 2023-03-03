@@ -6,7 +6,6 @@
   </div>
   <!-- footer -->
   <Footer />
-  
 </template>
 
 <script>
@@ -19,6 +18,13 @@ export default {
     return {
 
     }
+  },
+  created() {
+    // call api to sync data
+    // this.$store.dispatch("getServiceItem");
+    // this.$store.dispatch("getReviewItem");
+    // this.$store.dispatch("getBirdTypeItem");
+    // this.$store.dispatch("getPostItem");
   },
   components: {
     Homepage,

@@ -8,14 +8,14 @@ import Register from "../views/Register.vue";
 import Booking from "../views/Booking.vue";
 import Account from "../views/Account.vue";
 import Post from "../views/Post.vue";
-import Profile from "../components/account/Profile.vue";
-import BirdList from "../components/bird/BirdList.vue";
-import BirdCheck from "../components/bird/BirdCheck.vue";
-import Transaction from "../components/account/Transaction.vue";
 
-import Manager from "../components/manager/Manager.vue";
-import ManagerService from "../components/manager/Manage_Service.vue";
-import ManageReport from "../components/manager/Manage_Report.vue";
+import Profile from "../components/modules/account/Profile.vue";
+import BirdList from "../components/modules/bird/BirdList.vue";
+import BirdCheck from "../components/modules/bird/BirdCheck.vue";
+import Transaction from "../components/modules/account/Transaction.vue";
+import Manager from "../components/modules/manager/Manager.vue";
+import ManagerService from "../components/modules/manager/Manage_Service.vue";
+import ManageReport from "../components/modules/manager/Manage_Report.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),

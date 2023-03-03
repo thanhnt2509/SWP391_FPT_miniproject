@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import Bird_Info from '../components/bird/Bird_Info.vue'
+import Bird_Info from '../components/modules/bird/Bird_Info.vue'
 import { mapGetters } from 'vuex'
 export default {
     name: 'Booking',
