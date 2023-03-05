@@ -1,7 +1,5 @@
 const express = require('express');
-
 const service = require('../controller/service.controller');
-
 const { verifyLogin } = require('../middlewares/verifyLogin.mdw');
 const { verifyAdmin } = require('../middlewares/verifyAdmin.mdw');
 
@@ -18,8 +16,8 @@ router.route('/')
 
 router.route('/:service_id')
     .get(service.getServiceById)
-    .put(verifyLogin, verifyAdmin,service.updateServiceById)
-    .delete(verifyLogin, verifyAdmin,service.deleteServiceById);
+    .put(verifyLogin, verifyAdmin, service.updateServiceById)
+    .delete(verifyLogin, verifyAdmin, service.deleteServiceById);
 
 
 module.exports = router;
