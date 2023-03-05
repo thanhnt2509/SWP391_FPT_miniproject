@@ -15,44 +15,5 @@ module.exports = {
         } catch (error) {
             throw error;
         }
-    },
-    approveTransaction: async (booking_id) => {
-        try {
-            let con = await connection();
-            let sql = `update Booking set status = 1 where booking_id = ${booking_id}`
-            return con.query(sql);
-        } catch (error) {
-            throw error;
-        }
-    },
-    completeTransaction: async (booking_id) => {
-        try {
-            let con = await connection();
-            let sql = `update Booking set status = 2 where booking_id = ${booking_id}`
-            return con.query(sql);
-        } catch (error) {
-            throw error;
-        }
-
-    },
-    rejectTransaction: async (booking_id) => {
-        try {
-            let con = await connection();
-            let sql = `update Booking set status = 3 where booking_id = ${booking_id}`
-            return con.query(sql);
-        } catch (error) {
-            throw error;
-        }
-    },
-    addPost: async (body) => {
-        //body include: {title, content, reference}
-        try {
-            let con = await connection();
-            let sql = `INSERT INTO [Post] (title, content, reference) \n`
-                sql += `VALUES ('${body.title}', '${body.content}', '${body.reference}')`;
-            return con.query(sql);
-        } catch (error) {
-            throw error;
-        }
-    },
+    }
 }
