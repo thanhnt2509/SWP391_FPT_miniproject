@@ -5,8 +5,6 @@ const router = express.Router()
 
 router.route('/')
     .get(bird.getAllRegistedBird)
-
-router.route('/new')
     .post(bird.registerNewBird)
 
 router.route('/:bird_id')
