@@ -3,6 +3,15 @@ const bird = require('../controller/bird.controller')
 
 const router = express.Router()
 
+router.route('/')
+    .get(bird.getAllRegistedBird)
 
+router.route('/new')
+    .post(bird.registerNewBird)
+
+router.route('/:bird_id')
+    .get(bird.getBirdById)
+    .put(bird.updateBirdById)
+    .delete(bird.deleteBirdById)
 
 module.exports = router
