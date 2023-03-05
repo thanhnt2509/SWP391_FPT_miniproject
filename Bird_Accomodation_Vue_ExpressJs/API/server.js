@@ -12,13 +12,13 @@ app.use(cors());
 
 // only to monitor web -> don't need to care about this thing
 app.use(logger)
-function logger(req, res, next){
+function logger(req, res, next) {
     console.log(`URL: ${req.originalUrl} | METHOD: ${req.method} | TIME: ${new Date().toISOString()}`);
     next()
 }
 
 // allow express to read request body
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 // allow FE send json request and server can parse that json
 app.use(express.json())
@@ -30,7 +30,7 @@ app.use(handleError);
 port = process.env.PORT || 5000
 
 app.listen(port, () => {
-    console.log(`server is running on port ${port}`)
+    console.log(`server is running on port: ${port}`)
 })
 
 
