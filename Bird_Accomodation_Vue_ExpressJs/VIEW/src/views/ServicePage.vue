@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <!-- service introduction -->
-        <div class="content has-text-centered">
+        <div class="content has-text-centered self_info">
             <h1>Welcome to Bird Oasis !!!</h1>
             <p>We are dedicated to providing top-quality care for your feathered friends and understand the importance of
                 finding a comfortable and safe home for them. Our goal is to offer a comprehensive range of services and
@@ -28,12 +28,20 @@ import { mapGetters } from 'vuex'
 export default {
     name: "Service",
     computed: {
-        ...mapGetters(['serviceItems'])
+       ...mapGetters(['serviceItems'])
     }
 }
 </script>
 
 <style scoped>
+.self_info{
+    margin: 20px;
+    padding: 20px;
+}
+.self_info P{
+    font-size: 20px;
+    padding: 10px 40px 10px 40px;
+}
 img {
     width: 300px;
     height: 300px;

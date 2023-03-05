@@ -7,6 +7,7 @@
         :key="`post_` + post?.post_id"
         class="column_content column is-one-third"
       >
+        {{ post }}
         <div>
           <img
             class="column_content_img"

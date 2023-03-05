@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Homepage from "../views/Hompage.vue";
-import Service from "../views/Service.vue";
-import Facilities from "../views/Facilities.vue";
-import About from "../views/About.vue";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
-import Booking from "../views/Booking.vue";
-import Account from "../views/Account.vue";
-import Post from "../views/Post.vue";
+import Service from "../views/ServicePage.vue";
+import Facilities from "../views/FacilitiesPage.vue";
+import About from "../views/AboutPage.vue";
+import Login from "../views/LoginPage.vue";
+import Register from "../views/RegisterPage.vue";
+import Booking from "../views/BookingPage.vue";
+import Account from "../views/AccountPage.vue";
+import Post from "../views/PostPage.vue";
 
 import Profile from "../components/modules/account/Profile.vue";
 import BirdList from "../components/modules/bird/BirdList.vue";

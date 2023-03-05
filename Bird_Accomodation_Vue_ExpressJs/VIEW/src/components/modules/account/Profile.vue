@@ -62,7 +62,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getUser'])
+        // ...mapGetters(['getUser'])
     },
     methods: {
         edit() {

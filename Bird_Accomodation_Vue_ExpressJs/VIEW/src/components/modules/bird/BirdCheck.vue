@@ -51,7 +51,7 @@ export default {
   },
   props: ['booking_id'],
   computed: {
-    ...mapGetters(["getBirds", "getBookings"]),
+    // ...mapGetters(["getBirds", "getBookings"]),
   },
   components: {
     Bird_Info,

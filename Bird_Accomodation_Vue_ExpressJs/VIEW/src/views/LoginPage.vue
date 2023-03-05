@@ -54,8 +54,8 @@ export default {
     data() {
         return {
             fields: {
-                email: 'U1@gmail.com',
-                password: '12345',
+                email: 'U2@gmail.com',
+                password: '123456',
                 remember_me: false
             },
             isIncorrect: false,
@@ -67,14 +67,8 @@ export default {
             evt.preventDefault();
             this.loading = true;
             this.$store.dispatch('login', this.fields)
-                .then(() => {
-                    this.loading = false
-                    this.$router.push('/account/profile')
-                })
-                .catch((e) => {
-                    console.log(e);
-                    this.isIncorrect = true
-                }, 1000)
+            this.loading = false;
+            this.$router.push("/");
             console.log(this.fields);
         }
     }
@@ -83,9 +77,6 @@ export default {
 
 <style scoped>
 .main {
-    /* margin: 20px; */
     padding: 10%;
-    /* border-radius: 40px; */
-    /* background-color: #f5f5f5; */
 }
 </style>

@@ -17,7 +17,7 @@
             </div>
             <div class="column">
                 <!-- register new bird -->
-                <BirdRegister />
+                <!-- <BirdRegister /> -->
             </div>
         </div>
 
