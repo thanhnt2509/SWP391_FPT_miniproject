@@ -71,7 +71,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['birdTypeItems'])
+        // ...mapGetters(['birdTypeItems'])
     },
     methods: {
         submitForm(evt) {

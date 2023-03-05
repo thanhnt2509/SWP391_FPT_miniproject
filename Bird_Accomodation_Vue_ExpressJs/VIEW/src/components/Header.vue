@@ -13,6 +13,7 @@
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
             <router-link class="navbar-item" to="/about">About</router-link>
             <router-link class="navbar-item" to="/post">Post</router-link>
+            <!-- <router-link class="navbar-item" to="/booking/1/bill">Bill booking 1</router-link> -->
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
             <!-- <a href="#" class="navbar-item" name="account" @click="patchLogin">Account</a> -->
 
@@ -71,10 +72,8 @@ export default {
       else this.$router.push("/login");
     },
     logout() {
-      if (this.getUser) {
-        this.$store.dispatch("logout");
-        this.$router.push("/");
-      }
+      this.$store.dispatch("logout");
+      this.$router.push("/");
     },
   },
 };

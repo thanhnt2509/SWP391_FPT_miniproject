@@ -9,7 +9,8 @@ module.exports = {
                 name: item.name,
                 description: item.description,
                 status: item.status,
-                price: item.price
+                price: item.price,
+                image: item.image
             }))
             res.status(200).send({
                 exitcode: 0,
