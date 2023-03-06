@@ -40,7 +40,7 @@ module.exports = {
             const validateEmail = await accountModel.validateEmail(email);
             // validate email
             if (validateEmail) {
-                res.status(200).send({
+                res.status(409).send({
                     exitcode: 101,
                     message: "Email already exists"
                 });
@@ -49,7 +49,7 @@ module.exports = {
             // validate phone
             const validatePhone = await accountModel.validatePhone(phone);
             if (validatePhone) {
-                res.status(200).send({
+                res.status(409).send({
                     exitcode: 102,
                     message: "Phone already exists"
                 });
@@ -64,7 +64,7 @@ module.exports = {
             }
             const result = await accountModel.register(registerDetail);
             if (result > 0) {
-                res.status(200).send({
+                res.status(201).send({
                     exitcode: 0,
                     message: "Register successfully"
                 })

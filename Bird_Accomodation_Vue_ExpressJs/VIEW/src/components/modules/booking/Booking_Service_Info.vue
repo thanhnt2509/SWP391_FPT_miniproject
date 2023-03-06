@@ -19,7 +19,7 @@ import { mapGetters } from 'vuex'
 export default {
     name: 'Booking_Service_Info',
     computed: {
-        ...mapGetters(['serviceItems'])
+        // ...mapGetters(['serviceItems'])
     },
     props: {
         services: Array,

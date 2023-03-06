@@ -1,14 +1,16 @@
 <template>
     <!-- eachbird -->
-    <div class="container" :class="{'main': main}">
+    <div class="container" :class="{ 'main': main }">
         <!-- bird header -->
         <div>
             <div class="columns">
                 <div class="column">
                     <h4 class="title">{{ bird?.bird_name || '' }}</h4>
                 </div>
-                <button class="column button is-success" v-if="!noAction" @click="editBird">Edit</button>
-                <button class="column button is-danger" v-if="!noAction" style="border-top-right-radius: 20px;">Delete</button>
+                <button class="column button is-success" v-if="!noAction" @click="editBird"><i
+                        class="fa-solid fa-pen"></i></button>
+                <button class="column button is-danger" v-if="!noAction" style="border-top-right-radius: 20px;"><i
+                        class="fa-regular fa-trash-can"></i></button>
             </div>
 
 
@@ -23,18 +25,36 @@
 
         <!-- bird property -->
         <div>
-            <ul>
-                <li>Species: {{ birdTypeItems[bird?.type_id - 1]?.name || '' }}
-                    <!-- <select>
+            <table>
+                <tr>
+                    <td>Species
+                        <!-- <select>
                         <option v-for="type in birdTypeItems">{{ type.name }}</option>
                     </select> -->
-                </li>
-                <li>Age: {{ ageType[bird?.age - 1] || '' }}</li>
-                <li>Breed: {{ bird?.breed || '' }}</li>
-                <li>Gender: {{ bird?.gender || '' }}</li>
-                <li>Description: {{ bird?.description || '' }}</li>
-                <!-- <li>Status: <button disabled>On-service</button></li> -->
-            </ul>
+                    </td>
+                    <td>{{ bird?.type_name || '' }}</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>{{ ageType[bird?.age - 1] || '' }}</td>
+                </tr>
+                <tr>
+                    <td>Breed</td>
+                    <td>{{ bird?.breed || '' }}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{ bird?.gender === 1 ? 'Male' : 'Female' || '' }}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{ bird?.description || '' }}</td>
+                </tr>
+                <tr>
+                    <td>Boarding</td>
+                    <td><button :class="{'is-link': bird?.boarding === true, 'is-info': bird?.boarding === false}" class="button">{{ bird?.boarding ? 'On-going' : 'Pending' || '' }}</button></td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>
@@ -53,7 +73,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getBirds', 'birdTypeItems'])
+        // ...mapGetters(['getBirds', 'birdTypeItems'])
     },
     props: {
         bird: {
@@ -73,7 +93,8 @@ export default {
     padding: 10px;
     margin: 10px;
 }
-img{
+
+img {
     /* max-width: 290.7px; */
 }
 </style>

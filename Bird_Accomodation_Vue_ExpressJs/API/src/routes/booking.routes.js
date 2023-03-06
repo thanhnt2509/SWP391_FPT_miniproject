@@ -4,14 +4,18 @@ const { verifyAdmin } = require('../middlewares/verifyAdmin.mdw')
 
 const router = express.Router()
 
-// only use for ADMIN ??
-//GET: /api/booking
 router.route('/')
-    .get(verifyAdmin, booking.getAllBookings)
+    .get(booking.getAllBookings) //use for both user and admin
+    .post(booking.createBooking)
 
-// only use for ADMIN ??
-router.route('/:booking_id')
+router.route('/:booking_id/cancel')
+    .put(booking.cancelBooking)
+
+router.route('/:booking_id/:state')
     .put(verifyAdmin, booking.changeBookingStatus)
+
+
+
 
 
 module.exports = router

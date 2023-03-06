@@ -13,8 +13,12 @@ app.use(cors());
 // only to monitor web -> don't need to care about this thing
 app.use(logger)
 function logger(req, res, next) {
-    console.log(`URL: ${req.originalUrl} | METHOD: ${req.method} | TIME: ${new Date().toISOString()}`);
-    next()
+    const currentDate = new Date();
+    const utcOffset = 7; // UTC+7
+    const offsetDate = new Date(currentDate.getTime() + (utcOffset * 60 * 60 * 1000));
+
+    console.log(`URL: ${req.originalUrl} | METHOD: ${req.method} | TIME: ${offsetDate.toISOString().slice(0, 19).replace('T', ' ')}`);
+    next();
 }
 
 // allow express to read request body

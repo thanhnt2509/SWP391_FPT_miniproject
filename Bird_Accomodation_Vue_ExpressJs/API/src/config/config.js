@@ -31,6 +31,14 @@ module.exports = {
         return formattedDate.toISOString().slice(0, 10)
     },
 
+    bookingStatus: {
+        PENDING: 0,
+        APPROVED: 1,
+        ON_GOING: 2,
+        COMPLETED: 3,
+        CANCLED: 4,
+    },
+    
     role: {
         USER: 0,
         ADMIN: 1,
