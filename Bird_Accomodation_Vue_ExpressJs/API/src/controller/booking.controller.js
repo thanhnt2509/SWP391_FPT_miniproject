@@ -87,6 +87,7 @@ module.exports = {
                     booking_id: item.booking_id,
                     user_id: item.user_id,
                     bird_id: item.bird_id,
+                    bird_name: item.bird_name,
                     date_from: dateFormat(item.date_from),
                     date_to: dateFormat(item.date_to),
                     status: item.status,

@@ -1,12 +1,13 @@
 <template>
     <div class="container">
+        {{ getUser }}
         <h1 class="label has-text-centered" style="padding-bottom: 20px;">Transaction List</h1>
         <a-table :columns="columns" :data-source="data">
             <template #headerCell="{ column }">
-                <template v-if="column.key === 'transactionId'">
+                <template v-if="column.key === 'booking_id'">
                     <span>
                         <smile-outlined />
-                        TransactionId
+                        Booking_id
                     </span>
                 </template>
             </template>
@@ -45,12 +46,13 @@
 </template>
 <script>
 import { SmileOutlined, DownOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { createVNode, defineComponent } from 'vue';
+import { createVNode, defineComponent, computed } from 'vue';
+import { mapGetters } from 'vuex'
 import { Modal } from 'ant-design-vue';
 const columns = [{
-    name: 'TransactionId',
-    dataIndex: 'transactionId',
-    key: 'transactionId',
+    name: 'Booking_Id',
+    dataIndex: 'booking_id',
+    key: 'booking_id',
 }, {
     title: 'Address',
     dataIndex: 'address',
@@ -69,24 +71,27 @@ const columns = [{
 }];
 const data = [{
     key: '1',
-    transactionId: '1',
+    booking_id: '4',
     address: 'New York No. 1 Lake Park',
     bird: 'Typhoon',
     status: 'On-going',
 }, {
     key: '2',
-    transactionId: '2',
+    booking_id: '2',
     address: 'London No. 1 Lake Park',
     bird: 'Typhoon',
     status: 'completed',
 }, {
     key: '3',
-    transactionId: '3',
+    booking_id: '3',
     address: 'Sidney No. 1 Lake Park',
     bird: 'Typhoon',
     status: 'completed',
 }];
-export default defineComponent({
+export default{
+    computed: {
+        ...mapGetters['getUser']
+    },
     components: {
         SmileOutlined,
         DownOutlined,
@@ -113,5 +118,5 @@ export default defineComponent({
         };
     },
 
-});
+};
 </script>

@@ -21,8 +21,8 @@ module.exports = {
         const request = new con.Request();
         const returnData = request
             .input("email", con.NVarChar, email)
-            .query("SELECT * FROM [Booking] \n" +
-                "WHERE user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)");
+            .query("SELECT b.*, bi.bird_name FROM [Booking] b join [Bird] bi on b.bird_id = bi.bird_id\n" +
+                "WHERE b.user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)");
         return (await returnData).recordset || null;
     },
     addNewBooking: async (data) => {

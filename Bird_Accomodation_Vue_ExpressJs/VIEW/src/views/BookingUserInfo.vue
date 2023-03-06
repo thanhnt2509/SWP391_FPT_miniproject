@@ -61,13 +61,13 @@ export default {
 <style scoped>
 .user_img {
     width: 100%;
-    height: 100px;
+    height: 150px;
     text-align: center;
 }
 
 .user_img_image {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-color: rgb(120, 131, 134);
     border-radius: 50%;
     display: inline-block;
