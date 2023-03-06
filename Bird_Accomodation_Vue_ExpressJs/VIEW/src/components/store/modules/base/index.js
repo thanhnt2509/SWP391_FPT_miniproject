@@ -6,6 +6,13 @@ const state = {
 	reviews: [],
 	birdType: [],
 	posts: [],
+	bookingState : [
+		{state: 'Pending', color: 'yellow'},
+		{state: 'Approved', color: 'green'},
+		{state: 'On-going', color: 'blue'},
+		{state: 'Completed', color: 'purple'},
+		{state: 'Canceled', color: 'red'},
+	]
 };
 
 const mutations = {
@@ -15,9 +22,9 @@ const mutations = {
 	// UPDATE_REVIEW_ITEM(state, payload){
 	// 	state.reviews = payload;
 	// },
-	// UPDATE_BIRD_TYPE_ITEM(state, payload){
-	// 	state.birdType = payload;
-	// },
+	UPDATE_BIRD_TYPE_ITEM(state, payload){
+		state.birdType = payload;
+	},
 	UPDATE_POST_ITEM(state, payload){
 		state.posts = payload;
 	}
@@ -32,11 +39,10 @@ const actions = {
 	// 	const response = await axios.get("/api/reviews");
 	// 	commit("UPDATE_REVIEW_ITEM", response.data);
 	// },
-	// async getBirdTypeItem({ commit }) {
-	// 	// need to fix path
-	// 	const response = await axios.get("/api/account/birdType");
-	// 	commit("UPDATE_BIRD_TYPE_ITEM", response.data);
-	// },
+	async getBirdTypeItem({ commit }) {
+		const response = await api.get("/bird/type");
+		commit("UPDATE_BIRD_TYPE_ITEM", response.data.bird_types);
+	},
 	async getPostItem({ commit }){
 		const response = await api.get("/post");
 		commit("UPDATE_POST_ITEM", response.data.posts);
@@ -46,8 +52,10 @@ const actions = {
 const getters = {
 	serviceItems: state => state.services,
 	// reviewItems: state => state.reviews,
-	// birdTypeItems: state => state.birdType,
-	postItems: state => state.posts
+	birdTypeItems: state => state.birdType,
+	postItems: state => state.posts,
+	bookingStateItems: state => state.bookingState
+	
 };
 
 const baseModule = {

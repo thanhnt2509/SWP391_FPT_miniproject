@@ -13,7 +13,7 @@
             <select class="input select" v-model="fields.bird_type">
                 <!-- list of bird_type -->
                 <option disabled>Select bird type</option>
-                <option v-for="type in birdTypeItems" :value="type.name">{{ type.name }}</option>
+                <option v-for="type in birdTypeItems" :value="type.type_id">{{ type.type_name }}</option>
             </select>
         </div>
 
@@ -61,29 +61,23 @@ export default {
         return {
             fields: {
                 bird_name: '',
-                bird_type: '2',
+                bird_type: '3',
                 age: '2',
-                gender: 'Male',
+                gender: '1',
                 breed: '',
                 description: '',
-                image: ''
+                image: 'None'
             }
         }
     },
     computed: {
-        // ...mapGetters(['birdTypeItems'])
+        ...mapGetters(['birdTypeItems'])
     },
     methods: {
         submitForm(evt) {
             evt.preventDefault();
             this.fields.user_id = this.$store.getters.getUser.user_id
             this.$store.dispatch('addNewBird', this.fields)
-                .then(() => {
-                    console.log(`Success`);
-                })
-                .catch((e) => {
-                    console.log(`Error: ${e}`);
-                }, 1000)
         }
     }
 }
@@ -93,7 +87,7 @@ export default {
 .main {
     background-color: #f5f5f5;
     border-radius: 10px;
-    width: fit-content;
-    padding: 40px;
+    width: 300px;
+    padding: 20px;
 }
 </style>

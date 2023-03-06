@@ -34,19 +34,21 @@ module.exports = {
     },
     registerNewBird: async (req, res, next) => {
         try {
-            const email = req.payload.email;
-            const { bird_name,
+            // const email = req.payload.email;
+            const { 
+                user_id,
+                bird_name,
                 bird_type,
                 age, 
                 gender,
                 breed,
                 description,
                 image } = req.body;
-            const birdTypeId = await birdModel.getBirdTypeId(bird_type);
-            const user_id = await getUserId(email);
+            // const birdTypeId = await birdModel.getBirdTypeId(bird_type);
+            // const user_id = await getUserId(email);
             const birdDetail = {
                 user_id: user_id,
-                type_id: birdTypeId,
+                type_id: bird_type,
                 bird_name: bird_name,
                 age: age,
                 gender: gender,
@@ -155,4 +157,27 @@ module.exports = {
             next(error);
         }
     },
+    getAllBirdType: async (req, res, next) => {
+        try {
+            const result = await birdModel.getAllBirdType();
+            if (result.length === 0) {
+                res.status(404).send({
+                    exitcode: 101,
+                    message: "No bird type found"
+                })
+            } else {
+                const birdTypeList = result.map(item => ({
+                    type_id: item.btype_id,
+                    type_name: item.name
+                }))
+                res.status(200).send({
+                    exitcode: 0,
+                    message: "Get bird type list successfully",
+                    bird_types: birdTypeList
+                })
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 }

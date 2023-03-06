@@ -4,13 +4,14 @@
         <!-- bird header -->
         <div>
             <div class="columns">
-                <div class="column">
+                <div class="column is-four-fifths">
                     <h4 class="title">{{ bird?.bird_name || '' }}</h4>
                 </div>
-                <button class="column button is-success" v-if="!noAction" @click="editBird"><i
-                        class="fa-solid fa-pen"></i></button>
-                <button class="column button is-danger" v-if="!noAction" style="border-top-right-radius: 20px;"><i
-                        class="fa-regular fa-trash-can"></i></button>
+                <div class="column">
+                    <i v-if="!noAction" class="fa-solid fa-pen"></i>
+                    |
+                    <i v-if="!noAction" class="fa-regular fa-trash-can"></i>
+                </div>
             </div>
 
 
@@ -50,10 +51,11 @@
                     <td>Description</td>
                     <td>{{ bird?.description || '' }}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>Boarding</td>
-                    <td><button :class="{'is-link': bird?.boarding === true, 'is-info': bird?.boarding === false}" class="button">{{ bird?.boarding ? 'On-going' : 'Pending' || '' }}</button></td>
-                </tr>
+                    <td><button :class="{ 'is-link': bird?.boarding === true, 'is-info': bird?.boarding === false }"
+                            class="button">{{ bird?.boarding ? 'On-going' : 'Pending' || '' }}</button></td>
+                </tr> -->
             </table>
         </div>
     </div>
@@ -88,7 +90,8 @@ export default {
 </script>
 <style scoped>
 .main {
-    border: 1px solid #ccc;
+    border: 0.4px solid #b9b8b8;
+    background-color: azure;
     border-radius: 20px;
     padding: 10px;
     margin: 10px;

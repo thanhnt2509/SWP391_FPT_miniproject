@@ -17,7 +17,7 @@ function logger(req, res, next){
     const utcOffset = 7; // UTC+7
     const offsetDate = new Date(currentDate.getTime() + (utcOffset * 60 * 60 * 1000));
 
-    console.log(`URL: ${req.originalUrl} | METHOD: ${req.method} | TIME: ${offsetDate.toISOString().slice(0, 19).replace('T', ' ')}`);
+    console.log(`METHOD: ${req.method} | URL: ${req.originalUrl} | TIME: ${offsetDate.toISOString().slice(0, 19).replace('T', ' ')}`);
     next();
 }
 

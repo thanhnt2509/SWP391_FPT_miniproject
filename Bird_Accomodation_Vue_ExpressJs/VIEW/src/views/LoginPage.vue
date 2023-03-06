@@ -54,8 +54,8 @@ export default {
     data() {
         return {
             fields: {
-                email: 'U2@gmail.com',
-                password: '123456',
+                email: 'U1@gmail.com',
+                password: '12345',
                 remember_me: false
             },
             isIncorrect: false,

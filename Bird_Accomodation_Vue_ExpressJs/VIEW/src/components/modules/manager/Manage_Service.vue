@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-      <h1 class="label has-text-centered">Manage Service</h1>
+    <h1 class="label has-text-centered">Manage Service</h1>
     <a-table :columns="columns" :data-source="data" @resizeColumn="handleResizeColumn">
       <template #headerCell="{ column }">
         <template v-if="column.key === 'service_name'">
           <span>
             <smile-outlined />
-            #Service 
+            #Service
           </span>
         </template>
       </template>
@@ -19,11 +19,8 @@
         </template>
         <template v-else-if="column.key === 'tags'">
           <span>
-            <a-tag
-              v-for="tag in record.tags"
-              :key="tag"
-              :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-            >
+            <a-tag v-for="tag in record.tags" :key="tag"
+              :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'">
               {{ tag.toUpperCase() }}
             </a-tag>
           </span>

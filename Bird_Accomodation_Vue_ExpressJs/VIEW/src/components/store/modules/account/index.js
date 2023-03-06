@@ -69,21 +69,20 @@ const actions = {
 		const response = await api.get(`/bird`, state.user.email);
 		commit("UPDATE_BIRDS", response.data.birds);
 	},
-	// async addNewBird({ commit }, bird) {
-	// 	const response = await api.post(`/api/account/${state.user.user_id}/newBird`, bird);
-	// 	commit("UPDATE_BIRDS", response.data);
-	// 	await this.dispatch("getAllBirds");
-	// },
+	async addNewBird({ commit }, bird) {
+		const response = await api.post(`/bird`, bird);
+		await this.dispatch("getAllBirds");
+	},
 	async getAllBooking({ commit }) {
 		const response = await api.get(`/booking`,state.user.email);
-		commit("UPDATE_BOOKINGS", response.data,bookings);
+		commit("UPDATE_BOOKINGS", response.data.bookings);
 	},
 };
 
 const getters = {
 	getUser: state => state.user,
 	getBirds: state => state.birds,
-	// getBookings: state => state.bookings,
+	getBookings: state => state.bookings,
 };
 
 const accountModule = {

@@ -19,7 +19,7 @@ router.use('/auth', auth);
 router.use('/service', service);
 
 router.use('/account', verifyLogin, account);
-router.use('/bird', verifyLogin, bird);
+router.use('/bird', bird);
 router.use('/booking', verifyLogin, booking);
 
 
