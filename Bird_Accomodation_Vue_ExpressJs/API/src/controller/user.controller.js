@@ -6,7 +6,7 @@ module.exports = {
             const { user_id } = req.params;
             const { name } = req.body;
             const result = await userModel.updateUserName(user_id, name);
-            if (result > 0){
+            if (result > 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Update user name successfully"
@@ -16,7 +16,7 @@ module.exports = {
                     exitcode: 101,
                     message: "Update user name failed"
                 })
-            } 
+            }
         } catch (error) {
             next(error);
         }

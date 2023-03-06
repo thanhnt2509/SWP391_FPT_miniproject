@@ -13,11 +13,5 @@ router.route('/')
 router.route('/:booking_id')
     .put(verifyAdmin, booking.changeBookingStatus)
 
-// DailyReport
-router.route('/:booking_id/report')
-    .get(booking.getAllReport)
-
-router.route('/:booking_id/newReport')
-    .post(booking.addNewReport)
 
 module.exports = router

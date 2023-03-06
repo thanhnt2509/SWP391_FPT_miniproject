@@ -50,42 +50,4 @@ module.exports = {
         }
     },
 
-    //DailyReport
-    getAllReport: async (booking_id) => {
-        let con = await DBConnect.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("booking_id", DBConnect.sql.Int, booking_id)
-            .query(`SELECT 
-                        dr.date,
-                        dr.service_report_image,
-                        dr.service_report_text,
-                        df.content
-                    FROM 
-                        BookingDetail bd 
-                        JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id 
-                        JOIN DailyFeedback df ON dr.dreport_id = df.dreport_id 
-                    WHERE 
-                        bd.booking_id = @booking_id`);
-        return returnData.recordset;
-    },
-    addNewReport: async (booking_id, service_report_image, service_report_text) => {
-        let con = await DBConnect.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("booking_id", DBConnect.sql.Int, booking_id)
-            .input("service_report_image", DBConnect.sql.NVarChar, service_report_image)
-            .input("service_report_text", DBConnect.sql.NVarChar, service_report_text)
-            .query(`INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text)
-                    SELECT 
-                        bd.bdetail_id,
-                        GETDATE(),
-                        @service_report_image,
-                        @service_report_text
-                    FROM 
-                        BookingDetail bd 
-                    WHERE 
-                        bd.booking_id = @booking_id`);
-        return returnData.recordset;
-    }
 }
