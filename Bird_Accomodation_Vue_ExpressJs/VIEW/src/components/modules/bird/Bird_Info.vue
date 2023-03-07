@@ -51,11 +51,11 @@
                     <td>Description</td>
                     <td>{{ bird?.description || '' }}</td>
                 </tr>
-                <!-- <tr>
+                <tr>
                     <td>Boarding</td>
-                    <td><button :class="{ 'is-link': bird?.boarding === true, 'is-info': bird?.boarding === false }"
+                    <td><button :class="{ 'is-link': bird?.boarding === true, 'is-light': bird?.boarding === false }"
                             class="button">{{ bird?.boarding ? 'On-going' : 'Pending' || '' }}</button></td>
-                </tr> -->
+                </tr>
             </table>
         </div>
     </div>

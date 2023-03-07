@@ -1,12 +1,12 @@
 <template>
-    <div class="main">
+    <div class="main column">
         <h2 class="label has-text-centered">Find Your Feathered Friend</h2>
         <table>
             <tr>
                 <td>
                     <select v-model="bird_selected" class="input select">
                         <option disabled>Please select your bird to boarding</option>
-                        <option value="">NULL data to test</option>
+                        <!-- <option value="">NULL data to test</option> -->
                         <option v-for="bird in getBirds" :value="bird">{{ bird.bird_name }}</option>
                     </select>
                 </td>
@@ -42,6 +42,7 @@
                         <td>Description</td>
                         <td>{{ bird_selected?.description || '' }}</td>
                     </tr>
+                    Bird selected: {{ bird_selected.bird_id }}
                 </table>
             </div>
         </div>
@@ -54,6 +55,14 @@ export default {
     data() {
         return {
             bird_selected: undefined,
+        }
+    },
+    watch: {
+        bird_selected: {
+            handler: function (val, oldVal) {
+                this.$store.dispatch('setBirdSelected', this.bird_selected.bird_id)
+            },
+            deep: true
         }
     },
     computed: {

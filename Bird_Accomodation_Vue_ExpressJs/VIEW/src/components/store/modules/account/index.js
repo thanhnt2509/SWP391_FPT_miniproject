@@ -1,4 +1,5 @@
 import api from "@/components/store/api";
+import manager from "@/components/store/modules/manager";
 
 const state = {
 	user: undefined,
@@ -63,6 +64,10 @@ const actions = {
 		if (state.user) {
 			localStorage.removeItem("token")
 			commit("UPDATE_USER", undefined);
+			// clear all state of working manager
+			if(state.user.role === 1){
+				dispatch('manager/clearState')
+			}
 		}
 	},
 	async getAllBirds({ commit }) {

@@ -1,6 +1,10 @@
 <template>
-    <div class="main">
-        <h2 class="label has-text-centered">Customize your service</h2>
+    <div class="main column">
+        <h2 class="label has-text-centered">Customize your service 
+            <abbr title="The service pack selected will applies to your bird during boarding day">
+                <i style="padding-left: 10px;" class="fa-solid fa-circle-question"></i>
+            </abbr>
+        </h2>
         <div class="serviceList">
             <table>
                 <tr v-for="service in serviceItems" :key="service.id">
@@ -12,12 +16,12 @@
                         <label :for="service.id">{{ service.name }}</label>
                     </td>
                     <td>
-                        <label :for="service.id">{{ service.price }}$/night</label>
+                        <label :for="service.id">{{ service.price }}$/pack</label>
                     </td>
                 </tr>
             </table>
         </div>
-        {{ service_selected }}
+        Service selected: {{ service_selected }}
     </div>
 </template>
 
@@ -27,9 +31,16 @@ export default {
     name: 'BookingServiceSelect',
     data() {
         return {
-            checked: false,
             service_selected: [],
         }
+    },
+    watch: {
+        service_selected: {
+            handler: function (val) {
+                this.$store.dispatch('setServiceSelected', this.service_selected);
+            },
+            deep: true
+        },
     },
     computed: {
         ...mapGetters(['serviceItems']),
@@ -37,7 +48,7 @@ export default {
     },
     methods: {
 
-    }
+    },
 }
 </script>
 

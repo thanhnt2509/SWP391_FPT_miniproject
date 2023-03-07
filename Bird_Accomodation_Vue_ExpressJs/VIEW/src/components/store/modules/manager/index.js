@@ -6,8 +6,8 @@ const state = {
 	allUsers: [],
 	// allBirds: [],
 	allBookings: [],
-	allPosts: [],
-	allReviews: [],
+	// allPosts: [],
+	// allReviews: [],
 };
 
 const mutations = {
@@ -57,6 +57,12 @@ const actions = {
 	async checkout_Booking({ commit }, booking_id) {
 		const response = await api.put(`/booking/${booking_id}/check_out`);
 		await this.dispatch("getAllBookings");
+	},
+	clearState({ commit }) {
+		commit("UPDATE_SERVICE_ITEM", []);
+		commit("UPDATE_USER_ITEM", []);
+		// commit("UPDATE_BIRD_ITEM", []);
+		commit("UPDATE_BOOKING_ITEM", []);
 	}
 	// async completeBooking({ commit }, booking_id) {
 	// 	const response = await api.put(`/booking/${booking_id}/complete`);

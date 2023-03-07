@@ -25,30 +25,30 @@
                                 All
                             </a-menu-item>
                             <a-menu-item key="0">
-                                <UserOutlined />
+                                <i style="padding-right: 10px" class="fa-solid fa-circle-notch"></i>
                                 Pending
                             </a-menu-item>
                             <a-menu-item key="1">
-                                <UserOutlined />
+                                <i style="padding-right: 10px" class="fa-regular fa-circle-check"></i>
                                 Approved
                             </a-menu-item>
                             <a-menu-item key="2">
-                                <UserOutlined />
+                                <i style="padding-right: 10px" class="fa-solid fa-circle-info"></i>
                                 On-going
                             </a-menu-item>
                             <a-menu-item key="3">
-                                <UserOutlined />
+                                <i style="padding-right: 10px" class="fa-solid fa-wallet"></i>
                                 Completed
                             </a-menu-item>
                             <a-menu-item key="4">
-                                <UserOutlined />
+                                <i style="padding-right: 10px" class="fa-brands fa-rev"></i>
                                 Canceled
                             </a-menu-item>
                         </a-menu>
                     </template>
                     <a-button class="button is-light">
                         Sort by
-                        <DownOutlined/>
+                        <i style="padding-left: 10px;" class="fa-solid fa-arrow-down-wide-short"></i>
                     </a-button>
                 </a-dropdown>
             </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import TransactionList from './TransactionList.vue';
+import TransactionList from './Manage_TransactionList.vue';
 import { UserOutlined, DownOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';

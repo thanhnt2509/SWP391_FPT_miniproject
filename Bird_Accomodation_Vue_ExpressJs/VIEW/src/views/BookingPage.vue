@@ -9,14 +9,14 @@
         <!-- form -->
         <div class="columns booking">
             <!-- part 1: user information -->
-            <BookingUserInfo class="column"/>
+            <BookingUserInfo />
             <!-- part 2: bird selection -->
-            <BookingBirdSelect class="column"/>
+            <BookingBirdSelect />
             <!-- part 3: service and booking confirm -->
-            <BookingServiceSelect class="column"/>
+            <BookingServiceSelect />
         </div>
         <div class="has-text-centered">
-            <button class="button is-dark">Book now</button>
+            <button @click="submitForm" class="button is-dark">Book now</button>
         </div>
     </div>
 </template>
@@ -26,41 +26,40 @@
 import BookingUserInfo from './BookingUserInfo.vue';
 import BookingBirdSelect from './BookingBirdSelect.vue';
 import BookingServiceSelect from './BookingServiceSelect.vue';
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 export default {
     name: 'Booking',
     data() {
         return {
-            user_id: '',
-            bird_selected: undefined,
-            service_selected: [],
-            date_from: '',
-            date_to: '',
-            term_and_condition: false,
+
         }
     },
     computed: {
-        ...mapGetters(['getUser', 'serviceItems']),
+        ...mapGetters(['getUser', 'getNewBooking', 'newBookingisOk']),
     },
     methods: {
         submitForm() {
-            if (this.bird_selected && this.service_selected.length > 0 && this.date_from && this.date_to && this.term_and_condition) {
-                // this.$store.dispatch('booking', {
-                //     user_id: this.getUser.user_id,
-                //     bird_id: this.bird_selected.bird_id,
-                //     service_id: this.service_selected,
-                //     date_from: this.date_from,
-                //     date_to: this.date_to
-                // })
-                console.log({
+            if (!this.newBookingisOk) alert(`Please fill all the information!`);
+            else {
+                const { bird_selected_id, service_selected,
+                    date_from, date_to } = this.getNewBooking;
+
+                const booking = {
                     user_id: this.getUser.user_id,
-                    bird_id: this.bird_selected.bird_id,
-                    services: this.service_selected,
-                    date_from: this.date_from,
-                    date_to: this.date_to
-                });
-            } else {
-                alert('Please fill all the form')
+                    bird_id: bird_selected_id,
+                    services: service_selected,
+                    date_from: date_from,
+                    date_to: date_to,
+                }
+
+                console.log(booking);
+                this.$store.dispatch('createNewBooking', booking);
+                // sync data
+                this.$store.dispatch('getAllBooking');
+                this.$store.dispatch('getAllBirds');
+
+                // redirect to booking page
+                this.$router.push('/booking');
             }
         }
     },
@@ -78,25 +77,23 @@ export default {
     padding: 40px;
 }
 
-.booking{
+.booking {
     margin-top: 40px;
     /* background-color: bisque; */
 }
-.booking div{
+
+.booking div {
     background-color: rgb(255, 255, 255);
     margin: 15px;
     height: 600px;
     border: 0.6px solid rgb(230, 230, 230);
     border-radius: 20px;
-    
-}
-.booking_info{
 
 }
-.booking_bird_select{
 
-}
-.booking_service_select{
+.booking_info {}
 
-}
+.booking_bird_select {}
+
+.booking_service_select {}
 </style>

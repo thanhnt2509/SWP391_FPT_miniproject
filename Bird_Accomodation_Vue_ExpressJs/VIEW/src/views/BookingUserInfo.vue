@@ -1,5 +1,5 @@
 <template>
-    <div class=" main">
+    <div class="main column">
         <h1 class="label has-text-centered">User information</h1>
         <div class="user_img">
             <div class="user_img_image">
@@ -30,12 +30,13 @@
             <h3 style="white-space: nowrap;">Make a Reservation</h3>
             <tr>
                 <td>Check-in</td>
-                <td><input type="date"></td>
+                <td><input v-model="fields.date_from" type="date"></td>
             </tr>
             <tr>
                 <td>Check-out</td>
-                <td><input type="date"></td>
+                <td><input v-model="fields.date_to" type="date"></td>
             </tr>
+            {{ getNewBooking }}
         </table>
     </div>
 </template>
@@ -45,15 +46,23 @@ export default {
     name: 'BookingUserInfo',
     data() {
         return {
-
+            fields: {
+                date_from: '',
+                date_to: '',
+            }
         }
     },
     computed: {
-        ...mapGetters(['getUser']),
+        ...mapGetters(['getUser', 'getNewBooking']),
     },
-    methods: {
-
-    }
+    watch: {
+        fields: {
+            handler: function (val, oldVal) {
+                this.$store.dispatch('setBookingDate', this.fields);
+            },
+            deep: true
+        }
+    },
 
 };
 </script>
@@ -68,7 +77,9 @@ export default {
 .user_img_image {
     width: 150px;
     height: 150px;
-    background-color: rgb(120, 131, 134);
+    /* background-color: rgb(120, 131, 134); */
+    background-image: url('/public/images/avatar_user.jpg');
+    background-position: center;
     border-radius: 50%;
     display: inline-block;
 }

@@ -12,10 +12,8 @@
             <router-link class="navbar-item" to="/service">Service</router-link>
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
             <router-link class="navbar-item" to="/about">About</router-link>
-            <router-link class="navbar-item" to="/post">Post</router-link>
-            <!-- <router-link class="navbar-item" to="/booking/1/bill">Bill booking 1</router-link> -->
+            <router-link class="navbar-item" to="/post">Post</router-link> 
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
-            <!-- <a href="#" class="navbar-item" name="account" @click="patchLogin">Account</a> -->
 
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">

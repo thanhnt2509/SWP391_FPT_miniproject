@@ -13,6 +13,7 @@ module.exports = {
                 })
             } else {
                 const birdList = result.map(item => ({
+                    bird_id: item.bird_id,
                     type_name: item.type_name,
                     age: item.age,
                     bird_name: item.bird_name,
