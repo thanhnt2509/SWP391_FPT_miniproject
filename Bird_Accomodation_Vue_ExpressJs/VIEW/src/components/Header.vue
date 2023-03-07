@@ -29,7 +29,7 @@
                   <router-link class="navbar-item" to="/account/profile">Profile</router-link>
                   <router-link class="navbar-item" to="/account/transaction">Transaction</router-link>
                   <router-link class="navbar-item" to="/account/bird/list">Bird List</router-link>
-                  <!-- <router-link class="navbar-item" to="/account/bird/check">Bird Check</router-link> -->
+                  <router-link class="navbar-item" to="/report/1">Report on booking_id 1</router-link>
                 </div>
                 <hr class="navbar-divider" />
                 <a class="navbar-item">

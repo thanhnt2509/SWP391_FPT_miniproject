@@ -7,7 +7,7 @@ const router = express.Router();
 router.route('/detail')
     .get(report.getReportDetail);
 
-// DailyReport
+// Need to change database 
 router.route('/')
     .get(report.getAllReport)
 

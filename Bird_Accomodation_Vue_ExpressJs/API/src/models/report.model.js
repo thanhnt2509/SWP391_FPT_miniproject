@@ -28,7 +28,7 @@ module.exports = {
                     WHERE bd.booking_id = @booking_id AND dr.date = @date`);
                 let services = getServices.recordset;
 
-                let date = new Date(d.getTime());
+                let date = new Date(d.getTime()).toISOString().slice(0, 10);
 
                 if (services.length > 0) {
                     let serviceDetails = {
@@ -43,8 +43,10 @@ module.exports = {
                     reportDetails.push(serviceDetails);
                 }
             }
+            date_from = date_from.toISOString().slice(0, 10);
+            date_to = date_to.toISOString().slice(0, 10);
 
-            return { date_from, date_to, reportDetails };
+            return { booking_id, date_from, date_to, reportDetails };
         } catch (error) {
             await transaction.rollback();
             throw error;
