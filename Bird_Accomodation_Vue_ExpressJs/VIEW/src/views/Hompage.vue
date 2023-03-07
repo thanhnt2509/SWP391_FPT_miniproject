@@ -14,10 +14,8 @@
         </div>
         <a-carousel autoplay>
             <img class="img_banner" v-for="img in bannerImg" :src="img" alt="">
-
         </a-carousel>
     </section>
-
     <div class="container has-text-centered">
         <!-- Selft introduction -->
         <div class="content is-normal self_info">

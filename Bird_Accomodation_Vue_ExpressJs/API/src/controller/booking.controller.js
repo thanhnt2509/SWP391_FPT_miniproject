@@ -7,20 +7,21 @@ const { dateFormat } = require('../config/config');
 module.exports = {
     changeBookingStatus: async (req, res, next) => {
         try {
-            const { booking_id } = req.params.booking_id;
-            const { state } = req.params.state;
+            const booking_id = req.params.booking_id;
+            const state = req.params.state;
             let status;
+            console.log(`booking_id: ${booking_id}, state: ${state}`);
             switch (state) {
                 case 'approve':
                     status = config.bookingStatus.APPROVED;
                     break;
-                case 'on-going':
+                case 'check_in':
                     status = config.bookingStatus.ON_GOING;
                     break;
                 case 'cancel':
                     status = config.bookingStatus.CANCLED;
                     break;
-                case 'complete':
+                case 'check_out':
                     status = config.bookingStatus.COMPLETED;
                     break;
                 default:
@@ -87,6 +88,9 @@ module.exports = {
                     booking_id: item.booking_id,
                     user_id: item.user_id,
                     bird_id: item.bird_id,
+                    bird_name: item.bird_name,
+                    user_name: item.user_name,
+                    address: item.address,
                     date_from: dateFormat(item.date_from),
                     date_to: dateFormat(item.date_to),
                     status: item.status,

@@ -53,6 +53,12 @@ module.exports = {
             .query("SELECT btype_id FROM [BirdType] WHERE name = @bird_type")
         return (await returnData).recordset[0].btype_id || null;
     },
+    getAllBirdType: async () => {
+        let con = await config.connection();
+        let sql = `SELECT * FROM [BirdType]`;
+        const returnData = con.query(sql);
+        return (await returnData).recordset || null;
+    },
     updateBirdById: async (data) => {
         let con = await config.connection();
         const request = new con.Request();

@@ -6,14 +6,15 @@ import About from "../views/AboutPage.vue";
 import Login from "../views/LoginPage.vue";
 import Register from "../views/RegisterPage.vue";
 import Booking from "../views/BookingPage.vue";
-import Account from "../views/AccountPage.vue";
 import Post from "../views/PostPage.vue";
 
 import Profile from "../components/modules/account/Profile.vue";
 import BirdList from "../components/modules/bird/BirdList.vue";
-import BirdCheck from "../components/modules/bird/BirdCheck.vue";
 import Transaction from "../components/modules/account/Transaction.vue";
-import Manager from "../components/modules/manager/Manager.vue";
+
+import Report from "../components/modules/report/Report.vue"
+
+import Manager from "../components/modules/manager/Manage_Transaction.vue";
 import ManagerService from "../components/modules/manager/Manage_Service.vue";
 import ManageReport from "../components/modules/manager/Manage_Report.vue";
 
@@ -67,17 +68,17 @@ const router = createRouter({
 			component: Service
 		},
 		{
+			path: "/report/:booking_id",
+			name: "report history",
+			component: Report
+		},
+		{
 			path: "/account",
 			children: [
 				{
-					path: "/account",
-					name: "account",
-					component: Account
-				},
-				{
 					path: "transaction",
 					name: "transaction",
-					component: Transaction
+					component: Transaction,
 				},
 				{
 					path: "profile",
@@ -92,11 +93,6 @@ const router = createRouter({
 							path: "list",
 							name: "bird-list",
 							component: BirdList
-						},
-						{
-							path: "check/:id",
-							name: "bird-check",
-							component: BirdCheck
 						},
 					]
 				}

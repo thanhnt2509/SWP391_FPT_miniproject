@@ -1,4 +1,5 @@
 import api from "@/components/store/api";
+import manager from "@/components/store/modules/manager";
 
 const state = {
 	user: undefined,
@@ -33,12 +34,12 @@ const mutations = {
 	UPDATE_USER(state, payload) {
 		state.user = payload;
 	},
-	// UPDATE_BIRDS(state, payload) {
-	// 	state.birds = payload;
-	// },
-	// UPDATE_BOOKINGS(state, payload) {
-	// 	state.bookings = payload;
-	// },
+	UPDATE_BIRDS(state, payload) {
+		state.birds = payload;
+	},
+	UPDATE_BOOKINGS(state, payload) {
+		state.bookings = payload;
+	},
 
 };
 
@@ -52,45 +53,41 @@ const actions = {
 			console.log("after login user: ", state.user);
 		}
 		// a user login
-		// if (state.user.role === 0) {
-		// 	await this.dispatch("getAllBirds");
-		// 	console.log("after get all birds: ", state.birds);
-		// 	await this.dispatch("getAllBooking");
-		// 	console.log("after get all bookings: ", state.bookings);
-		// }
+		if (state.user.role === 0) {
+			await this.dispatch("getAllBirds");
+			console.log("after get all birds: ", state.birds);
+			await this.dispatch("getAllBooking");
+			console.log("after get all bookings: ", state.bookings);
+		}
 	},
 	async logout({ commit }) {
 		if (state.user) {
 			localStorage.removeItem("token")
 			commit("UPDATE_USER", undefined);
+			// clear all state of working manager
+			if(state.user.role === 1){
+				dispatch('manager/clearState')
+			}
 		}
 	},
-	// async getAllBirds({ commit }) {
-	// 	const response = await api.get(`/api/account/${state.user.user_id}/birds`);
-	// 	commit("UPDATE_BIRDS", response.data);
-	// },
-	// async addNewBird({ commit }, bird) {
-	// 	const response = await api.post(`/api/account/${state.user.user_id}/newBird`, bird);
-	// 	commit("UPDATE_BIRDS", response.data);
-	// 	await this.dispatch("getAllBirds");
-	// },
-	// async getAllBooking({ commit }) {
-	// 	const response = await api.get(`/api/account/${state.user.user_id}/bookings`);
-	// 	response.data.map(async booking => {
-	// 		booking.bird_id = (await api.get(`/api/account/${state.user.user_id}/${booking.bird_id}`)).data;
-	// 		booking.date_from = new Date(booking.date_from).toISOString().slice(0, 10);
-	// 		booking.date_to = new Date(booking.date_to).toISOString().slice(0, 10);
-	// 		booking.services = (await api.get(`/api/account/${booking.booking_id}/services`)).data;
-	// 		// booking.reports = (await axios.get(`/api/account/${booking.booking_id}/reports`)).data;
-	// 	});
-	// 	commit("UPDATE_BOOKINGS", response.data);
-	// },
+	async getAllBirds({ commit }) {
+		const response = await api.get(`/bird`, state.user.email);
+		commit("UPDATE_BIRDS", response.data.birds);
+	},
+	async addNewBird({ commit }, bird) {
+		const response = await api.post(`/bird`, bird);
+		await this.dispatch("getAllBirds");
+	},
+	async getAllBooking({ commit }) {
+		const response = await api.get(`/booking`,state.user.email);
+		commit("UPDATE_BOOKINGS", response.data.bookings);
+	},
 };
 
 const getters = {
 	getUser: state => state.user,
 	getBirds: state => state.birds,
-	// getBookings: state => state.bookings,
+	getBookings: state => state.bookings,
 };
 
 const accountModule = {
