@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/:booking_id/cancel')
     .put(booking.cancelBooking)
-    
+
 router.route('/:booking_id/:state')
     .put(verifyAdmin, booking.changeBookingStatus)
 

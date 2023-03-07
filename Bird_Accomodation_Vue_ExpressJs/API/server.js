@@ -12,7 +12,7 @@ app.use(cors());
 
 // only to monitor web -> don't need to care about this thing
 app.use(logger)
-function logger(req, res, next){
+function logger(req, res, next) {
     const currentDate = new Date();
     const utcOffset = 7; // UTC+7
     const offsetDate = new Date(currentDate.getTime() + (utcOffset * 60 * 60 * 1000));
@@ -22,7 +22,7 @@ function logger(req, res, next){
 }
 
 // allow express to read request body
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 // allow FE send json request and server can parse that json
 app.use(express.json())
@@ -34,7 +34,7 @@ app.use(handleError);
 port = process.env.PORT || 5000
 
 app.listen(port, () => {
-    console.log(`server is running on port ${port}`)
+    console.log(`server is running on port: ${port}`)
 })
 
 
