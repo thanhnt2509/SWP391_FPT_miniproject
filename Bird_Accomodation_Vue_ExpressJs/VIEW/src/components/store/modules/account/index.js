@@ -1,5 +1,4 @@
 import api from "@/components/store/api";
-import manager from "@/components/store/modules/manager";
 
 const state = {
 	user: undefined,
