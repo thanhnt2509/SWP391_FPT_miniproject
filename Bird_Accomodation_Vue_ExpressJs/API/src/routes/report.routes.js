@@ -5,7 +5,7 @@ const report = require('../controller/report.controller')
 const router = express.Router();
 
 router.route('/detail')
-    .get(report.getReportDetail);
+    .patch(report.getReportDetail);
 
 // Need to change database 
 router.route('/')

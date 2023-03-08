@@ -56,7 +56,7 @@
                     <button class="button is-warning"><i style="padding-right: 10px" class="fa-brands fa-rev"></i>Re-booking</button>
                 </span>
                 <span v-else-if="bookingState[record.status].state === 'On-going'">
-                    <router-link :to="`/manager/report/${record.booking_id}`"><button
+                    <router-link to="/manager/report"><button
                             class="button is-link"><i style="padding-right: 10px" class="fa-solid fa-square-pen"></i>Update</button></router-link>
                     <a-divider type="vertical" />
                     <button @click="checkout_Booking(record.booking_id)" class="button is-primary"><i style="padding-right: 10px" class="fa-regular fa-credit-card"></i>Check-out</button>
@@ -64,10 +64,10 @@
             </template>
         </template>
     </a-table>
-    <p>all booking</p>
+    <!-- <p>all booking</p>
     {{ getAllBookings }}
     <p>state</p>
-    {{ bookingState }}
+    {{ bookingState }} -->
 </template>
 <script>
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';

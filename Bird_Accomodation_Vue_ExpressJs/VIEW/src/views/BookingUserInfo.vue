@@ -78,7 +78,7 @@ export default {
     width: 150px;
     height: 150px;
     /* background-color: rgb(120, 131, 134); */
-    background-image: url('/public/images/avatar_user.jpg');
+    background-image: url('/images/avatar_user.jpg');
     background-position: center;
     border-radius: 50%;
     display: inline-block;

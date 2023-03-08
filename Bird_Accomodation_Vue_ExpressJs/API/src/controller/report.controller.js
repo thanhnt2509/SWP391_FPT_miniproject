@@ -4,7 +4,6 @@ module.exports = {
     getReportDetail: async (req, res, next) => {
         try {
             const { user_id, booking_id } = req.body;
-            console.log(user_id, booking_id);
             const result = await reportModel.getReportDetail(user_id, booking_id);
             if (result.length === 0) {
                 throw new ErrorHandler(404, 'No report found');
@@ -30,7 +29,7 @@ module.exports = {
                 throw new ErrorHandler(404, 'No report found');
             } else {
                 const reportList = result.map(item => ({
-                    date: item.date,
+                    date: new Date(item.date).toISOString().slice(0, 10),
                     service_report_image: item.service_report_image,
                     service_report_text: item.service_report_text,
                     content: item.content
