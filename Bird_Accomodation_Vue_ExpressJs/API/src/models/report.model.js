@@ -22,10 +22,10 @@ module.exports = {
                     .input("booking_id", DBConnect.sql.Int, booking_id)
                     .input("date", DBConnect.sql.Date, new Date(d))
                     .query(`SELECT s.name AS service_name, dr.service_report_text, dr.service_report_image, bd.booked_price, date
-                    FROM BookingDetail bd
-                    JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id
-                    JOIN Service s ON bd.service_id = s.service_id
-                    WHERE bd.booking_id = @booking_id AND dr.date = @date`);
+                            FROM BookingDetail bd
+                            JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id
+                            JOIN Service s ON bd.service_id = s.service_id
+                            WHERE bd.booking_id = @booking_id AND dr.date = @date`);
                 let services = getServices.recordset;
 
                 let date = new Date(d.getTime()).toISOString().slice(0, 10);
@@ -62,11 +62,10 @@ module.exports = {
                         dr.date,
                         dr.service_report_image,
                         dr.service_report_text,
-                        df.content
+                        dr.feedback_content
                     FROM 
                         BookingDetail bd 
                         JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id 
-                        JOIN DailyFeedback df ON dr.dreport_id = df.dreport_id 
                     WHERE 
                         bd.booking_id = @booking_id`);
         return returnData.recordset;

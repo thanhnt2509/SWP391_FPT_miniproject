@@ -8,6 +8,7 @@ const auth = require('./auth.routes');
 const bird = require('./bird.routes');
 const booking = require('./booking.routes');
 const report = require('./report.routes');
+const reportDetail = require('./reportDetail.routes');
 // middlewares
 const { verifyLogin } = require('../middlewares/verifyLogin.mdw');
 
@@ -24,6 +25,7 @@ router.use('/bird', bird);
 router.use('/booking', verifyLogin, booking);
 
 router.use('/report', verifyLogin, report);
+router.use('/reportDetail', verifyLogin, reportDetail);
 
 // export router
 module.exports = router;
