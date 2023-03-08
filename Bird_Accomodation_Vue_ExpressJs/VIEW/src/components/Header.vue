@@ -8,11 +8,11 @@
           </router-link>
         </div>
         <div class="navbar-menu">
-          <div class="navbar-start">
+          <div class="navbar-start" v-if="getUser?.role === 0 || getUser === undefined">
             <router-link class="navbar-item" to="/service">Service</router-link>
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
             <router-link class="navbar-item" to="/about">About</router-link>
-            <router-link class="navbar-item" to="/post">Post</router-link> 
+            <router-link class="navbar-item" to="/post">Post</router-link>
             <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
 
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
@@ -21,15 +21,10 @@
               </a>
 
               <div class="navbar-dropdown">
-                <div v-if="getUser?.role === 1">
-                  <a class="navbar-item" href="#" name="manager" @click="patchLogin">Manage Transaction</a>
-                  <router-link class="navbar-item" to="/manager/service">Manage Service</router-link>
-                </div>
-                <div v-else>
+                <div>
                   <router-link class="navbar-item" to="/account/profile">Profile</router-link>
                   <router-link class="navbar-item" to="/account/transaction">Transaction</router-link>
                   <router-link class="navbar-item" to="/account/bird/list">Bird List</router-link>
-                  <router-link class="navbar-item" to="/report/1">Report on booking_id 1</router-link>
                 </div>
                 <hr class="navbar-divider" />
                 <a class="navbar-item">
@@ -37,6 +32,25 @@
                 </a>
               </div>
             </div>
+          </div>
+          <div class="navbar-start" v-if="getUser?.role === 1">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <i class="fa-solid fa-bars"></i>
+              </a>
+
+              <div class="navbar-dropdown">
+                <div>
+                  <a class="navbar-item" href="#" name="manager" @click="patchLogin">Manage Transaction</a>
+                  <router-link class="navbar-item" to="/manager/service">Manage Service</router-link>
+                </div>
+                <hr class="navbar-divider" />
+                <a class="navbar-item">
+                  <a href="#" @click="logout">Logout</a>
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
 

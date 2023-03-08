@@ -9,12 +9,9 @@
                 </div>
                 <div class="column">
                     <i v-if="!noAction" class="fa-solid fa-pen"></i>
-                    |
-                    <i v-if="!noAction" class="fa-regular fa-trash-can"></i>
+                    <i style="padding-left: 10px;" v-if="!noAction" class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
-
-
 
         </div>
 

@@ -48,7 +48,8 @@ const actions = {
 		if (response) {
 			const data = response.data
 			localStorage.setItem("token", data.token)
-			commit("UPDATE_USER", response.data.account[0]);
+			console.log(response.data.account);
+			commit("UPDATE_USER", await response.data.account[0]);
 			console.log("after login user: ", state.user);
 		}
 		// a user login
@@ -62,11 +63,11 @@ const actions = {
 	async logout({ commit }) {
 		if (state.user) {
 			localStorage.removeItem("token")
-			commit("UPDATE_USER", undefined);
 			// clear all state of working manager
-			if(state.user.role === 1){
-				dispatch('manager/clearState')
-			}
+			// if(state.user.role === 1){
+			// 	this.dispatch('manager/clearState')
+			// }
+			commit("UPDATE_USER", undefined);
 		}
 	},
 	async getAllBirds({ commit }) {

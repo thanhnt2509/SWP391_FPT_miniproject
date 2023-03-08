@@ -12,9 +12,11 @@
                 Start a journey
             </button>
         </div>
-        <a-carousel autoplay>
-            <img class="img_banner" v-for="img in bannerImg" :src="img" alt="">
-        </a-carousel>
+        <div>
+            <a-carousel autoplay>
+                <img class="img_banner" v-for="img in bannerImg" :src="img" alt="">
+            </a-carousel>
+        </div>
     </section>
     <div class="container has-text-centered">
         <!-- Selft introduction -->
@@ -61,7 +63,7 @@
                 <div>
                     <div class="h columns">
                         <div class="h_img column is-two-thirds">
-                            <img src="/public/images/big-treehouse.jpg" alt="">
+                            <img src="/images/big-treehouse.jpg" alt="">
                         </div>
                         <div class="h_list column">
                             <div class="h_list_item" v-for="h in hItems">
@@ -88,11 +90,11 @@
             <div class="columns" style="margin-bottom: 50px;">
                 <article class="column columns is-half message feedback">
                     <div class="message-body column feedback_img">
-                        <img src="/public/images/bird-housing.jpg" alt="">
+                        <img src="/images/bird-housing.jpg" alt="">
                     </div>
                     <div class="column feedback_content">
                         <h2>Jhon love parrot!</h2>
-                        <div><a-rate :value="4.5" disabled allow-half/></div>
+                        <div><a-rate :value="4.5" disabled allow-half /></div>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>,
                         tempus
                         quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
@@ -102,11 +104,11 @@
                 </article>
                 <article class="column columns is-half message feedback">
                     <div class="message-body column feedback_img">
-                        <img src="/public/images/bird-housing.jpg" alt="">
+                        <img src="/images/bird-housing.jpg" alt="">
                     </div>
                     <div class="column feedback_content">
                         <h2>Jhon love parrot!</h2>
-                        <div><a-rate :value="4.5" disabled allow-half/></div>
+                        <div><a-rate :value="4.5" disabled allow-half /></div>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>,
                         tempus
                         quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
@@ -128,31 +130,31 @@ export default {
     data() {
         return {
             bannerImg: [
-                '/public/images/big-treehouse.jpg',
-                '/public/images/bird-tree-hotel.jpg',
-                '/public/images/bird-nesting.jpg',
-                '/public/images/bird-food2-crop.jpg',
-                '/public/images/Bird Photography.jpg',
+                '/images/big-treehouse.jpg',
+                '/images/bird-tree-hotel.jpg',
+                '/images/bird-nesting.jpg',
+                '/images/bird-food2-crop.jpg',
+                '/images/Bird Photography.jpg',
             ],
             services: [
                 {
                     name: 'Boarding',
-                    image: '/public/images/bird-tree-hotel.jpg',
+                    image: '/images/bird-tree-hotel.jpg',
                     description: 'What makes us the best dog hotel for your furry.'
                 },
                 {
                     name: 'Training',
-                    image: '/public/images/bird-training.jpg',
+                    image: '/images/bird-training.jpg',
                     description: 'What makes us the best dog hotel for your furry friend? '
                 },
                 {
                     name: 'Photography',
-                    image: '/public/images/bird-photography.jpg',
+                    image: '/images/bird-photography.jpg',
                     description: 'What makes us the best dog hotel for your furry.'
                 },
                 {
                     name: 'Play area',
-                    image: '/public/images/bird-play-area.jpg',
+                    image: '/images/bird-play-area.jpg',
                     description: 'What makes us the best dog hotel for your furry friend? '
                 },
             ],
@@ -189,20 +191,23 @@ export default {
 </script>
 
 <style scoped>
-.feedback{
+.feedback {
     height: 225px;
     margin-right: 20px;
     padding: 0;
     margin: 0;
 }
-.feedback_img img{
+
+.feedback_img img {
     border-radius: 10px;
 }
-.feedback_content{
+
+.feedback_content {
     padding: 10px;
     overflow: hidden;
     text-align: left;
 }
+
 .h_img img {
     object-fit: cover;
     object-position: top;

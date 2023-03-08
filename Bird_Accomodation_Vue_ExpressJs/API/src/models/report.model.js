@@ -21,7 +21,7 @@ module.exports = {
                 let getServices = await transaction.request()
                     .input("booking_id", DBConnect.sql.Int, booking_id)
                     .input("date", DBConnect.sql.Date, new Date(d))
-                    .query(`SELECT s.name AS service_name, dr.service_report_text, dr.service_report_image, bd.booked_price, date
+                    .query(`SELECT s.name AS service_name, s.service_id, dr.service_report_text, dr.service_report_image, bd.booked_price, date
                             FROM BookingDetail bd
                             JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id
                             JOIN Service s ON bd.service_id = s.service_id
@@ -34,6 +34,7 @@ module.exports = {
                     let serviceDetails = {
                         date: date,
                         services: services.map(service => ({
+                            service_id: service.service_id,
                             service_name: service.service_name,
                             service_report_text: service.service_report_text,
                             service_report_image: service.service_report_image,

@@ -17,7 +17,7 @@
         <div v-if="bird_selected">
             <div class="bird_img">
                 <div class="bird_img_image">
-                    <img src="/public/images/bird1.jpg" alt="user bird">
+                    <img src="/images/bird1.jpg" alt="user bird">
                 </div>
             </div>
             <div class="bird_info">
