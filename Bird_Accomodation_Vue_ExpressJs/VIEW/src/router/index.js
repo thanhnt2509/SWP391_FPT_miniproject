@@ -11,8 +11,8 @@ import Post from "../views/PostPage.vue";
 import Profile from "../components/modules/account/Profile.vue";
 import BirdList from "../components/modules/bird/BirdList.vue";
 import Transaction from "../components/modules/account/Transaction.vue";
-
 import Report from "../components/modules/report/Report.vue"
+import Bill from "../components/modules/bill/Bill.vue"
 
 import Manager from "../components/modules/manager/Manage_Transaction.vue";
 import ManagerService from "../components/modules/manager/Manage_Service.vue";
@@ -73,6 +73,11 @@ const router = createRouter({
 			component: Report
 		},
 		{
+			path: "/bill/:booking_id",
+			name: "get bill by booking_id",
+			component: Bill
+		},
+		{
 			path: "/account",
 			children: [
 				{
@@ -95,7 +100,7 @@ const router = createRouter({
 							component: BirdList
 						},
 					]
-				}
+				},
 			]
 		},
 		{

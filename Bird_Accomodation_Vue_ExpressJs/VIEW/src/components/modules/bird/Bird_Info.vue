@@ -23,7 +23,7 @@
 
         <!-- bird property -->
         <div>
-            <table>
+            <table class="table">
                 <tr>
                     <td>Species
                         <!-- <select>
