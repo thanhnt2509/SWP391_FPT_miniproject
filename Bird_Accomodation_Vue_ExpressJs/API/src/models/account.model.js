@@ -19,7 +19,6 @@ module.exports = {
             .input("user_img", con.NVarChar, defaultUserImg)
             .query("INSERT INTO [User] (email, password, name, address, phone, role, status, user_img) \n" +
                 "VALUES (@email, @password, @name, @address, @phone, @role, @status, @user_img)");
-        con.close();
         return returnData.rowsAffected[0];
     },
     login: async (body) => {
@@ -32,7 +31,6 @@ module.exports = {
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as \n" +
                 "AND password = @password collate latin1_general_cs_as");
-        con.close();
         return (await returnData).recordset || null;
     },
     validateEmail: async (email) => {
@@ -42,7 +40,6 @@ module.exports = {
             .input("email", con.NVarChar, email)
             .query("SELECT [user_id],[email],[role] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as");
-        con.close();
         if ((await returnData).recordset.length > 0) {
             return true;
         } else {
@@ -56,7 +53,6 @@ module.exports = {
             .input("phone", con.NVarChar, phone)
             .query("SELECT [user_id],[phone] FROM [User] \n" +
                 "WHERE phone = @phone");
-        con.close();
         if ((await returnData).recordset.length > 0) {
             return true;
         } else {
@@ -70,7 +66,6 @@ module.exports = {
             .input("user_id", con.Int, user_id)
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
                 "WHERE user_id = @user_id");
-        con.close();
         return (await returnData).recordset || null;
     },
     getSearchAccount: async (body) => {
@@ -84,7 +79,6 @@ module.exports = {
                 "WHERE COALESCE(name, '') LIKE '%' + COALESCE(@name, '') + '%' \n" +
                 "AND COALESCE(email, '') LIKE '%' + COALESCE(@email, '') + '%' \n" +
                 "AND COALESCE(phone, '') LIKE '%' + COALESCE(@phone, '') + '%'");
-        con.close();
         return (await returnData).recordset || null;
     },
     changeAccountStatus: async (user_id, newStatus) => {
@@ -94,7 +88,6 @@ module.exports = {
             .input("user_id", con.Int, user_id)
             .input("status", con.Int, newStatus)
             .query("UPDATE [User] SET status = @status WHERE user_id = @user_id");
-        con.close();
         return returnData.rowsAffected[0];
     },
     validateRole: async (email) => {
@@ -104,7 +97,6 @@ module.exports = {
             .input("email", con.NVarChar, email)
             .query("SELECT [role] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as");
-        con.close();
         return (await returnData).recordset[0].role || null;
     },
     getAllAccount: async () => {
@@ -112,7 +104,6 @@ module.exports = {
         const request = new con.Request();
         const returnData = await request
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User]");
-        con.close();
         return (await returnData).recordset || null;
     },
     updateUserName: async (user_id, name) => {
@@ -122,7 +113,6 @@ module.exports = {
             .input("user_id", con.Int, user_id)
             .input("name", con.NVarChar, name)
             .query("UPDATE [User] SET name = @name WHERE user_id = @user_id");
-        con.close();
         return returnData.rowsAffected[0];
     },
     getUserId: async (email) => {
@@ -132,7 +122,6 @@ module.exports = {
             .input("email", con.NVarChar, email)
             .query("SELECT [user_id] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as");
-        con.close();
         return (await returnData).recordset[0].user_id || null;
     },
 }
