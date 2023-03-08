@@ -17,5 +17,11 @@ router.route('/search')
 
 router.route('/:user_id')
     .patch(account.updateUserName)
-
+// router.route('/:user_id/:booking_id/:dreport_id')
+//     .get(async (req, res) => {
+//     })
+//     .put(async (req, res) => {
+//     })
+//     .delete(async (req, res) => {
+//     }) 
 module.exports = router
