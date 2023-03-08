@@ -5,6 +5,7 @@ module.exports = {
         let con = await config.connection();
         let sql = `SELECT * FROM [Post]`;
         const returnData = con.query(sql);
+        con.close();
         return (await returnData).recordset || null;
     },
     addPost: async (body) => {
@@ -16,6 +17,7 @@ module.exports = {
             .input("content", con.NVarChar, body.content)
             .input("reference", con.NVarChar, body.reference)
             .query("INSERT INTO [Post] (title, content, reference) VALUES (@title, @content, @reference)");
+        con.close();
         return returnData.rowsAffected[0];
     },
     updatePostByID: async (post_id, body) => {
@@ -28,6 +30,7 @@ module.exports = {
             .input("content", con.NVarChar, body.content)
             .input("reference", con.NVarChar, body.reference)
             .query("UPDATE [Post] SET title = @title, content = @content, reference = @reference WHERE post_id = @post_id");
+        con.close();
         return returnData.rowsAffected[0];
     },
     deletePostByID: async (post_id) => {
@@ -36,6 +39,7 @@ module.exports = {
         const returnData = await request
             .input("post_id", con.Int, post_id)
             .query("DELETE FROM [Post] WHERE post_id = @post_id");
+        con.close();
         return returnData.rowsAffected[0];
     },
 }
