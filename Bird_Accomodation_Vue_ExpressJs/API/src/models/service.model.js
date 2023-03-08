@@ -6,6 +6,7 @@ module.exports = {
         const request = new con.Request();
         const returnData = await request
             .query("SELECT * FROM Service WHERE status = 1");
+        con.close();
         return (await returnData).recordset || null;
     },
     // getServiceByName: async (name) => {
@@ -22,6 +23,7 @@ module.exports = {
         const returnData = await request
             .input("service_id", con.NVarChar, service_id)
             .query("SELECT * FROM Service WHERE service_id = @service_id");
+        con.close();
         return (await returnData).recordset || null;
     },
     addService: async (body) => {
@@ -36,6 +38,7 @@ module.exports = {
             .input("price", con.Int, body.price)
             .query("INSERT INTO Service (name, description, status, price) \n" +
                 "VALUES (@name, @description, @status, @price)");
+        con.close();
         return returnData.rowsAffected[0];
     },
     // updateServiceByName: async (name, body) => {
@@ -60,6 +63,7 @@ module.exports = {
             .input("status", con.Int, body.status)
             .input("price", con.Int, body.price)
             .query("UPDATE Service SET status = @status, name = @name, description = @description, price = @price WHERE service_id = @service_id");
+        con.close();
         return returnData.rowsAffected[0];
     },
     // deleteServiceByName: async (name) => {
@@ -80,6 +84,7 @@ module.exports = {
             .input("service_id", con.NVarChar, service_id)
             .input("status", con.Int, deleteStatus)
             .query("UPDATE Service SET status = @status WHERE service_id = @service_id");
+        con.close();
         return returnData.rowsAffected[0];
     }
 }

@@ -8,12 +8,15 @@ module.exports = {
             .input("booking_id", con.Int, bookingId)
             .input("status", con.Int, status)
             .query("UPDATE [Booking] SET status = @status WHERE booking_id = @booking_id");
+        con.close();
         return (await returnData).rowsAffected[0];
     },
     getAllBookings: async () => {
         let con = await config.connection();
         const request = new con.Request();
-        const returnData = request.query("SELECT b.*, bi.bird_name, u.address, u.name as user_name FROM [Booking] b join [Bird] bi on b.bird_id = bi.bird_id join [User] u on b.user_id = u.user_id");
+        const returnData = request.query("SELECT b.*, bi.bird_name, u.address, u.name as user_name \n " +
+        "FROM [Booking] b join [Bird] bi on b.bird_id = bi.bird_id join [User] u on b.user_id = u.user_id");
+        con.close();
         return (await returnData).recordset || null;
     },
     getMyBookings: async (email) => {
@@ -23,6 +26,7 @@ module.exports = {
             .input("email", con.NVarChar, email)
             .query("SELECT b.*, bi.bird_name, u.address FROM [Booking] b join [Bird] bi on b.bird_id = bi.bird_id join [User] u on b.user_id = u.user_id \n" +
                 "WHERE b.user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)");
+        con.close();
         return (await returnData).recordset || null;
     },
     addNewBooking: async (data) => {
@@ -51,9 +55,11 @@ module.exports = {
                         + `VALUES (@booking_id, @service_id, @booked_price)`);
             }
             await transaction.commit();
+            con.close();
             return true;
         } catch (error) {
             await transaction.rollback();
+            con.close();
             return false;
         }
     },

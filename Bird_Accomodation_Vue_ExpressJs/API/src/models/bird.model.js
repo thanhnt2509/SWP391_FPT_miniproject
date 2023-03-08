@@ -9,6 +9,7 @@ module.exports = {
             .query("SELECT B.*, BT.name as type_name FROM [Bird] B \n" +
                 "LEFT JOIN [BirdType] BT ON B.type_id = BT.btype_id \n" +
                 "WHERE user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)")
+        con.close();
         return (await returnData).recordset || null;
     },
     deleteBirdById: async (bird_id) => {
@@ -17,6 +18,7 @@ module.exports = {
         const returnData = await request
             .input("bird_id", con.Int, bird_id)
             .query("DELETE FROM [Bird] WHERE bird_id = @bird_id")
+        con.close();
         return returnData.rowsAffected[0];
     },
     getBirdById: async (bird_id) => {
@@ -27,6 +29,7 @@ module.exports = {
             .query("SELECT B.*, BT.name as type_name FROM [Bird] B \n" +
                 "LEFT JOIN [BirdType] BT ON B.type_id = BT.btype_id \n" +
                 "WHERE bird_id = @bird_id")
+        con.close();
         return (await returnData).recordset[0] || null;
     },
     registerNewBird: async (data) => {
@@ -43,6 +46,7 @@ module.exports = {
             .input("image", con.NVarChar, data.image)
             .query("INSERT INTO [Bird] (user_id, type_id, age, bird_name, breed, gender, [image], [description]) \n" +
                 "VALUES (@user_id, @type_id, @age, @bird_name, @breed, @gender, @image, @description)")
+        con.close();
         return returnData.rowsAffected[0];
     },
     getBirdTypeId: async (bird_type) => {
@@ -51,12 +55,14 @@ module.exports = {
         const returnData = await request
             .input("bird_type", con.VarChar, bird_type)
             .query("SELECT btype_id FROM [BirdType] WHERE name = @bird_type")
+        con.close();
         return (await returnData).recordset[0].btype_id || null;
     },
     getAllBirdType: async () => {
         let con = await config.connection();
         let sql = `SELECT * FROM [BirdType]`;
         const returnData = con.query(sql);
+        con.close();
         return (await returnData).recordset || null;
     },
     updateBirdById: async (data) => {
@@ -80,6 +86,7 @@ module.exports = {
                 "[image] = COALESCE(@image, [image]), \n" +
                 "[description] = COALESCE(@description, [description]) \n" +
                 "WHERE bird_id = @bird_id")
+        con.close();
         return returnData.rowsAffected[0];
     },
 }
