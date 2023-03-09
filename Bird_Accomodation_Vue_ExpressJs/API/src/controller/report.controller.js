@@ -1,43 +1,31 @@
 const reportModel = require('../models/report.model');
+const { dateFormat } = require('../config/config');
 
 module.exports = {
     getReportDetail: async (req, res, next) => {
-        try {
-            const { user_id, booking_id } = req.body;
-            const result = await reportModel.getReportDetail(user_id, booking_id);
-            if (result.length === 0) {
-                throw new ErrorHandler(404, 'No report found');
-            } else {
-                res.status(200).send({
-                    exitcode: 0,
-                    message: "Get report detail successfully",
-                    reports: result
-                });
-            }
-        } catch (error) {
-            next(error);
-        }
+        
     },
-
-
     //DailyReport
     getAllReport: async (req, res, next) => {
         try {
-            const { booking_id } = req.body;
-            const result = await reportModel.getAllReport(booking_id);
+            const result = await reportModel.getAllReport();
             if (result.length === 0) {
-                throw new ErrorHandler(404, 'No report found');
+                res.status(404).send({
+                    exitcode: 1,
+                    message: 'No report found'
+                });
             } else {
                 const reportList = result.map(item => ({
-                    date: new Date(item.date).toISOString().slice(0, 10),
-                    service_report_image: item.service_report_image,
-                    service_report_text: item.service_report_text,
-                    content: item.content
+                    report_id: item.dreport_id,
+                    date: dateFormat(item.date),
+                    service_name: item.name,
+                    report_text: item.service_report_text,
+                    report_img: item.service_report_image,
                 }));
                 res.status(200).send({
                     exitcode: 0,
                     message: 'Get all reports successfully',
-                    reports: reportList // sửa lại thành reportList
+                    reports: reportList 
                 });
             }
 
@@ -47,19 +35,54 @@ module.exports = {
     },
     addNewReport: async (req, res, next) => {
         try {
-            const { booking_id, service_report_image, service_report_text } = req.body;
-            const result = await reportModel.addNewReport(booking_id, service_report_image, service_report_text);
-            if (result === 0) {
-                throw new ErrorHandler(400, 'Failed to add new report');
-            } else {
+            const { booking_id, 
+                services } = req.body;
+            const reportDetail = {
+                booking_id: booking_id,
+                services: services
+            }
+            // console.log(reportDetail);
+            const result = await reportModel.addNewReport(reportDetail);
+            if (result){
                 res.status(200).send({
                     exitcode: 0,
-                    message: 'Add new report successfully',
+                    message: 'Add new report successfully'
+                });
+            } else {
+                res.status(400).send({
+                    exitcode: 1,
+                    message: 'Add new report failed'
                 });
             }
         } catch (error) {
             next(error);
         }
-    }
-
+    },
+    getReportByBookingId: async (req, res, next) => {
+        try {
+            const { booking_id } = req.params;
+            const result = await reportModel.getReportByBookingId(booking_id);
+            if (result.length === null) {
+                res.status(404).send({
+                    exitcode: 1,
+                    message: 'No report found'
+                });
+            } else {
+                const reportList = result.map(item => ({
+                    report_id: item.dreport_id,
+                    date: dateFormat(item.date),
+                    service_name: item.name,
+                    report_text: item.service_report_text,
+                    report_img: item.service_report_image,
+                }));
+                res.status(200).send({
+                    exitcode: 0,
+                    message: 'Get all reports successfully',
+                    reports: reportList
+                });
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
 };

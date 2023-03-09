@@ -89,7 +89,7 @@ module.exports = {
                     user_id: item.user_id,
                     bird_id: item.bird_id,
                     bird_name: item.bird_name,
-                    user_name: item.user_name,
+                    user_name: item.name,
                     address: item.address,
                     date_from: dateFormat(item.date_from),
                     date_to: dateFormat(item.date_to),
