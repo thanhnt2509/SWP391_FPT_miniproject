@@ -38,7 +38,7 @@ module.exports = {
         COMPLETED: 3,
         CANCLED: 4,
     },
-    
+
     role: {
         USER: 0,
         ADMIN: 1,
