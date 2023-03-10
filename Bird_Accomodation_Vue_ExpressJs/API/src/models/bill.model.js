@@ -19,7 +19,7 @@ module.exports = {
         const request = new con.Request();
         const returnData = await request
             .input("booking_id", con.Int, booking_id)
-            .query("SELECT s.service_id, s.name \n" +
+            .query("SELECT s.service_id, s.name, bd.booked_price \n" +
                 "FROM BookingDetail AS bd \n" +
                 "JOIN Service AS s ON bd.service_id = s.service_id \n" +
                 "WHERE bd.booking_id = @booking_id");

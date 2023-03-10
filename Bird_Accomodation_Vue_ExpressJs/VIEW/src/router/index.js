@@ -118,7 +118,7 @@ const router = createRouter({
 					component: ManagerService
 				},
 				{
-					path: "report",
+					path: "report/:booking_id",
 					name: "update report on booking",
 					component: ManageReport
 				},

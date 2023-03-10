@@ -42,24 +42,32 @@
             </template>
             <template v-else-if="column.key === 'action'">
                 <span v-if="bookingState[record.status].state === 'Pending'">
-                    <button @click="approveBooking(record.booking_id)" class="button is-success"><i style="padding-right: 10px" class="fa-solid fa-circle-check"></i>Approve</button>
+                    <button @click="approveBooking(record.booking_id)" class="button is-success"><i
+                            style="padding-right: 10px" class="fa-solid fa-circle-check"></i>Approve</button>
                     <a-divider type="vertical" />
-                    <button @click="rejectBooking(record.booking_id)" class="button is-danger"><i style="padding-right: 10px" class="fa-solid fa-circle-xmark"></i>Reject</button>
+                    <button @click="rejectBooking(record.booking_id)" class="button is-danger"><i
+                            style="padding-right: 10px" class="fa-solid fa-circle-xmark"></i>Reject</button>
                 </span>
                 <span v-else-if="bookingState[record.status].state === 'Approved'">
-                    <button @click="checkin_Booking(record.booking_id)" class="button is-info"><i style="padding-right: 10px" class="fa-solid fa-calendar-check"></i>Check-in</button>
+                    <button @click="checkin_Booking(record.booking_id)" class="button is-info"><i
+                            style="padding-right: 10px" class="fa-solid fa-calendar-check"></i>Check-in</button>
                 </span>
                 <span v-else-if="bookingState[record.status].state === 'Completed'">
-                    <button class="button is-link is-light"><i style="padding-right: 10px" class="fa-solid fa-wallet"></i>View Bill</button>
+                    <router-link :to="`/bill/${record.booking_id}`">
+                        <button class="button is-link is-light"><i style="padding-right: 10px"
+                                class="fa-solid fa-wallet"></i>View Bill</button>
+                    </router-link>
                 </span>
                 <span v-else-if="bookingState[record.status].state === 'Canceled'">
-                    <button class="button is-warning"><i style="padding-right: 10px" class="fa-brands fa-rev"></i>Re-booking</button>
+                    <button class="button is-warning"><i style="padding-right: 10px"
+                            class="fa-brands fa-rev"></i>Re-booking</button>
                 </span>
                 <span v-else-if="bookingState[record.status].state === 'On-going'">
-                    <router-link to="/manager/report"><button
-                            class="button is-link"><i style="padding-right: 10px" class="fa-solid fa-square-pen"></i>Update</button></router-link>
+                    <router-link :to="`/manager/report/${record.booking_id}`"><button class="button is-link"><i style="padding-right: 10px"
+                                class="fa-solid fa-square-pen"></i>Update</button></router-link>
                     <a-divider type="vertical" />
-                    <button @click="checkout_Booking(record.booking_id)" class="button is-primary"><i style="padding-right: 10px" class="fa-regular fa-credit-card"></i>Check-out</button>
+                    <button @click="checkout_Booking(record.booking_id)" class="button is-primary"><i
+                            style="padding-right: 10px" class="fa-regular fa-credit-card"></i>Check-out</button>
                 </span>
             </template>
         </template>
@@ -118,17 +126,17 @@ export default defineComponent({
         const store = useStore();
 
         const getAllBookings = computed(() => {
-            if(props.sort_by === 'All') {
+            if (props.sort_by === 'All') {
                 return store.getters['allBookingItems']
-            }else if(props.sort_by === 'Pending') {
+            } else if (props.sort_by === 'Pending') {
                 return store.getters['allBookingItems_pending']
-            }else if(props.sort_by === 'Approved') {
+            } else if (props.sort_by === 'Approved') {
                 return store.getters['allBookingItems_approved']
-            }else if(props.sort_by === 'On-going') {
+            } else if (props.sort_by === 'On-going') {
                 return store.getters['allBookingItems_ongoing']
-            }else if(props.sort_by === 'Completed') {
+            } else if (props.sort_by === 'Completed') {
                 return store.getters['allBookingItems_completed']
-            }else if(props.sort_by === 'Canceled') {
+            } else if (props.sort_by === 'Canceled') {
                 return store.getters['allBookingItems_canceled']
             }
         });

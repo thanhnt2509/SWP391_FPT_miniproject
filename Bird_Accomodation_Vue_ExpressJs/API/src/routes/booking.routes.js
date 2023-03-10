@@ -8,6 +8,9 @@ router.route('/')
     .get(booking.getAllBookings) //use for both user and admin
     .post(booking.createBooking)
 
+router.route('/:booking_id/services')
+    .get(booking.getBookingServices)
+
 router.route('/:booking_id/cancel')
     .put(booking.cancelBooking)
 

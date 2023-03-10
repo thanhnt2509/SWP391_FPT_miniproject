@@ -44,7 +44,7 @@ module.exports = {
         ADMIN: 1,
     },
     //jwt
-    JWT_EXP_TIME: 60 * 60,
+    JWT_EXP_TIME: 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60,
     JWT_SECRET: process.env.JWT_SECRET,
 
 }
