@@ -40,7 +40,7 @@ export default {
             this.$store.dispatch('swtichEditReport')
         },
         onPublishReportClick(booking_id) {
-            this.$store.dispatch('publishReport', booking_id)
+            this.$store.dispatch('publishNewReport', booking_id)
         }
     },
     created() {

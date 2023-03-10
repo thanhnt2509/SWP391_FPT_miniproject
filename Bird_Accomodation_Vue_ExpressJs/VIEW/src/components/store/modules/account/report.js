@@ -41,16 +41,16 @@ const actions = {
     async publishNewReport({ commit }, booking_id) {
         const services = state.newReport.map(service => ({
             service_id: service.service_id,
-            report_text: service.report_text,
-            report_image: service.report_image
+            service_report_text: service.report_text,
+            service_report_image: service.report_image
         }))
         const reportPublish = {
             booking_id: booking_id,
-            services: state.newReport
+            services: services
         }
+        console.log(`report Publish ${JSON.stringify(reportPublish)}`);
         const response = await api.post("/report/newReport", reportPublish);
-        console.log(response.data);
-        // commit('SET_REPORT', response.data)
+        commit('SET_REPORT', response.data)
     },
     swtichEditReport({ commit }) {
         commit('SET_ON_EDIT_REPORT', !state.onEditReport)

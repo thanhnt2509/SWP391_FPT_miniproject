@@ -10,7 +10,7 @@ module.exports = {
         try {
             //Get date_from, date_to
             let getBooking = await transaction.request()
-                .input("booking_id", DBConnect.sql.Int, booking_id)
+                .input("booking_id", config.sql.Int, booking_id)
                 .query("SELECT date_from, date_to FROM Booking WHERE booking_id = @booking_id");
             let date_from = new Date(getBooking.recordset[0].date_from);
             let date_to = new Date(getBooking.recordset[0].date_to);
@@ -20,8 +20,8 @@ module.exports = {
                 // Get Service [{service_name, service_report_image, service_report_text, booked_price}]
 
                 let getServices = await transaction.request()
-                    .input("booking_id", DBConnect.sql.Int, booking_id)
-                    .input("date", DBConnect.sql.Date, new Date(d))
+                    .input("booking_id", config.sql.Int, booking_id)
+                    .input("date", config.sql.Date, new Date(d))
                     .query(`SELECT s.name AS service_name, s.service_id, dr.service_report_text, dr.service_report_image, bd.booked_price, date
                             FROM BookingDetail bd
                             JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id
