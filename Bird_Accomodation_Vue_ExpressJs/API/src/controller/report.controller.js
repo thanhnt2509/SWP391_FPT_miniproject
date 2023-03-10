@@ -37,8 +37,8 @@ module.exports = {
     addNewReport: async (req, res, next) => {
         try {
             const booking_id = req.body.booking_id;
-            const service = req.body.service;
-            const result = await reportModel.addNewReport(booking_id, service);
+            const services = req.body.services;
+            const result = await reportModel.addNewReport(booking_id, services);
             if (result === 0) {
                 throw new ErrorHandler(400, 'Failed to add new report');
             } else {
