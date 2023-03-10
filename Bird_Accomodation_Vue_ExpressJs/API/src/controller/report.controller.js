@@ -1,4 +1,5 @@
 const reportModel = require('../models/report.model');
+const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
 const { dateFormat } = require('../config/config');
 
 module.exports = {
@@ -39,7 +40,7 @@ module.exports = {
                 res.status(200).send({
                     exitcode: 0,
                     message: 'Get all reports successfully',
-                    reports: reportList 
+                    reports: reportList
                 });
             }
 

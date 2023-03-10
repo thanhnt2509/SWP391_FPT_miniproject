@@ -63,20 +63,7 @@ module.exports = {
                 "FROM DailyReport AS dr \n " +
                 "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +
                 "JOIN Service AS s ON bk.service_id = s.service_id");
-        
-        return returnData.recordset;
-    },
-    getReportByBookingId: async (booking_id) => {
-        let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("booking_id", con.Int, booking_id)
-            .query("SELECT dr.*, s.name \n " +
-                "FROM DailyReport AS dr \n " +
-                "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +
-                "JOIN Service AS s ON bk.service_id = s.service_id \n " +
-                "WHERE bk.booking_id = @booking_id");
-        
+
         return returnData.recordset;
     },
     addNewReport: async (booking_id, services) => {
@@ -108,47 +95,17 @@ module.exports = {
             await transaction.rollback();
         }
     },
-    /*addNewReport: async (data) => {
-        let con = await DBConnect.connection();
-        const transaction = new con.Transaction();
-        await transaction.begin();
-        try {
-            for (let i = 0; i < data.services.length; i++){
-                let service = data.services[i];
-                // let getBdetailId = await transaction.request()
-                //     .input("booking_id", con.Int, data.booking_id)
-                //     .input("service_id", con.Int, service.service_id)
-                //     .query("SELECT bd.bdetail_id FROM BookingDetail bd WHERE bd.booking_id = @booking_id AND bd.service_id = @service_id");
-                // let bdetail_id = getBdetailId.recordset[0].bdetail_id;
-                let addReport = await transaction.request()
-                    .input("booking_id", con.Int, data.booking_id)
-                    // .input("bdetail_id", con.Int, bdetail_id)
-                    // .input("date", con.Date, new Date(data.date))
-                    .input("service_report_image", con.NVarChar, service.service_report_image)
-                    .input("service_report_text", con.NVarChar, service.service_report_text)
-                    .query("INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text) \n " +
-                        "SELECT bd.bdetail_id, GETDATE(), @service_report_image, @service_report_text \n " +
-                        "FROM BookingDetail bd \n " +
-                        "WHERE bd.booking_id = @booking_id");
-            }
-            await transaction.commit();
-            
-            return true;
-        } catch (error) {
-            await transaction.rollback();
-            
-            return false;
-        }
-        // const request = new con.Request();
-        // const returnData = await request
-        //     .input("booking_id", con.Int, data.booking_id)
-        //     .input("service_report_image", con.NVarChar, data.report_image)
-        //     .input("service_report_text", con.NVarChar, data.report_text)
-        //     .query("INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text) \n " +
-        //         "SELECT bd.bdetail_id, GETDATE(), @service_report_image, @service_report_text \n " +
-        //         "FROM BookingDetail bd \n " +
-        //         "WHERE bd.booking_id = @booking_id");
-        // 
-        // return returnData.rowsAffected[0];
-    },*/
+    getReportByBookingId: async (booking_id) => {
+        let con = await config.connection();
+        const request = new con.Request();
+        const returnData = await request
+            .input("booking_id", con.Int, booking_id)
+            .query("SELECT dr.*, s.name \n " +
+                "FROM DailyReport AS dr \n " +
+                "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +
+                "JOIN Service AS s ON bk.service_id = s.service_id \n " +
+                "WHERE bk.booking_id = @booking_id");
+
+        return returnData.recordset;
+    },
 };
