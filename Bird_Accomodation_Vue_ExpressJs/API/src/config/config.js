@@ -1,5 +1,6 @@
 module.exports = {
     sql: require('mssql'), // export mssql module
+    knex: require('knex'), // export knex module
     // export dotenv and config
     dotenv: require('dotenv').config({ path: require('path').resolve(__dirname, '..', '..', '.env') }),
     database: {
@@ -24,7 +25,17 @@ module.exports = {
             console.log(err.message)
         }
     },
-
+    knexConnection: async () => {
+        try {
+            return module.exports.knex({
+                client: 'mssql',
+                connection: module.exports.database,
+            });
+        }
+        catch (err) {
+            console.log(err.message)
+        }
+    },
     //date format yyyy-mm-dd
     dateFormat: (date) => {
         let formattedDate = new Date(date)
