@@ -71,23 +71,49 @@ module.exports = {
                         bd.booking_id = @booking_id`);
         return returnData.recordset;
     },
-    addNewReport: async (booking_id, service_report_image, service_report_text) => {
-        let con = await DBConnect.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("booking_id", DBConnect.sql.Int, booking_id)
-            .input("service_report_image", DBConnect.sql.NVarChar, service_report_image)
-            .input("service_report_text", DBConnect.sql.NVarChar, service_report_text)
-            .query(`INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text)
-                    SELECT 
-                        bd.bdetail_id,
-                        GETDATE(),
-                        @service_report_image,
-                        @service_report_text
-                    FROM 
-                        BookingDetail bd 
-                    WHERE 
-                        bd.booking_id = @booking_id`);
-        return returnData.recordset;
+    // addNewReport: async (booking_id, service_report_image, service_report_text) => {
+    //     let con = await DBConnect.connection();
+    //     const request = new con.Request();
+    //     const returnData = await request
+    //         .input("booking_id", DBConnect.sql.Int, booking_id)
+    //         .input("service_report_image", DBConnect.sql.NVarChar, service_report_image)
+    //         .input("service_report_text", DBConnect.sql.NVarChar, service_report_text)
+    //         .query(`INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text)
+    //                 VALUES (SELECT 
+    //                     bd.bdetail_id
+    //                 FROM 
+    //                     BookingDetail bd 
+    //                 WHERE 
+    //                     bd.booking_id = @booking_id,GETDATE(), @service_report_image, @service_report_text)`);
+    //     return returnData.recordset;
+    // },
+    addNewReport: async (booking_id, services) => {
+        try {
+            let con = await DBConnect.connection();
+            const transaction = new con.Transaction();
+            await transaction.begin();
+
+            for (const service of services) {
+                let getBookingDetailID = await transaction.request()
+                    .input("booking_id", DBConnect.sql.Int, booking_id)
+                    .input("service_id", DBConnect.sql.Int, service.service_id)
+                    .query(`SELECT bdetail_id
+                      FROM BookingDetail
+                      WHERE booking_id = @booking_id AND service_id = @service_id`);
+                let bdetail_id = getBookingDetailID.recordset[0].bdetail_id;
+
+                let insertReport = await transaction.request()
+                    .input("bdetail_id", DBConnect.sql.Int, bdetail_id)
+                    .input("service_report_image", DBConnect.sql.NVarChar, service.service_report_image)
+                    .input("service_report_text", DBConnect.sql.NVarChar, service.service_report_text)
+                    .query(`INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text)
+                      VALUES (@bdetail_id, GETDATE(), @service_report_image, @service_report_text)`);
+            }
+
+            await transaction.commit();
+        } catch (error) {
+            console.log(error);
+            await transaction.rollback();
+        }
     },
 };

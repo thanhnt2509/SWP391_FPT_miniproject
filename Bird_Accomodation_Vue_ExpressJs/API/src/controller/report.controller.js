@@ -1,4 +1,5 @@
 const reportModel = require('../models/report.model');
+const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
 
 module.exports = {
     getReportDetail: async (req, res, next) => {
@@ -47,8 +48,9 @@ module.exports = {
     },
     addNewReport: async (req, res, next) => {
         try {
-            const { booking_id, service_report_image, service_report_text } = req.body;
-            const result = await reportModel.addNewReport(booking_id, service_report_image, service_report_text);
+            const booking_id = req.body.booking_id;
+            const service = req.body.service;
+            const result = await reportModel.addNewReport(booking_id, service);
             if (result === 0) {
                 throw new ErrorHandler(400, 'Failed to add new report');
             } else {
@@ -60,6 +62,5 @@ module.exports = {
         } catch (error) {
             next(error);
         }
-    }
-
+    },
 };
