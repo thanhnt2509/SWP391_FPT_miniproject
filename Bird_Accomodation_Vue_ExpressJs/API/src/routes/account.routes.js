@@ -10,12 +10,10 @@ router.route('/')
 
 router.route('/:user_id')
     .get(verifyAdmin, account.getAccountByID)
-    .patch(verifyAdmin, account.changeAccountStatus);
+    .put(verifyAdmin, account.changeAccountStatus)
+    .patch(account.updateUserName)
 
 router.route('/search')
     .post(verifyAdmin, account.getSearchAccount);
-
-router.route('/:user_id')
-    .patch(account.updateUserName)
 
 module.exports = router

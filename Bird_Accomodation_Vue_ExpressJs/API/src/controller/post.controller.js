@@ -28,7 +28,8 @@ module.exports = {
                 reference: reference
             }
             const result = await postModel.addPost(postDetail);
-            if (result > 0){
+            console.log(result);
+            if (result !== null){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Add post successfully"

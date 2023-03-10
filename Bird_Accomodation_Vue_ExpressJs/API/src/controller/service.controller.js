@@ -26,13 +26,14 @@ module.exports = {
         try {
             const { name } = req.params;
             const result = await servicesModel.getServiceByName(name);
+            console.log(result);
             const serviceList = result.map(item => ({
                 service_id: item.service_id,
                 name: item.name,
                 description: item.description,
                 price: item.price
             }))
-            if (result.length === 0) {
+            if (result === null) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Service not found"
@@ -59,7 +60,7 @@ module.exports = {
                 status: item.status,
                 price: item.price
             }))
-            if (result.length === 0) {
+            if (result === null) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Service not found"
@@ -85,9 +86,11 @@ module.exports = {
                 price: price
             }
             const result = await servicesModel.addService(serviceDetail);
-            if (result > 0){
+            console.log(result);
+            if (result !== null){
                 res.status(200).send({
                     exitcode: 0,
+                    service_id: result[0].service_id,
                     message: "Add service successfully"
                 })
             } else {
@@ -110,9 +113,16 @@ module.exports = {
     updateServiceById: async (req, res, next) => {
         try {
             const {service_id} = req.params;
-            const result = await servicesModel.updateServiceById(service_id, req.body);
+            const { name, description, price } = req.body;
+            const updateDetail = {
+                service_id: service_id,
+                name: name,
+                description: description,
+                price: price
+            }
+            const result = await servicesModel.updateServiceById(updateDetail);
             const serviceDetail = await servicesModel.getServiceById(service_id);
-            if (result > 0){
+            if (result !== null){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Update service successfully",
@@ -153,7 +163,7 @@ module.exports = {
             const { service_id } = req.params;
             const result = await servicesModel.deleteServiceById(service_id);
             const serviceDetail = await servicesModel.getServiceById(service_id);
-            if (result > 0){
+            if (result !== null){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Delete service successfully",
