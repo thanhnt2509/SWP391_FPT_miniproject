@@ -54,6 +54,14 @@ module.exports = {
         USER: 0,
         ADMIN: 1,
     },
+    userStatus: {
+        INACTIVE: 0,
+        ACTIVE: 1,
+    },
+    serviceStatus: {
+        AVAILABLE: 1,
+        UNAVAILABLE: 0,
+    },
     //jwt
     JWT_EXP_TIME: 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60,
     JWT_SECRET: process.env.JWT_SECRET,
