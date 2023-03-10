@@ -1,17 +1,18 @@
 <template>
     <div>
-        <!-- Detail of {{ serviceReport }}
-        IMG: {{ reportImages }}
-        INFO: {{ reportServiceInfo }} -->
-        edit report: {{ isEditable }}
+        <!-- Detail of {{ serviceReport }} -->
+        <!-- INFO: {{ reportServiceInfo }} -->
+        <!-- edit report: {{ isEditable }} <br>
+        prop report : {{ serviceReport }} -->
+        new report data : {{ newReport }}<hr>
     </div>
 
     <div class="columns container main">
         <!-- service name and content -->
-        <div class="column is half" v-for="report in reportServiceInfo">
-            <h3>{{ report.name }}</h3>
-            <p v-if="!isEditable">{{ report.content }}</p>
-            <p v-else><textarea class="input textarea" placeholder="place a report" :value="report.id"></textarea></p>
+        <div class="column is half" v-for="report in serviceReport" :key="report.service_id">
+            <h3>{{ report?.service_name }}</h3>
+            <p v-if="!isEditable">{{ report?.service_report_text }}</p>
+            <p v-else><textarea :disabled="!$store.getters.getOnEditReport" @input="evt => onInputReportText(evt, report.service_id)" class="input textarea" placeholder="place a report" ></textarea></p>
         </div>
     </div>
     <!-- carousel images -->
@@ -20,7 +21,6 @@
             <img class="reportImg" v-for="img in reportImagesLink" :src="img.img" alt="">
         </a-carousel>
     </section>
-    
 </template>
 
 <script>
@@ -35,6 +35,7 @@ export default {
                 { img: '/images/bird-food2.jpg' },
                 { img: '/images/Bird Photography.jpg' },
             ],
+            newReport: this.serviceReport
         }
     },
     props: {
@@ -49,14 +50,17 @@ export default {
         }
     },
     computed: {
-        reportImages() {
-            return this.serviceReport.map((item) => ({ img: item.service_report_image }))
-        },
-        reportServiceInfo() {
-            return this.serviceReport.map((item) => ({ id: item.service_id, name: item.service_name, content: item.service_report_text }))
-        },
-    }
 
+    },
+    methods: {
+        onInputReportText(evt, service_id) {
+            this.newReport.forEach(report => {
+                if (report.service_id === service_id) {
+                    report.report_text = evt.target.value
+                }
+            })
+        }
+    },
 }
 </script>
 

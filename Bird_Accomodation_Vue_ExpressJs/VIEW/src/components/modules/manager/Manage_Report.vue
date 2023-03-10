@@ -9,7 +9,7 @@
                         style="padding-right: 10px;" class="fa-solid fa-plus"></i>Add new report</button> -->
                 <button @click="onClickEdit" style="margin-right: 10px;" class="button is-warning"><i
                         style="padding-right: 10px;" class="fa-solid fa-pen"></i>Edit</button>
-                <button :disabled="!edit" class="button is-link"><i style="padding-right: 10px;"
+                <button @click="onPublishReportClick(getReportItem.booking_id)" :disabled="!edit" class="button is-link"><i style="padding-right: 10px;"
                         class="fa-solid fa-upload"></i>Publish</button>
             </div>
         </div>
@@ -24,7 +24,6 @@ export default {
     name: "Manage_Report",
     data() {
         return {
-            edit: false
         }
     },
     components: {
@@ -33,21 +32,22 @@ export default {
     computed: {
         ...mapGetters({
             getReportItem: 'getReportItem',
+            edit: 'getOnEditReport'
         })
     },
     methods: {
         onClickEdit() {
-            this.edit = !this.edit
+            this.$store.dispatch('swtichEditReport')
         },
-        onClickAdd() {
-
+        onPublishReportClick(booking_id) {
+            this.$store.dispatch('publishReport', booking_id)
         }
     },
     created() {
         try {
             const data = {
-                user_id: 2,
-                booking_id: 5
+                user_id: this.$store.getters.getUser.user_id,
+                booking_id: this.$route.params.booking_id
             }
             this.$store.dispatch('getReport', data)
         } catch (error) {

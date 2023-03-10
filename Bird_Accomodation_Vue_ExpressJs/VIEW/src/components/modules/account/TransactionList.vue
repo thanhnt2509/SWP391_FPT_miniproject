@@ -35,7 +35,7 @@
                         <a v-if="bookingState[record.status].state === 'Pending'"><button disabled class="button is-warning is-light"><i style="padding-right: 10px" class="fa-solid fa-circle-notch"></i>Processing</button></a>
                         <a v-else-if="bookingState[record.status].state === 'Approved'"><button disabled class="button is-success is-light"><i style="padding-right: 10px" class="fa-regular fa-circle-check"></i>Approved</button></a>
                         <router-link :to="`/report/${record.booking_id}`" v-else-if="bookingState[record.status].state === 'On-going'"><button class="button is-info is-light"><i style="padding-right: 10px" class="fa-solid fa-circle-info"></i>Check {{ record.bird_name }}</button></router-link>
-                        <a v-else-if="bookingState[record.status].state === 'Completed'"><button class="button is-link is-light"><i style="padding-right: 10px" class="fa-solid fa-wallet"></i>View bill</button></a>
+                        <router-link :to="`/bill/${record.booking_id}`" v-else-if="bookingState[record.status].state === 'Completed'"><button class="button is-link is-light"><i style="padding-right: 10px" class="fa-solid fa-wallet"></i>View bill</button></router-link>
                         <a v-else-if="bookingState[record.status].state === 'Canceled'"><button class="button is-danger is-light"><i style="padding-right: 10px" class="fa-brands fa-rev"></i>Re-booking</button></a>
                     </span>
                 </template>

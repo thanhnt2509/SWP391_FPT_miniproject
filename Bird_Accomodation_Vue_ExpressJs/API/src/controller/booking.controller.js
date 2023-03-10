@@ -105,6 +105,29 @@ module.exports = {
             next(error);
         }
     },
+    getBookingServices: async (req, res, next) => {
+        try {
+            const booking_id = req.params.booking_id;
+            const result = await bookingModel.getBookingServices(booking_id);
+            if (result.length === 0) {
+                throw new ErrorHandler(404, 'No booking found');
+            } else {
+                const serviceList = result.map(item => ({
+                    service_id: item.service_id,
+                    service_name: item.name,
+                    price: item.price,
+                    description: item.description,
+                }));
+                res.status(200).send({
+                    exitcode: 0,
+                    message: 'Get booking services successfully',
+                    services: serviceList
+                });
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
     createBooking: async (req, res, next) => {
         try {
             const { user_id, bird_id, date_from, date_to, services } = req.body;

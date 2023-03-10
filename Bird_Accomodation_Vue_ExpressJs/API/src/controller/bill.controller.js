@@ -27,6 +27,7 @@ module.exports = {
                         bird_name: bill[0].bird_name,
                     },
                     booking: {
+                        booking_id: bill[0].booking_id,
                         date_from: dateFormat(bill[0].date_from),
                         date_to: dateFormat(bill[0].date_to),
                         status: bill[0].status,

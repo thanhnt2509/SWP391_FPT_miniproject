@@ -3,7 +3,21 @@ const { dateFormat } = require('../config/config');
 
 module.exports = {
     getReportDetail: async (req, res, next) => {
-        
+        try {
+            const { user_id, booking_id } = req.body;
+            const result = await reportModel.getReportDetail(user_id, booking_id);
+            if (result.length === 0) {
+                throw new ErrorHandler(404, 'No report found');
+            } else {
+                res.status(200).send({
+                    exitcode: 0,
+                    message: "Get report detail successfully",
+                    reports: result
+                });
+            }
+        } catch (error) {
+            next(error);
+        }
     },
     //DailyReport
     getAllReport: async (req, res, next) => {
@@ -35,23 +49,15 @@ module.exports = {
     },
     addNewReport: async (req, res, next) => {
         try {
-            const { booking_id, 
-                services } = req.body;
-            const reportDetail = {
-                booking_id: booking_id,
-                services: services
-            }
-            // console.log(reportDetail);
-            const result = await reportModel.addNewReport(reportDetail);
-            if (result){
+            const booking_id = req.body.booking_id;
+            const services = req.body.services;
+            const result = await reportModel.addNewReport(booking_id, services);
+            if (result === 0) {
+                throw new ErrorHandler(400, 'Failed to add new report');
+            } else {
                 res.status(200).send({
                     exitcode: 0,
                     message: 'Add new report successfully'
-                });
-            } else {
-                res.status(400).send({
-                    exitcode: 1,
-                    message: 'Add new report failed'
                 });
             }
         } catch (error) {
