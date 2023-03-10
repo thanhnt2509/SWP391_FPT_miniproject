@@ -9,14 +9,19 @@
         </div>
 
         <!-- services -->
-        <div >
+        <div class="columns is-multiline">
             <!-- each service -->
-            <div class="columns service" v-for="service in serviceItems" :key="service.service_id">
-                <div class="column"><img class="img_service" :src="'/images/' + service.image + '.jpg'" :alt="service.name"></div>
-                <div class="content column is-three-quarters">
-                    <h3 class="title is-4 is-spaced">{{ service.name }}</h3>
-                    <p >{{ service.description }}</p>
-                    <button disabled class="button is-info">Price: {{ service.price }}$</button>
+            <div class="column is-4 " v-for="(service, index) in serviceItems" :key="service.service_id">
+                <div class="service">
+                    <img class="img_service" :src="'/images/' + service.image + '.jpg'" :alt="service.name">
+
+                    <div class="content  is-three-quarters">
+                        <div style="text-align: center;">
+                            <h3 class="title">{{ service.name }}</h3>
+                            <p style="text-align: left;">{{ service.description }}</p>
+                            <button disabled class="button is-info">Price: {{ service.price }}$</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,32 +33,36 @@ import { mapGetters } from 'vuex'
 export default {
     name: "Service",
     computed: {
-       ...mapGetters(['serviceItems'])
+        ...mapGetters(['serviceItems'])
     }
 }
 </script>
 
 <style scoped>
-.self_info{
+.self_info {
     margin: 20px;
     padding: 20px;
 }
-.self_info P{
+
+.self_info P {
     font-size: 20px;
     padding: 10px 40px 10px 40px;
 }
+
 img {
     width: 300px;
     height: 300px;
 }
-.service{
+
+.service {
     margin: 20px;
     border-radius: 40px;
     background-color: #f5f5f5;
     padding: 20px;
 }
-.img_service{
-    width: 300px;
+
+.img_service {
+    width: 100%;
     height: 300px;
     object-fit: cover;
     border-radius: 40px;
