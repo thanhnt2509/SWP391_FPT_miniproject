@@ -23,11 +23,23 @@ import store from '../components/store/index';
 // guard for checking if the user is authenticated
 const isAdmin = (to, from, next) => {
 	const userRole = store.getters.getUser?.role;
-	if (store.getters.getUser && userRole === 1) {
+	if (isAuth && userRole === 1) {
 	  // user is authenticated and has the admin role
 	  next();
 	} else {
 	  // user is not authenticated or does not have the admin role
+	  alert("You must login to access this page")
+	  next('/login'); // redirect the user to the login page
+	}
+  };
+const isAuth = (to, from, next) => {
+	const userRole = store.getters.getUser?.role;
+	if (store.getters.getUser) {
+	  // user is authenticated and has the admin role
+	  next();
+	} else {
+	  // user is not authenticated or does not have the admin role
+	  alert("You must login to access this page")
 	  next('/login'); // redirect the user to the login page
 	}
   };
@@ -64,7 +76,8 @@ const router = createRouter({
 		{
 			path: "/booking",
 			name: "booking",
-			component: Booking
+			component: Booking,
+			beforeEnter: isAuth
 		},
 		{
 			path: "/post",
