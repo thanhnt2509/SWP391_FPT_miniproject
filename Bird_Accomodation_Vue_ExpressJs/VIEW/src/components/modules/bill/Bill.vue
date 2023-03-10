@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="container">
+        <div class="container" style="padding-left: 18%; padding-right: 18%;">
             <div class="has-text-centered">
                 <h1 class="title">Bill for booking_id_{{ $route.params.booking_id }}</h1>
             </div>
-            {{ seed }}
+            <!-- {{ seed }} -->
 
             <div style="width: 600px;">
                 <!-- user info -->

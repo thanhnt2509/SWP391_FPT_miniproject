@@ -7,9 +7,9 @@
         new report data : {{ newReport }}<hr>
     </div>
 
-    <div class="columns container main">
+    <div class="columns container main is-multiline">
         <!-- service name and content -->
-        <div class="column is half" v-for="report in serviceReport" :key="report.service_id">
+        <div class="column is-4 " v-for="report in serviceReport" :key="report.service_id">
             <h3>{{ report?.service_name }}</h3>
             <p v-if="!isEditable">{{ report?.service_report_text }}</p>
             <p v-else><textarea :disabled="!$store.getters.getOnEditReport" @input="evt => onInputReportText(evt, report.service_id)" class="input textarea" placeholder="place a report" ></textarea></p>

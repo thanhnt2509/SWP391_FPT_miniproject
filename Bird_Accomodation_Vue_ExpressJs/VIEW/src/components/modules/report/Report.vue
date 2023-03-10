@@ -2,7 +2,7 @@
     <div class="container content">
         <div class="has-text-centered">
             <h1 class="title ">Report History for Booking_{{ $route.params.booking_id }}</h1>
-            <p class="subtitle">{{ getReportItem.date_from }} - {{ getReportItem.date_to }}</p>
+            <p class="subtitle">{{ getReportItem?.date_from }} - {{ getReportItem?.date_to }}</p>
         </div>
         <!-- <p>TEST: {{ getReportItem }}</p>
         <p>getUser test: {{ getUser }}</p>
