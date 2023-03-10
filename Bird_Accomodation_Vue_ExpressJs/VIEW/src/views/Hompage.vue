@@ -25,7 +25,7 @@
                 <div class="">
                     <h1 class="title">Bird Oasis</h1>
                 </div>
-                <p>Bird Oais is the pethouse for bird, provide various service and safe place for bird accommodation
+                <p style="padding-left: 17%; padding-right: 17%;">Bird Oais is the pethouse for bird, provide various service and safe place for bird accommodation
                     With the well-trainer staff have experience in take care of various types of bird, we ensure that we
                     will
                     bring the best place and service for your bird</p>
@@ -79,6 +79,8 @@
                 </div>
             </div>
         </div>
+        <!-- test post page added -->
+        <PostPage />
 
         <!-- feedback from user -->
         <div>
@@ -124,6 +126,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import ServiceList from './ServiceList.vue';
+import PostPage from './PostPage.vue';
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
 export default {
     name: 'Homepage',
@@ -185,7 +188,8 @@ export default {
     components: {
         LeftCircleOutlined,
         RightCircleOutlined,
-        ServiceList
+        ServiceList,
+        PostPage
     },
 }
 </script>
