@@ -4,7 +4,7 @@
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <router-link class="navbar-item" to="/">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
+            <img src="../../public/images/bird-oasis.png" width="130" height="28" />
           </router-link>
         </div>
         <div class="navbar-menu">
