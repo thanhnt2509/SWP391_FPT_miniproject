@@ -11,7 +11,7 @@ module.exports = {
                 password: password
             }
             const result = await accountModel.login(loginDetail);
-            if (result.length > 0) {
+            if (result !== null) {
                 // Create payload for encryption
                 const payload = {
                     email: email,

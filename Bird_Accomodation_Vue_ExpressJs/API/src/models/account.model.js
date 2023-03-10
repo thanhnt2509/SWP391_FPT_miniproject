@@ -22,17 +22,27 @@ module.exports = {
         return returnData.rowsAffected[0];
     },
     login: async (body) => {
-        //body = {email, password}
-        let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("email", con.NVarChar, body.email)
-            .input("password", con.NVarChar, body.password)
-            .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
-                "WHERE email = @email collate latin1_general_cs_as \n" +
-                "AND password = @password collate latin1_general_cs_as");
-        return (await returnData).recordset || null;
+        let con = await config.knexConnection();
+        const returnData = await con('User')
+            .where({
+                email: body.email,
+                password: body.password
+            })
+            .first();
+        return returnData;
     },
+    // login: async (body) => {
+    //     //body = {email, password}
+    //     let con = await config.connection();
+    //     const request = new con.Request();
+    //     const returnData = await request
+    //         .input("email", con.NVarChar, body.email)
+    //         .input("password", con.NVarChar, body.password)
+    //         .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
+    //             "WHERE email = @email collate latin1_general_cs_as \n" +
+    //             "AND password = @password collate latin1_general_cs_as");
+    //     return (await returnData).recordset || null;
+    // },
     validateEmail: async (email) => {
         let con = await config.connection();
         const request = new con.Request();
