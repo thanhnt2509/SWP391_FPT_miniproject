@@ -4,8 +4,6 @@ module.exports = {
     register: async (body) => {
         //body = {email, password, name, address, phone}
         let con = await config.connection();
-        const defaultRole = 0; //0: user, 1: admin
-        const defaultStatus = 1; //0: inactive, 1: active
         const defaultUserImg = null;
         const request = new con.Request();
         const returnData = await request
@@ -14,8 +12,8 @@ module.exports = {
             .input("name", con.NVarChar, body.name)
             .input("address", con.NVarChar, body.address)
             .input("phone", con.NVarChar, body.phone)
-            .input("role", con.Int, defaultRole)
-            .input("status", con.Int, defaultStatus)
+            .input("role", con.Int, config.role.USER)
+            .input("status", con.Int, config.userStatus.ACTIVE)
             .input("user_img", con.NVarChar, defaultUserImg)
             .query("INSERT INTO [User] (email, password, name, address, phone, role, status, user_img) \n" +
                 "VALUES (@email, @password, @name, @address, @phone, @role, @status, @user_img)");
