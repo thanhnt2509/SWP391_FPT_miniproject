@@ -18,6 +18,21 @@ import Manager from "../components/modules/manager/Manage_Transaction.vue";
 import ManagerService from "../components/modules/manager/Manage_Service.vue";
 import ManageReport from "../components/modules/manager/Manage_Report.vue";
 
+import store from '../components/store/index';
+
+// guard for checking if the user is authenticated
+const isAdmin = (to, from, next) => {
+	const userRole = store.getters.getUser?.role;
+	if (store.getters.getUser && userRole === 1) {
+	  // user is authenticated and has the admin role
+	  next();
+	} else {
+	  // user is not authenticated or does not have the admin role
+	  next('/login'); // redirect the user to the login page
+	}
+  };
+  
+
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
@@ -106,6 +121,11 @@ const router = createRouter({
 		{
 			path: "/manager",
 			name: "manager",
+			meta: {
+				requireAuth: true,
+				requiresAdmin: true
+			},
+			beforeEnter: isAdmin,
 			children: [
 				{
 					path: "/manager",

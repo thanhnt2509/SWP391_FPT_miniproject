@@ -1,54 +1,61 @@
 <template>
+  <div class="container content">
     <div class="tile is-ancestor">
-  <div class="tile is-vertical is-8">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-primary">
-          <p class="title">Vertical...</p>
-          <p class="subtitle">Top tile</p>
-        </article>
-        <article class="tile is-child notification is-warning">
-          <p class="title">...tiles</p>
-          <p class="subtitle">Bottom tile</p>
-        </article>
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <img class="tile is-child notification is-primary" src="../../public/images/avatar_user.jpg" alt="">
+            <img class="tile is-child notification is-warning" src="../../public/images/bird-fac2.jpg" alt="">
+          </div>
+          <div class="tile is-parent">
+            <img class="tile is-child notification is-info" src="../../public/images/bird-care.jpg" alt="">
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <img class="tile is-child notification is-danger" src="../../public/images/bird-housing.jpg" alt="">
+        </div>
       </div>
       <div class="tile is-parent">
-        <article class="tile is-child notification is-info">
-          <p class="title">Middle tile</p>
-          <p class="subtitle">With an image</p>
-          <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/640x480.png">
-          </figure>
-        </article>
+        <img class="tile is-child notification is-success" src="../../public/images/2_parrot.jpg" alt="">
       </div>
     </div>
-    <div class="tile is-parent">
-      <article class="tile is-child notification is-danger">
-        <p class="title">Wide tile</p>
-        <p class="subtitle">Aligned with the right tile</p>
-        <div class="content">
-          <!-- Content -->
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical  ">
+        <div class="tile">
+          <div class="tile is-parent">
+            <img class="tile is-child notification is-info" src="../../public/images/bird-boarding.jpg" alt="">
+          </div>
+          <div class="tile is-parent is-vertical">
+            <img class="tile is-child notification is-primary" src="../../public/images/Bird Photography.jpg" alt="">
+            <img class="tile is-child notification is-warning" src="../../public/images/bird-cardinal-nest-box.jpg" alt="">
+          </div>
+          <div class="tile is-parent">
+            <img class="tile is-child notification is-success" src="../../public/images/bird-train.jpg" alt="">
+          </div>
         </div>
-      </article>
-    </div>
-  </div>
-  <div class="tile is-parent">
-    <article class="tile is-child notification is-success">
-      <div class="content">
-        <p class="title">Tall tile</p>
-        <p class="subtitle">With even more content</p>
-        <div class="content">
-          <!-- Content -->
+        <div class="tile is-parent">
+          <img class="tile is-child notification is-danger" src="../../public/images/big-treehouse.jpg" alt="">
         </div>
       </div>
-    </article>
+
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
-    name: 'Gallery',
+  name: 'Gallery',
 
 }
 </script>
+
+<style scoped>
+img {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+</style>

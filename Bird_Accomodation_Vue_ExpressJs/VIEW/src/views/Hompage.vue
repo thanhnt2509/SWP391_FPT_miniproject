@@ -315,4 +315,5 @@ export default {
 
 .ant-carousel :deep(.custom-slick-arrow:hover) {
     opacity: 0.5;
-}</style>
+}
+</style>
