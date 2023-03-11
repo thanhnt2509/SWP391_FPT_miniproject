@@ -17,7 +17,6 @@ module.exports = {
             throw error;
         }
     },
-
     getReportDetailByBookingID_DreportID: async (booking_id, dreport_id) => {
         try {
             //get report by booking_id and dreport_id
@@ -32,7 +31,6 @@ module.exports = {
             throw error;
         }
     },
-
     // deleteReportDetail:async (booking_id,dreport_id) =>{
     //     try {
     //         let con = await DBConnect.connection();
@@ -44,5 +42,4 @@ module.exports = {
     //             throw error;
     //     }
     // },
-
 }

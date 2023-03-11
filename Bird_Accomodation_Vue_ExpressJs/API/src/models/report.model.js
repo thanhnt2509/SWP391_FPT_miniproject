@@ -6,7 +6,6 @@ module.exports = {
         let con = await config.connection();
         const transaction = new con.Transaction();
         await transaction.begin();
-
         try {
             //Get date_from, date_to
             let getBooking = await transaction.request()
@@ -18,7 +17,6 @@ module.exports = {
             let reportDetails = [];
             for (let d = new Date(date_from); d <= date_to; d.setDate(d.getDate() + 1)) {
                 // Get Service [{service_name, service_report_image, service_report_text, booked_price}]
-
                 let getServices = await transaction.request()
                     .input("booking_id", config.sql.Int, booking_id)
                     .input("date", config.sql.Date, new Date(d))
@@ -28,9 +26,7 @@ module.exports = {
                             JOIN Service s ON bd.service_id = s.service_id
                             WHERE bd.booking_id = @booking_id AND dr.date = @date`);
                 let services = getServices.recordset;
-
                 let date = new Date(d.getTime()).toISOString().slice(0, 10);
-
                 if (services.length > 0) {
                     let serviceDetails = {
                         date: date,
@@ -47,7 +43,6 @@ module.exports = {
             }
             date_from = date_from.toISOString().slice(0, 10);
             date_to = date_to.toISOString().slice(0, 10);
-
             return { booking_id, date_from, date_to, reportDetails };
         } catch (error) {
             await transaction.rollback();
@@ -63,7 +58,6 @@ module.exports = {
                 "FROM DailyReport AS dr \n " +
                 "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +
                 "JOIN Service AS s ON bk.service_id = s.service_id");
-
         return returnData.recordset;
     },
     addNewReport: async (booking_id, services) => {
@@ -71,7 +65,6 @@ module.exports = {
             let con = await config.connection();
             const transaction = new con.Transaction();
             await transaction.begin();
-
             for (const service of services) {
                 let getBookingDetailID = await transaction.request()
                     .input("booking_id", con.Int, booking_id)
@@ -80,7 +73,6 @@ module.exports = {
                             FROM BookingDetail
                             WHERE booking_id = @booking_id AND service_id = @service_id`);
                 let bdetail_id = getBookingDetailID.recordset[0].bdetail_id;
-
                 let insertReport = await transaction.request()
                     .input("bdetail_id", con.Int, bdetail_id)
                     .input("service_report_image", con.NVarChar, service.service_report_image)
@@ -88,7 +80,6 @@ module.exports = {
                     .query(`INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text)
                                             VALUES (@bdetail_id, GETDATE(), @service_report_image, @service_report_text)`);
             }
-
             await transaction.commit();
         } catch (error) {
             console.log(error);
@@ -105,7 +96,6 @@ module.exports = {
                 "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +
                 "JOIN Service AS s ON bk.service_id = s.service_id \n " +
                 "WHERE bk.booking_id = @booking_id");
-
         return returnData.recordset;
     },
 };

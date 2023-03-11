@@ -54,7 +54,7 @@ module.exports = {
                 reference: reference
             }
             const result = await postModel.updatePostByID(post_id, postDetail);
-            if (result > 0){
+            if (result !== null){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Update post successfully"
@@ -73,7 +73,7 @@ module.exports = {
         try {
             const { post_id } = req.params;
             const result = await postModel.deletePostByID(post_id);
-            if (result > 0){
+            if (result !== null){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Delete post successfully"

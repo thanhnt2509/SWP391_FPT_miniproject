@@ -17,8 +17,4 @@ router.route('/:booking_id/cancel')
 router.route('/:booking_id/:state')
     .put(verifyAdmin, booking.changeBookingStatus)
 
-
-
-
-
 module.exports = router

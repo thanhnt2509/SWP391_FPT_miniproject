@@ -37,7 +37,6 @@ module.exports = {
         try {
             const email = req.payload.email;
             const {
-                user_id,
                 bird_name,
                 bird_type,
                 age,

@@ -13,6 +13,4 @@ router.route('/:post_id')
     .put(verifyLogin, verifyAdmin, post.updatePostByID)
     .delete(verifyLogin, verifyAdmin, post.deletePostByID)
 
-
-
 module.exports = router

@@ -16,15 +16,15 @@ const { verifyLogin } = require('../middlewares/verifyLogin.mdw');
 // router
 const router = express.Router();
 
-// base data
+// public routes
 router.use('/post', post);
 router.use('/auth', auth);
 router.use('/service', service);
-
-router.use('/account', verifyLogin, account);
 router.use('/bird', bird);
-router.use('/booking', verifyLogin, booking);
 
+// login required routes
+router.use('/account', verifyLogin, account);
+router.use('/booking', verifyLogin, booking);
 router.use('/report', verifyLogin, report);
 router.use('/reportDetail', verifyLogin, reportDetail);
 router.use('/bill', verifyLogin, bill);

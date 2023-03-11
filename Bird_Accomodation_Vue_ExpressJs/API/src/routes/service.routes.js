@@ -19,5 +19,4 @@ router.route('/:service_id')
     .put(verifyLogin, verifyAdmin, service.updateServiceById)
     .delete(verifyLogin, verifyAdmin, service.deleteServiceById);
 
-
 module.exports = router;
