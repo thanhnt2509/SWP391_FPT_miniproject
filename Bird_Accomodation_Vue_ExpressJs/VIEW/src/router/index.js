@@ -12,11 +12,12 @@ import Profile from "../components/modules/account/Profile.vue";
 import BirdList from "../components/modules/bird/BirdList.vue";
 import Transaction from "../components/modules/account/Transaction.vue";
 import Report from "../components/modules/report/Report.vue"
-import Bill from "../components/modules/bill/Bill.vue"
+import Bill from "../components/modules/account/Bill.vue"
 
-import Manager from "../components/modules/manager/Manage_Transaction.vue";
-import ManagerService from "../components/modules/manager/Manage_Service.vue";
+import ManageTransaction from "../components/modules/manager/Manage_Transaction.vue";
+import ManageService from "../components/modules/manager/Manage_Service.vue";
 import ManageReport from "../components/modules/manager/Manage_Report.vue";
+import ManagerPage from "../components/modules/manager/ManagerPage.vue";
 
 import store from '../components/store/index';
 
@@ -98,15 +99,19 @@ const router = createRouter({
 		{
 			path: "/report/:booking_id",
 			name: "report history",
-			component: Report
+			component: Report,
+			beforeEnter: isAuth
 		},
 		{
 			path: "/bill/:booking_id",
 			name: "get bill by booking_id",
-			component: Bill
+			component: Bill,
+			beforeEnter: isAuth
 		},
 		{
 			path: "/account",
+			name: "account",
+			beforeEnter: isAuth,
 			children: [
 				{
 					path: "transaction",
@@ -143,12 +148,17 @@ const router = createRouter({
 				{
 					path: "/manager",
 					name: "manager",
-					component: Manager,
+					component: ManagerPage,
+				},
+				{
+					path: "transaction",
+					name: "transaction",
+					component: ManageTransaction,
 				},
 				{
 					path: "service",
 					name: "crud service",
-					component: ManagerService
+					component: ManageService
 				},
 				{
 					path: "report/:booking_id",

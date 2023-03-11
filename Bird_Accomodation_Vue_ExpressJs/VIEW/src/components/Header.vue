@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
+      <nav class="navbar is-light" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <router-link class="navbar-item" to="/">
             <img src="../../public/images/bird-oasis.png" width="130" height="28" />
@@ -34,17 +34,13 @@
             </div>
           </div>
           <div class="navbar-start" v-if="getUser?.role === 1">
+            <router-link class="navbar-item" to="/manager">Manager page</router-link>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 <i class="fa-solid fa-bars"></i>
               </a>
-
               <div class="navbar-dropdown">
-                <div>
-                  <a class="navbar-item" href="#" name="manager">Manage Transaction</a>
-                  <router-link class="navbar-item" to="/manager/service">Manage Service</router-link>
-                </div>
-                <hr class="navbar-divider" />
+                <!-- <hr class="navbar-divider" /> -->
                 <a class="navbar-item">
                   <a href="#" @click="logout">Logout</a>
                 </a>
