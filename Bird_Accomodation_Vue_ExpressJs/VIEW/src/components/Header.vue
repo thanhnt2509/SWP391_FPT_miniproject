@@ -13,7 +13,7 @@
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
             <router-link class="navbar-item" to="/about">About</router-link>
             <router-link class="navbar-item" to="/post">Post</router-link>
-            <a href="#" class="navbar-item" name="booking" @click="patchLogin">Booking</a>
+            <router-link class="navbar-item" to="/booking">Booking</router-link>
 
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
@@ -41,7 +41,7 @@
 
               <div class="navbar-dropdown">
                 <div>
-                  <a class="navbar-item" href="#" name="manager" @click="patchLogin">Manage Transaction</a>
+                  <a class="navbar-item" href="#" name="manager">Manage Transaction</a>
                   <router-link class="navbar-item" to="/manager/service">Manage Service</router-link>
                 </div>
                 <hr class="navbar-divider" />
@@ -79,10 +79,6 @@ export default {
     ...mapGetters(["getUser"]),
   },
   methods: {
-    patchLogin(evt) {
-      if (this.getUser) this.$router.push("/" + evt.target.name);
-      else this.$router.push("/login");
-    },
     logout() {
       this.$store.dispatch("logout");
       this.$router.push("/");
