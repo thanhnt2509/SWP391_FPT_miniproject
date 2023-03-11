@@ -10,32 +10,35 @@ module.exports = {
         try {
             //Get date_from, date_to
             let getBooking = await transaction.request()
-                .input("booking_id", config.sql.Int, booking_id)
+                .input("booking_id", con.Int, booking_id)
                 .query("SELECT date_from, date_to FROM Booking WHERE booking_id = @booking_id");
-            let date_from = new Date(getBooking.recordset[0].date_from);
-            let date_to = new Date(getBooking.recordset[0].date_to);
+            let date_from = dateFormat(getBooking.recordset[0].date_from);
+            let date_to = dateFormat(getBooking.recordset[0].date_to);
             // Get Report by date
             let reportDetails = [];
-            for (let d = new Date(date_from); d <= date_to; d.setDate(d.getDate() + 1)) {
-                // Get Service [{service_name, service_report_image, service_report_text, booked_price}]
+            let d = new Date(date_from);
 
+            // console.log(d);
+            while (d <= new Date(date_to)) {
+                console.log('date_from:', date_from, 'date_to:', date_to);
+                console.log(d);
                 let getServices = await transaction.request()
-                    .input("booking_id", config.sql.Int, booking_id)
-                    .input("date", config.sql.Date, new Date(d))
-                    .query(`SELECT s.name AS service_name, s.service_id, dr.service_report_text, dr.service_report_image, bd.booked_price, date
+                    .input("booking_id", con.Int, booking_id)
+                    .input("date", con.Date, new Date(d))
+                    .query(`SELECT s.name AS service_name, dr.service_report_text, dr.service_report_image, bd.booked_price, date
                             FROM BookingDetail bd
                             JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id
                             JOIN Service s ON bd.service_id = s.service_id
                             WHERE bd.booking_id = @booking_id AND dr.date = @date`);
                 let services = getServices.recordset;
+                console.log(services, d);
 
-                let date = new Date(d.getTime()).toISOString().slice(0, 10);
+                let date = dateFormat(d);
 
                 if (services.length > 0) {
                     let serviceDetails = {
                         date: date,
                         services: services.map(service => ({
-                            service_id: service.service_id,
                             service_name: service.service_name,
                             service_report_text: service.service_report_text,
                             service_report_image: service.service_report_image,
@@ -44,10 +47,15 @@ module.exports = {
                     };
                     reportDetails.push(serviceDetails);
                 }
-            }
-            date_from = date_from.toISOString().slice(0, 10);
-            date_to = date_to.toISOString().slice(0, 10);
 
+                d.setDate(d.getDate() + 1);
+            }
+            console.log('d after increment:', d);
+            date_from = dateFormat(date_from);
+            date_to = dateFormat(date_to);
+
+            await transaction.commit();
+            console.log(booking_id, date_from, date_to, reportDetails);
             return { booking_id, date_from, date_to, reportDetails };
         } catch (error) {
             await transaction.rollback();
