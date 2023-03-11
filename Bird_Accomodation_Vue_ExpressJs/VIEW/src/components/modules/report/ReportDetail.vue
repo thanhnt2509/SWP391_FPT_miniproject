@@ -4,7 +4,7 @@
         <!-- INFO: {{ reportServiceInfo }} -->
         <!-- edit report: {{ isEditable }} <br>
         prop report : {{ serviceReport }} -->
-        new report data : {{ newReport }}<hr>
+        <!-- new report data : {{ newReport }}<hr> -->
     </div>
 
     <div class="columns container main is-multiline">

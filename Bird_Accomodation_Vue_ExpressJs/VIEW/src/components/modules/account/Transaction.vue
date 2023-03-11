@@ -2,7 +2,6 @@
     <div class="container">
         <div class="columns">
             <h1 class="label content has-text-centered column is-four-fifths">Transaction List</h1>
-            
         </div>
         <TransactionList />
     </div>
@@ -14,13 +13,6 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     components: {
         TransactionList,
-    },
-    setup() {
-
-
-        return {
-            
-        };
     },
 });
 </script>

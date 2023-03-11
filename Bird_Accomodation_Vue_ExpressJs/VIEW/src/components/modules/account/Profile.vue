@@ -50,6 +50,9 @@
 import { mapGetters } from 'vuex'
 export default {
     name: 'Profile',
+    components: {
+        
+    },
     data() {
         return {
             fields: {

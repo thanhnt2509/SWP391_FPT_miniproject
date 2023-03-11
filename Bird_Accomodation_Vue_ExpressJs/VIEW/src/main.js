@@ -14,4 +14,6 @@ app.use(store);
 
 app.use(Antd);
 
-app.mount("#app");
+router.isReady().then(() => {
+    app.mount("#app");
+})

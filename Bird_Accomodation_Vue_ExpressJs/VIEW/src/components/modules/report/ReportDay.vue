@@ -1,6 +1,6 @@
 <template>
     <div class="container has-text-centered">
-       new report : {{ getNewReport }} <br>
+       <!-- new report : {{ getNewReport }} <br> -->
        <!-- report detail : {{ getReportDetail }} <br> -->
        <div v-if="!getReportDetail?.length">
             <h3 class="title">No report available</h3>
@@ -10,14 +10,14 @@
                 <!-- {{ date.services }} -->
                 <ReportDetail :serviceReport="date.services" />
             </a-tab-pane>
-            <!-- v-if="getUser.role === 1" -->
-            <a-tab-pane  :key="getReportDetail?.length">
+            <a-tab-pane v-if="getUser?.role === 1" :key="getReportDetail?.length">
                 <template #tab>
                     <span>
                         <i style="padding-right: 10px;" class="fa-solid fa-plus"></i>
                         {{ new Date().toISOString().slice(0, 10) }}
                     </span>
                 </template>
+                <!-- get new report test :{{ getNewReport }} -->
                 <ReportDetail :isEditable="true" :serviceReport="getNewReport"/>
             </a-tab-pane>
         </a-tabs>
@@ -32,13 +32,6 @@ export default {
     data() {
         return {
             activeKey: 1,
-            empty_services: [
-                {
-                    service_name: 'Service name',
-                    service_report_text: 'Service content',
-                    service_report_image: '/images/big-treehouse.jpg'
-                }
-            ]
         };
     },
     computed: {

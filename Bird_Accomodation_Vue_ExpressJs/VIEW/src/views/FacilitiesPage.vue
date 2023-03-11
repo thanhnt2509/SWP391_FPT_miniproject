@@ -4,37 +4,37 @@
       <div class="tile is-vertical is-8">
         <div class="tile">
           <div class="tile is-parent is-vertical">
-            <img class="tile is-child notification is-primary" src="../../public/images/avatar_user.jpg" alt="">
-            <img class="tile is-child notification is-warning" src="../../public/images/bird-fac2.jpg" alt="">
+            <img class="tile is-child notification is-primary" src="/images/avatar_user.jpg" alt="">
+            <img class="tile is-child notification is-warning" src="/images/bird-fac2.jpg" alt="">
           </div>
           <div class="tile is-parent">
-            <img class="tile is-child notification is-info" src="../../public/images/bird-care.jpg" alt="">
+            <img class="tile is-child notification is-info" src="/images/bird-care.jpg" alt="">
           </div>
         </div>
         <div class="tile is-parent">
-          <img class="tile is-child notification is-danger" src="../../public/images/bird-housing.jpg" alt="">
+          <img class="tile is-child notification is-danger" src="/images/bird-housing.jpg" alt="">
         </div>
       </div>
       <div class="tile is-parent">
-        <img class="tile is-child notification is-success" src="../../public/images/2_parrot.jpg" alt="">
+        <img class="tile is-child notification is-success" src="/images/2_parrot.jpg" alt="">
       </div>
     </div>
     <div class="tile is-ancestor">
       <div class="tile is-vertical  ">
         <div class="tile">
           <div class="tile is-parent">
-            <img class="tile is-child notification is-info" src="../../public/images/bird-boarding.jpg" alt="">
+            <img class="tile is-child notification is-info" src="/images/bird-boarding.jpg" alt="">
           </div>
           <div class="tile is-parent is-vertical">
-            <img class="tile is-child notification is-primary" src="../../public/images/Bird Photography.jpg" alt="">
-            <img class="tile is-child notification is-warning" src="../../public/images/bird-cardinal-nest-box.jpg" alt="">
+            <img class="tile is-child notification is-primary" src="/images/Bird Photography.jpg" alt="">
+            <img class="tile is-child notification is-warning" src="/images/bird-cardinal-nest-box.jpg" alt="">
           </div>
           <div class="tile is-parent">
-            <img class="tile is-child notification is-success" src="../../public/images/bird-train.jpg" alt="">
+            <img class="tile is-child notification is-success" src="/images/bird-train.jpg" alt="">
           </div>
         </div>
         <div class="tile is-parent">
-          <img class="tile is-child notification is-danger" src="../../public/images/big-treehouse.jpg" alt="">
+          <img class="tile is-child notification is-danger" src="/images/big-treehouse.jpg" alt="">
         </div>
       </div>
 

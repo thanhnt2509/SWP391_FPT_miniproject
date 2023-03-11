@@ -68,7 +68,7 @@ export default defineComponent({
         const store = useStore();
 
         const getAllServices = computed(() => {
-            return store.getters['serviceItems']
+            return store.getters['allServiceItems']
         });
 
         const data = getAllServices;

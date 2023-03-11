@@ -10,7 +10,7 @@ module.exports = {
             const accountList = result.map(item => ({
                 user_id: item.user_id,
                 email: item.email,
-                name: item.username,
+                name: item.name,
                 address: item.address,
                 phone: item.phone,
                 role: item.role,

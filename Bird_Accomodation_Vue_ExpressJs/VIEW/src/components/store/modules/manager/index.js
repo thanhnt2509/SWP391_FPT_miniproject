@@ -58,6 +58,10 @@ const actions = {
 		const response = await api.put(`/booking/${booking_id}/check_out`);
 		await this.dispatch("getAllBookings");
 	},
+	async changeAccountStatus({ commit }, { user_id, status }) {
+		const response = await api.patch(`/account/${user_id}`, { currentStatus: status });
+		await this.dispatch("getAllUsers");
+	},
 	clearState({ commit }) {
 		commit("UPDATE_SERVICE_ITEM", []);
 		commit("UPDATE_USER_ITEM", []);
