@@ -12,19 +12,20 @@
 
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'status'">
-                {{ record.status === 1 ? 'Active' : 'Inactive' }}
+                <a-tag :color="record.status === 1 ? 'green' : 'red'">
+                    {{ record.status === 1 ? 'Active' : 'Inactive' }}
+                </a-tag>
             </template>
             <template v-if="column.key === 'role'">
                 {{ record.role === 1 ? 'Admin' : 'Customer' }}
             </template>
             <template v-else-if="column.key === 'action'">
-                <span v-if="record.role === 0">
-                    <a href=""><button style="width: 80px;" class="button is-info">Profile</button></a>
-                    <a href="">
-                        <button v-if="record.status === 1" class="button is-danger">Ban</button>
-                        <button v-else class="button is-danger">UnBan</button>
-                    </a>
-
+                <span v-if="record.role === CONST.account_role['CUSTOMER']">
+                    <!-- <button style="width: 80px; margin-right: 10px;" class="button is-info">Profile</button> -->
+                    <button @click="changeAccountStatus(record.user_id, CONST.account_status['ACTIVE'])"
+                        v-if="record.status === 1" class="button is-danger">Ban</button>
+                    <button @click="changeAccountStatus(record.user_id, CONST.account_status['BANNED'])" v-else
+                        class="button is-success">UnBan</button>
                 </span>
             </template>
         </template>
@@ -35,6 +36,7 @@
 import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from 'vuex';
+import CONST from "./CONST";
 const columns = ref([
     {
         name: "UserId",
@@ -45,6 +47,11 @@ const columns = ref([
         title: "Email",
         dataIndex: "email",
         key: "email",
+    },
+    {
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
     },
     {
         title: "Address",
@@ -89,10 +96,17 @@ export default defineComponent({
         });
 
         const data = getAllUserItems;
+
+        const changeAccountStatus = (user_id, status) => {
+            store.dispatch('changeAccountStatus', { user_id, status });
+            // console.log(`userId: ${userId}, status: ${status}`);
+        }
         return {
             data,
             columns,
-            getAllUserItems
+            getAllUserItems,
+            CONST,
+            changeAccountStatus
         };
     },
 });
