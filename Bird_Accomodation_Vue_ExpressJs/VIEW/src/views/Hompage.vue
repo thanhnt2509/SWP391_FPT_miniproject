@@ -25,7 +25,8 @@
                 <div class="">
                     <h1 class="title">Bird Oasis</h1>
                 </div>
-                <p style="padding-left: 17%; padding-right: 17%;">Bird Oais is the pethouse for bird, provide various service and safe place for bird accommodation
+                <p style="padding-left: 17%; padding-right: 17%;">Bird Oais is the pethouse for bird, provide various
+                    service and safe place for bird accommodation
                     With the well-trainer staff have experience in take care of various types of bird, we ensure that we
                     will
                     bring the best place and service for your bird</p>
@@ -55,7 +56,7 @@
         </div>
 
         <!-- Highlight section -->
-        <div style="margin: 50px">
+        <div style="margin: 50px;">
             <div>
                 <div>
                     <h1 style="margin-bottom: 41px;" class="title has-text-centered">What Sets Us Apart</h1>
@@ -78,9 +79,12 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <!-- test post page added -->
-        <PostPage />
+        <!-- <PostPage /> -->
+
+        
 
         <!-- feedback from user -->
         <div>
@@ -219,7 +223,6 @@ export default {
     width: 100%;
 }
 
-.h_list {}
 
 .h_list_item {
     padding: 10px;
@@ -230,7 +233,6 @@ export default {
     font-size: x-large;
 }
 
-.h_list_item_content {}
 
 .services_content {
     background-color: bisque;
@@ -243,7 +245,6 @@ export default {
     border-bottom-right-radius: 100px;
 }
 
-.services_content_img {}
 
 .self_info {
     margin-top: 20px;

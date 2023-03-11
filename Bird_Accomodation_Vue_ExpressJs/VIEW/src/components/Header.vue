@@ -4,7 +4,7 @@
       <nav class="navbar is-light" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <router-link class="navbar-item" to="/">
-            <img src="../../public/images/bird-oasis.png" width="130" height="28" />
+            <img src="/images/bird-oasis.png" width="130" height="28" />
           </router-link>
         </div>
         <div class="navbar-menu">

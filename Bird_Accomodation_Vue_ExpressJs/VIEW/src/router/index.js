@@ -7,6 +7,7 @@ import Login from "../views/LoginPage.vue";
 import Register from "../views/RegisterPage.vue";
 import Booking from "../views/BookingPage.vue";
 import Post from "../views/PostPage.vue";
+import NotFoundPage from "../views/NotFoundPage.vue";
 
 import Profile from "../components/modules/account/Profile.vue";
 import BirdList from "../components/modules/bird/BirdList.vue";
@@ -21,30 +22,31 @@ import ManagerPage from "../components/modules/manager/ManagerPage.vue";
 
 import store from '../components/store/index';
 
+
 // guard for checking if the user is authenticated
 const isAdmin = (to, from, next) => {
 	const userRole = store.getters.getUser?.role;
 	if (isAuth && userRole === 1) {
-	  // user is authenticated and has the admin role
-	  next();
+		// user is authenticated and has the admin role
+		next();
 	} else {
-	  // user is not authenticated or does not have the admin role
-	  alert("You must login to access this page")
-	  next('/login'); // redirect the user to the login page
+		// user is not authenticated or does not have the admin role
+		alert("You must login to access this page")
+		next('/login'); // redirect the user to the login page
 	}
-  };
+};
 const isAuth = (to, from, next) => {
 	const userRole = store.getters.getUser?.role;
 	if (store.getters.getUser) {
-	  // user is authenticated and has the admin role
-	  next();
+		// user is authenticated and has the admin role
+		next();
 	} else {
-	  // user is not authenticated or does not have the admin role
-	  alert("You must login to access this page")
-	  next('/login'); // redirect the user to the login page
+		// user is not authenticated or does not have the admin role
+		alert("You must login to access this page")
+		next('/login'); // redirect the user to the login page
 	}
-  };
-  
+};
+
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +65,10 @@ const router = createRouter({
 			path: "/about",
 			name: "about",
 			component: About
+		},
+		{
+			path: '/:catchAll(.*)',
+			component: NotFoundPage // add your own not-found component here
 		},
 		{
 			path: "/login",
@@ -139,31 +145,12 @@ const router = createRouter({
 		{
 			path: "/manager",
 			name: "manager",
-			meta: {
-				requireAuth: true,
-				requiresAdmin: true
-			},
 			beforeEnter: isAdmin,
 			children: [
 				{
 					path: "/manager",
 					name: "manager",
 					component: ManagerPage,
-				},
-				{
-					path: "transaction",
-					name: "transaction",
-					component: ManageTransaction,
-				},
-				{
-					path: "service",
-					name: "crud service",
-					component: ManageService
-				},
-				{
-					path: "report/:booking_id",
-					name: "update report on booking",
-					component: ManageReport
 				},
 			]
 		}
