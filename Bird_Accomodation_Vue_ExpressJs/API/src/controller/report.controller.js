@@ -53,12 +53,18 @@ module.exports = {
             const booking_id = req.body.booking_id;
             const services = req.body.services;
             const result = await reportModel.addNewReport(booking_id, services);
-            if (result === 0) {
+
+            if (result < 0) {
                 throw new ErrorHandler(400, 'Failed to add new report');
-            } else {
+            } else if (result === 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: 'Add new report successfully'
+                });
+            } else {
+                res.status(200).send({
+                    exitcode: 0,
+                    message: 'Update report successfully'
                 });
             }
         } catch (error) {
