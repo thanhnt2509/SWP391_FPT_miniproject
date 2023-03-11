@@ -41,6 +41,10 @@ export default {
         },
         onPublishReportClick(booking_id) {
             this.$store.dispatch('publishNewReport', booking_id)
+            this.$store.dispatch('getReport', {
+                user_id: this.$store.getters.getUser.user_id,
+                booking_id: this.$route.params.booking_id
+            })
         }
     },
     created() {

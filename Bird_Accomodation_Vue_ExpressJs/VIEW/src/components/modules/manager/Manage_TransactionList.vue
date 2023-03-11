@@ -164,8 +164,5 @@ export default defineComponent({
     computed: {
 
     },
-    created() {
-        this.$store.dispatch('getAllBookings');
-    },
 });
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="container content">
+        <h1 class="label has-text-centered">Manage Account</h1>
         <Manage_AccountList />
     </div>
 </template>

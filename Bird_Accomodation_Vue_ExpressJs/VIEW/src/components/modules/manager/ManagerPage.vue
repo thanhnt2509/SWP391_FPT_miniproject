@@ -12,5 +12,11 @@ export default {
     components: {
         Manager_menu
     },
+    created() {
+        this.$store.dispatch('getAllServices');
+        this.$store.dispatch('getAllUsers');
+        this.$store.dispatch('getAllBookings');
+
+    }
 }
 </script>

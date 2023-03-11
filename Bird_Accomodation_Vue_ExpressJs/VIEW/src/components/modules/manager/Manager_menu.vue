@@ -30,6 +30,7 @@
                 <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
                     <Manage_Transaction v-if="selectedKeys == 'transaction'" />
                     <Manage_Service v-if="selectedKeys == 'service'" />
+                    <Manage_Account v-if="selectedKeys == 'account'" />
                 </a-layout-content>
             </a-layout>
         </a-layout-content>
@@ -40,6 +41,7 @@ import { AccountBookOutlined, VideoCameraOutlined, SolutionOutlined, FundViewOut
 import { defineComponent, ref } from 'vue';
 import Manage_Transaction from './Manage_Transaction.vue';
 import Manage_Service from './Manage_Service.vue';
+import Manage_Account from './Manage_Account.vue';
 export default defineComponent({
     components: {
         AccountBookOutlined, 
@@ -48,6 +50,7 @@ export default defineComponent({
         FundViewOutlined,
         Manage_Transaction,
         Manage_Service,
+        Manage_Account
     },
     setup() {
         return {
