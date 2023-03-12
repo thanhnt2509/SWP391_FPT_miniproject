@@ -27,7 +27,7 @@ export default {
         }
     },
     components: {
-        ReportDay
+        ReportDay,
     },
     computed: {
         ...mapGetters({
@@ -45,6 +45,8 @@ export default {
                 user_id: this.$store.getters.getUser.user_id,
                 booking_id: this.$route.params.booking_id
             })
+            // console.log(`booking_id: ${booking_id}`);
+            this.$router.push(`/manager/report/${booking_id}`)
         }
     },
     created() {
