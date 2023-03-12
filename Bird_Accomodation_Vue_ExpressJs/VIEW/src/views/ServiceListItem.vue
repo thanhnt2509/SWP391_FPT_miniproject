@@ -25,12 +25,14 @@ export default {
     height: 500px;
     background-size: cover;
     border-collapse: collapse;
+    position: relative;
 }
 
 .no-active-text {
     position: absolute;
-    top: 830px;
-    z-index: 1;
+    top: 448px;
+    right: 96px;
+    z-index: 999;
     width: 293px;
     text-align: center;
 }
