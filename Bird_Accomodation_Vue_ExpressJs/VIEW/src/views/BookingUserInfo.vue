@@ -36,7 +36,7 @@
                 <td>Check-out</td>
                 <td><input v-model="fields.date_to" type="date"></td>
             </tr>
-            {{ getNewBooking }}
+            <!-- {{ getNewBooking }} -->
         </table>
     </div>
 </template>

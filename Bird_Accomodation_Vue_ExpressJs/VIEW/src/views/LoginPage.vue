@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { message } from 'ant-design-vue';
 export default {
     name: 'Login',
     data() {
@@ -72,12 +73,29 @@ export default {
     },
     methods: {
         submitForm(evt) {
-            evt.preventDefault();
-            this.loading = true;
-            this.$store.dispatch('login', this.fields)
-            this.loading = false;
-            this.$router.push("/");
-            console.log(this.fields);
+            // validation fields
+            if (this.fields.email == '' || this.fields.password == '') {
+                message.error('Please fill in all fields');
+                return;
+            } else {
+                evt.preventDefault();
+                this.loading = true;
+                this.$store.dispatch('login', this.fields).then(res => {
+                    if (res.status == 200) {
+                        this.loading = false;
+                        message.success('Login successfully');
+                        this.$router.push('/home');
+                    } else {
+                        this.loading = false;
+                        this.isIncorrect = true;
+                        message.error('Incorrect email or password');
+                    }
+                }).catch(err => {
+                    this.loading = false;
+                    this.isIncorrect = true;
+                    message.error('Incorrect email or password');
+                })
+            }
         }
     }
 }
@@ -95,12 +113,15 @@ export default {
     background-blend-mode: darken;
     background-size: cover;
 }
-.form_input{
+
+.form_input {
     background-color: rgb(255, 255, 255, 0.2);
     padding: 10px;
     border-radius: 20px;
 }
-.form_input h1, p, label{
+
+.form_input h1,
+p,
+label {
     color: white;
-}
-</style>
+}</style>

@@ -21,7 +21,7 @@
                 </tr>
             </table>
         </div>
-        Service selected: {{ service_selected }}
+        <!-- Service selected: {{ service_selected }} -->
     </div>
 </template>
 

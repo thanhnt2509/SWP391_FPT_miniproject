@@ -55,6 +55,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { message } from 'ant-design-vue';
 export default {
     name: 'Birdregister',
     data() {
@@ -76,8 +77,19 @@ export default {
     methods: {
         submitForm(evt) {
             evt.preventDefault();
-            this.fields.user_id = this.$store.getters.getUser.user_id
-            this.$store.dispatch('addNewBird', this.fields)
+            // check validation
+            if (this.fields.bird_name == '') {
+                message.error('Please enter bird name');
+                return;
+            } else {
+                try {
+                    this.fields.user_id = this.$store.getters.getUser.user_id
+                    this.$store.dispatch('addNewBird', this.fields)
+                    message.success('Bird added successfully');
+                } catch (error) {
+                    message.error('Something went wrong');
+                }
+            }
         }
     }
 }

@@ -42,7 +42,7 @@
             </template>
         </a-table>
     </div>
-    {{ getBooking }}
+    <!-- {{ getBooking }} -->
 </template>
 <script>
 import { SmileOutlined, DownOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';

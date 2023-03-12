@@ -42,7 +42,7 @@
                         <td>Description</td>
                         <td>{{ bird_selected?.description || '' }}</td>
                     </tr>
-                    Bird selected: {{ bird_selected.bird_id }}
+                    <!-- Bird selected: {{ bird_selected.bird_id }} -->
                 </table>
             </div>
         </div>

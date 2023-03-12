@@ -16,7 +16,8 @@
             <BookingServiceSelect />
         </div>
         <div class="has-text-centered">
-            <button @click="submitForm" class="button is-dark">Book now</button>
+            <!-- <button @click="submitForm" class="button is-dark">Book now</button> -->
+            <a-button class="button is-dark" type="primary" @click="submitForm">Book now</a-button>
         </div>
     </div>
 </template>
@@ -27,41 +28,52 @@ import BookingUserInfo from './BookingUserInfo.vue';
 import BookingBirdSelect from './BookingBirdSelect.vue';
 import BookingServiceSelect from './BookingServiceSelect.vue';
 import { mapGetters } from 'vuex';
+import { message } from 'ant-design-vue';
 export default {
     name: 'Booking',
     data() {
         return {
-
+            isSuccess: false,
         }
+    },
+    setup() {
+
     },
     computed: {
         ...mapGetters(['getUser', 'getNewBooking', 'newBookingisOk']),
     },
     methods: {
         submitForm() {
-            if (!this.newBookingisOk) alert(`Please fill all the information!`);
-            else {
-                const { bird_selected_id, service_selected,
-                    date_from, date_to } = this.getNewBooking;
-
-                const booking = {
-                    user_id: this.getUser.user_id,
-                    bird_id: bird_selected_id,
-                    services: service_selected,
-                    date_from: date_from,
-                    date_to: date_to,
-                }
-
-                console.log(booking);
-                this.$store.dispatch('createNewBooking', booking);
-                // sync data
-                this.$store.dispatch('getAllBooking');
-                this.$store.dispatch('getAllBirds');
-
-                // redirect to booking page
-                this.$router.push('/booking');
+            if (!this.newBookingisOk) {
+                message.error('Please select all fields !');
             }
-        }
+            else {
+                try {
+                    const { bird_selected_id, service_selected,
+                        date_from, date_to } = this.getNewBooking;
+
+                    const booking = {
+                        user_id: this.getUser.user_id,
+                        bird_id: bird_selected_id,
+                        services: service_selected,
+                        date_from: date_from,
+                        date_to: date_to,
+                    }
+
+                    console.log(booking);
+                    this.$store.dispatch('createNewBooking', booking);
+                    // sync data
+                    this.$store.dispatch('getAllBooking');
+                    this.$store.dispatch('getAllBirds');
+
+                    message.success('Booking success !');
+                    // redirect to booking page
+                    this.$router.push('/booking');
+                } catch (error) {
+                    message.error('Something went wrong !');
+                }
+            }
+        },
     },
     components: {
         // Bird_Info,

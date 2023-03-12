@@ -22,10 +22,19 @@
             <template v-else-if="column.key === 'action'">
                 <span v-if="record.role === CONST.account_role['CUSTOMER']">
                     <!-- <button style="width: 80px; margin-right: 10px;" class="button is-info">Profile</button> -->
-                    <button @click="changeAccountStatus(record.user_id, CONST.account_status['ACTIVE'])"
-                        v-if="record.status === 1" class="button is-danger">Ban</button>
-                    <button @click="changeAccountStatus(record.user_id, CONST.account_status['BANNED'])" v-else
-                        class="button is-success">UnBan</button>
+
+                    <a-popconfirm v-if="record.status === 1" title="Are you sure to ban this user ?" ok-text="Yes"
+                        cancel-text="No" @confirm="changeAccountStatus(record.user_id, CONST.account_status['ACTIVE'])"
+                        @cancel="">
+                        <button class="button is-danger">Ban</button>
+                    </a-popconfirm>
+
+                    <a-popconfirm v-if="record.status === 0" title="Are you sure to ban this user ?" ok-text="Yes"
+                        cancel-text="No" @confirm="changeAccountStatus(record.user_id, CONST.account_status['BANNED'])"
+                        @cancel="">
+                        <button class="button is-success">UnBan</button>
+                    </a-popconfirm>
+
                 </span>
             </template>
         </template>

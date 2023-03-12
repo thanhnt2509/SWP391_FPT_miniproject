@@ -29,16 +29,16 @@
         <div class="field">
             <label class="label">Phone</label>
             <div class="control">
-                <input  class="input is-success" :disabled="!isEdit" type="tel" v-model="fields.phone">
+                <input class="input is-success" :disabled="!isEdit" type="tel" v-model="fields.phone">
             </div>
         </div>
 
         <div class="field">
-                <label class="label">Address</label>
-                <div class="control">
-                    <input class="input is-success" :disabled="!isEdit" type="text" v-model="fields.address">
-                </div>
+            <label class="label">Address</label>
+            <div class="control">
+                <input class="input is-success" :disabled="!isEdit" type="text" v-model="fields.address">
             </div>
+        </div>
 
         <div>
             <button class="button is-primary" @click="submitForm">Submit</button>
@@ -51,7 +51,7 @@ import { mapGetters } from 'vuex'
 export default {
     name: 'Profile',
     components: {
-        
+
     },
     data() {
         return {

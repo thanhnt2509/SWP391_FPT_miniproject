@@ -18,8 +18,7 @@
                     </span>
                 </template>
                 <!-- get new report test :{{ getNewReport }} -->
-                <!-- get report detail :{{ getReportDetail[getReportDetail.length - 1] }} -->
-                <ReportDetail :isEditable="true" :serviceReport="getNewReport" :origin="getReportDetail[getReportDetail.length - 1]"/>
+                <ReportDetail :isEditable="true" :serviceReport="getNewReport"/>
             </a-tab-pane>
         </a-tabs>
     </div>

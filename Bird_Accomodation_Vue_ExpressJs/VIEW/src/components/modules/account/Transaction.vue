@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="columns">
-            <h1 class="label content has-text-centered column is-four-fifths">Transaction List</h1>
+        <div class="">
+            <h1 class="title content has-text-centered">Transaction List</h1>
         </div>
         <TransactionList />
     </div>

@@ -44,7 +44,7 @@
                     <div class="field">
                         <label class="label">Address</label>
                         <div class="control">
-                            <input class="input is-success" type="text" placeholder="Phone">
+                            <input class="input is-success" type="text" placeholder="Address">
                         </div>
                     </div>
 

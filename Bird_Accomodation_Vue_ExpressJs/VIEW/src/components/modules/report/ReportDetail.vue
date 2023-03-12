@@ -5,7 +5,6 @@
         <!-- edit report: {{ isEditable }} <br>
         prop report : {{ serviceReport }} -->
         <!-- new report data : {{ newReport }} -->
-        <!-- origin report data : {{ origin }} -->
         <hr>
     </div>
 
@@ -24,7 +23,7 @@
     </div>
     <!-- carousel images -->
     <section>
-        <a-carousel class="listImg" :dot-position="'top'">
+        <a-carousel autoplay class="listImg" :dot-position="'top'">
             <img class="reportImg" v-for="img in reportImagesLink" :src="img.img" alt="">
         </a-carousel>
     </section>
@@ -55,11 +54,6 @@ export default {
             required: false,
             default: false
         },
-        origin: {
-            type: Object,
-            required: false,
-            default: null
-        }
     },
     computed: {
 
