@@ -53,17 +53,18 @@
 </template>
 
 <script>
+import { message } from 'ant-design-vue';
 export default {
     name: 'Login',
     data() {
         return {
             fields: {
                 // admin login
-                // email: 'U1@gmail.com',
-                // password: '12345',
+                email: 'U1@gmail.com',
+                password: '12345',
                 // user login
-                email: 'U2@gmail.com',
-                password: '123456',
+                // email: 'U2@gmail.com',
+                // password: '123456',
                 remember_me: false
             },
             isIncorrect: false,
@@ -72,12 +73,30 @@ export default {
     },
     methods: {
         submitForm(evt) {
-            evt.preventDefault();
-            this.loading = true;
-            this.$store.dispatch('login', this.fields)
-            this.loading = false;
-            this.$router.push("/");
-            console.log(this.fields);
+            // validation fields
+            if (this.fields.email == '' || this.fields.password == '') {
+                message.error('Please fill in all fields');
+                return;
+            } else {
+                evt.preventDefault();
+                this.loading = true;
+                try {
+                    const res = this.$store.dispatch('login', this.fields)
+                    this.loading = false;
+                    message.success('Login successfully');
+                    this.$router.push('/');
+                    // if (res.status == 200) {
+                    // } else {
+                        // this.loading = false;
+                        // this.isIncorrect = true;
+                        // message.error('Incorrect email or password');
+                    // }
+                } catch (err) {
+                    this.loading = false;
+                    this.isIncorrect = true;
+                    message.error('Incorrect email or password');
+                }
+            }
         }
     }
 }
@@ -95,12 +114,16 @@ export default {
     background-blend-mode: darken;
     background-size: cover;
 }
-.form_input{
+
+.form_input {
     background-color: rgb(255, 255, 255, 0.2);
     padding: 10px;
     border-radius: 20px;
 }
-.form_input h1, p, label{
+
+.form_input h1,
+p,
+label {
     color: white;
 }
 </style>

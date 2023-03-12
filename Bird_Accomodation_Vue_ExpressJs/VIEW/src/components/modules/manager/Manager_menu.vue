@@ -4,7 +4,8 @@
             <a-breadcrumb style="margin: 16px 0">
                 <a-breadcrumb-item>Home</a-breadcrumb-item>
                 <a-breadcrumb-item>Manage</a-breadcrumb-item>
-                <a-breadcrumb-item>{{`${selectedKeys[0].charAt(0).toUpperCase()}${selectedKeys[0].slice(1)}` }}</a-breadcrumb-item>
+                <a-breadcrumb-item>{{ `${selectedKeys[0].charAt(0).toUpperCase()}${selectedKeys[0].slice(1)}`
+                }}</a-breadcrumb-item>
             </a-breadcrumb>
             <a-layout style="padding: 24px 0; background: #fff">
                 <a-layout-sider width="200" style="background: #fff">
@@ -44,8 +45,8 @@ import Manage_Service from './Manage_Service.vue';
 import Manage_Account from './Manage_Account.vue';
 export default defineComponent({
     components: {
-        AccountBookOutlined, 
-        VideoCameraOutlined, 
+        AccountBookOutlined,
+        VideoCameraOutlined,
         SolutionOutlined,
         FundViewOutlined,
         Manage_Transaction,

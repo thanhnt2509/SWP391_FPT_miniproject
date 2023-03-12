@@ -4,7 +4,8 @@
         <!-- INFO: {{ reportServiceInfo }} -->
         <!-- edit report: {{ isEditable }} <br>
         prop report : {{ serviceReport }} -->
-        <!-- new report data : {{ newReport }}<hr> -->
+        <!-- new report data : {{ newReport }} -->
+        <hr>
     </div>
 
     <div class="columns container main is-multiline">
@@ -12,12 +13,17 @@
         <div class="column is-4 " v-for="report in serviceReport" :key="report.service_id">
             <h3>{{ report?.service_name }}</h3>
             <p v-if="!isEditable">{{ report?.service_report_text }}</p>
-            <p v-else><textarea :disabled="!$store.getters.getOnEditReport" @input="evt => onInputReportText(evt, report.service_id)" class="input textarea" placeholder="place a report" ></textarea></p>
+            <p v-else>
+                <textarea :disabled="!$store.getters.getOnEditReport"
+                    @input="evt => onInputReportText(evt, report.service_id)" class="input textarea"
+                    placeholder="place a report">
+                        </textarea>
+            </p>
         </div>
     </div>
     <!-- carousel images -->
     <section>
-        <a-carousel class="listImg" :dot-position="'top'">
+        <a-carousel autoplay class="listImg" :dot-position="'top'">
             <img class="reportImg" v-for="img in reportImagesLink" :src="img.img" alt="">
         </a-carousel>
     </section>
@@ -47,7 +53,7 @@ export default {
             type: Boolean,
             required: false,
             default: false
-        }
+        },
     },
     computed: {
 
@@ -61,6 +67,9 @@ export default {
             })
         }
     },
+    created() {
+        
+    }
 }
 </script>
 

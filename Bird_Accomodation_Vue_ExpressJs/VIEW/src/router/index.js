@@ -152,6 +152,11 @@ const router = createRouter({
 					name: "manager",
 					component: ManagerPage,
 				},
+				{
+					path: "report/:booking_id",
+					name: "CRU report",
+					component: ManageReport,
+				}
 			]
 		}
 	]

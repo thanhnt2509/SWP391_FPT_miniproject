@@ -19,8 +19,8 @@ module.exports = {
 
             // console.log(d);
             while (d <= new Date(date_to)) {
-                console.log('date_from:', date_from, 'date_to:', date_to);
-                console.log(d);
+                // console.log('date_from:', date_from, 'date_to:', date_to);
+                // console.log(d);
                 let getServices = await transaction.request()
                     .input("booking_id", con.Int, booking_id)
                     .input("date", con.Date, new Date(d))
@@ -30,7 +30,7 @@ module.exports = {
                             JOIN Service s ON bd.service_id = s.service_id
                             WHERE bd.booking_id = @booking_id AND dr.date = @date`);
                 let services = getServices.recordset;
-                console.log(services, d);
+                // console.log(services, d);
 
                 let date = dateFormat(d);
 
@@ -49,12 +49,12 @@ module.exports = {
 
                 d.setDate(d.getDate() + 1);
             }
-            console.log('d after increment:', d);
+            // console.log('d after increment:', d);
             date_from = dateFormat(date_from);
             date_to = dateFormat(date_to);
 
             await transaction.commit();
-            console.log(booking_id, date_from, date_to, reportDetails);
+            // console.log(booking_id, date_from, date_to, reportDetails);
             return { booking_id, date_from, date_to, reportDetails };
         } catch (error) {
             await transaction.rollback();
@@ -118,7 +118,7 @@ module.exports = {
                 }
             }
             await transaction.commit();
-            console.log(reportCount);
+            // console.log(reportCount);
             return reportCount;
         } catch (error) {
             console.log(error);

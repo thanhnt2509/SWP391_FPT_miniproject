@@ -41,33 +41,61 @@
                 </span>
             </template>
             <template v-else-if="column.key === 'action'">
+                <!-- approve and reject booking -->
                 <span v-if="bookingState[record.status].state === 'Pending'">
-                    <button @click="approveBooking(record.booking_id)" class="button is-success"><i
-                            style="padding-right: 10px" class="fa-solid fa-circle-check"></i>Approve</button>
+                    <a-popconfirm title="Are you sure to approve this booking ?" ok-text="Yes" cancel-text="No"
+                        @confirm="approveBooking(record.booking_id)" @cancel="">
+                        <button class="button is-success"><i style="padding-right: 10px"
+                                class="fa-solid fa-circle-check"></i>Approve</button>
+                    </a-popconfirm>
+
                     <a-divider type="vertical" />
-                    <button @click="rejectBooking(record.booking_id)" class="button is-danger"><i
-                            style="padding-right: 10px" class="fa-solid fa-circle-xmark"></i>Reject</button>
+
+
+                    <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
+                        @confirm="rejectBooking(record.booking_id)" @cancel="">
+                        <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
+                        <button class="button is-danger"><i style="padding-right: 10px"
+                                class="fa-solid fa-circle-xmark"></i>Reject</button>
+                    </a-popconfirm>
                 </span>
+                <!-- check-in  -->
                 <span v-else-if="bookingState[record.status].state === 'Approved'">
-                    <button @click="checkin_Booking(record.booking_id)" class="button is-info"><i
-                            style="padding-right: 10px" class="fa-solid fa-calendar-check"></i>Check-in</button>
+
+                    <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
+                        @confirm="checkin_Booking(record.booking_id)" @cancel="">
+                        <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
+                        <button class="button is-info"><i style="padding-right: 10px"
+                                class="fa-solid fa-calendar-check"></i>Check-in</button>
+                    </a-popconfirm>
                 </span>
+
+                <!-- view bill  -->
                 <span v-else-if="bookingState[record.status].state === 'Completed'">
                     <router-link :to="`/bill/${record.booking_id}`">
                         <button class="button is-link is-light"><i style="padding-right: 10px"
                                 class="fa-solid fa-wallet"></i>View Bill</button>
                     </router-link>
                 </span>
+
+                <!-- re-booking  -->
                 <span v-else-if="bookingState[record.status].state === 'Canceled'">
                     <button class="button is-warning"><i style="padding-right: 10px"
                             class="fa-brands fa-rev"></i>Re-booking</button>
                 </span>
+
+                <!-- update and check-out  -->
                 <span v-else-if="bookingState[record.status].state === 'On-going'">
-                    <router-link :to="`/manager/report/${record.booking_id}`"><button class="button is-link"><i style="padding-right: 10px"
-                                class="fa-solid fa-square-pen"></i>Update</button></router-link>
+                    <router-link :to="`/manager/report/${record.booking_id}`"><button class="button is-link"><i
+                                style="padding-right: 10px" class="fa-solid fa-square-pen"></i>Update</button></router-link>
                     <a-divider type="vertical" />
-                    <button @click="checkout_Booking(record.booking_id)" class="button is-primary"><i
-                            style="padding-right: 10px" class="fa-regular fa-credit-card"></i>Check-out</button>
+
+                    <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
+                        @confirm="checkout_Booking(record.booking_id)" @cancel="">
+                        <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
+                        <button class="button is-primary"><i style="padding-right: 10px"
+                                class="fa-regular fa-credit-card"></i>Check-out</button>
+                    </a-popconfirm>
                 </span>
             </template>
         </template>
@@ -78,9 +106,10 @@
     {{ bookingState }} -->
 </template>
 <script>
-import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
+import { SmileOutlined, DownOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue';
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
+import { message } from 'ant-design-vue';
 const columns = [{
     name: 'Booking ID',
     dataIndex: 'booking_id',
