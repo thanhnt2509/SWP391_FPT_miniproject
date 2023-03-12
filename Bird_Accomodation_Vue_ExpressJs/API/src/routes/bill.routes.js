@@ -10,4 +10,7 @@ const router = express.Router();
 router.route('/:booking_id')
     .get(bill.getBill)
 
+router.route('/new')
+    .post(bill.createBill)
+
 module.exports = router

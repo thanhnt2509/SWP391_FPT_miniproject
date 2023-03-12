@@ -1,6 +1,9 @@
 const config = require('../config/config');
 
 module.exports = {
+    createBill: async (data) => {
+
+    },
     getBill: async (booking_id) => {
         let con = await config.knexConnection();
         const returnData = await con('Bill AS b')

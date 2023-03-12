@@ -2,74 +2,68 @@ const config = require("../config/config");
 
 module.exports = {
     changeBookingStatus: async (bookingId, status) => {
-        let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("booking_id", con.Int, bookingId)
-            .input("status", con.Int, status)
-            .query("UPDATE [Booking] SET status = @status WHERE booking_id = @booking_id");
-        return (await returnData).rowsAffected[0];
+        let con = await config.knexConnection();
+        return await con('Booking')
+            .where('booking_id', bookingId)
+            .update({
+                status: status
+            }) || null;
     },
     getAllBookings: async () => {
-        let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .query("SELECT b.*, bi.bird_name, u.address, u.name \n" +
-                "FROM [Booking] AS b \n" +
-                "JOIN [Bird] AS bi ON b.bird_id = bi.bird_id \n" +
-                "JOIN [User] AS u ON b.user_id = u.user_id");
-        return (await returnData).recordset || null;
+        let con = await config.knexConnection();
+        const result = await con.select("b.*", "bi.bird_name", "u.address", "u.name")
+            .from("Booking as b")
+            .join("Bird as bi", "b.bird_id", "bi.bird_id")
+            .join("User as u", "b.user_id", "u.user_id");
+        return result || null;
     },
     getBookingServices: async (bookingId) => {
-        let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("booking_id", con.Int, bookingId)
-            .query("select s.service_id, s.name, s.price " +
-                "from Booking b join BookingDetail bd on b.booking_id = bd.booking_id " +
-                " join Service s on bd.service_id = s.service_id " +
-                "where b.booking_id = @booking_id");
-        return (await returnData).recordset || null;
+        let con = await config.knexConnection();
+        const result = await con.select("s.service_id", "s.name", "s.price", "s.description")
+            .from("Booking as b")
+            .join("BookingDetail as bd", "b.booking_id", "bd.booking_id")
+            .join("Service as s", "bd.service_id", "s.service_id")
+            .where({
+                "b.booking_id": bookingId
+            });
+        return result || null;
     },
     getMyBookings: async (email) => {
-        let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
-            .input("email", con.NVarChar, email)
-            .query("SELECT b.*, bi.bird_name, u.address FROM [Booking] b join [Bird] bi on b.bird_id = bi.bird_id join [User] u on b.user_id = u.user_id \n" +
-                "WHERE b.user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)");
-        return (await returnData).recordset || null;
+        let con = await config.knexConnection();
+        const result = await con.select("b.*", "bi.bird_name", "u.address")
+            .from("Booking as b")
+            .join("Bird as bi", "b.bird_id", "bi.bird_id")
+            .join("User as u", "b.user_id", "u.user_id")
+            .where("b.user_id", con.select("user_id").from("User").where({email: email}));
+        return result || null;
     },
     addNewBooking: async (data) => {
-        let con = await config.connection();
-        const transaction = new con.Transaction();
-        await transaction.begin();
         try {
-            await transaction.request()
-                .input('user_id', con.Int, data.user_id)
-                .input('bird_id', con.Int, data.bird_id)
-                .input('date_from', con.Date, data.date_from)
-                .input('date_to', con.Date, data.date_to)
-                .input('status', con.Int, data.status)
-                .query(`INSERT INTO [Booking] (user_id, bird_id, date_from, date_to, status) \n`
-                    + `VALUES (@user_id, @bird_id, @date_from, @date_to, @status)`);
-            const booking_id = await transaction.request()
-                .query(`SELECT TOP 1 booking_id FROM [Booking] ORDER BY booking_id DESC`);
-            for (let i = 0; i < data.services.length; i++) {
-                let booked_price = await transaction.request()
-                    .query(`SELECT price from [Service] WHERE service_id = ${data.services[i]}`);
-                await transaction.request()
-                    .input('booking_id', con.Int, booking_id.recordset[0].booking_id)
-                    .input('service_id', con.Int, data.services[i])
-                    .input('booked_price', con.Int, booked_price.recordset[0].price)
-                    .query(`INSERT INTO [BookingDetail] (booking_id, service_id, booked_price) \n`
-                        + `VALUES (@booking_id, @service_id, @booked_price)`);
-            }
-            await transaction.commit();
+            let con = await config.knexConnection();
+            await con.transaction(async (trx) => {
+                const booking_id = await trx('Booking').insert({
+                    user_id: data.user_id,
+                    bird_id: data.bird_id,
+                    date_from: data.date_from,
+                    date_to: data.date_to,
+                    status: data.status
+                }).returning('booking_id').then((id) => {
+                    return id[0].booking_id;
+                });
+                const services = await trx('Service')
+                    .select('service_id', 'price')
+                    .whereIn('service_id', data.services);
+                const bookingDetails = services.map((service) => {
+                    return {
+                        booking_id: booking_id,
+                        service_id: service.service_id,
+                        booked_price: service.price
+                    }
+                });
+                await trx('BookingDetail').insert(bookingDetails);
+            });
             return true;
         } catch (error) {
-            await transaction.rollback();
-
             return false;
         }
     },

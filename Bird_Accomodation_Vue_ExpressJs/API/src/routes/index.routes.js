@@ -21,6 +21,7 @@ router.use('/post', post);
 router.use('/auth', auth);
 router.use('/service', service);
 router.use('/bird', bird);
+router.use('/review', review);
 
 // login required routes
 router.use('/account', verifyLogin, account);

@@ -10,7 +10,6 @@ module.exports = {
             const booking_id = req.params.booking_id;
             const state = req.params.state;
             let status;
-            console.log(`booking_id: ${booking_id}, state: ${state}`);
             switch (state) {
                 case 'approve':
                     status = config.bookingStatus.APPROVED;
@@ -19,7 +18,7 @@ module.exports = {
                     status = config.bookingStatus.ON_GOING;
                     break;
                 case 'cancel':
-                    status = config.bookingStatus.CANCLED;
+                    status = config.bookingStatus.CANCELLED;
                     break;
                 case 'check_out':
                     status = config.bookingStatus.COMPLETED;
@@ -30,7 +29,7 @@ module.exports = {
                     });
             }
             const result = await bookingModel.changeBookingStatus(booking_id, status);
-            if (result.affectedRows === 0) {
+            if (result === null) {
                 res.status(404).send({
                     exitcode: 1,
                     message: 'Booking not found'
@@ -50,10 +49,10 @@ module.exports = {
     },
     cancelBooking: async (req, res, next) => {
         const { booking_id } = req.params.booking_id;
-        const cancelStatus = config.bookingStatus.CANCLED;
+        const cancelStatus = config.bookingStatus.CANCELLED;
         try {
             const result = await bookingModel.changeBookingStatus(booking_id, cancelStatus);
-            if (result.affectedRows === 0) {
+            if (result === null) {
                 res.status(404).send({
                     exitcode: 1,
                     message: 'Booking not found'
@@ -81,7 +80,7 @@ module.exports = {
             } else {
                 result = await bookingModel.getMyBookings(email);
             }
-            if (result.length === 0) {
+            if (result === null) {
                 throw new ErrorHandler(404, 'No booking found');
             } else {
                 const bookingList = result.map(item => ({
@@ -109,7 +108,7 @@ module.exports = {
         try {
             const booking_id = req.params.booking_id;
             const result = await bookingModel.getBookingServices(booking_id);
-            if (result.length === 0) {
+            if (result === null || result.length === 0) {
                 throw new ErrorHandler(404, 'No booking found');
             } else {
                 const serviceList = result.map(item => ({

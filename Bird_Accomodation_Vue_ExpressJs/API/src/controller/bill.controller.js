@@ -3,6 +3,13 @@ const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
 const { dateFormat } = require('../config/config');
 
 module.exports = {
+    createBill: async (req, res, next) => {
+        try{
+            const { booking_id, user_id } = req.body;
+        } catch (error) {
+            next(error);
+        }
+    },
     getBill: async (req, res, next) => {
         try {
             const { booking_id } = req.params;
