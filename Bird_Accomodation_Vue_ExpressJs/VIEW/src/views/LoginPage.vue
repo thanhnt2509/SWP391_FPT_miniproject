@@ -80,21 +80,22 @@ export default {
             } else {
                 evt.preventDefault();
                 this.loading = true;
-                this.$store.dispatch('login', this.fields).then(res => {
-                    if (res.status == 200) {
-                        this.loading = false;
-                        message.success('Login successfully');
-                        this.$router.push('/home');
-                    } else {
-                        this.loading = false;
-                        this.isIncorrect = true;
-                        message.error('Incorrect email or password');
-                    }
-                }).catch(err => {
+                try {
+                    const res = this.$store.dispatch('login', this.fields)
+                    this.loading = false;
+                    message.success('Login successfully');
+                    this.$router.push('/');
+                    // if (res.status == 200) {
+                    // } else {
+                        // this.loading = false;
+                        // this.isIncorrect = true;
+                        // message.error('Incorrect email or password');
+                    // }
+                } catch (err) {
                     this.loading = false;
                     this.isIncorrect = true;
                     message.error('Incorrect email or password');
-                })
+                }
             }
         }
     }
@@ -124,4 +125,5 @@ export default {
 p,
 label {
     color: white;
-}</style>
+}
+</style>

@@ -3,7 +3,7 @@
         <!-- {{ service }} -->
         <div class="no-active-text columns">
             <p style="background-blend-mode: darken;" class="column is-four-fifths">{{ service.name }} </p>
-            <i style="padding-top: 17px;" class="column fa-solid fa-maximize"></i>
+            <!-- <i style="padding-top: 17px;" class="column fa-solid fa-maximize"></i> -->
         </div>
 
     </div>
