@@ -47,7 +47,7 @@ module.exports = {
         APPROVED: 1,
         ON_GOING: 2,
         COMPLETED: 3,
-        CANCLED: 4,
+        CANCELLED: 4,
     },
     
     role: {
