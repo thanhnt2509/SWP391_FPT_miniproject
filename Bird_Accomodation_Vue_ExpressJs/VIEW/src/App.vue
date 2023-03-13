@@ -34,3 +34,9 @@ export default {
   }
 }
 </script>
+
+<style >
+*{
+  font-size: large;
+}  
+</style>

@@ -1,66 +1,13 @@
 const config = require("../../src/config/config");
-const { dateFormat } = require("../../src/config/config");
 
 module.exports = {
-    getReportDetail: async (user_id, booking_id) => {
+    getReportDetail: async (booking_id) => {
         let con = await config.connection();
-        const transaction = new con.Transaction();
-        await transaction.begin();
-
-        try {
-            //Get date_from, date_to
-            let getBooking = await transaction.request()
-                .input("booking_id", con.Int, booking_id)
-                .query("SELECT date_from, date_to FROM Booking WHERE booking_id = @booking_id");
-            let date_from = dateFormat(getBooking.recordset[0].date_from);
-            let date_to = dateFormat(getBooking.recordset[0].date_to);
-            // Get Report by date
-            let reportDetails = [];
-            let d = new Date(date_from);
-
-            // console.log(d);
-            while (d <= new Date(date_to)) {
-                // console.log('date_from:', date_from, 'date_to:', date_to);
-                // console.log(d);
-                let getServices = await transaction.request()
-                    .input("booking_id", con.Int, booking_id)
-                    .input("date", con.Date, new Date(d))
-                    .query(`SELECT s.name AS service_name, dr.service_report_text, dr.service_report_image, bd.booked_price, date
-                            FROM BookingDetail bd
-                            JOIN DailyReport dr ON bd.bdetail_id = dr.bdetail_id
-                            JOIN Service s ON bd.service_id = s.service_id
-                            WHERE bd.booking_id = @booking_id AND dr.date = @date`);
-                let services = getServices.recordset;
-                // console.log(services, d);
-
-                let date = dateFormat(d);
-
-                if (services.length > 0) {
-                    let serviceDetails = {
-                        date: date,
-                        services: services.map(service => ({
-                            service_name: service.service_name,
-                            service_report_text: service.service_report_text,
-                            service_report_image: service.service_report_image,
-                            booked_price: service.booked_price
-                        }))
-                    };
-                    reportDetails.push(serviceDetails);
-                }
-
-                d.setDate(d.getDate() + 1);
-            }
-            // console.log('d after increment:', d);
-            date_from = dateFormat(date_from);
-            date_to = dateFormat(date_to);
-
-            await transaction.commit();
-            // console.log(booking_id, date_from, date_to, reportDetails);
-            return { booking_id, date_from, date_to, reportDetails };
-        } catch (error) {
-            await transaction.rollback();
-            throw error;
-        }
+        const request = new con.Request()
+        const data = await request
+            .input('booking_id', booking_id)
+            .query("select * from DailyReport where booking_id = @booking_id")
+        return data.recordset
     },
     //DailyReport
     getAllReport: async () => {

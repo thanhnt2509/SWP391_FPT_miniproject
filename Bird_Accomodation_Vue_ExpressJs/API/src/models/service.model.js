@@ -5,7 +5,14 @@ module.exports = {
         let con = await config.connection();
         const request = new con.Request();
         const returnData = await request
-            .query("SELECT * FROM Service WHERE status = 1");
+            .query("SELECT * FROM Service WHERE status = 1 and isHightLight = 1");
+        return (await returnData).recordset || null;
+    },
+    getAllServicesHightLight: async () => {
+        let con = await config.connection();
+        const request = new con.Request();
+        const returnData = await request
+            .query("SELECT * FROM Service WHERE status = 1 and isHightLight = 1");
         return (await returnData).recordset || null;
     },
     // getServiceByName: async (name) => {
