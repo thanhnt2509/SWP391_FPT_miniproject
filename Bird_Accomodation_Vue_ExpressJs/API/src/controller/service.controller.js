@@ -23,22 +23,22 @@ module.exports = {
     },
     getServiceByName: async (req, res, next) => {
         try {
-            const { service_name }  = req.params;
+            const { service_name } = req.params;
             const result = await servicesModel.getServiceByName(service_name);
-            const serviceList = result.map(item => ({
-                service_id: item.service_id,
-                name: item.name,
-                description: item.description,
-                status: item.status,
-                price: item.price,
-                image: item.image
-            }))
             if (result === null || result.length === 0) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Service not found"
                 })
             } else {
+                const serviceList = result.map(item => ({
+                    service_id: item.service_id,
+                    name: item.name,
+                    description: item.description,
+                    status: item.status,
+                    price: item.price,
+                    image: item.image
+                }))
                 res.status(200).send({
                     exitcode: 0,
                     message: "Get service successfully",
@@ -53,20 +53,20 @@ module.exports = {
         try {
             const { service_id } = req.params;
             const result = await servicesModel.getServiceById(service_id);
-            const serviceList = result.map(item => ({
-                service_id: item.service_id,
-                name: item.name,
-                description: item.description,
-                status: item.status,
-                price: item.price,
-                image: item.image
-            }))
-            if (result === null || result.length === 0) {
+            if (result === null) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Service not found"
                 })
             } else {
+                const serviceList = {
+                    service_id: result.service_id,
+                    name: result.name,
+                    description: result.description,
+                    status: result.status,
+                    price: result.price,
+                    image: result.image
+                }
                 res.status(200).send({
                     exitcode: 0,
                     message: "Get service successfully",
@@ -87,7 +87,7 @@ module.exports = {
             }
             // Check if service name already exists
             const checkService = await servicesModel.validateServiceName(name);
-            if (checkService !== null && checkService.length > 0) {
+            if (checkService !== null) {
                 res.status(400).send({
                     exitcode: 101,
                     message: "Service name already exists"
@@ -95,8 +95,7 @@ module.exports = {
                 return;
             }
             const result = await servicesModel.addService(serviceDetail);
-            console.log(result);
-            if (result !== null){
+            if (result !== null) {
                 res.status(200).send({
                     exitcode: 0,
                     service_id: result[0].service_id,
@@ -123,7 +122,7 @@ module.exports = {
                 price: price
             }
             const result = await servicesModel.updateServiceByName(updateDetail);
-            if (result !== null && result.length > 0){
+            if (result !== null && result.length > 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Update service successfully",
@@ -141,7 +140,7 @@ module.exports = {
     },
     updateServiceById: async (req, res, next) => {
         try {
-            const {service_id} = req.params;
+            const { service_id } = req.params;
             const { name, description, price } = req.body;
             const updateDetail = {
                 service_id: service_id,
@@ -150,7 +149,7 @@ module.exports = {
                 price: price
             }
             const result = await servicesModel.updateServiceById(updateDetail);
-            if (result !== null && result.length > 0){
+            if (result !== null && result.length > 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Update service successfully",
@@ -170,7 +169,7 @@ module.exports = {
         try {
             const { service_name } = req.params;
             const result = await servicesModel.deleteServiceByName(service_name);
-            if (result !== null && result.length > 0){
+            if (result !== null && result.length > 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Delete service successfully",
@@ -191,7 +190,7 @@ module.exports = {
             const { service_id } = req.params;
             const result = await servicesModel.deleteServiceById(service_id);
             console.log(result);
-            if (result !== null && result.length > 0){
+            if (result !== null && result.length > 0) {
                 res.status(200).send({
                     exitcode: 0,
                     message: "Delete service successfully",

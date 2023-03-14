@@ -11,7 +11,7 @@ module.exports = {
                 password: password
             }
             const result = await accountModel.login(loginDetail);
-            if (result !== null) {
+            if (result !== null && result.length !== 0) {
                 // Create payload for encryption
                 const payload = {
                     email: email,
@@ -38,6 +38,7 @@ module.exports = {
         try {
             const { email, password, name, address, phone } = req.body;
             const validateEmail = await accountModel.validateEmail(email);
+            console.log(validateEmail);
             // validate email
             if (validateEmail !== null) {
                 res.status(409).send({

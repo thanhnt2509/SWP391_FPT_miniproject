@@ -8,7 +8,6 @@ const auth = require('./auth.routes');
 const bird = require('./bird.routes');
 const booking = require('./booking.routes');
 const report = require('./report.routes');
-const reportDetail = require('./reportDetail.routes');
 const bill = require('./bill.routes');
 const handleFile = require('./handleFile.routes');
 // middlewares
@@ -28,7 +27,6 @@ router.use('/review', review);
 router.use('/account', verifyLogin, account);
 router.use('/booking', verifyLogin, booking);
 router.use('/report', verifyLogin, report);
-router.use('/reportDetail', verifyLogin, reportDetail);
 router.use('/bill', verifyLogin, bill);
 router.use('/file', handleFile);
 

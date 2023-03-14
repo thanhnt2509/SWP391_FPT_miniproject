@@ -1,7 +1,7 @@
 module.exports = {
-    sql: require('mssql'), // export mssql module
-    knex: require('knex'), // export knex module
-    // export dotenv and config
+    sql: require('mssql'), 
+    knex: require('knex'), 
+
     dotenv: require('dotenv').config({ path: require('path').resolve(__dirname, '..', '..', '.env') }),
     database: {
         server: process.env.SQL_SERVER,
@@ -14,7 +14,10 @@ module.exports = {
             trustServerCertificate: true
         }
     },
-    //export connection
+    /**
+     * @description mssql connection
+     * @decaprecated use knexConnection instead
+     */
     connection: async () => {
         try {
             await module.exports.sql.connect(module.exports.database);
@@ -41,7 +44,14 @@ module.exports = {
         let formattedDate = new Date(date)
         return formattedDate.toISOString().slice(0, 10)
     },
-
+    /**
+     * @description: booking status
+     * @property {0} PENDING
+     * @property {1} APPROVED
+     * @property {2} ON_GOING
+     * @property {3} COMPLETED
+     * @property {4} CANCELLED
+     */
     bookingStatus: {
         PENDING: 0,
         APPROVED: 1,
@@ -49,15 +59,29 @@ module.exports = {
         COMPLETED: 3,
         CANCELLED: 4,
     },
-    
+    /**
+     * @description: user role
+     * @property {0} USER
+     * @property {1} ADMIN
+     */
     role: {
         USER: 0,
         ADMIN: 1,
     },
+    /**
+     * @description: user status
+     * @property {0} INACTIVE
+     * @property {1} ACTIVE
+     */
     userStatus: {
         INACTIVE: 0,
         ACTIVE: 1,
     },
+    /**
+     * @description: service status
+     * @property {0} UNAVAILABLE
+     * @property {1} AVAILABLE
+     */
     serviceStatus: {
         AVAILABLE: 1,
         UNAVAILABLE: 0,

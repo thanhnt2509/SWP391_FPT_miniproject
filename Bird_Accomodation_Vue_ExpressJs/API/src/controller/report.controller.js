@@ -7,16 +7,19 @@ module.exports = {
         try {
             const { booking_id } = req.body;
             const result = await reportModel.getReportDetail(booking_id);
-            if (result.length === 0) {
+            if (result === null || result.length === 0) {
                 throw new ErrorHandler(404, 'No report found');
             } else {
-                const reportList = result.map(item => {
-                    date: dateFormat(new Date(date))
-                })
+                const reportDetail = result.map(item => ({
+                    report_id: item.dreport_id,
+                    date: dateFormat(item.date),
+                    report_text: item.service_report_text,
+                    report_img: item.service_report_image,
+                }));
                 res.status(200).send({
                     exitcode: 0,
-                    message: "Get report detail successfully",
-                    reports: result
+                    message: 'Get report detail successfully',
+                    report: reportDetail
                 });
             }
         } catch (error) {

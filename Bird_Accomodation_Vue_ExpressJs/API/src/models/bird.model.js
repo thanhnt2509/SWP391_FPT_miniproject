@@ -10,7 +10,12 @@ module.exports = {
         const result = await con.select("b.*", "bt.name as type_name")
             .from("Bird as b")
             .join("BirdType as bt", "b.type_id", "bt.btype_id")
-            .where({ user_id: user_id });
+            .where({ user_id: user_id })
+            .select(
+                con.raw("CASE WHEN EXISTS \n" +
+                "(SELECT * FROM Booking WHERE bird_id = b.bird_id) \n" +
+                "THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS boarding")
+            );
         return result || null;
     },
     deleteBirdById: async (bird_id) => {

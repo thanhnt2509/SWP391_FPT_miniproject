@@ -1,5 +1,4 @@
 const birdModel = require('../models/bird.model');
-const { getUserId } = require('../models/account.model');
 
 module.exports = {
     getAllRegistedBird: async (req, res, next) => {
@@ -21,7 +20,7 @@ module.exports = {
                     gender: item.gender,
                     image: item.image,
                     description: item.description,
-                    // boarding: item.boarding
+                    boarding: item.boarding
                 }))
                 res.status(200).send({
                     exitcode: 0,

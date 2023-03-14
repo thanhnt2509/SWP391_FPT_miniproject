@@ -30,6 +30,7 @@ module.exports = {
                 service_id: service_id,
                 // status: config.serviceStatus.AVAILABLE 
             })
+            .first();
         return result || null;
     },
     addService: async (body) => {
@@ -92,6 +93,7 @@ module.exports = {
         let con = await config.knexConnection();
         const result = await con("Service")
             .where({ name: name })
+            .first();
         return result || null;
     },
 }
