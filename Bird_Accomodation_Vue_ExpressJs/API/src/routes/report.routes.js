@@ -8,8 +8,8 @@ const router = express.Router();
 // router.route('/')
 //     .get(report.getAllReport)
 
-// router.route('/:booking_id')
-//     .get(report.getReportByBookingId)
+router.route('/:booking_id')
+    .get(report.getReportByBookingId)
 
 router.route('/detail')
     .patch(report.getReportDetail);

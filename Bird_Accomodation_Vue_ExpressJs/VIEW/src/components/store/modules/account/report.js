@@ -1,3 +1,4 @@
+import api from '../../api'
 
 const state = {
     report: undefined,
@@ -12,9 +13,11 @@ const mutations = {
 }
 
 const actions = {
-    async getReport({ commit }, data) {
-
-    },  
+    async getAllReportOfBooking_id({ commit }, booking_id) {
+        const response = await api.get(`/report/${booking_id}`);
+        console.log(response.data);
+        commit("SET_REPORT", response.data);
+    }
 
 }
 

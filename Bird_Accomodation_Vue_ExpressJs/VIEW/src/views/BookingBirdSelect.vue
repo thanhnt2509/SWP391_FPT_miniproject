@@ -1,5 +1,5 @@
 <template>
-    <div class="main column">
+    <div class="main column is-one-third">
         <h2 class="label has-text-centered">Find Your Feathered Friend</h2>
         <table>
             <tr>

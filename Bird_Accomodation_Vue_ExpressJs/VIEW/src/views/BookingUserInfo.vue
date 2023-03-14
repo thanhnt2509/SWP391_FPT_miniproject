@@ -1,5 +1,5 @@
 <template>
-    <div class="main column">
+    <div class="main column is-one-third" >
         <h1 class="label has-text-centered">User information</h1>
         <div class="user_img">
             <div class="user_img_image">
@@ -30,11 +30,11 @@
             <h3 style="white-space: nowrap;">Make a Reservation</h3>
             <tr>
                 <td>Check-in</td>
-                <td><input v-model="fields.date_from" type="date"></td>
+                <td><input style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_from" type="date"></td>
             </tr>
             <tr>
                 <td>Check-out</td>
-                <td><input v-model="fields.date_to" type="date"></td>
+                <td><input style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_to" type="date"></td>
             </tr>
             <!-- {{ getNewBooking }} -->
         </table>
@@ -68,6 +68,9 @@ export default {
 </script>
 
 <style scoped>
+.main{
+    height: fit-content;
+}
 .user_img {
     width: 100%;
     height: 150px;

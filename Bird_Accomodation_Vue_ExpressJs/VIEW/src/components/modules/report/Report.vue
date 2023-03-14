@@ -7,7 +7,7 @@
         <!-- <p>TEST: {{ getReportItem }}</p>
         <p>getUser test: {{ getUser }}</p>
         <p>getReportDetail test: {{ getReportDetail }}</p> -->
-        <!-- <ReportDay /> -->
+        <ReportDay />
     </div>
 </template>
 <script>
@@ -24,7 +24,7 @@ export default {
         })
     },
     components: {
-        // ReportDay,
+        ReportDay,
     },
     created() {
 

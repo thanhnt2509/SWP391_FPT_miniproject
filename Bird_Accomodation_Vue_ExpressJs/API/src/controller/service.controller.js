@@ -134,7 +134,7 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
-    //sussy
+    //ussy
     // deleteServiceByName: async (req, res, next) => {
     //     try {
     //         const { name } = req.params;

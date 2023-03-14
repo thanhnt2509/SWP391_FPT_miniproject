@@ -1,5 +1,4 @@
 const billModel = require('../models/bill.model');
-const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
 const { dateFormat } = require('../config/config');
 
 module.exports = {
@@ -9,7 +8,8 @@ module.exports = {
             const bill = await billModel.getBill(booking_id);
             const billService = await billModel.getBillServiceDetail(booking_id);
             if (billService.length === 0 && bill.length === 0) {
-                throw new ErrorHandler(404, 'Bill not found');
+                console.error("Bill not found ");
+                res.status(400).send("Bill not found");
             } else {
                 const serviceList = billService.map(item => ({
                     service_id: item.service_id,
@@ -47,7 +47,7 @@ module.exports = {
             }
         } catch (error) {
            console.log(error.message);
-            res.status(500).send("Internal server error");
+           res.status(500).send("Internal server error");
         }
     },
 }

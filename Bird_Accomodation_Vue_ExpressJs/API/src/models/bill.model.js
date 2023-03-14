@@ -26,4 +26,19 @@ module.exports = {
                 "WHERE bd.booking_id = @booking_id");
         return (await returnData).recordset || null;
     },
+    publishBill: async (booking_id) => {
+        let con = await config.connection();
+        const transaction = con.transaction();
+        await transaction.begin();
+        try {
+            await transaction.request()
+                .input('booking_id', sql.Int, booking_id)
+                .query(`INSERT INTO [Bill] (booking_id, total_amount, checkout_date) \n`
+                    + `VALUES (@booking_id, 0, GETDATE())`);
+            await transaction.commit();
+        } catch (err) {
+            console.log(err);
+            await transaction.rollback();
+        }
+    }
 }

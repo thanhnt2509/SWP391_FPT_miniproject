@@ -1,7 +1,17 @@
 import api from "@/components/store/api";
 
 const state = {
-	user: undefined,
+	user: {
+		address: "somewhere",
+		email: "U1@gmail.com",
+		name: "ADMIN_CORE",
+		phone: "0111111111",
+		role: 1,
+		status: 1,
+		token: null,
+		user_id: 1,
+		user_img: null,
+	},
 	birds: [
 		{
 			bird_id: 1,
@@ -84,7 +94,7 @@ const actions = {
 		await this.dispatch("getAllBirds");
 	},
 	async getAllBooking({ commit }) {
-		const response = await api.get(`/booking`,state.user.email);
+		const response = await api.get(`/booking`, state.user.email);
 		commit("UPDATE_BOOKINGS", response.data.bookings);
 	},
 };

@@ -17,7 +17,6 @@ module.exports = {
                     email: email,
                 };
                 res.status(200).send({
-                    exitcode: 0,
                     message: "Login successfully",
                     token: jwt.sign(payload, config.JWT_SECRET, {
                         expiresIn: config.JWT_EXP_TIME,
@@ -25,10 +24,7 @@ module.exports = {
                     account: result
                 })
             } else {
-                res.status(200).send({
-                    exitcode: 101,
-                    message: "Login failed, wrong password or email"
-                })
+                res.status(200).send({message: "Login failed, wrong password or email"})
             }
         } catch (error) {
            console.log(error.message);
@@ -41,19 +37,14 @@ module.exports = {
             const validateEmail = await accountModel.validateEmail(email);
             // validate email
             if (validateEmail) {
-                res.status(409).send({
-                    exitcode: 101,
-                    message: "Email already exists"
+                res.status(409).send({message: "Email already exists"
                 });
                 return;
             }
             // validate phone
             const validatePhone = await accountModel.validatePhone(phone);
             if (validatePhone) {
-                res.status(409).send({
-                    exitcode: 102,
-                    message: "Phone already exists"
-                });
+                res.status(409).send({message: "Phone already exists"});
                 return;
             }
             const registerDetail = {
@@ -65,15 +56,9 @@ module.exports = {
             }
             const result = await accountModel.register(registerDetail);
             if (result > 0) {
-                res.status(201).send({
-                    exitcode: 0,
-                    message: "Register successfully"
-                })
+                res.status(201).send({message: "Register successfully"})
             } else {
-                res.status(200).send({
-                    exitcode: 103,
-                    message: "Register failed"
-                })
+                res.status(200).send({message: "Register failed"})
             }
         } catch (error) {
            console.log(error.message);

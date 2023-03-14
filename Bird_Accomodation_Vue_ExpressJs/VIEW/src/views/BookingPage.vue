@@ -97,7 +97,8 @@ export default {
 .booking div {
     background-color: rgb(255, 255, 255);
     margin: 15px;
-    height: 600px;
+    /*height: 649px;*/
+    overflow: hidden;
     border: 0.6px solid rgb(230, 230, 230);
     border-radius: 20px;
 

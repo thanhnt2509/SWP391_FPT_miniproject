@@ -1,6 +1,9 @@
 const config = require("../../src/config/config");
 const sql = require("mssql");
 
+
+
+
 module.exports = {
     getReportDetail: async (booking_id) => {
         let con = await config.connection();
@@ -27,7 +30,7 @@ module.exports = {
         let transaction = null;
         try {
             con = await config.connection();
-            transaction = new con.Transaction();
+            transaction = new con.transaction();
             await transaction.begin();
             let reportCount = -1;
 
@@ -73,9 +76,7 @@ module.exports = {
             return reportCount;
         } catch (error) {
             console.log(error);
-            if (transaction) {
-                await transaction.rollback();
-            }
+
             throw error;
         } finally {
             if (con) {
@@ -83,18 +84,46 @@ module.exports = {
             }
         }
     },
+
     getReportByBookingId: async (booking_id) => {
         let con = await config.connection();
         const request = con.request();
         const returnData = await request
             .input("booking_id", sql.Int, booking_id)
-            .query("SELECT dr.*, s.name \n " +
-                "FROM DailyReport AS dr \n " +
-                "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +
-                "JOIN Service AS s ON bk.service_id = s.service_id \n " +
-                "WHERE bk.booking_id = @booking_id");
+            .query("select dr.*\n" +
+                "from DailyReport dr\n" +
+                "where dr.booking_id = @booking_id \n"
+            );
+        return returnData.recordset.map(item => (
+            {
+                dreport_id: item.dreport_id,
+                date: new Date(item.date).toISOString().slice(0, 10),
+                service_report_text: item.service_report_text,
+                feedback_content: item.feedback_content,
+            }))
+        // console.log(reportData)
+        /*
+        * [
+               { date: '2023-03-10', dreport_id: 116 },
+               { date: '2023-03-11', dreport_id: 124 },
+               { date: '2023-03-12', dreport_id: 137 }
 
-        return returnData.recordset;
+            ]
+        * */
+        // console.log(await getImageByDreportId(116))
+    },
+
+   getImageByDreportId:  async (dreport_id) => {
+
+        let con = await config.connection();
+        const request = con.request();
+        const returnData = await request
+            .input("dreport_id", sql.Int, dreport_id)
+            .query("select dri.service_report_image\n" +
+                "from DailyReportImage dri\n" +
+                "where dri.dreport_id = @dreport_id")
+
+        return returnData.recordset
     },
     // addNewReport: async (data) => {
     //     let con = await config.connection();

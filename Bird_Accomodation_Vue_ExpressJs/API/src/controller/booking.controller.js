@@ -1,16 +1,14 @@
 const bookingModel = require('../models/booking.model');
 const config = require("../../src/config/config");
 const { validateRole } = require("../../src/models/account.model");
-const { ErrorHandler } = require('../middlewares/errorHandler.mdw');
 const { dateFormat } = require('../config/config');
 
 module.exports = {
-    changeBookingStatus: async (req, res, next) => {
+    changeBookingStatus: async (req, res) => {
         try {
             const booking_id = req.params.booking_id;
             const state = req.params.state;
             let status;
-            console.log(`booking_id: ${booking_id}, state: ${state}`);
             switch (state) {
                 case 'approve':
                     status = config.bookingStatus.APPROVED;
@@ -49,7 +47,7 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
-    cancelBooking: async (req, res, next) => {
+    cancelBooking: async (req, res) => {
         const { booking_id } = req.params.booking_id;
         const cancelStatus = config.bookingStatus.CANCLED;
         try {
@@ -73,7 +71,7 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
-    getAllBookings: async (req, res, next) => {
+    getAllBookings: async (req, res) => {
         try {
             const email = await req.payload.email;
             const validateResult = await validateRole(email);
@@ -84,7 +82,9 @@ module.exports = {
                 result = await bookingModel.getMyBookings(email);
             }
             if (result.length === 0) {
-                throw new ErrorHandler(404, 'No booking found');
+                console.log('No booking found');
+                res.status(400).send('No booking found');
+
             } else {
                 const bookingList = result.map(item => ({
                     booking_id: item.booking_id,
@@ -108,12 +108,13 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
-    getBookingServices: async (req, res, next) => {
+    getBookingServices: async (req, res) => {
         try {
             const booking_id = req.params.booking_id;
             const result = await bookingModel.getBookingServices(booking_id);
             if (result.length === 0) {
-                throw new ErrorHandler(404, 'No booking found');
+                console.log('No booking found');
+                res.status(400).send('No booking found');
             } else {
                 const serviceList = result.map(item => ({
                     service_id: item.service_id,
@@ -132,7 +133,7 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
-    createBooking: async (req, res, next) => {
+    createBooking: async (req, res) => {
         try {
             const { user_id, bird_id, date_from, date_to, services } = req.body;
             const bookingStatus = config.bookingStatus.PENDING;
@@ -146,7 +147,8 @@ module.exports = {
             };
             let check = await bookingModel.addNewBooking(booking);
             if (check === false) {
-                throw new ErrorHandler(400, 'Add new booking failed');
+                console.log('Add new booking failed');
+                res.status(400).send('Add new booking failed');
             } else {
                 res.status(201).send({
                     exitcode: 0,
@@ -158,7 +160,7 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
-    checkoutBooking: async(req, res, next) => {
+    checkoutBooking: async(req, res) => {
         try {
             const { booking_id } = req.params;
             const { checkout_date, payment_method } = req.body;
