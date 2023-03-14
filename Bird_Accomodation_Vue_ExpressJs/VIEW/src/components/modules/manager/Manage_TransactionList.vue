@@ -177,7 +177,10 @@ export default defineComponent({
         const approveBooking = (booking_id) => store.dispatch('approveBooking', booking_id)
         const rejectBooking = (booking_id) => store.dispatch('rejectBooking', booking_id)
         const checkin_Booking = (booking_id) => store.dispatch('checkin_Booking', booking_id)
-        const checkout_Booking = (booking_id) => store.dispatch('checkout_Booking', booking_id)
+        const checkout_Booking = (booking_id) => {
+            this.$router.push(`/manager/checkout/${booking_id}`)
+            // store.dispatch('checkout_Booking', booking_id)
+            }
 
         return {
             data,

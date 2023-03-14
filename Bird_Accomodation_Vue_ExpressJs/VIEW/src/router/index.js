@@ -14,6 +14,7 @@ import BirdList from "../components/modules/bird/BirdList.vue";
 import Transaction from "../components/modules/account/Transaction.vue";
 import Report from "../components/modules/report/Report.vue"
 import Bill from "../components/modules/account/Bill.vue"
+import Checkout from "../components/modules/account/Checkout.vue"
 
 import ManageTransaction from "../components/modules/manager/Manage_Transaction.vue";
 import ManageService from "../components/modules/manager/Manage_Service.vue";
@@ -156,7 +157,13 @@ const router = createRouter({
 					path: "report/:booking_id",
 					name: "CRU report",
 					component: ManageReport,
-				}
+				},
+				{
+					path: "checkout/:booking_id",
+					name: "checkout payment",
+					component: Checkout,
+				},
+				
 			]
 		}
 	]

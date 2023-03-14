@@ -8,17 +8,20 @@ module.exports = {
         return result || null;
     },
     getServiceByName: async (name) => {
-        // let con = await config.connection();
-        // const request = new con.Request();
-        // const returnData = await request
-        //     .input("name", con.NVarChar, name)
-        //     .query("SELECT * FROM Service WHERE name = @name");
-        // return (await returnData).recordset || null;
         let con = await config.knexConnection();
         const result = await con("Service")
             .where({
                 name: name,
                 status: config.serviceStatus.AVAILABLE
+            })
+        return result || null;
+    },
+    getAllServicesHighLight: async () => {
+        let con = await config.knexConnection();
+        const result = await con("Service")
+            .where({
+                status: config.serviceStatus.AVAILABLE,
+                isHightLight: 1
             })
         return result || null;
     },
@@ -43,17 +46,16 @@ module.exports = {
             .returning("service_id");
         return result || null;
     },
-    // updateServiceByName: async (name, body) => {
-    //     //body includes: name, description, price
-    //     let con = await config.connection();
-    //     const request = new con.Request();
-    //     const returnData = await request
-    //         .input("name", con.NVarChar, name)
-    //         .input("description", con.NVarChar, body.description)
-    //         .input("price", con.Int, body.price)
-    //         .query("UPDATE Service SET description = @description, price = @price WHERE name = @name");
-    //     return returnData.rowsAffected[0];
-    // },
+    updateServiceByName: async (data) => {
+        let con = await config.knexConnection();
+        const result = await con("Service")
+            .where({ name: data.name })
+            .update({
+                description: data.description,
+                price: data.price
+            })
+        return result || null;
+    },
     updateServiceById: async (data) => {
         let con = await config.knexConnection();
         const result = await con("Service")
@@ -65,16 +67,15 @@ module.exports = {
             })
         return result || null;
     },
-    // deleteServiceByName: async (name) => {
-    //     let con = await config.connection();
-    //     const deleteStatus = 0;
-    //     const request = new con.Request();
-    //     const returnData = await request
-    //         .input("name", con.NVarChar, name)
-    //         .input("status", con.Int, deleteStatus)
-    //         .query("UPDATE Service SET status = @status WHERE name = @name");
-    //     return returnData.rowsAffected[0];
-    // },
+    deleteServiceByName: async (name) => {
+        let con = await config.knexConnection();
+        const result = await con("Service")
+            .where({ name: name })
+            .update({
+                status: config.serviceStatus.UNAVAILABLE
+            })
+        return result || null;
+    },
     deleteServiceById: async (service_id) => {
         let con = await config.knexConnection();
         const result = await con("Service")
