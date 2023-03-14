@@ -30,7 +30,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     registerNewBird: async (req, res, next) => {
@@ -66,7 +67,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getBirdById: async (req, res, next) => {
@@ -95,7 +97,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     updateBirdById: async (req, res, next) => {
@@ -103,7 +106,7 @@ module.exports = {
             const bird_id = req.params.bird_id;
             const { bird_name,
                 bird_type,
-                age, 
+                age,
                 gender,
                 breed,
                 description,
@@ -132,7 +135,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     deleteBirdById: async (req, res, next) => {
@@ -151,7 +155,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getAllBirdType: async (req, res, next) => {
@@ -174,7 +179,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     }
 }

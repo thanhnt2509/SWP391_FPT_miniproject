@@ -1,11 +1,12 @@
 const config = require("../config/config");
+const sql = require("mssql");
 
 module.exports = {
     getAllRegistedBird: async (email) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("email", con.VarChar, email)
+            .input("email", sql.VarChar, email)
             .query("SELECT B.*, BT.name as type_name FROM [Bird] B \n" +
                 "LEFT JOIN [BirdType] BT ON B.type_id = BT.btype_id \n" +
                 "WHERE user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)")
@@ -13,17 +14,17 @@ module.exports = {
     },
     deleteBirdById: async (bird_id) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("bird_id", con.Int, bird_id)
+            .input("bird_id", sql.Int, bird_id)
             .query("DELETE FROM [Bird] WHERE bird_id = @bird_id")
         return returnData.rowsAffected[0];
     },
     getBirdById: async (bird_id) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("bird_id", con.Int, bird_id)
+            .input("bird_id", sql.Int, bird_id)
             .query("SELECT B.*, BT.name as type_name FROM [Bird] B \n" +
                 "LEFT JOIN [BirdType] BT ON B.type_id = BT.btype_id \n" +
                 "WHERE bird_id = @bird_id")
@@ -31,46 +32,46 @@ module.exports = {
     },
     registerNewBird: async (data) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("user_id", con.Int, data.user_id)
-            .input("type_id", con.Int, data.type_id)
-            .input("bird_name", con.NVarChar, data.bird_name)
-            .input("age", con.Int, data.age)
-            .input("gender", con.Int, data.gender)
-            .input("breed", con.NVarChar, data.breed)
-            .input("description", con.NVarChar, data.description)
-            .input("image", con.NVarChar, data.image)
+            .input("user_id", sql.Int, data.user_id)
+            .input("type_id", sql.Int, data.type_id)
+            .input("bird_name", sql.NVarChar, data.bird_name)
+            .input("age", sql.Int, data.age)
+            .input("gender", sql.Int, data.gender)
+            .input("breed", sql.NVarChar, data.breed)
+            .input("description", sql.NVarChar, data.description)
+            .input("image", sql.NVarChar, data.image)
             .query("INSERT INTO [Bird] (user_id, type_id, age, bird_name, breed, gender, [image], [description]) \n" +
                 "VALUES (@user_id, @type_id, @age, @bird_name, @breed, @gender, @image, @description)")
         return returnData.rowsAffected[0];
     },
     getBirdTypeId: async (bird_type) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("bird_type", con.VarChar, bird_type)
+            .input("bird_type", sql.VarChar, bird_type)
             .query("SELECT btype_id FROM [BirdType] WHERE name = @bird_type")
         return (await returnData).recordset[0].btype_id || null;
     },
     getAllBirdType: async () => {
         let con = await config.connection();
         let sql = `SELECT * FROM [BirdType]`;
-        const returnData = con.query(sql);
+        const returnData = con.request().query(sql);
         return (await returnData).recordset || null;
     },
     updateBirdById: async (data) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("bird_id", con.Int, data.bird_id)
-            .input("type_id", con.Int, data.type_id)
-            .input("bird_name", con.NVarChar, data.bird_name)
-            .input("age", con.Int, data.age)
-            .input("gender", con.Int, data.gender)
-            .input("breed", con.NVarChar, data.breed)
-            .input("description", con.NVarChar, data.description)
-            .input("image", con.NVarChar, data.image)
+            .input("bird_id", sql.Int, data.bird_id)
+            .input("type_id", sql.Int, data.type_id)
+            .input("bird_name", sql.NVarChar, data.bird_name)
+            .input("age", sql.Int, data.age)
+            .input("gender", sql.Int, data.gender)
+            .input("breed", sql.NVarChar, data.breed)
+            .input("description", sql.NVarChar, data.description)
+            .input("image", sql.NVarChar, data.image)
             .query("UPDATE [Bird] SET \n" +
                 "type_id = COALESCE(@type_id, type_id), \n" +
                 "bird_name = COALESCE(@bird_name, bird_name), \n" +

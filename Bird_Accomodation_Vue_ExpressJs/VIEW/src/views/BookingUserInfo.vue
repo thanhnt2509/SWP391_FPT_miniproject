@@ -13,19 +13,19 @@
             </tr>
             <tr>
                 <td>Fullname</td>
-                <td>{{ getUser.name }}</td>
+                <td>{{ getUser?.name }}</td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td>{{ getUser.email }}</td>
+                <td>{{ getUser?.email }}</td>
             </tr>
             <tr>
                 <td>Address</td>
-                <td>{{ getUser.address }}</td>
+                <td>{{ getUser?.address }}</td>
             </tr>
             <tr>
                 <td>Phone number</td>
-                <td>{{ getUser.phone }}</td>
+                <td>{{ getUser?.phone }}</td>
             </tr>
             <h3 style="white-space: nowrap;">Make a Reservation</h3>
             <tr>
@@ -78,7 +78,7 @@ export default {
     width: 150px;
     height: 150px;
     /* background-color: rgb(120, 131, 134); */
-    background-image: url('/images/avatar_user.jpg');
+    background-image: url('../../public/images/avatar_user.jpg');
     background-position: center;
     border-radius: 50%;
     display: inline-block;

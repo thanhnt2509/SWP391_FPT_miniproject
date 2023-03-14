@@ -18,7 +18,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+           console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     }
 }

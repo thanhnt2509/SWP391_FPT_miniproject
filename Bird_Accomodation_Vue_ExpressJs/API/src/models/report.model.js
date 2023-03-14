@@ -1,18 +1,19 @@
 const config = require("../../src/config/config");
+const sql = require("mssql");
 
 module.exports = {
     getReportDetail: async (booking_id) => {
         let con = await config.connection();
-        const request = new con.Request()
-        const data = await request
-            .input('booking_id', booking_id)
+        const request = con.request();
+        const returnData = await request
+            .input('booking_id', sql.Int, booking_id)
             .query("select * from DailyReport where booking_id = @booking_id")
         return data.recordset
     },
     //DailyReport
     getAllReport: async () => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
             .query("SELECT dr.*, s.name \n " +
                 "FROM DailyReport AS dr \n " +
@@ -84,9 +85,9 @@ module.exports = {
     },
     getReportByBookingId: async (booking_id) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("booking_id", con.Int, booking_id)
+            .input("booking_id", sql.Int, booking_id)
             .query("SELECT dr.*, s.name \n " +
                 "FROM DailyReport AS dr \n " +
                 "JOIN BookingDetail AS bk ON dr.bdetail_id = bk.bdetail_id\n " +

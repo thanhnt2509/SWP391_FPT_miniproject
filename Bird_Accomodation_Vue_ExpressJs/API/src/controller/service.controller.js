@@ -18,7 +18,8 @@ module.exports = {
                 services: serviceList
             })
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     //sussy
@@ -45,7 +46,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getServiceById: async (req, res, next) => {
@@ -72,7 +74,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     //update this to not add duplicate sv name
@@ -97,14 +100,16 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     updateServiceByName: async (req, res, next) => {
         try {
-            
+
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     updateServiceById: async (req, res, next) => {
@@ -125,7 +130,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     //sussy
@@ -145,7 +151,8 @@ module.exports = {
     //             })
     //         }
     //     } catch (error) {
-    //         next(error);
+    //       console.log(error.message);
+    //        res.status(500).send("Internal server error");
     //     }
     // },
     deleteServiceById: async (req, res, next) => {
@@ -166,7 +173,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
 }

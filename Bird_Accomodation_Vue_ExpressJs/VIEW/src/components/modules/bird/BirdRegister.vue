@@ -106,7 +106,7 @@ export default {
           formData.append('breed', this.fields.breed)
           formData.append('description', this.fields.description)
           // console.log(this.fields)
-          console.log(formData)
+          // console.log(formData)
           // this.$store.dispatch('addNewBird', formData)
 
           axios.post('http://localhost:5000/bird', formData, {
@@ -118,7 +118,7 @@ export default {
             console.log(res)
           })
 
-
+          this.$store.dispatch('getAllBirds')
           message.success('Bird added successfully');
         } catch (error) {
           message.error('Something went wrong');

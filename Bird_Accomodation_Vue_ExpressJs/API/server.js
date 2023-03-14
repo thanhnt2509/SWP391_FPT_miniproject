@@ -6,7 +6,6 @@ const { handleError } = require('./src/middlewares/errorHandler.mdw');
 const { unknownEndpoint } = require('./src/middlewares/unknownEndpoint.mdw');
 
 const app = express();
-app.setMaxListeners(30)
 
 //Access-Control-Allow-Origin
 app.use(cors());

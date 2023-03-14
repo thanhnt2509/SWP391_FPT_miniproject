@@ -102,7 +102,7 @@
           </tr>
           <tr>
             <td>Upload image for checkout</td>
-            <td><input type="file" accept="image/*" @change="evt => {fields.imgCheckout = evt.target.files[0]}"></td>
+            <td><input type="file" accept="image/*" @change="evt => fields.imgCheckout = evt.target.files[0]"></td>
           </tr>
           {{ fields.imgCheckout }}
           <tr>
@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     showModal() {
-      if(this.validateInputFields()) {
+      if (this.validateInputFields()) {
         this.visible = true;
       }
     },
@@ -161,16 +161,18 @@ export default {
 
         // run api request checkout
         const formData = this.handleContentForm();
-        this.$store.dispatch("checkout", formData);
+        const successs = this.$store.dispatch("checkout", formData);
 
-        // show success after 2s
-        Modal.success({
-          title: 'Checkout successfully !',
-          content: h('div', {}, [
-            h('p', 'Money will be transfered to your account soon !'),
-            h('p', 'Thank you for using our service !'),
-          ]),
-        });
+        if (successs) {
+          // show success after 2s
+          Modal.success({
+            title: 'Checkout successfully !',
+            content: h('div', {}, [
+              h('p', 'Money will be transfered to your account soon !'),
+              h('p', 'Thank you for using our service !'),
+            ]),
+          });
+        }
       }, 2000);
     },
     handleContentForm() {

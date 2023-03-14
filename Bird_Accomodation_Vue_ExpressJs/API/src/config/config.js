@@ -1,24 +1,24 @@
-module.exports = {
-    sql: require('mssql'), // export mssql module
-    // export dotenv and config
-    dotenv: require('dotenv').config({ path: require('path').resolve(__dirname, '..', '..', '.env') }),
-    database: {
-        server: process.env.SQL_SERVER,
+const sql = require('mssql');
+
+const database = {
+    server: process.env.SQL_SERVER,
         database: process.env.SQL_DB,
         user: process.env.SQL_USERNAME,
         password: process.env.SQL_PASSWORD,
         port: parseInt(process.env.SQL_PORT),
         options: {
-            encrypt: false,
+        encrypt: false,
             trustServerCertificate: true
-        }
-    },
+    }
+};
+
+module.exports = {// export mssql module
+    // export dotenv and config
+    dotenv: require('dotenv').config({ path: require('path').resolve(__dirname, '..', '..', '.env') }),
     //export connection
     connection: async () => {
         try {
-            await module.exports.sql.connect(module.exports.database);
-            module.exports.sql.on('error', err => { console.log(err.message); }); //handle error
-            return module.exports.sql;
+            return await sql.connect(database);
         }
         catch (err) {
             console.log(err.message)

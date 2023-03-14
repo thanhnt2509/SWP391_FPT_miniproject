@@ -45,7 +45,8 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     cancelBooking: async (req, res, next) => {
@@ -68,7 +69,8 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getAllBookings: async (req, res, next) => {
@@ -102,7 +104,8 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getBookingServices: async (req, res, next) => {
@@ -125,7 +128,8 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     createBooking: async (req, res, next) => {
@@ -150,20 +154,39 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     checkoutBooking: async(req, res, next) => {
         try {
-            // const { booking_id } = req.params;
-            // const { checkout_date, payment_method } = req.body;
-            // const checkout_img_filename = req.file.path;
+            const { booking_id } = req.params;
+            const { checkout_date, payment_method } = req.body;
+            const checkout_img_filename = req.file.filename;
 
-            console.log(req.params.booking_id);
-            console.log(req.body);
-            console.log(req.file);
+            const payload = { booking_id, checkout_date, payment_method, checkout_img_filename }
+            // console.log(req.params.booking_id);
+            // console.log(req.body);
+            // console.log(checkout_img_filename);
+
+            const result = await bookingModel.checkoutBooking(payload);
+            if (result.affectedRows === 0) {
+                res.status(402).send('Booking not found');
+            }else{
+                res.status(200).send({
+                    exitcode: 0,
+                    message: 'Checkout booking successfully',
+                    payload: {
+                        booking_id: booking_id,
+                        checkout_date: checkout_date,
+                        payment_method: payment_method,
+                        checkout_img_filename: checkout_img_filename
+                    }
+                });
+            }
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send(error.message);
         }
     }
 }

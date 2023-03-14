@@ -1,11 +1,12 @@
 const config = require("../config/config");
+const sql = require("mssql")
 
 module.exports = {
     register: async (body) => {
         //body = {email, password, name, address, phone}
-        let con = await config.connection();
         const defaultUserImg = null;
-        const request = new con.Request();
+        let con = await config.connection();
+        const request = con.request();
         const returnData = await request
             .input("email", con.NVarChar, body.email)
             .input("password", con.NVarChar, body.password)
@@ -22,11 +23,10 @@ module.exports = {
     login: async (body) => {
         //body = {email, password}
         let con = await config.connection();
-
-        const request = new con.Request()
+        const request = con.request();
         const returnData = await request
-            .input("email", con.NVarChar, body.email)
-            .input("password", con.NVarChar, body.password)
+            .input("email", sql.NVarChar, body.email)
+            .input("password", sql.NVarChar, body.password)
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as \n" +
                 "AND password = @password collate latin1_general_cs_as");
@@ -34,46 +34,38 @@ module.exports = {
     },
     validateEmail: async (email) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("email", con.NVarChar, email)
+            .input("email", sql.NVarChar, email)
             .query("SELECT [user_id],[email],[role] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as");
-        if ((await returnData).recordset.length > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (await returnData).recordset.length > 0;
     },
     validatePhone: async (phone) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = new con.request();
         const returnData = await request
             .input("phone", con.NVarChar, phone)
             .query("SELECT [user_id],[phone] FROM [User] \n" +
                 "WHERE phone = @phone");
-        if ((await returnData).recordset.length > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (await returnData).recordset.length > 0;
     },
     getAccountByID: async (user_id) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("user_id", con.Int, user_id)
+            .input("user_id", sql.Int, user_id)
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
                 "WHERE user_id = @user_id");
         return (await returnData).recordset || null;
     },
     getSearchAccount: async (body) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("name", con.NVarChar, body.name)
-            .input("email", con.NVarChar, body.email)
-            .input("phone", con.NVarChar, body.phone)
+            .input("name", sql.NVarChar, body.name)
+            .input("email", sql.NVarChar, body.email)
+            .input("phone", sql.NVarChar, body.phone)
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User] \n" +
                 "WHERE COALESCE(name, '') LIKE '%' + COALESCE(@name, '') + '%' \n" +
                 "AND COALESCE(email, '') LIKE '%' + COALESCE(@email, '') + '%' \n" +
@@ -82,43 +74,43 @@ module.exports = {
     },
     changeAccountStatus: async (user_id, newStatus) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("user_id", con.Int, user_id)
-            .input("status", con.Int, newStatus)
+            .input("user_id", sql.Int, user_id)
+            .input("status", sql.Int, newStatus)
             .query("UPDATE [User] SET status = @status WHERE user_id = @user_id");
         return returnData.rowsAffected[0];
     },
     validateRole: async (email) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("email", con.NVarChar, email)
+            .input("email", sql.NVarChar, email)
             .query("SELECT [role] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as");
         return (await returnData).recordset[0].role || null;
     },
     getAllAccount: async () => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
             .query("SELECT [user_id],[email],[name],[address],[phone],[role],[status],[user_img],[token] FROM [User]");
         return (await returnData).recordset || null;
     },
     updateUserName: async (user_id, name) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("user_id", con.Int, user_id)
-            .input("name", con.NVarChar, name)
+            .input("user_id", sql.Int, user_id)
+            .input("name", sql.NVarChar, name)
             .query("UPDATE [User] SET name = @name WHERE user_id = @user_id");
         return returnData.rowsAffected[0];
     },
     getUserId: async (email) => {
         let con = await config.connection();
-        const request = new con.Request();
+        const request = con.request();
         const returnData = await request
-            .input("email", con.NVarChar, email)
+            .input("email", sql.NVarChar, email)
             .query("SELECT [user_id] FROM [User] \n" +
                 "WHERE email = @email collate latin1_general_cs_as");
         return (await returnData).recordset[0].user_id || null;

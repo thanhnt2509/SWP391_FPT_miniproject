@@ -5,7 +5,8 @@ module.exports = {
         try {
             // code here
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     }
 }
