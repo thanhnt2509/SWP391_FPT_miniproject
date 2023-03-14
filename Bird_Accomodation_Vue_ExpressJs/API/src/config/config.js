@@ -1,8 +1,7 @@
-module.exports = {
-    sql: require('mssql'), 
-    knex: require('knex'), 
+const dotenv = require('dotenv')
+dotenv.config({ path: require('path').resolve(__dirname, '..', '..', '.env') })
 
-    dotenv: require('dotenv').config({ path: require('path').resolve(__dirname, '..', '..', '.env') }),
+module.exports = {
     database: {
         server: process.env.SQL_SERVER,
         database: process.env.SQL_DB,
@@ -12,31 +11,6 @@ module.exports = {
         options: {
             encrypt: false,
             trustServerCertificate: true
-        }
-    },
-    /**
-     * @description mssql connection
-     * @deprecated use knexConnection instead
-     */
-    connection: async () => {
-        try {
-            await module.exports.sql.connect(module.exports.database);
-            module.exports.sql.on('error', err => { console.log(err.message); }); //handle error
-            return module.exports.sql;
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    },
-    knexConnection: async () => {
-        try {
-            return module.exports.knex({
-                client: 'mssql',
-                connection: module.exports.database,
-            });
-        }
-        catch (err) {
-            console.log(err.message)
         }
     },
     //date format yyyy-mm-dd
