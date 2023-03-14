@@ -29,7 +29,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     registerNewBird: async (req, res, next) => {
@@ -41,6 +42,7 @@ module.exports = {
             // console.log(req.body);
             // console.log('file')
             // console.log(req.file)
+            const filename = req.file.filename;
             const birdDetail = {
                 user_id: userId,
                 type_id: birdTypeId,
@@ -49,7 +51,7 @@ module.exports = {
                 gender: gender,
                 breed: breed,
                 description: description,
-                image: req.file.filename
+                image: filename
             }
             const result = await birdModel.registerNewBird(birdDetail);
             console.log(result);
@@ -66,7 +68,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getBirdById: async (req, res, next) => {
@@ -95,7 +98,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     updateBirdById: async (req, res, next) => {
@@ -135,7 +139,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     deleteBirdById: async (req, res, next) => {
@@ -154,7 +159,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getAllBirdType: async (req, res, next) => {
@@ -177,7 +183,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     }
 }

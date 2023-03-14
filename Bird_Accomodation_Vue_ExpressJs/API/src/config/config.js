@@ -9,7 +9,7 @@ module.exports = {
         password: process.env.SQL_PASSWORD,
         port: parseInt(process.env.SQL_PORT),
         options: {
-            encrypt: false,
+        encrypt: false,
             trustServerCertificate: true
         }
     },

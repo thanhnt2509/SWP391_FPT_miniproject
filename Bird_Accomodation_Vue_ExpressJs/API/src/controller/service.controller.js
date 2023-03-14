@@ -18,7 +18,8 @@ module.exports = {
                 services: serviceList
             })
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getServiceByName: async (req, res, next) => {
@@ -46,7 +47,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getServiceById: async (req, res, next) => {
@@ -74,7 +76,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     addService: async (req, res, next) => {
@@ -108,7 +111,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     updateServiceByName: async (req, res, next) => {
@@ -182,9 +186,31 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
+    //sussy
+    // deleteServiceByName: async (req, res, next) => {
+    //     try {
+    //         const { name } = req.params;
+    //         const result = await servicesModel.deleteServiceByName(name);
+    //         if (result > 0){
+    //             res.status(200).send({
+    //                 exitcode: 0,
+    //                 message: "Delete service successfully"
+    //             })
+    //         } else {
+    //             res.status(200).send({
+    //                 exitcode: 101,
+    //                 message: "Delete service failed"
+    //             })
+    //         }
+    //     } catch (error) {
+    //       console.log(error.message);
+    //        res.status(500).send("Internal server error");
+    //     }
+    // },
     deleteServiceById: async (req, res, next) => {
         try {
             const { service_id } = req.params;
@@ -203,7 +229,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+          console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
 }

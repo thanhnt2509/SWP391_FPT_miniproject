@@ -35,9 +35,10 @@
             </template>
             <template v-if="column.key === 'status'">
                 <span>
-                    <a-tag :color="bookingState[record.status].color">
+                    <!-- <a-tag :color="bookingState[record.status].color">
                         {{ bookingState[record.status].state }}
-                    </a-tag>
+                    </a-tag> -->
+                    <p>{{ bookingState[record.status].state }}</p>
                 </span>
             </template>
             <template v-else-if="column.key === 'action'">
@@ -91,8 +92,7 @@
                     <a-divider type="vertical" />
 
                     <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
-                        @confirm="checkout_Booking(record.booking_id)" @cancel="">
-                        <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
+                        @confirm="$router.push(`/manager/checkout/${record.booking_id}`)" @cancel="">
                         <button class="button is-primary"><i style="padding-right: 10px"
                                 class="fa-regular fa-credit-card"></i>Check-out</button>
                     </a-popconfirm>
@@ -177,10 +177,10 @@ export default defineComponent({
         const approveBooking = (booking_id) => store.dispatch('approveBooking', booking_id)
         const rejectBooking = (booking_id) => store.dispatch('rejectBooking', booking_id)
         const checkin_Booking = (booking_id) => store.dispatch('checkin_Booking', booking_id)
-        const checkout_Booking = (booking_id) => {
-            this.$router.push(`/manager/checkout/${booking_id}`)
-            // store.dispatch('checkout_Booking', booking_id)
-            }
+        // const checkout_Booking = (booking_id) => {
+        //     router.push(`/manager/checkout/${booking_id}`)
+        //     //store.dispatch('checkout_Booking', booking_id)
+        //     }
 
         return {
             data,
@@ -190,7 +190,7 @@ export default defineComponent({
             approveBooking,
             rejectBooking,
             checkin_Booking,
-            checkout_Booking
+            //checkout_Booking
         };
     },
     computed: {

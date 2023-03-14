@@ -65,4 +65,17 @@ module.exports = {
     getBooking: async (booking_status) => {
         //code here
     },
+    checkoutBooking: async (payload) => {
+        const { booking_id, checkout_date, payment_method, checkout_img_filename } = payload;
+        const successCheckoutStatus = 1;
+        const returnData = await db('Bill')
+            .where('booking_id', booking_id)
+            .update({
+                checkout_date: checkout_date,
+                payment_status: successCheckoutStatus,
+                payment_method: payment_method,
+                checkout_img: checkout_img_filename
+            });
+        return returnData || null;
+    }
 }

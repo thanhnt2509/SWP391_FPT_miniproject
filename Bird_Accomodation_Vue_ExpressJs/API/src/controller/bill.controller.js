@@ -23,6 +23,7 @@ module.exports = {
                     service_name: item.name,
                     booked_price: item.booked_price,
                 }));
+
                 const billInfo = {
                     user: {
                         user_name: bill[0].name,
@@ -40,7 +41,10 @@ module.exports = {
                         status: bill[0].status,
                     },
                     services: serviceList,
-                    total_amount: bill[0].total_amount,
+                    bill: {
+                        total_amount: bill[0].total_amount,
+                        checkout_date: bill[0].checkout_date,
+                    }
                 };
                 res.status(200).send({
                     exitcode: 0,
@@ -49,7 +53,8 @@ module.exports = {
                 });
             }
         } catch (error) {
-            next(error);
+           console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
 }

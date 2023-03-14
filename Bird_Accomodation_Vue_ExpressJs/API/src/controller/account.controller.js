@@ -24,7 +24,8 @@ module.exports = {
                 accounts: accountList
             })
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     getAccountByID: async (req, res, next) => {
@@ -41,7 +42,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+           console.log(error.message);
+           res.status(500).send("Internal server error");
         }
     },
     getSearchAccount: async (req, res, next) => {
@@ -78,7 +80,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+           console.log(error.message);
+           res.status(500).send("Internal server error");
         }
     },
     changeAccountStatus: async (req, res, next) => {
@@ -102,7 +105,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+           console.log(error.message);
+           res.status(500).send("Internal server error");
         }
     },
     updateUserName: async (req, res, next) => {
@@ -122,7 +126,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+           console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     }
 }

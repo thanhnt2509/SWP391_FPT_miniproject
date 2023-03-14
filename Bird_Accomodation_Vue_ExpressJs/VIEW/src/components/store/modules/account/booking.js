@@ -1,3 +1,4 @@
+import axios from 'axios';
 import api from '../../api'
 
 const state = {
@@ -50,6 +51,19 @@ const actions = {
             date_from: '',
             date_to: '',
         });
+    },
+    async checkout({ commit }, formData) {
+        let done = false;
+        // console.log(`is checkout_img ?: ${formData.get('file')}`);
+        console.log(formData.get('file'));
+        const response = await axios.post(`http://localhost:5000/booking/${formData.get('booking_id')}/checkout`, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				"x-access-token": localStorage.getItem("token"),
+			},
+		});
+        done = response.status === 200;
+        return done;
     }
 }
 
@@ -58,7 +72,7 @@ const getters = {
     getNewBooking_bird: state => state.newBooking.bird_selected_id,
     getNewBooking_service: state => state.newBooking.service_selected,
     getNewBooking_date: state => ([state.newBooking.date_from, state.newBooking.date_to]),
-    newBookingisOk: state => (state.newBooking.bird_selected_id != '' && state.newBooking.service_selected.length > 0 && state.newBooking.date_from != '' && state.newBooking.date_to != ''),
+    newBookingisOk: state => (state.newBooking.bird_selected_id !== '' && state.newBooking.service_selected.length > 0 && state.newBooking.date_from !== '' && state.newBooking.date_to !== ''),
 }
 
 

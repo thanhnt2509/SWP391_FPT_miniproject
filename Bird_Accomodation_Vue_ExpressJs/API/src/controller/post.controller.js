@@ -16,7 +16,8 @@ module.exports = {
                 posts: postList
             })
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     addPost: async (req, res, next) => {
@@ -41,7 +42,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     updatePostByID: async (req, res, next) => {
@@ -66,7 +68,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
     deletePostByID: async (req, res, next) => {
@@ -85,7 +88,8 @@ module.exports = {
                 })
             }
         } catch (error) {
-            next(error);
+            console.log(error.message);
+            res.status(500).send("Internal server error");
         }
     },
 }

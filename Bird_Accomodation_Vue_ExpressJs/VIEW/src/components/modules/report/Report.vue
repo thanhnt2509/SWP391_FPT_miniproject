@@ -7,7 +7,7 @@
         <!-- <p>TEST: {{ getReportItem }}</p>
         <p>getUser test: {{ getUser }}</p>
         <p>getReportDetail test: {{ getReportDetail }}</p> -->
-        <ReportDay />
+        <!-- <ReportDay /> -->
     </div>
 </template>
 <script>
@@ -21,23 +21,13 @@ export default {
     computed: {
         ...mapGetters({
             getReportItem: 'getReportItem',
-            getReportDetail: 'getReportDetail',
-            getUser: 'getUser',
         })
     },
     components: {
-        ReportDay,
+        // ReportDay,
     },
     created() {
-        try {
-            const data = {
-                user_id: this.getUser.user_id,
-                booking_id: Number.parseInt(this.$route.params.booking_id)
-            }
-            this.$store.dispatch('getReport', data)
-        } catch (error) {
-            console.log(error)
-        }
+
     },
 
 }                                                                                                                                                                     
