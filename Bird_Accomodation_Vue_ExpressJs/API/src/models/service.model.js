@@ -1,22 +1,20 @@
+const db = require("../utils/dbConnect");
 const config = require("../config/config");
 
 module.exports = {
     getAllServices: async () => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ status: config.serviceStatus.AVAILABLE })
         return result || null;
     },
     getServiceByName: async (name) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where("name", "like", "%" + name + "%")
             .andWhere({ status: config.serviceStatus.AVAILABLE })
         return result || null;
     },
     getAllServicesHighLight: async () => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({
                 status: config.serviceStatus.AVAILABLE,
                 isHightLight: 1
@@ -24,8 +22,7 @@ module.exports = {
         return result || null;
     },
     getServiceById: async (service_id) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ 
                 service_id: service_id,
                 // status: config.serviceStatus.AVAILABLE 
@@ -34,8 +31,7 @@ module.exports = {
         return result || null;
     },
     addService: async (body) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .insert({
                 name: body.name,
                 description: body.description,
@@ -46,8 +42,7 @@ module.exports = {
         return result || null;
     },
     updateServiceByName: async (data) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ name: data.service_name })
             .update({
                 name: data.name,
@@ -58,8 +53,7 @@ module.exports = {
         return result || null;
     },
     updateServiceById: async (data) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ service_id: data.service_id })
             .update({
                 name: data.name,
@@ -70,8 +64,7 @@ module.exports = {
         return result || null;
     },
     deleteServiceByName: async (name) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ name: name })
             .update({
                 status: config.serviceStatus.UNAVAILABLE
@@ -80,8 +73,7 @@ module.exports = {
         return result || null;
     },
     deleteServiceById: async (service_id) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ service_id: service_id })
             .update({
                 status: config.serviceStatus.UNAVAILABLE
@@ -90,8 +82,7 @@ module.exports = {
         return result || null;
     },
     validateServiceName: async (name) => {
-        let con = await config.knexConnection();
-        const result = await con("Service")
+        const result = await db("Service")
             .where({ name: name })
             .first();
         return result || null;

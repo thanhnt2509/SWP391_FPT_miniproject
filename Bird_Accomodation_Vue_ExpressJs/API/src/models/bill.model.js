@@ -1,12 +1,11 @@
-const config = require('../config/config');
+const db = require('../utils/dbConnect');
 
 module.exports = {
     createBill: async (data) => {
 
     },
     getBill: async (booking_id) => {
-        let con = await config.knexConnection();
-        const returnData = await con('Bill AS b')
+        const returnData = await db('Bill AS b')
             .join('Booking AS bk', 'b.booking_id', 'bk.booking_id')
             .join('User AS us', 'bk.user_id', 'us.user_id')
             .join('Bird AS br', 'bk.bird_id', 'br.bird_id')
@@ -25,8 +24,7 @@ module.exports = {
         return returnData || null;
     },
     getBillServiceDetail: async (booking_id) => {
-        let con = await config.knexConnection();
-        const returnData = await con('BookingDetail AS bd')
+        const returnData = await db('BookingDetail AS bd')
             .join('Service AS s', 'bd.service_id', 's.service_id')
             .where('bd.booking_id', booking_id)
             .select(

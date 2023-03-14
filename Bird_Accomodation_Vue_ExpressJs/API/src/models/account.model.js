@@ -1,9 +1,9 @@
+const db = require("../utils/dbConnect");
 const config = require("../config/config");
 
 module.exports = {
     register: async (body) => {
-        let con = await config.knexConnection();
-        return await con('User').insert({
+        return await db('User').insert({
             email: body.email,
             password: body.password,
             name: body.name,
@@ -15,23 +15,20 @@ module.exports = {
         });
     },
     login: async (body) => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .whereRaw('email = ? collate latin1_general_cs_as \n' +
                 'and password = ? collate latin1_general_cs_as', [body.email, body.password])
             .first();
         return returnData || null;
     },
     validateEmail: async (email) => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .whereRaw('email = ? collate latin1_general_cs_as', [email])
             .first();
         return returnData || null;
     },
     validatePhone: async (phone) => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .where({
                 phone: phone
             })
@@ -39,8 +36,7 @@ module.exports = {
         return returnData || null;
     },
     getAccountByID: async (user_id) => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .where({
                 user_id: user_id
             })
@@ -48,9 +44,8 @@ module.exports = {
         return returnData || null;
     },
     getSearchAccount: async (body) => {
-        const con = await config.knexConnection();
         const { name, email, phone } = body;
-        const returnData = await con('User')
+        const returnData = await db('User')
             .select('user_id', 'email', 'name', 'address', 'phone', 'role', 'status', 'user_img', 'token')
             .whereRaw('COALESCE(name, \'\') LIKE ?', `%${name || ''}%`)
             .whereRaw('COALESCE(email, \'\') LIKE ?', `%${email || ''}%`)
@@ -58,8 +53,7 @@ module.exports = {
         return returnData || null;
     },
     changeAccountStatus: async (user_id, newStatus) => {
-        let con = await config.knexConnection();
-        return await con('User')
+        return await db('User')
             .where({
                 user_id: user_id
             })
@@ -68,8 +62,7 @@ module.exports = {
             });
     },
     validateRole: async (email) => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .select('role')
             .where({
                 email: email
@@ -78,8 +71,7 @@ module.exports = {
         return returnData.role;
     },
     getAllAccount: async () => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .select(
                 'user_id',
                 'email',
@@ -94,8 +86,7 @@ module.exports = {
         return returnData || null;
     },
     updateUserName: async (user_id, name) => {
-        let con = await config.knexConnection();
-        return await con('User')
+        return await db('User')
             .where({
                 user_id: user_id
             })
@@ -104,8 +95,7 @@ module.exports = {
             });
     },
     getUserId: async (email) => {
-        let con = await config.knexConnection();
-        const returnData = await con('User')
+        const returnData = await db('User')
             .select('user_id')
             .where({
                 email: email

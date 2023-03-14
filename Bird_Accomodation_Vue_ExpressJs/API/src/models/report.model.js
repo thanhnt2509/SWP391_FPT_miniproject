@@ -1,16 +1,14 @@
-const config = require("../../src/config/config");
+const db = require("../utils/dbConnect");
 
 module.exports = {
     getReportDetail: async (booking_id) => {
-        let con = await config.knexConnection();
-        const result = await con("DailyReport")
+        const result = await db("DailyReport")
             .where({ booking_id: booking_id })
         return result || null;
     },
     //DailyReport
     getAllReport: async () => {
-        let con = await config.knexConnection();
-        const result = await con("DailyReport")
+        const result = await db("DailyReport")
             .join("BookingDetail", "DailyReport.bdetail_id", "BookingDetail.bdetail_id")
             .join("Service", "BookingDetail.service_id", "Service.service_id")
             .select("DailyReport.*", "Service.name")
@@ -77,8 +75,7 @@ module.exports = {
     //     }
     // },
     getReportByBookingId: async (booking_id) => {
-        let con = await config.knexConnection();
-        const result = await con("DailyReport")
+        const result = await db("DailyReport")
             .join("BookingDetail", "DailyReport.bdetail_id", "BookingDetail.bdetail_id")
             .join("Service", "BookingDetail.service_id", "Service.service_id")
             .where({ booking_id: booking_id })

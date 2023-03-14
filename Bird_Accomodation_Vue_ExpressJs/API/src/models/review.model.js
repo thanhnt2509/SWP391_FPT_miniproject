@@ -1,9 +1,8 @@
-const config = require("../../src/config/config");
+const db = require("../utils/dbConnect");
 
 module.exports = {
     getAllReviews: async () => {
-        let con = await config.knexConnection();
-        const result = await con('Review')
+        const result = await db('Review')
             .select('r.review_id', 'u.name', 'u.user_img', 'b.date_from', 'b.date_to', 'b.status', 'r.rating', 'r.comment')
             .from('Review as r')
             .join('User as u', 'r.user_id', 'u.user_id')
@@ -12,8 +11,7 @@ module.exports = {
         return result || null;
     },
     filterReview: async (star) => {
-        let con = await config.knexConnection();
-        const result = await con('Review')
+        const result = await db('Review')
             .select('r.review_id', 'u.name', 'u.user_img', 'b.date_from', 'b.date_to', 'b.status', 'r.rating', 'r.comment')
             .from('Review as r')
             .join('User as u', 'r.user_id', 'u.user_id')
@@ -23,8 +21,7 @@ module.exports = {
         return result || null;
     },
     addReview: async (data) => {
-        let con = await config.knexConnection();
-        return await con('Review')
+        return await db('Review')
             .insert({
                 user_id: data.user_id,
                 booking_id: data.booking_id,
@@ -33,8 +30,7 @@ module.exports = {
             }) || null;
     },
     editReview: async (data) => {
-        let con = await config.knexConnection();
-        return await con('Review')
+        return await db('Review')
             .where('review_id', data.review_id)
             .update({
                 rating: data.rating,
@@ -42,8 +38,7 @@ module.exports = {
             }) || null;
     },
     deleteReview: async (review_id) => {
-        let con = await config.knexConnection();
-        return await con('Review')
+        return await db('Review')
             .where('review_id', review_id)
             .del() || null;
     },

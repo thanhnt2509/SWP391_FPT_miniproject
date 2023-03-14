@@ -1,15 +1,13 @@
-const config = require("../config/config");
+const db = require("../utils/dbConnect");
 
 module.exports = {
     getAllPosts: async () => {
-        let con = await config.knexConnection();
-        const returnData = await con('Post').select();
+        const returnData = await db('Post').select();
         return returnData || null;
     },
     addPost: async (body) => {
-        let con = await config.knexConnection();
         const { title, content, reference } = body;
-        const returnData = await con('Post')
+        const returnData = await db('Post')
             .returning('post_id')
             .insert({
                 title: title,
@@ -19,9 +17,8 @@ module.exports = {
         return returnData || null;
     },
     updatePostByID: async (post_id, body) => {
-        let con = await config.knexConnection();
         const { title, content, reference } = body;
-        const returnData = await con('Post')
+        const returnData = await db('Post')
             .where({
                 post_id: post_id
             })
@@ -33,8 +30,7 @@ module.exports = {
         return returnData || null;
     },
     deletePostByID: async (post_id) => {
-        let con = await config.knexConnection();
-        const returnData = await con('Post')
+        const returnData = await db('Post')
             .where({
                 post_id: post_id
             })

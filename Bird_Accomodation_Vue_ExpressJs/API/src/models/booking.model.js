@@ -1,25 +1,22 @@
-const config = require("../config/config");
+const db = require("../utils/dbConnect");
 
 module.exports = {
     changeBookingStatus: async (bookingId, status) => {
-        let con = await config.knexConnection();
-        return await con('Booking')
+        return await db('Booking')
             .where('booking_id', bookingId)
             .update({
                 status: status
             }) || null;
     },
     getAllBookings: async () => {
-        let con = await config.knexConnection();
-        const result = await con.select("b.*", "bi.bird_name", "u.address", "u.name")
+        const result = await db.select("b.*", "bi.bird_name", "u.address", "u.name")
             .from("Booking as b")
             .join("Bird as bi", "b.bird_id", "bi.bird_id")
             .join("User as u", "b.user_id", "u.user_id");
         return result || null;
     },
     getBookingServices: async (bookingId) => {
-        let con = await config.knexConnection();
-        const result = await con.select("s.service_id", "s.name", "s.price", "s.description")
+        const result = await db.select("s.service_id", "s.name", "s.price", "s.description")
             .from("Booking as b")
             .join("BookingDetail as bd", "b.booking_id", "bd.booking_id")
             .join("Service as s", "bd.service_id", "s.service_id")
@@ -29,18 +26,16 @@ module.exports = {
         return result || null;
     },
     getMyBookings: async (email) => {
-        let con = await config.knexConnection();
-        const result = await con.select("b.*", "bi.bird_name", "u.address")
+        const result = await db.select("b.*", "bi.bird_name", "u.address")
             .from("Booking as b")
             .join("Bird as bi", "b.bird_id", "bi.bird_id")
             .join("User as u", "b.user_id", "u.user_id")
-            .where("b.user_id", con.select("user_id").from("User").where({email: email}));
+            .where("b.user_id", db.select("user_id").from("User").where({email: email}));
         return result || null;
     },
     addNewBooking: async (data) => {
         try {
-            let con = await config.knexConnection();
-            await con.transaction(async (trx) => {
+            await db.transaction(async (trx) => {
                 const booking_id = await trx('Booking').insert({
                     user_id: data.user_id,
                     bird_id: data.bird_id,

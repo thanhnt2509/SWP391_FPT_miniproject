@@ -15,7 +15,7 @@ module.exports = {
             const { booking_id } = req.params;
             const bill = await billModel.getBill(booking_id);
             const billService = await billModel.getBillServiceDetail(booking_id);
-            if (billService === null && bill === null) {
+            if (billService === null && bill === null || billService.length === 0 && bill.length === 0) {
                 throw new ErrorHandler(404, 'Bill not found');
             } else {
                 const serviceList = billService.map(item => ({
