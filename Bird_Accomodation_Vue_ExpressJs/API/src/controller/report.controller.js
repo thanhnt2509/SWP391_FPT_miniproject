@@ -21,6 +21,23 @@ module.exports = {
     },
     addNewReport: async (req, res, next) => {
         try {
+            // add to report
+            const { booking_id, date, service_report_text } = req.body;
+            const images = req.files;
+            // check if report exist
+            const reportExist = await reportModel.isExistReportDate(booking_id, date);
+            if(reportExist){
+
+            }else{
+                const { affected, dreport_id } = await reportModel.addNewReport(booking_id, { date, service_report_text});
+
+                console.log(affected)
+                console.log(dreport_id)
+                // add to report_image
+                // const images = req.files;
+            }
+            // console.log(req.body)
+            // console.log(req.files)
 
         } catch (error) {
            console.error(error.message);

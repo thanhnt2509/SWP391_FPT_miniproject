@@ -1,42 +1,37 @@
 <template>
-  <div>
-    <a-upload
-        v-model:file-list="fileList"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        list-type="picture"
-    >
-      <a-button>
-        <upload-outlined></upload-outlined>
-        upload
-      </a-button>
-    </a-upload>
-
+  <h1 class="title">
+    Leave a report
+  </h1>
+  <div class="field">
+    <label class="label">Content</label>
+    <textarea class="textarea" placeholder="write report here !" @input="handleInputContent"></textarea>
   </div>
-</template>
-<script>
-import { UploadOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    UploadOutlined,
-  },
-  setup() {
-    const fileList = ref([]);
 
+  <div class="field">
+    <label class="label">Upload Images</label>
+    <label class="subtitle">Hold Ctrl or Shift to select multiple file</label>
+    <input type="file" accept="image/*" multiple @change="handleFileUpload">
+  </div>
+
+  new report : {{ $store.getters.getNewReport }}
+</template>
+
+<script>
+export default {
+  name: "ReportUpload",
+  data() {
     return {
-      fileList,
-    };
+
+    }
   },
-});
+  methods: {
+    handleFileUpload(evt) {
+      this.$store.commit('SET_NEW_REPORT_IMAGES', evt.target.files)
+    },
+    handleInputContent(evt) {
+      this.$store.commit('SET_NEW_REPORT_CONTENT', evt.target.value)
+    }
+  }
+}
+
 </script>
-<style scoped>
-/* tile uploaded pictures */
-.upload-list-inline :deep(.ant-upload-list-item) {
-  float: left;
-  width: 200px;
-  margin-right: 8px;
-}
-.upload-list-inline [class*='-upload-list-rtl'] :deep(.ant-upload-list-item) {
-  float: right;
-}
-</style>

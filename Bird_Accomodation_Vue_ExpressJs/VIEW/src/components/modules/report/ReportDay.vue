@@ -31,6 +31,8 @@
 import ReportDetail from './ReportDetail.vue'
 import {mapGetters} from 'vuex'
 import ReportUpload from "@/components/modules/report/ReportUpload.vue";
+import {Modal} from "ant-design-vue";
+import {h} from "vue";
 
 export default {
   name: "Report Day",
@@ -40,7 +42,6 @@ export default {
       modalText: 'Add a report for this day ?',
       visible: false,
       confirmLoading: false,
-
     };
   },
   computed: {
@@ -60,11 +61,57 @@ export default {
         this.confirmLoading = false;
         this.modalText = 'Add a report for this day ?';  // reset modal text
 
-        // run api request checkout
-        // const formData = this.handleContentForm();
-        // const successs = this.$store.dispatch("addReport", formData);
+        // validate form  -> ok
+        if(!this.validateReportForm()) {
+          Modal.error({
+            title: 'Upload report failed !',
+            content: h('div', {}, [
+              h('p', 'Please fill all the fields !'),
+            ]),
+          });
+          return;
+        }
+
+        // handle form
+        const formData = this.handleContentForm();
+        const success = this.$store.dispatch('submitNewReport', formData);
+        if(success){
+          Modal.success({
+            title: 'Checkout successfully !',
+            content: h('div', {}, [
+              h('p', 'Money will be transfered to your account soon !'),
+              h('p', 'Thank you for using our service !'),
+            ]),
+          });
+        }else{
+          Modal.error({
+            title: 'Something went wrong !',
+            content: h('div', {}, [
+              h('p', 'Please try again later !'),
+            ]),
+          });
+        }
       }, 2000);
     },
+    handleContentForm() {
+      const formData = new FormData();
+      formData.append('booking_id', this.$route.params.booking_id);
+      formData.append('date', new Date().toISOString().slice(0, 10));
+      formData.append('service_report_text', this.$store.getters.getNewReportContent);
+      const images = this.$store.getters.getNewReportImages;
+      for (let i = 0; i < images.length; i++) {
+        formData.append('files', images[i]);
+      }
+
+      return formData;
+    },
+    validateReportForm() {
+      const newReport = this.$store.getters.getNewReport;
+      if (!newReport || !newReport.images || !newReport.content || newReport.content.length === 0) {
+        return false;
+      }
+      return true;
+    }
   },
   components: {
     ReportDetail,
