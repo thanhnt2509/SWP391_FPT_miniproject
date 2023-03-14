@@ -10,10 +10,8 @@ module.exports = {
     getServiceByName: async (name) => {
         let con = await config.knexConnection();
         const result = await con("Service")
-            .where({
-                name: name,
-                status: config.serviceStatus.AVAILABLE
-            })
+            .where("name", "like", "%" + name + "%")
+            .andWhere({ status: config.serviceStatus.AVAILABLE })
         return result || null;
     },
     getAllServicesHighLight: async () => {
@@ -49,11 +47,13 @@ module.exports = {
     updateServiceByName: async (data) => {
         let con = await config.knexConnection();
         const result = await con("Service")
-            .where({ name: data.name })
+            .where({ name: data.service_name })
             .update({
+                name: data.name,
                 description: data.description,
                 price: data.price
             })
+            .returning(["service_id", "name", "description", "price", "image", "status"]);
         return result || null;
     },
     updateServiceById: async (data) => {
@@ -65,6 +65,7 @@ module.exports = {
                 description: data.description,
                 price: data.price
             })
+            .returning(["service_id", "name", "description", "price", "image", "status"]);
         return result || null;
     },
     deleteServiceByName: async (name) => {
@@ -74,6 +75,7 @@ module.exports = {
             .update({
                 status: config.serviceStatus.UNAVAILABLE
             })
+            .returning(["service_id", "name", "description", "price", "image", "status"]);
         return result || null;
     },
     deleteServiceById: async (service_id) => {
@@ -83,6 +85,13 @@ module.exports = {
             .update({
                 status: config.serviceStatus.UNAVAILABLE
             })
+            .returning(["service_id", "name", "description", "price", "image", "status"]);
         return result || null;
-    }
+    },
+    validateServiceName: async (name) => {
+        let con = await config.knexConnection();
+        const result = await con("Service")
+            .where({ name: name })
+        return result || null;
+    },
 }

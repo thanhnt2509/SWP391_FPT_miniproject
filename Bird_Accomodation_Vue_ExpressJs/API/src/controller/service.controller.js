@@ -21,19 +21,19 @@ module.exports = {
             next(error);
         }
     },
-    //sussy
     getServiceByName: async (req, res, next) => {
         try {
-            const { name } = req.params;
-            const result = await servicesModel.getServiceByName(name);
-            console.log(result);
+            const { service_name }  = req.params;
+            const result = await servicesModel.getServiceByName(service_name);
             const serviceList = result.map(item => ({
                 service_id: item.service_id,
                 name: item.name,
                 description: item.description,
-                price: item.price
+                status: item.status,
+                price: item.price,
+                image: item.image
             }))
-            if (result === null) {
+            if (result === null || result.length === 0) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Service not found"
@@ -58,9 +58,10 @@ module.exports = {
                 name: item.name,
                 description: item.description,
                 status: item.status,
-                price: item.price
+                price: item.price,
+                image: item.image
             }))
-            if (result === null) {
+            if (result === null || result.length === 0) {
                 res.status(200).send({
                     exitcode: 101,
                     message: "Service not found"
@@ -76,7 +77,6 @@ module.exports = {
             next(error);
         }
     },
-    //update this to not add duplicate sv name
     addService: async (req, res, next) => {
         try {
             const { name, description, price } = req.body;
@@ -84,6 +84,15 @@ module.exports = {
                 name: name,
                 description: description,
                 price: price
+            }
+            // Check if service name already exists
+            const checkService = await servicesModel.validateServiceName(name);
+            if (checkService !== null && checkService.length > 0) {
+                res.status(400).send({
+                    exitcode: 101,
+                    message: "Service name already exists"
+                })
+                return;
             }
             const result = await servicesModel.addService(serviceDetail);
             console.log(result);
@@ -94,7 +103,7 @@ module.exports = {
                     message: "Add service successfully"
                 })
             } else {
-                res.status(200).send({
+                res.status(400).send({
                     exitcode: 101,
                     message: "Add service failed"
                 })
@@ -105,7 +114,27 @@ module.exports = {
     },
     updateServiceByName: async (req, res, next) => {
         try {
-            
+            const { service_name } = req.params;
+            const { name, description, price } = req.body;
+            const updateDetail = {
+                service_name: service_name,
+                name: name,
+                description: description,
+                price: price
+            }
+            const result = await servicesModel.updateServiceByName(updateDetail);
+            if (result !== null && result.length > 0){
+                res.status(200).send({
+                    exitcode: 0,
+                    message: "Update service successfully",
+                    service: result
+                })
+            } else {
+                res.status(400).send({
+                    exitcode: 101,
+                    message: "No service found"
+                })
+            }
         } catch (error) {
             next(error);
         }
@@ -121,58 +150,57 @@ module.exports = {
                 price: price
             }
             const result = await servicesModel.updateServiceById(updateDetail);
-            const serviceDetail = await servicesModel.getServiceById(service_id);
-            if (result !== null){
+            if (result !== null && result.length > 0){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Update service successfully",
-                    service: serviceDetail
+                    service: result
                 })
             } else {
-                res.status(200).send({
+                res.status(400).send({
                     exitcode: 101,
-                    message: "Update service failed"
+                    message: "No service found"
                 })
             }
         } catch (error) {
             next(error);
         }
     },
-    //sussy
-    // deleteServiceByName: async (req, res, next) => {
-    //     try {
-    //         const { name } = req.params;
-    //         const result = await servicesModel.deleteServiceByName(name);
-    //         if (result > 0){
-    //             res.status(200).send({
-    //                 exitcode: 0,
-    //                 message: "Delete service successfully"
-    //             })
-    //         } else {
-    //             res.status(200).send({
-    //                 exitcode: 101,
-    //                 message: "Delete service failed"
-    //             })
-    //         }
-    //     } catch (error) {
-    //         next(error);
-    //     }
-    // },
+    deleteServiceByName: async (req, res, next) => {
+        try {
+            const { service_name } = req.params;
+            const result = await servicesModel.deleteServiceByName(service_name);
+            if (result !== null && result.length > 0){
+                res.status(200).send({
+                    exitcode: 0,
+                    message: "Delete service successfully",
+                    service: result
+                })
+            } else {
+                res.status(400).send({
+                    exitcode: 101,
+                    message: "Delete service failed, service not found"
+                })
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
     deleteServiceById: async (req, res, next) => {
         try {
             const { service_id } = req.params;
             const result = await servicesModel.deleteServiceById(service_id);
-            const serviceDetail = await servicesModel.getServiceById(service_id);
-            if (result !== null){
+            console.log(result);
+            if (result !== null && result.length > 0){
                 res.status(200).send({
                     exitcode: 0,
                     message: "Delete service successfully",
-                    service: serviceDetail
+                    service: result
                 })
             } else {
-                res.status(200).send({
+                res.status(400).send({
                     exitcode: 101,
-                    message: "Delete service failed"
+                    message: "Delete service failed, service not found"
                 })
             }
         } catch (error) {
