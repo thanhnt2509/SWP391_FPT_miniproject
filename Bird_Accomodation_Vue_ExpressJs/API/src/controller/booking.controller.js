@@ -153,7 +153,17 @@ module.exports = {
             next(error);
         }
     },
-    getBookingByStatus: async (req, res, next) => {
-        //code here
-    },
+    checkoutBooking: async(req, res, next) => {
+        try {
+            // const { booking_id } = req.params;
+            // const { checkout_date, payment_method } = req.body;
+            // const checkout_img_filename = req.file.path;
+
+            console.log(req.params.booking_id);
+            console.log(req.body);
+            console.log(req.file);
+        } catch (error) {
+            next(error);
+        }
+    }
 }

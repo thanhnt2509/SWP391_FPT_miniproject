@@ -6,7 +6,7 @@ module.exports = {
         const request = new con.Request();
         const returnData = await request
             .input("booking_id", con.Int, booking_id)
-            .query("SELECT us.name, us.address, us.phone, br.bird_id, br.bird_name, bk.date_from, bk.date_to, bk.[status], b.total_amount \n" +
+            .query("SELECT us.name, us.address, us.phone, br.bird_id, br.bird_name, bk.date_from, bk.date_to, bk.[status], b.total_amount, b.checkout_date \n" +
                 "FROM Bill AS b \n" +
                 "JOIN Booking AS bk ON b.booking_id = bk.booking_id \n" +
                 "JOIN [User] AS us ON bk.user_id = us.user_id \n" +

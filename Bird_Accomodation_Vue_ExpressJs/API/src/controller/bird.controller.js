@@ -42,6 +42,7 @@ module.exports = {
             // console.log(req.body);
             // console.log('file')
             // console.log(req.file)
+            const filename = req.file.filename;
             const birdDetail = {
                 user_id: user_id,
                 type_id: bird_type,
@@ -50,7 +51,7 @@ module.exports = {
                 gender: gender,
                 breed: breed,
                 description: description,
-                image: req.file.filename
+                image: filename
             }
             const result = await birdModel.registerNewBird(birdDetail);
             if (result > 0) {

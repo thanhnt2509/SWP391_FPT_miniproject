@@ -1,3 +1,4 @@
+import axios from 'axios';
 import api from '../../api'
 
 const state = {
@@ -50,6 +51,22 @@ const actions = {
             date_from: '',
             date_to: '',
         });
+    },
+    async checkout({ commit }, formData) {
+        let done = false;
+        console.log(`is checkout_img ?: ${formData.get('file')}`);
+        const response = await api.post(`/booking/${formData.get('booking_id')}/checkout`, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				"x-access-token": localStorage.getItem("token"),
+			},
+		});
+        if (response.status === 200) {
+            done = true;
+        }else{
+            done = false;
+        }
+        return done;
     }
 }
 
