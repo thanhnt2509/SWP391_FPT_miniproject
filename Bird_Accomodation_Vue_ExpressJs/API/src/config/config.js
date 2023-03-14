@@ -16,7 +16,7 @@ module.exports = {
     },
     /**
      * @description mssql connection
-     * @decaprecated use knexConnection instead
+     * @deprecated use knexConnection instead
      */
     connection: async () => {
         try {
