@@ -1,4 +1,4 @@
-const config = require("../../src/config/config");
+const config = require("../config/config");
 
 module.exports = {
     register: async (body) => {
@@ -22,7 +22,8 @@ module.exports = {
     login: async (body) => {
         //body = {email, password}
         let con = await config.connection();
-        const request = new con.Request();
+
+        const request = new con.Request()
         const returnData = await request
             .input("email", con.NVarChar, body.email)
             .input("password", con.NVarChar, body.password)

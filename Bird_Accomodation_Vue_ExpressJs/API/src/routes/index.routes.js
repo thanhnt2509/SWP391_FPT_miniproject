@@ -10,6 +10,7 @@ const booking = require('./booking.routes');
 const report = require('./report.routes');
 const reportDetail = require('./reportDetail.routes');
 const bill = require('./bill.routes');
+const handleFile = require('./handleFile.routes');
 // middlewares
 const { verifyLogin } = require('../middlewares/verifyLogin.mdw');
 
@@ -28,6 +29,7 @@ router.use('/booking', verifyLogin, booking);
 router.use('/report', verifyLogin, report);
 router.use('/reportDetail', verifyLogin, reportDetail);
 router.use('/bill', verifyLogin, bill);
+router.use('/file', handleFile);
 
 // export router
 module.exports = router;

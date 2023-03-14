@@ -3,8 +3,7 @@ const config = require("../config/config");
 module.exports = {
     getAllServices: async () => {
         let con = await config.connection();
-        const request = new con.Request();
-        const returnData = await request
+        const returnData = await con
             .query("SELECT * FROM Service WHERE status = 1 and isHightLight = 1");
         return (await returnData).recordset || null;
     },

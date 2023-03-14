@@ -6,10 +6,10 @@ const { handleError } = require('./src/middlewares/errorHandler.mdw');
 const { unknownEndpoint } = require('./src/middlewares/unknownEndpoint.mdw');
 
 const app = express();
+app.setMaxListeners(30)
 
 //Access-Control-Allow-Origin
 app.use(cors());
-
 // only to monitor web -> don't need to care about this thing
 app.use(logger)
 function logger(req, res, next) {

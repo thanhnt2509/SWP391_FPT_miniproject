@@ -36,17 +36,12 @@ module.exports = {
     registerNewBird: async (req, res, next) => {
         try {
             // const email = req.payload.email;
-            const { 
-                user_id,
-                bird_name,
-                bird_type,
-                age, 
-                gender,
-                breed,
-                description,
-                image } = req.body;
-            // const birdTypeId = await birdModel.getBirdTypeId(bird_type);
-            // const user_id = await getUserId(email);
+            const { user_id, bird_name, bird_type, age, gender, breed, description } = req.body;
+            // const img = req.file.path;
+            // console.log('body')
+            // console.log(req.body);
+            // console.log('file')
+            // console.log(req.file)
             const birdDetail = {
                 user_id: user_id,
                 type_id: bird_type,
@@ -55,7 +50,7 @@ module.exports = {
                 gender: gender,
                 breed: breed,
                 description: description,
-                image: image
+                image: req.file.filename
             }
             const result = await birdModel.registerNewBird(birdDetail);
             if (result > 0) {

@@ -74,8 +74,13 @@ const actions = {
 		const response = await api.get(`/bird`, state.user.email);
 		commit("UPDATE_BIRDS", response.data.birds);
 	},
-	async addNewBird({ commit }, bird) {
-		const response = await api.post(`/bird`, bird);
+	async addNewBird({ commit }, formData) {
+		const response = await api.post(`/bird`, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+				"x-access-token": localStorage.getItem("token"),
+			},
+		});
 		await this.dispatch("getAllBirds");
 	},
 	async getAllBooking({ commit }) {
