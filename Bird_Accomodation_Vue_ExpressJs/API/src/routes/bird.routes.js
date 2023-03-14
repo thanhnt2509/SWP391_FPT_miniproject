@@ -1,12 +1,12 @@
 const express = require('express')
 const bird = require('../controller/bird.controller')
 const { verifyLogin } = require('../middlewares/verifyLogin.mdw');
-
+const multerInstance = require('../middlewares/multer');
 const router = express.Router()
 
 router.route('/')
     .get(verifyLogin, bird.getAllRegistedBird)
-    .post(verifyLogin, bird.registerNewBird)
+    .post(multerInstance.upload.single('file'), bird.registerNewBird)
 
 router.get('/type', bird.getAllBirdType)
 

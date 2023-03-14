@@ -1,4 +1,4 @@
-const config = require("../../src/config/config");
+const config = require("../config/config");
 
 module.exports = {
     register: async (body) => {
