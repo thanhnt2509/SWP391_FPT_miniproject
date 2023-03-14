@@ -12,9 +12,10 @@
 
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'status'">
-                <a-tag :color="record.status === 1 ? 'green' : 'red'">
+                <!-- <a-tag :color="record.status === 1 ? 'green' : 'red'">
                     {{ record.status === 1 ? 'Active' : 'Inactive' }}
-                </a-tag>
+                </a-tag> -->
+                <p>{{ record.status === 1 ? 'Active' : 'Inactive' }}</p>
             </template>
             <template v-if="column.key === 'role'">
                 {{ record.role === 1 ? 'Admin' : 'Customer' }}
