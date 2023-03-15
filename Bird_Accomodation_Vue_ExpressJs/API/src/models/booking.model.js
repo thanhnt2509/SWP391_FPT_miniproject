@@ -95,6 +95,7 @@ module.exports = {
         let con = await config.connection();
         const request = con.request();
         const successCheckoutStatus = 1;
+        const completeBookingStatus = 3;
         const returnData = await request
             .input("booking_id", sql.Int, booking_id)
             .input("checkout_date", sql.Date, checkout_date)
@@ -102,6 +103,13 @@ module.exports = {
             .input("payment_status", sql.Int, successCheckoutStatus)
             .input("checkout_img", sql.NVarChar, checkout_img_filename)
             .query("UPDATE [Bill] SET checkout_date = @checkout_date, payment_status = @payment_status, payment_method = @payment_method, checkout_img = @checkout_img WHERE booking_id = @booking_id");
-        return (await returnData).rowsAffected[0];
+
+        // upload booking status as successful
+        const changeStatus = await con.request()
+            .input("booking_id", sql.Int, booking_id)
+            .input("status", sql.Int, completeBookingStatus)
+            .query("UPDATE [Booking] SET status = @status WHERE booking_id = @booking_id");
+
+        return returnData.rowsAffected[0];
     }
 }

@@ -19,7 +19,7 @@ router.route('/:booking_id/:state')
     .put(verifyAdmin, booking.changeBookingStatus)
 
 router.route('/:booking_id/checkout')
-    .post(multerInstance.upload.single('file') ,booking.checkoutBooking)
+    .post(multerInstance.uploadCheckout.single('file') ,booking.checkoutBooking)
 
 
 
