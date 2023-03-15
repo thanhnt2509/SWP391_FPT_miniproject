@@ -2,9 +2,7 @@
     <div class="main column is-one-third" >
         <h1 class="label has-text-centered">User information</h1>
         <div class="user_img">
-            <div class="user_img_image">
-
-            </div>
+            <img class="user_img_image" src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
         </div>
         <table>
             <tr>
@@ -81,8 +79,8 @@ export default {
     width: 150px;
     height: 150px;
     /* background-color: rgb(120, 131, 134); */
-    background-image: url('../../public/images/avatar_user.jpg');
-    background-position: center;
+    /* background-image: url('../../public/images/avatar_user.jpg'); */
+    object-position: center;
     border-radius: 50%;
     display: inline-block;
 }

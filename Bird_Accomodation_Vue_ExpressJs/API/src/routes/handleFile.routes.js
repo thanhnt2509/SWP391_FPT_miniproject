@@ -42,4 +42,12 @@ router.get('/get_bird_img/:img_path', function(req, res, next) {
     }
 })
 
+router.get('/get_user_img/:img_path', function(req, res, next) {
+    const { img_path } = req.params;
+    try {
+        res.status(200).sendFile(img_path, { root: './store/avatar' });
+    }catch (e) {
+        res.status(500).send(e);
+    }
+})
 module.exports = router
