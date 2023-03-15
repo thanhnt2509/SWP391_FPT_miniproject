@@ -52,6 +52,12 @@ module.exports = {
     },
     createBill: async (req, res, next) => {
         const { booking_id } = req.params;
-        
+
+        try {
+            // get total amount of booking_id
+        }catch (error) {
+            console.log(error.message);
+            res.status(500).send("Internal server error");
+        }
     },
 }

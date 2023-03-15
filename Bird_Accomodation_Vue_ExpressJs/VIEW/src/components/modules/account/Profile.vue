@@ -21,7 +21,7 @@
         </div>
         <div class="wrapper-avatar column is-4 ">
             <div class="wrapper-avatar-img">
-                <img src="http://localhost:5000/file/get_img/avatar_user.jpg" alt="">
+                <img src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
             </div>
         </div>
     </div>

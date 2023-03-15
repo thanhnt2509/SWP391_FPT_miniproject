@@ -74,7 +74,7 @@ exports.uploadReport = multer({
 });
 
 exports.uploadBird = multer({
-    storage: storageReport,
+    storage: storageBird,
     limits: {
         // 5Mbs
         fileSize: 1024 * 1024 * 5
