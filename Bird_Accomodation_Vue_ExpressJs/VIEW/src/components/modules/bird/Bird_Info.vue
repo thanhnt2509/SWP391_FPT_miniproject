@@ -17,7 +17,7 @@
 
         <!-- bird image -->
         <div>
-            <img :src="`http://localhost:5000/file/get_img/${bird?.image}`"
+            <img :src="`http://localhost:5000/file/get_bird_img/${bird?.image}`"
                 alt="bird image goes here" style="max-width: 60%%;">
         </div>
 

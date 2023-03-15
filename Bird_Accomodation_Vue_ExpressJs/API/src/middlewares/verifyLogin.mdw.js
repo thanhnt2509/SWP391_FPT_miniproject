@@ -7,6 +7,7 @@ module.exports = {
         if (!token) {
             console.log( "Missing token");
             res.status(500).send( "Missing token")
+            return;
         }
         try {
             const decoded = jwt.verify(token, config.JWT_SECRET);

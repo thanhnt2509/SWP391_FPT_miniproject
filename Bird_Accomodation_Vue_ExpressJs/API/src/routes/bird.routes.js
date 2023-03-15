@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.route('/')
     .get(verifyLogin, bird.getAllRegistedBird)
-    .post(multerInstance.upload.single('file'), bird.registerNewBird)
+    .post(multerInstance.uploadBird.single('file'), bird.registerNewBird)
 
 // base data
 router.get('/type', bird.getAllBirdType)
