@@ -48,7 +48,7 @@ module.exports = {
         }
     },
     cancelBooking: async (req, res) => {
-        const { booking_id } = req.params.booking_id;
+        const { booking_id } = req.params;
         const cancelStatus = config.bookingStatus.CANCLED;
         try {
             const result = await bookingModel.changeBookingStatus(booking_id, cancelStatus);

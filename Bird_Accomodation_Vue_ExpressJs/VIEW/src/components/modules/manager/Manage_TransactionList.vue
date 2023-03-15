@@ -63,7 +63,7 @@
                 <!-- check-in  -->
                 <span v-else-if="bookingState[record.status].state === 'Approved'">
 
-                    <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
+                    <a-popconfirm title="Are you sure to perform check-in on this booking ?" ok-text="Yes" cancel-text="No"
                         @confirm="checkin_Booking(record.booking_id)" @cancel="">
                         <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
                         <button class="button is-info"><i style="padding-right: 10px"
@@ -106,10 +106,9 @@
     {{ bookingState }} -->
 </template>
 <script>
-import { SmileOutlined, DownOutlined, QuestionCircleOutlined } from '@ant-design/icons-vue';
+import { SmileOutlined, DownOutlined} from '@ant-design/icons-vue';
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
-import { message } from 'ant-design-vue';
 const columns = [{
     name: 'Booking ID',
     dataIndex: 'booking_id',
@@ -177,10 +176,6 @@ export default defineComponent({
         const approveBooking = (booking_id) => store.dispatch('approveBooking', booking_id)
         const rejectBooking = (booking_id) => store.dispatch('rejectBooking', booking_id)
         const checkin_Booking = (booking_id) => store.dispatch('checkin_Booking', booking_id)
-        // const checkout_Booking = (booking_id) => {
-        //     router.push(`/manager/checkout/${booking_id}`)
-        //     //store.dispatch('checkout_Booking', booking_id)
-        //     }
 
         return {
             data,

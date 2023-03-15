@@ -20,9 +20,9 @@
           :title="`Update Report ${new Date().toISOString().slice(0, 10)}`" :confirm-loading="confirmLoading"
           @ok="handleOk">
           <!--        <p>{{ modalText }}</p>-->
-            getNewReportContent: {{ getNewReportContent }} <br>
+            <!-- getNewReportContent: {{ getNewReportContent }} <br>
             getNewReportImages: {{ getNewReportImages }}  <br>
-            getNewReportUpdateList: {{ getNewReportUpdateList }} <br>
+            getNewReportUpdateList: {{ getNewReportUpdateList }} <br> -->
           <div class="columns">
             <ReportUpload />
             <ReportUploadServiceSelect />
