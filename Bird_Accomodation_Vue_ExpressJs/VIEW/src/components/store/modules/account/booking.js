@@ -68,7 +68,8 @@ const actions = {
         });
         done = response.status === 200;
         return done;
-    }
+    },
+
 }
 
 const getters = {
@@ -77,6 +78,7 @@ const getters = {
     getNewBooking_service: state => state.newBooking.service_selected,
     getNewBooking_date: state => ([state.newBooking.date_from, state.newBooking.date_to]),
     newBookingisOk: state => (state.newBooking.bird_selected_id !== '' && state.newBooking.service_selected.length > 0 && state.newBooking.date_from !== '' && state.newBooking.date_to !== ''),
+
 }
 
 

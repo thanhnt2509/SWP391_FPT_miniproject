@@ -32,7 +32,7 @@
                 </template>
                 <template v-else-if="column.key === 'action'">
                     <span>
-                        <a><button class="button is-primary">Detail on #tr_{{ record.booking_id }}</button></a>
+                        <!-- <a><button class="button is-primary">Detail on #tr_{{ record.booking_id }}</button></a> -->
                         <a-divider type="vertical" />
                         <a v-if="bookingState[record.status].state === 'Pending'"><button disabled class="button is-warning is-light"><i style="padding-right: 10px" class="fa-solid fa-circle-notch"></i>Processing</button></a>
                         <a v-else-if="bookingState[record.status].state === 'Approved'"><button disabled class="button is-success is-light"><i style="padding-right: 10px" class="fa-regular fa-circle-check"></i>Approved</button></a>

@@ -1,5 +1,5 @@
 <template>
- reportData: {{ reportData }}
+ <!-- reportData: {{ reportData }} -->
   <div class="main columns">
     <!--      report text -->
     <div class="column is-6" style="padding-left: 61px;">
@@ -14,18 +14,8 @@
     <!--      report img-->
     <div class="column is-6">
       <h1 class="title">Report Image</h1>
-      <a-carousel arrows autoplay dots-class="slick-dots slick-thumb">
-        <template #prevArrow>
-          <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
-            <left-circle-outlined />
-          </div>
-        </template>
-        <template #nextArrow>
-          <div class="custom-slick-arrow" style="right: 10px">
-            <right-circle-outlined />
-          </div>
-        </template>
-        <div v-for="item in reportData.images" :key="item">
+      <a-carousel autoplay dots-class="slick-dots slick-thumb" :dot-position="'top'" style="padding-top: 40px; background-color: #d5e28a;">
+        <div v-for="item in reportData.images" :key="item" class="image_report">
           <img :src="getImgUrl(item.service_report_image)" :alt="item.service_report_image"/>
         </div>
       </a-carousel>
@@ -69,7 +59,7 @@ export default {
   padding: 0;
   margin: 0;
   height: 597px;
-  background-color: #98a550;
+  /* background-color: #61c88a; */
   border: 0.2px solid #aaaaaa;
   border-radius: 20px;
 }
@@ -80,7 +70,7 @@ export default {
 }
 
 .ant-carousel :deep(.slick-slide img) {
-  border: 5px solid #fff;
+  border: 5px solid #b39b31;
   display: block;
   margin: auto;
   max-width: 80%;
@@ -109,15 +99,14 @@ export default {
 .ant-carousel :deep .slick-thumb li.slick-active img {
   filter: grayscale(0%);
 }
-
-.ant-carousel :deep(.custom-slick-arrow:before) {
-  display: none;
-}
-.ant-carousel :deep(.custom-slick-arrow:hover) {
-  opacity: 0.5;
+.image_report{
+  width: 369px;
+  height: 371px;
 }
 
-.ant-carousel :deep(.slick-slide h3) {
-  color: #fff;
+.image_report{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

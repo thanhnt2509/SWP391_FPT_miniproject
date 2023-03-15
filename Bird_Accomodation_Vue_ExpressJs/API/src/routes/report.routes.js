@@ -11,11 +11,10 @@ const router = express.Router();
 router.route('/:booking_id')
     .get(report.getReportByBookingId)
 
-router.route('/detail')
-    .patch(report.getReportDetail);
-
 router.route('/newReport')
     .post(verifyAdmin, multerInstance.uploadReport.array('files') , report.addNewReport)
 
+router.route('/newReport/updateReportList')
+    .post(verifyAdmin, report.updateReportList)
 
 module.exports = router;

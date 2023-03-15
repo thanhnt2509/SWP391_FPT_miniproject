@@ -2,23 +2,6 @@ const reportModel = require('../models/report.model');
 
 
 module.exports = {
-    getReportDetail: async (req, res, next) => {
-        try {
-
-        } catch (error) {
-           console.error(error.message);
-            res.status(500).send("Internal server error");
-        }
-    },
-    //DailyReport
-    getAllReport: async (req, res, next) => {
-        try {
-
-        } catch (error) {
-           console.error(error.message);
-            res.status(500).send("Internal server error");
-        }
-    },
     addNewReport: async (req, res, next) => {
         try {
             // add to report
@@ -35,23 +18,36 @@ module.exports = {
             if(reportExist.length !== 0){
                 console.log(`report are existed !`);
                 console.log(reportExist);
-                const updateReport = await reportModel.updateReport(booking_id, {date, service_report_text} ,reportExist)
-                res.status(201).send("update report successfully !!")
-                return;
+                // need to update this function, because it's high workload
+                // const updateReport = await reportModel.updateReport(booking_id, {date, service_report_text} ,reportExist)
+                // res.status(201).send("update report successfully !!")
+                res.status(400).send("Report are existed !");
             }else{
                 const { affected, dreport_id } = await reportModel.addNewReport(booking_id, { date, service_report_text});
                 const reportImages = await reportModel.addNewReportImage(dreport_id, imagePath);
-                console.log(affected)
-                console.log(dreport_id)
-                console.log(reportImages);
+                // console.log(affected)
+                // console.log(dreport_id)
+                // console.log(reportImages);
                 
-                res.status(200).send("Add new report successfully !")
+                res.status(200).send("Add new report (text, images) successfully !")
             }
             // console.log(req.body)
             // console.log(req.files)
 
         } catch (error) {
            console.error(error.message);
+            res.status(500).send("Internal server error");
+        }
+    },
+    updateReportList: async (req, res, next) => {
+        const { booking_id, updateList } = req.body;
+        try {
+            const result = await reportModel.updateReportServiceByBooking_id(booking_id, updateList);
+            // console.log(booking_id);
+            // console.log(updateList);
+            res.status(200).send("Update report list successfully !");
+        }catch (e) {
+            console.log(e.message)
             res.status(500).send("Internal server error");
         }
     },

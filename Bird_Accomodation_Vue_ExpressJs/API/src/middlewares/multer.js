@@ -45,8 +45,8 @@ exports.upload = multer({
 exports.uploadReport = multer({
     storage: storageReport,
     limits: {
-        // 5Mbs
-        fileSize: 1024 * 1024 * 5
+        // 20Mbs
+        fileSize: 1024 * 1024 * 20
     }
 });
 

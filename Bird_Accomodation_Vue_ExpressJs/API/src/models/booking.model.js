@@ -27,10 +27,9 @@ module.exports = {
         const request = con.request();
         const returnData = await request
             .input("booking_id", sql.Int, bookingId)
-            .query("select s.service_id, s.name, s.price " +
-                "from Booking b join BookingDetail bd on b.booking_id = bd.booking_id " +
-                " join Service s on bd.service_id = s.service_id " +
-                "where b.booking_id = @booking_id");
+            .query("select s.service_id, s.name, s.price as current_price, s.isPack, bd.booked_price, bd.quantity, bd.remain\n" +
+                "from BookingDetail bd join Service s on bd.service_id = s.service_id\n" +
+                "where bd.booking_id = @booking_id");
         return (await returnData).recordset || null;
     },
     getMyBookings: async (email) => {
@@ -74,9 +73,10 @@ module.exports = {
                     .input('booking_id', sql.Int, booking_id.recordset[0].lastId)
                     .input('service_id', sql.Int, serviceList[i].service_id)
                     .input('quantity', sql.Int, serviceList[i].quantity)
+                    .input('remain', sql.Int, serviceList[i].quantity)
                     .input('booked_price', sql.Int, serviceList[i].price)
-                    .query(`INSERT INTO [BookingDetail] (booking_id, service_id, quantity, booked_price) \n`
-                        + `VALUES (@booking_id, @service_id, @quantity, @booked_price)`);
+                    .query(`INSERT INTO [BookingDetail] (booking_id, service_id, quantity, booked_price, remain) \n`
+                        + `VALUES (@booking_id, @service_id, @quantity, @booked_price, @remain)`);
             }
             await transaction.commit();
 

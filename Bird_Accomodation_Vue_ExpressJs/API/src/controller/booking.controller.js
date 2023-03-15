@@ -116,16 +116,10 @@ module.exports = {
                 console.log('No booking found');
                 res.status(400).send('No booking found');
             } else {
-                const serviceList = result.map(item => ({
-                    service_id: item.service_id,
-                    service_name: item.name,
-                    price: item.price,
-                    description: item.description,
-                }));
                 res.status(200).send({
                     exitcode: 0,
                     message: 'Get booking services successfully',
-                    services: serviceList
+                    services: result
                 });
             }
         } catch (error) {

@@ -1,17 +1,25 @@
 <template>
-    <div class="container content">
+    <div class="content" style="padding-left: 6%; padding-right: 6%;">
         <div class="has-text-centered">
             <h1 class="title ">Report History for Booking_{{ $route.params.booking_id }}</h1>
-            <p class="subtitle">{{ getReportItem?.date_from }} - {{ getReportItem?.date_to }}</p>
+            <p class="subtitle">date_from - date_to</p>
         </div>
-        <!-- <p>TEST: {{ getReportItem }}</p>
-        <p>getUser test: {{ getUser }}</p>
-        <p>getReportDetail test: {{ getReportDetail }}</p> -->
-        <ReportDay />
+         <!-- <p>TEST: {{ getReportItem }}</p> -->
+         <!-- <p>get all service of booking: {{ getBookingServices }}</p> -->
+        <!--<p>getUser test: {{ getUser }}</p> -->
+        <div class="columns">
+            <ReportDay />
+            <div class="column is-4">
+                <ReportProgressBar />
+                <TransactionNewService />
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import ReportDay from './ReportDay.vue'
+import TransactionNewService from '../account/TransactionNewService.vue';
+import ReportProgressBar from './ReportProgressBar.vue';
 import { mapGetters } from 'vuex'
 export default {
     name: "Report",
@@ -21,10 +29,13 @@ export default {
     computed: {
         ...mapGetters({
             getReportItem: 'getReportItem',
+            getBookingServices: 'getBookingServices',
         })
     },
     components: {
         ReportDay,
+        TransactionNewService,
+        ReportProgressBar
     },
     created() {
 

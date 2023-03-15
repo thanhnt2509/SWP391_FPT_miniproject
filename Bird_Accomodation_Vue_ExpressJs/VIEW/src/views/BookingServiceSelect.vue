@@ -17,7 +17,7 @@
                 </thead>
                 <tr v-for="(service,index) in serviceSelectedList" :key="service.id">
                     <td>
-                        <a-switch size="small" v-model:checked="serviceSelectedList[index].checked" />
+                        <a-switch :disabled="service.isPack ? true : false" size="small" v-model:checked="serviceSelectedList[index].checked" />
                     </td>
                     <td>
                         <label :for="service.id">{{ service.name }}</label>
@@ -27,9 +27,9 @@
                         <label :for="service.id">{{ service.price }}</label>
                     </td>
                     <td>
-                        <input type="number" v-if="!service.isPack" v-model="serviceSelectedList[index].quantity"
-                            style="width: 100px; border: 0.2px solid black; border-radius: 10px; padding: 8px;" min="1">
-                        <p v-else style="padding: 10px; border: 0.2px solid black; border-radius: 10px;">is Pack</p>
+                        <a-input-number type="number" v-if="!service.isPack" v-model="serviceSelectedList[index].quantity"
+                            style="width: 100px; border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;" min="1"/>
+                        <p v-else style="border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;">is Pack</p>
                     </td>
                 </tr>
             </table>

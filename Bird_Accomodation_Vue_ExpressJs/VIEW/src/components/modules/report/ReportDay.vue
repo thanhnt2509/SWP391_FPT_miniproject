@@ -1,38 +1,45 @@
 <template>
-  <div class="container has-text-centered">
-    <!--       report: {{ getReportItem }}-->
-    <div v-if="!getReportItem">
-      <h3 class="title">No report available</h3>
-    </div>
-    <a-tabs v-model:activeKey="activeKey" type="card">
-      <a-tab-pane v-for="(data, index) in getReportItem" :key="index" :tab="data.date">
-        <!--                 {{ data }}-->
-        <ReportDetail :reportData="data"/>
-      </a-tab-pane>
-    </a-tabs>
+  <div class="column is-8">
+    <div class="container has-text-centered">
+      <!--       report: {{ getReportItem }}-->
+      <div v-if="!getReportItem">
+        <h3 class="title">No report available</h3>
+      </div>
+      <a-tabs v-model:activeKey="activeKey" type="card">
+        <a-tab-pane v-for="(data, index) in getReportItem" :key="index" :tab="data.date">
+          <!--                 {{ data }}-->
+          <ReportDetail :reportData="data" />
+        </a-tab-pane>
+      </a-tabs>
+      
 
-    <!--        button to add a report-->
-    <div v-if="$store.getters.getUser.role === 1">
-      <button class="button is-primary add_report_button" @click="showModal">Add Report</button>
-      <a-modal
-          v-model:visible="visible"
-          :title="`Update Report ${ new Date().toISOString().slice(0, 10) }`"
-          :confirm-loading="confirmLoading"
-          @ok="handleOk"
-      >
-<!--        <p>{{ modalText }}</p>-->
-        <ReportUpload />
-      </a-modal>
+      <!--        button to add a report-->
+      <div v-if="$store.getters.getUser.role === 1">
+        <button class="button is-primary add_report_button" @click="showModal">Add Report</button>
+        <a-modal width="1000px" v-model:visible="visible"
+          :title="`Update Report ${new Date().toISOString().slice(0, 10)}`" :confirm-loading="confirmLoading"
+          @ok="handleOk">
+          <!--        <p>{{ modalText }}</p>-->
+            getNewReportContent: {{ getNewReportContent }} <br>
+            getNewReportImages: {{ getNewReportImages }}  <br>
+            getNewReportUpdateList: {{ getNewReportUpdateList }} <br>
+          <div class="columns">
+            <ReportUpload />
+            <ReportUploadServiceSelect />
+          </div>
+        </a-modal>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ReportDetail from './ReportDetail.vue'
-import {mapGetters} from 'vuex'
+import ReportUploadServiceSelect from './ReportUploadServiceSelect.vue'
 import ReportUpload from "@/components/modules/report/ReportUpload.vue";
-import {Modal} from "ant-design-vue";
-import {h} from "vue";
+import { mapGetters } from 'vuex'
+import { Modal } from "ant-design-vue";
+import { h } from "vue";
 
 export default {
   name: "Report Day",
@@ -47,6 +54,10 @@ export default {
   computed: {
     ...mapGetters({
       getReportItem: 'getReportItem',
+      getNewReport: 'getNewReport',
+      getNewReportContent: 'getNewReportContent',
+      getNewReportImages: 'getNewReportImages',
+      getNewReportUpdateList: 'getNewReportUpdateList',
     })
   },
   methods: {
@@ -62,7 +73,7 @@ export default {
         this.modalText = 'Add a report for this day ?';  // reset modal text
 
         // validate form  -> ok
-        if(!this.validateReportForm()) {
+        if (!this.validateReportForm()) {
           Modal.error({
             title: 'Upload report failed !',
             content: h('div', {}, [
@@ -74,8 +85,13 @@ export default {
 
         // handle form
         const formData = this.handleContentForm();
-        const success = this.$store.dispatch('submitNewReport', formData);
-        if(success){
+        const uploadReportListPayload = {
+          booking_id: this.$route.params.booking_id,
+          updateList: this.$store.getters.getNewReportUpdateList,}
+        const success = 
+          this.$store.dispatch('submitNewReport', formData) && 
+          this.$store.dispatch('submitNewReportUpdateList', uploadReportListPayload);
+        if (success) {
           Modal.success({
             title: 'Checkout successfully !',
             content: h('div', {}, [
@@ -83,7 +99,8 @@ export default {
               h('p', 'Thank you for using our service !'),
             ]),
           });
-        }else{
+          this.$store.dispatch('clearNewReport');
+        } else {
           Modal.error({
             title: 'Something went wrong !',
             content: h('div', {}, [
@@ -98,6 +115,7 @@ export default {
       formData.append('booking_id', this.$route.params.booking_id);
       formData.append('date', new Date().toISOString().slice(0, 10));
       formData.append('service_report_text', this.$store.getters.getNewReportContent);
+      // formData.append('service_report_update', this.$store.getters.getNewReportUpdateList); // can not upload array as form data
       const images = this.$store.getters.getNewReportImages;
       for (let i = 0; i < images.length; i++) {
         formData.append('files', images[i]);
@@ -107,6 +125,7 @@ export default {
     },
     validateReportForm() {
       const newReport = this.$store.getters.getNewReport;
+      console.log(newReport);
       if (!newReport || !newReport.images || !newReport.content || newReport.content.length === 0) {
         return false;
       }
@@ -115,10 +134,12 @@ export default {
   },
   components: {
     ReportDetail,
-    ReportUpload
+    ReportUpload,
+    ReportUploadServiceSelect,
   },
   created() {
     this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
+    this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
   }
 }
 </script>
@@ -129,5 +150,4 @@ export default {
   padding: 30px;
   font-size: 20px;
 }
-
 </style>

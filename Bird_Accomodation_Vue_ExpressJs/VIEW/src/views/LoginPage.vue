@@ -60,11 +60,11 @@ export default {
         return {
             fields: {
                 // admin login
-                // email: 'U1@gmail.com',
-                // password: '12345',
+                email: 'U1@gmail.com',
+                password: '12345',
                 // user login
-                email: 'U2@gmail.com',
-                password: '123456',
+                // email: 'U2@gmail.com',
+                // password: '123456',
                 remember_me: false
             },
             isIncorrect: false,
@@ -109,7 +109,7 @@ export default {
 }
 
 .origin {
-    background-image: url('../../public/images/wallpaper-bird.jpg');
+    background-image: url('/images/wallpaper-bird.jpg');
     background-position: left;
     background-blend-mode: darken;
     background-size: cover;
