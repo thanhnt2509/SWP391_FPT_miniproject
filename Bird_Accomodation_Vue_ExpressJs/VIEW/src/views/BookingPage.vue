@@ -17,7 +17,7 @@
         </div>
         <div class="has-text-centered">
             <!-- <button @click="submitForm" class="button is-dark">Book now</button> -->
-            <a-button class="button is-dark" type="primary" @click="submitForm">Book now</a-button>
+            <a-button style="padding: 15px; height: fit-content;" class="button is-dark" type="primary" @click="submitForm">Book now</a-button>
         </div>
     </div>
 </template>
@@ -28,7 +28,8 @@ import BookingUserInfo from './BookingUserInfo.vue';
 import BookingBirdSelect from './BookingBirdSelect.vue';
 import BookingServiceSelect from './BookingServiceSelect.vue';
 import { mapGetters } from 'vuex';
-import { message } from 'ant-design-vue';
+import { message, Modal } from 'ant-design-vue';
+import { h } from "vue";
 export default {
     name: 'Booking',
     data() {
@@ -61,15 +62,27 @@ export default {
                     }
 
                     console.log(booking);
-                    this.$store.dispatch('createNewBooking', booking);
-                    // sync data
-                    this.$store.dispatch('getAllBooking');
-                    this.$store.dispatch('getAllBirds');
+                    const success = this.$store.dispatch('createNewBooking', booking);
 
-                    message.success('Booking success !');
-                    // redirect to booking page
-                    this.$router.push('/booking');
+                    if (success) {
+                        // sync data
+                        this.$store.dispatch('getAllBooking');
+                        this.$store.dispatch('getAllBirds');
+
+                        Modal.success({
+                            title: 'Booking successfully !',
+                            content: h('div', {}, [
+                                h('p', 'Perform booking successfuly !'),
+                                h('p', 'Thank you for using our service !'),
+                                h('p', 'Please check your transaction history !'),
+                            ]),
+                        });
+                        
+                    }
+                    this.$store.dispatch('clearBooking')
+                    this.$router.push('/account/transaction');
                 } catch (error) {
+                    console.log(error);
                     message.error('Something went wrong !');
                 }
             }

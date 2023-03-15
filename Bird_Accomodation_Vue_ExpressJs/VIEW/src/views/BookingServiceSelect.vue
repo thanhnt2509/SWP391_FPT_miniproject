@@ -6,7 +6,7 @@
             </abbr>
         </h2>
         <!-- serviceSelectedList {{ serviceSelectedList }} -->
-        new booking service selected : {{ $store.getters.getNewBooking_service }}
+        <!-- new booking service selected : {{ $store.getters.getNewBooking_service }} -->
         <div class="serviceList">
             <table>
                 <thead>
@@ -15,12 +15,13 @@
                     <th>Price</th>
                     <th>Quantity</th>
                 </thead>
-                <tr v-for="(service,index) in serviceItems" :key="service.id">
+                <tr v-for="(service,index) in serviceSelectedList" :key="service.id">
                     <td>
                         <a-switch size="small" v-model:checked="serviceSelectedList[index].checked" />
                     </td>
                     <td>
                         <label :for="service.id">{{ service.name }}</label>
+                        <!-- <p class="subtitle" v-if="service.isHighlight" style="color: red;">Best selection</p> -->
                     </td>
                     <td>
                         <label :for="service.id">{{ service.price }}</label>
@@ -33,7 +34,7 @@
                 </tr>
             </table>
         </div>
-        all service: {{ serviceItems }}
+        <!-- all service: {{ serviceItems }} -->
     </div>
 </template>
 <script>
@@ -63,9 +64,11 @@ export default {
             service_id: item.service_id,
             isHighlight: item.isHighlight,
             isPack: item.isPack,
-            quantity: 0,
-            checked: false,
-        }))
+            name: item.name,
+            price: item.price,
+            quantity: item.isPack ? 0 : 1,
+            checked: item.isPack ? true : false,
+        })).sort((a, b) => b.isPack - a.isPack);
     },
 }
 </script>

@@ -57,16 +57,26 @@ module.exports = {
                 .query(`INSERT INTO [Booking] (user_id, bird_id, date_from, date_to, status) \n`
                     + `VALUES (@user_id, @bird_id, @date_from, @date_to, @status)`);
             const booking_id = await transaction.request()
-                .query(`SELECT TOP 1 booking_id FROM [Booking] ORDER BY booking_id DESC`);
-            for (let i = 0; i < data.services.length; i++) {
-                let booked_price = await transaction.request()
-                    .query(`SELECT price from [Service] WHERE service_id = ${data.services[i]}`);
+                .query(`SELECT IDENT_CURRENT('Booking') AS lastId`);
+
+            // process service list add to Booking Detail
+            const serviceList = data.services.map(service => {
+                return {
+                    service_id: service.service_id,
+                    quantity: service.quantity,
+                    price: service.price,
+                    checked: service.checked,
+                }
+            }).filter(service => service.checked === true);
+
+            for(let i = 0; i < serviceList.length; i++) {
                 await transaction.request()
-                    .input('booking_id', sql.Int, booking_id.recordset[0].booking_id)
-                    .input('service_id', sql.Int, data.services[i])
-                    .input('booked_price', sql.Int, booked_price.recordset[0].price)
-                    .query(`INSERT INTO [BookingDetail] (booking_id, service_id, booked_price) \n`
-                        + `VALUES (@booking_id, @service_id, @booked_price)`);
+                    .input('booking_id', sql.Int, booking_id.recordset[0].lastId)
+                    .input('service_id', sql.Int, serviceList[i].service_id)
+                    .input('quantity', sql.Int, serviceList[i].quantity)
+                    .input('booked_price', sql.Int, serviceList[i].price)
+                    .query(`INSERT INTO [BookingDetail] (booking_id, service_id, quantity, booked_price) \n`
+                        + `VALUES (@booking_id, @service_id, @quantity, @booked_price)`);
             }
             await transaction.commit();
 

@@ -28,20 +28,24 @@ const mutations = {
 
 const actions = {
     async createNewBooking({ commit }, booking) {
-        const response = await api.post('/booking', booking);
-        if (response.status === 200) {
-            console.log(`Booking created successfully: ${response.data.booking_id}`);
-            this.clearBooking();
+        let done = false;
+        try {
+            const response = await api.post('/booking', booking);
+            done = response.status === 201;
+        } catch (error) {
+            console.log(error);
+            done = false;
         }
+        return done;
     },
     async setBirdSelected({ commit }, bird_id) {
         commit("SET_BIRD_SELECTED", bird_id);
-        
+
     },
     async setServiceSelected({ commit }, service) {
         commit("SET_SERVICE_SELECTED", service);
     },
-    async setBookingDate({ commit }, date) {   
+    async setBookingDate({ commit }, date) {
         commit("SET_BOOKING_DATE", date);
     },
     clearBooking({ commit }) {
@@ -57,11 +61,11 @@ const actions = {
         // console.log(`is checkout_img ?: ${formData.get('file')}`);
         console.log(formData.get('file'));
         const response = await axios.post(`http://localhost:5000/booking/${formData.get('booking_id')}/checkout`, formData, {
-			headers: {
-				"Content-Type": "multipart/form-data",
-				"x-access-token": localStorage.getItem("token"),
-			},
-		});
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "x-access-token": localStorage.getItem("token"),
+            },
+        });
         done = response.status === 200;
         return done;
     }
