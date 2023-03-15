@@ -17,7 +17,7 @@
 
         <!-- bird image -->
         <div>
-            <img :src="`http://localhost:5000/file/get_img/${bird?.image}`"
+            <img class="bird_img" :src="`http://localhost:5000/file/get_bird_img/${bird?.image}`"
                 alt="bird image goes here" style="max-width: 60%%;">
         </div>
 
@@ -94,7 +94,13 @@ export default {
     margin: 10px;
 }
 
-img {
-    /* max-width: 290.7px; */
+.bird_img{
+    width: 288px;
+    height: 288px;
+}
+.bird_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>

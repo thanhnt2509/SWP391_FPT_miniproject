@@ -1,7 +1,6 @@
-const { ErrorHandler } = require("./errorHandler.mdw");
-
 module.exports = {
     unknownEndpoint: (req, res) => {
-        throw new ErrorHandler(404, "Unknown endpoint with " + req.path);
+       console.error("Unknown endpoint");
+       res.status(500).send("Unknown endpoint");
     }
 };

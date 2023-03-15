@@ -16,13 +16,10 @@ module.exports = {
         return result || null;
     },
     getBookingServices: async (bookingId) => {
-        const result = await db.select("s.service_id", "s.name", "s.price", "s.description")
-            .from("Booking as b")
-            .join("BookingDetail as bd", "b.booking_id", "bd.booking_id")
+        const result = await db.select("s.service_id", "s.name", "s.price as current_price", "s.isPack", "bd.booked_price", "bd.quantity", "bd.remain")
+            .from("BookingDetail as bd")
             .join("Service as s", "bd.service_id", "s.service_id")
-            .where({
-                "b.booking_id": bookingId
-            });
+            .where("bd.booking_id", bookingId);
         return result || null;
     },
     getMyBookings: async (email) => {
@@ -30,7 +27,7 @@ module.exports = {
             .from("Booking as b")
             .join("Bird as bi", "b.bird_id", "bi.bird_id")
             .join("User as u", "b.user_id", "u.user_id")
-            .where("b.user_id", db.select("user_id").from("User").where({email: email}));
+            .where("b.user_id", db.select("user_id").from("User").where({ email: email }));
         return result || null;
     },
     addNewBooking: async (data) => {
@@ -45,13 +42,21 @@ module.exports = {
                 }).returning('booking_id').then((id) => {
                     return id[0].booking_id;
                 });
-                const services = await trx('Service')
-                    .select('service_id', 'price')
-                    .whereIn('service_id', data.services);
-                const bookingDetails = services.map((service) => {
+                // process service list add to Booking Detail
+                const serviceList = data.services.map(service => {
+                    return {
+                        service_id: service.service_id,
+                        quantity: service.quantity,
+                        price: service.price,
+                        checked: service.checked,
+                    }
+                }).filter(service => service.checked === true);
+                const bookingDetails = serviceList.map(service => {
                     return {
                         booking_id: booking_id,
                         service_id: service.service_id,
+                        quantity: service.quantity,
+                        remain: service.quantity,
                         booked_price: service.price
                     }
                 });

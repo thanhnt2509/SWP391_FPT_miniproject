@@ -17,7 +17,7 @@ module.exports = {
         const result = await db("Service")
             .where({
                 status: config.serviceStatus.AVAILABLE,
-                isHightLight: 1
+                isHighLight: 1
             })
         return result || null;
     },

@@ -47,6 +47,7 @@ const actions = {
 		await this.dispatch("getAllBookings");
 	},
 	async rejectBooking({ commit }, booking_id) {
+		console.log(`rejecting booking ${booking_id}`);
 		const response = await api.put(`/booking/${booking_id}/cancel`);
 		await this.dispatch("getAllBookings");
 	},

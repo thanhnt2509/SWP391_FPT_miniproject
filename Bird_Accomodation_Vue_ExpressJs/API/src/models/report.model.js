@@ -14,72 +14,112 @@ module.exports = {
             .select("DailyReport.*", "Service.name")
         return result || null;
     },
-    // addNewReport: async (booking_id, services) => {
-    //     let con = null;
-    //     let transaction = null;
-    //     try {
-    //         con = await config.connection();
-    //         transaction = new con.Transaction();
-    //         await transaction.begin();
-    //         let reportCount = -1;
-
-    //         for (const service of services) {
-    //             let getBookingDetailID = await transaction.request()
-    //                 .input("booking_id", con.Int, booking_id)
-    //                 .input("service_id", con.Int, service.service_id)
-    //                 .query(`SELECT bdetail_id
-    //                         FROM BookingDetail
-    //                         WHERE booking_id = @booking_id AND service_id = @service_id`);
-    //             let bdetail_id = getBookingDetailID.recordset[0].bdetail_id;
-
-    //             // Check if report already exists for the given bdetail_id and date
-    //             let checkReportExists = await transaction.request()
-    //                 .input("bdetail_id", con.Int, bdetail_id)
-    //                 .query(`SELECT COUNT(*) AS report_count
-    //                         FROM DailyReport
-    //                         WHERE bdetail_id = @bdetail_id AND date = CONVERT(date, GETDATE())`);
-    //             reportCount = checkReportExists.recordset[0].report_count;
-
-    //             if (reportCount > 0) {
-    //                 // Report already exists, update the existing record
-    //                 let updateReport = await transaction.request()
-    //                     .input("bdetail_id", con.Int, bdetail_id)
-    //                     .input("service_report_image", con.NVarChar, service.service_report_image)
-    //                     .input("service_report_text", con.NVarChar, service.service_report_text)
-    //                     .query(`UPDATE DailyReport
-    //                             SET service_report_image = @service_report_image, service_report_text = @service_report_text
-    //                             WHERE bdetail_id = @bdetail_id AND date = CONVERT(date, GETDATE())`);
-    //             } else {
-    //                 // Report doesn't exist, insert a new record
-    //                 let insertReport = await transaction.request()
-    //                     .input("bdetail_id", con.Int, bdetail_id)
-    //                     .input("service_report_image", con.NVarChar, service.service_report_image)
-    //                     .input("service_report_text", con.NVarChar, service.service_report_text)
-    //                     .query(`INSERT INTO DailyReport (bdetail_id, date, service_report_image, service_report_text)
-    //                             VALUES (@bdetail_id, CONVERT(date, GETDATE()), @service_report_image, @service_report_text)`);
-    //             }
-    //         }
-    //         await transaction.commit();
-    //         // console.log(reportCount);
-    //         return reportCount;
-    //     } catch (error) {
-    //         console.log(error);
-    //         if (transaction) {
-    //             await transaction.rollback();
-    //         }
-    //         throw error;
-    //     } finally {
-    //         if (con) {
-    //             con.close();
-    //         }
-    //     }
-    // },
     getReportByBookingId: async (booking_id) => {
-        const result = await db("DailyReport")
-            .join("BookingDetail", "DailyReport.bdetail_id", "BookingDetail.bdetail_id")
-            .join("Service", "BookingDetail.service_id", "Service.service_id")
+        let reportData = await db("DailyReport")
             .where({ booking_id: booking_id })
-            .select("DailyReport.*", "Service.name")
+            .select("date", "dreport_id")
+        return returnData.recordset.map(item => (
+            {
+                dreport_id: item.dreport_id,
+                date: new Date(item.date).toISOString().slice(0, 10),
+                service_report_text: item.service_report_text,
+                feedback_content: item.feedback_content,
+            }))
+        // console.log(reportData)
+        /*
+        * [
+               { date: '2023-03-10', dreport_id: 116 },
+               { date: '2023-03-11', dreport_id: 124 },
+               { date: '2023-03-12', dreport_id: 137 }
+
+            ]
+        * */
+        // console.log(await getImageByDreportId(116))
+    },
+    getImageByDreportId: async (dreport_id) => {
+        const result = await db("DailyReportImage")
+            .where({ dreport_id: dreport_id })
+            .select("service_report_image")
         return result || null;
     },
+    addNewReport: async (booking_id, { date, service_report_text }) => {
+        const result = await db("DailyReport")
+            .insert({
+                booking_id: booking_id,
+                date: date,
+                service_report_text: service_report_text
+            })
+            .returning("dreport_id");
+        return { affected: result.length, dreport_id: result[0]}
+    },
+    addNewReportImage: async (dreport_id, imagePaths) => {
+        const returnData = [];
+        for (let i = 0; i < imagePaths.length; i++) {
+            let result = await db("DailyReportImage")
+                .insert({
+                    dreport_id: dreport_id,
+                    service_report_image: imagePaths[i].imgPath
+                })
+            returnData.push(result)
+        }
+        return returnData;
+    },
+    isExistReportDate: async (booking_id, date) => {
+        const result = await db("DailyReport")
+            .where({
+                booking_id: booking_id,
+                date: date
+            })
+        return result || null;
+    },
+    // need to update this function, because it's high workload
+    updateReport: async (booking_id, { date, service_report_text }, origin) => {
+        if (date === '' || !date) date = origin.date
+        if (service_report_text === '' || !service_report_text) service_report_text = origin
+        let result = await db("DailyReport")
+            .where({
+                booking_id: booking_id,
+                date: date
+            })
+            .update({
+                service_report_text: service_report_text
+            })
+        return result || null;
+    },
+    // handle for update report service on both customer and admin side
+    updateReportServiceByBooking_id: async (booking_id, service_report_update) => {
+        // const { service_id, quantity, remain, isPack } = service_report_update
+        const returnData = [];
+        for (let i = 0; i < service_report_update.length; i++) {
+            const isExistBookingService = await db("BookingDetail")
+                .where({
+                    booking_id: booking_id,
+                    service_id: service_report_update[i].service_id
+                })
+            // does not exist the service_id of booking_id in BookingDetail -> insert
+            if (isExistBookingService.length === 0 || !isExistBookingService) {
+                const insertBookingService = await db("BookingDetail")
+                    .insert({
+                        booking_id: booking_id,
+                        service_id: service_report_update[i].service_id,
+                        quantity: service_report_update[i].quantity,
+                        remain: service_report_update[i].remain
+                    })
+                returnData.push(insertBookingService.length)
+            } else {
+                // exist the service_id of booking_id in BookingDetail -> update
+                const updateBookingService = await db("BookingDetail")
+                    .where({
+                        booking_id: booking_id,
+                        service_id: service_report_update[i].service_id
+                    })
+                    .update({
+                        quantity: service_report_update[i].quantity,
+                        remain: service_report_update[i].remain
+                    })
+                returnData.push(updateBookingService.length)
+            }
+        }
+        return returnData
+    }
 };

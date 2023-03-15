@@ -109,7 +109,7 @@ export default {
 }
 
 .origin {
-    background-image: url('../../public/images/wallpaper-bird.jpg');
+    background-image: url('/images/wallpaper-bird.jpg');
     background-position: left;
     background-blend-mode: darken;
     background-size: cover;

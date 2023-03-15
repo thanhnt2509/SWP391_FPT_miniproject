@@ -1,5 +1,5 @@
 <template>
-    <div class="main column">
+    <div class="main column is-one-third">
         <h2 class="label has-text-centered">Find Your Feathered Friend</h2>
         <table>
             <tr>
@@ -17,7 +17,7 @@
         <div v-if="bird_selected">
             <div class="bird_img">
                 <div class="bird_img_image">
-                    <img src="/images/bird1.jpg" alt="user bird">
+                    <img :src="`http://localhost:5000/file/get_bird_img/${bird_selected.image}`" alt="user bird">
                 </div>
             </div>
             <div class="bird_info">
