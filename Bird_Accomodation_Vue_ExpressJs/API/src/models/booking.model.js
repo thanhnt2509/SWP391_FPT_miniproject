@@ -1,4 +1,5 @@
 const db = require("../utils/dbConnect");
+const config = require("../config/config");
 
 module.exports = {
     changeBookingStatus: async (bookingId, status) => {
@@ -72,15 +73,20 @@ module.exports = {
     },
     checkoutBooking: async (payload) => {
         const { booking_id, checkout_date, payment_method, checkout_img_filename } = payload;
-        const successCheckoutStatus = 1;
         const returnData = await db('Bill')
             .where('booking_id', booking_id)
             .update({
                 checkout_date: checkout_date,
-                payment_status: successCheckoutStatus,
+                payment_status: config.bookingStatus.APPROVED,
                 payment_method: payment_method,
                 checkout_img: checkout_img_filename
-            });
-        return returnData || null;
+            }) || null;
+        // upload booking status as successful
+        const changeStatus = await db('Booking')
+            .where('booking_id', booking_id)
+            .update({
+                status: config.bookingStatus.COMPLETED
+            }) || null;
+        return returnData;
     }
 }

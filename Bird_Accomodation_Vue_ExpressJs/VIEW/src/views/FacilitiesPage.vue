@@ -4,7 +4,7 @@
       <div class="tile is-vertical is-8">
         <div class="tile">
           <div class="tile is-parent is-vertical">
-            <img class="tile is-child notification is-primary" src="/images/avatar_user.jpg" alt="">
+            <img class="tile is-child notification is-primary" src="/images/bird-house-design.jpg" alt="">
             <img class="tile is-child notification is-warning" src="/images/bird-fac2.jpg" alt="">
           </div>
           <div class="tile is-parent">

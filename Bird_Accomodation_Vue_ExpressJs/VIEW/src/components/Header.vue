@@ -11,7 +11,7 @@
           <div class="navbar-start" v-if="getUser?.role === 0 || getUser === undefined">
             <router-link class="navbar-item" to="/service">Service</router-link>
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
-            <router-link class="navbar-item" to="/about">About</router-link>
+            <!-- <router-link class="navbar-item" to="/about">About</router-link> -->
             <router-link class="navbar-item" to="/post">Post</router-link>
             <router-link class="navbar-item" to="/booking">Booking</router-link>
 

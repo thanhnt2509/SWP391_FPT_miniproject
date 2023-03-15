@@ -34,6 +34,29 @@ const storageBird = multer.diskStorage({
         cb(null, file.originalname);
     }
 });
+
+const storageCheckout = multer.diskStorage({
+    destination: function(req, file, cb)
+    {
+        cb(null, './store/checkout');
+    },
+    filename: function(req, file, cb)
+    {
+        cb(null, file.originalname);
+    }
+});
+
+const storageAvatar = multer.diskStorage({
+    destination: function(req, file, cb)
+    {
+        cb(null, './store/avatars');
+    },
+    filename: function(req, file, cb)
+    {
+        cb(null, file.originalname);
+    }
+});
+
 exports.upload = multer({
     storage: storageFile,
     limits: {
@@ -51,7 +74,23 @@ exports.uploadReport = multer({
 });
 
 exports.uploadBird = multer({
-    storage: storageReport,
+    storage: storageBird,
+    limits: {
+        // 5Mbs
+        fileSize: 1024 * 1024 * 5
+    }
+});
+
+exports.uploadCheckout = multer({
+    storage: storageCheckout,
+    limits: {
+        // 5Mbs
+        fileSize: 1024 * 1024 * 5
+    }
+});
+
+exports.uploadCheckout = multer({
+    storage: storageAvatar,
     limits: {
         // 5Mbs
         fileSize: 1024 * 1024 * 5
