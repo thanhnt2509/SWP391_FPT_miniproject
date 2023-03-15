@@ -1,5 +1,5 @@
 <template>
-<!--  reportData: {{ reportData }}-->
+ reportData: {{ reportData }}
   <div class="main columns">
     <!--      report text -->
     <div class="column is-6" style="padding-left: 61px;">
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-const baseUrl = 'http://localhost:5000/file/get_img/'
+const baseUrl = 'http://localhost:5000/file/get_report_img/'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
 export default {
   name: "Report Detail",
@@ -68,8 +68,8 @@ export default {
 .main {
   padding: 0;
   margin: 0;
-  height: fit-content;
-  background-color: #dae7e9;
+  height: 597px;
+  background-color: #98a550;
   border: 0.2px solid #aaaaaa;
   border-radius: 20px;
 }

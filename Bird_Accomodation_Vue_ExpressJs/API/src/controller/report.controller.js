@@ -24,17 +24,28 @@ module.exports = {
             // add to report
             const { booking_id, date, service_report_text } = req.body;
             const images = req.files;
+            // console.log(req.files);
+
+            const imagePath = images.map(item => ({
+                imgPath: item.filename
+            }))
+            // console.log(imagePath);
             // check if report exist
             const reportExist = await reportModel.isExistReportDate(booking_id, date);
-            if(reportExist){
-
+            if(reportExist.length !== 0){
+                console.log(`report are existed !`);
+                console.log(reportExist);
+                const updateReport = await reportModel.updateReport(booking_id, {date, service_report_text} ,reportExist)
+                res.status(201).send("update report successfully !!")
+                return;
             }else{
                 const { affected, dreport_id } = await reportModel.addNewReport(booking_id, { date, service_report_text});
-
+                const reportImages = await reportModel.addNewReportImage(dreport_id, imagePath);
                 console.log(affected)
                 console.log(dreport_id)
-                // add to report_image
-                // const images = req.files;
+                console.log(reportImages);
+                
+                res.status(200).send("Add new report successfully !")
             }
             // console.log(req.body)
             // console.log(req.files)

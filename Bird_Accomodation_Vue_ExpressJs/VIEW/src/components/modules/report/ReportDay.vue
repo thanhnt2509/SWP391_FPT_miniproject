@@ -38,7 +38,7 @@ export default {
   name: "Report Day",
   data() {
     return {
-      activeKey: 1,
+      activeKey: 0,
       modalText: 'Add a report for this day ?',
       visible: false,
       confirmLoading: false,

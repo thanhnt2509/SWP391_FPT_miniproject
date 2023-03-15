@@ -24,4 +24,13 @@ router.get('/get_img/:img_path', function(req, res, next) {
     }
 })
 
+router.get('/get_report_img/:img_path', function(req, res, next) {
+    const { img_path } = req.params;
+    try {
+        res.status(200).sendFile(img_path, { root: './reports' });
+    }catch (e) {
+        res.status(500).send(e);
+    }
+})
+
 module.exports = router

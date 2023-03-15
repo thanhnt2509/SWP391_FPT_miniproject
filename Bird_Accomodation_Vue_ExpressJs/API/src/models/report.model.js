@@ -84,6 +84,21 @@ module.exports = {
 
         return { affected: dailyReport.rowsAffected.length, dreport_id: lastInsertedId.recordset[0].lastId}
     },
+    addNewReportImage: async (dreport_id, imagePaths) => {
+        let con = await config.connection();
+        const request = con.request();
+        const returnData = [];
+        for(let i=0; i<imagePaths.length; i++){
+            // console.log(imagePaths[i]);
+            const res = await request
+                .input("dreport_id", sql.Int , dreport_id)
+                .input("service_report_image", sql.NVarChar, imagePaths[i].imgPath)
+                .query("INSERT INTO DailyReportImage (dreport_id, service_report_image) \n" +
+                    "VALUES (@dreport_id, @service_report_image)")
+            returnData.push(res.recordset)
+        }
+        return returnData
+    },
     isExistReportDate: async (booking_id, date) => {
         let con = await config.connection();
         const request = con.request();
@@ -94,7 +109,18 @@ module.exports = {
 
         return returnData.recordset
     },
-    updateReport: async (booking_id, {date, service_report_text}) => {
-
+    updateReport: async (booking_id, {date, service_report_text}, origin) => {
+        let con = await config.connection();
+        const request = con.request();
+        if(date === '' || !date) date = origin.date
+        if(service_report_text === '' || !service_report_text) service_report_text = origin
+        const returnData = await request
+            .input("booking_id", sql.Int, booking_id)
+            .input("date", sql.Date, date)
+            .input("service_report_text", sql.NVarChar, service_report_text)
+            .query("UPDATE DailyReport \n" +
+                    "SET service_report_text = @service_report_text \n" +
+                    "WHERE booking_id = @booking_id and date = @date")
+        return returnData.recordset
     }
 };

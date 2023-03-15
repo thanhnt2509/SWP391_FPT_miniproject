@@ -12,7 +12,8 @@ module.exports = {
             }
             next();
         } catch (error) {
-            next(error);
+            console.log(err.message);
+            res.status(500).send(err.message)
         }
     }
 }
