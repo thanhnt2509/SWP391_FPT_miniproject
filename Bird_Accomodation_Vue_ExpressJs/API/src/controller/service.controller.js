@@ -10,7 +10,9 @@ module.exports = {
                 description: item.description,
                 status: item.status,
                 price: item.price,
-                image: item.image
+                image: item.image,
+                isHighlight: item.isHighlight,  // need to fix database name
+                isPack: item.isPack,
             }))
             res.status(200).send({
                 exitcode: 0,

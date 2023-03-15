@@ -1,17 +1,18 @@
 import api from "@/components/store/api";
 
 const state = {
-	user: {
-		address: "somewhere",
-		email: "U1@gmail.com",
-		name: "ADMIN_CORE",
-		phone: "0111111111",
-		role: 1,
-		status: 1,
-		token: null,
-		user_id: 1,
-		user_img: null,
-	},
+	// user: {
+	// 	address: "somewhere",
+	// 	email: "U1@gmail.com",
+	// 	name: "ADMIN_CORE",
+	// 	phone: "0111111111",
+	// 	role: 1,
+	// 	status: 1,
+	// 	token: null,
+	// 	user_id: 1,
+	// 	user_img: null,
+	// },
+	user: undefined,
 	birds: [
 		{
 			bird_id: 1,

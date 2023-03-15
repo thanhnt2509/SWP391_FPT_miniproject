@@ -12,7 +12,7 @@
     </a-tabs>
 
     <!--        button to add a report-->
-    <div>
+    <div v-if="$store.getters.getUser.role === 1">
       <button class="button is-primary add_report_button" @click="showModal">Add Report</button>
       <a-modal
           v-model:visible="visible"

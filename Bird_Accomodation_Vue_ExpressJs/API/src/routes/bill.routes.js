@@ -9,5 +9,5 @@ const router = express.Router();
 
 router.route('/:booking_id')
     .get(bill.getBill)
-
+    .post(bill.createBill)
 module.exports = router

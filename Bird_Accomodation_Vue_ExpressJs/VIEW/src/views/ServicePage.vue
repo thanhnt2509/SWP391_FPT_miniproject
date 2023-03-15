@@ -14,12 +14,12 @@
             <div class="column is-4 " v-for="(service, index) in serviceItems" :key="service.service_id">
                 <div class="service">
                     <img class="img_service" :src="'/images/' + service.image + '.jpg'" :alt="service.name">
-
                     <div class="content  is-three-quarters">
                         <div style="text-align: center;">
                             <h3 class="title">{{ service.name }}</h3>
+                            <p class="subtitle" v-if="service.isHighlight" style="color: red">Best seller option</p>
                             <p style="text-align: left;">{{ service.description }}</p>
-                            <button disabled class="button is-info">Price: {{ service.price }}$</button>
+                            <button disabled class="button is-info">Price: {{ service.price }}$ {{ service.isPack ? '/pack' : '' }}</button>
                         </div>
                     </div>
                 </div>

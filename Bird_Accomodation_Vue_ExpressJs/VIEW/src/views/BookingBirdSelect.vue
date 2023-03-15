@@ -17,7 +17,7 @@
         <div v-if="bird_selected">
             <div class="bird_img">
                 <div class="bird_img_image">
-                    <img src="/images/bird1.jpg" alt="user bird">
+                    <img :src="`http://localhost:5000/file/get_bird_img/${bird_selected.image}`" alt="user bird">
                 </div>
             </div>
             <div class="bird_info">
