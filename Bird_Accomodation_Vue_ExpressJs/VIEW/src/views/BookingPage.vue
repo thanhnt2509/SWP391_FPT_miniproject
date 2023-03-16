@@ -77,10 +77,12 @@ export default {
                                 h('p', 'Please check your transaction history !'),
                             ]),
                         });
-                        
+
+                        this.$store.dispatch('clearBooking')
+                        this.$router.push('/account/transaction');   
+                    }else{
+                        message.error('Something went wrong !');
                     }
-                    this.$store.dispatch('clearBooking')
-                    this.$router.push('/account/transaction');
                 } catch (error) {
                     console.log(error);
                     message.error('Something went wrong !');

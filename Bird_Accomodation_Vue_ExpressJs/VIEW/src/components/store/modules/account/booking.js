@@ -34,7 +34,6 @@ const actions = {
             done = response.status === 201;
         } catch (error) {
             console.log(error);
-            done = false;
         }
         return done;
     },

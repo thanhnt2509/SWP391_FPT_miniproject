@@ -55,6 +55,8 @@ module.exports = {
                 .input('status', sql.Int, data.status)
                 .query(`INSERT INTO [Booking] (user_id, bird_id, date_from, date_to, status) \n`
                     + `VALUES (@user_id, @bird_id, @date_from, @date_to, @status)`);
+
+            // get last booking id
             const booking_id = await transaction.request()
                 .query(`SELECT IDENT_CURRENT('Booking') AS lastId`);
 
@@ -80,15 +82,17 @@ module.exports = {
             }
 
             // creat a bill for this booking with empty data
-            await transaction.request()
-                .input('booking_id', sql.Int, booking_id.recordset[0].lastId)
-                .query(`INSERT INTO [Bill] (booking_id) \n`
-                    + `VALUES (@booking_id)`);
+            const payment_status = 0;   // not paid
+            const total_service_amount = 0; // no service
+            await transaction.request() // booking_id inputted
+                .query(`INSERT INTO [Bill] (booking_id, payment_status, total_service_amount) \n`
+                    + `VALUES (${booking_id.recordset[0].lastId}, ${payment_status}, ${total_service_amount})`);
 
             await transaction.commit();
 
             return true;
         } catch (error) {
+            console.log(error)
             await transaction.rollback();
 
             return false;
