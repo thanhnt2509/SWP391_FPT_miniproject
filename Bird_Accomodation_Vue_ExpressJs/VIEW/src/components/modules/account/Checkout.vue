@@ -195,7 +195,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("publishBill", this.$route.params.booking_id);
+    // this.$store.dispatch("publishBill", this.$route.params.booking_id);
     this.$store.dispatch("fetchCurrentBill", this.$route.params.booking_id);
   },
 };
