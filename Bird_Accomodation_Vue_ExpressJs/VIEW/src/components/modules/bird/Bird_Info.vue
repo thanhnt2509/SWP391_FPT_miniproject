@@ -23,7 +23,7 @@
 
         <!-- bird property -->
         <div>
-            <table class="table">
+            <table class="table" style="background-color: rgba(255, 255, 255, 0.2);">
                 <tr>
                     <td>Species
                         <!-- <select>
@@ -48,11 +48,11 @@
                     <td>Description</td>
                     <td>{{ bird?.description || '' }}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>Boarding</td>
                     <td><button :class="{ 'is-link': bird?.boarding === true, 'is-light': bird?.boarding === false }"
                             class="button">{{ bird?.boarding ? 'On-going' : 'Pending' || '' }}</button></td>
-                </tr>
+                </tr> -->
             </table>
         </div>
     </div>
@@ -88,7 +88,7 @@ export default {
 <style scoped>
 .main {
     border: 0.4px solid #b9b8b8;
-    background-color: azure;
+    background-color: #F2ECFF;
     border-radius: 20px;
     padding: 10px;
     margin: 10px;
@@ -97,10 +97,7 @@ export default {
 .bird_img{
     width: 288px;
     height: 288px;
-}
-.bird_img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    object-fit: fill;
+    border-radius: 20px;
 }
 </style>

@@ -27,7 +27,7 @@
                         <label :for="service.id">{{ service.price }}</label>
                     </td>
                     <td>
-                        <a-input-number type="number" v-if="!service.isPack" v-model="serviceSelectedList[index].quantity"
+                        <a-input-number type="number" v-if="!service.isPack" v-model:value="serviceSelectedList[index].quantity"
                             style="width: 100px; border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;" min="1"/>
                         <p v-else style="border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;">is Pack</p>
                     </td>
@@ -66,8 +66,8 @@ export default {
             isPack: item.isPack,
             name: item.name,
             price: item.price,
-            quantity: item.isPack ? 0 : 1,
-            checked: item.isPack ? true : false,
+            quantity: item.isPack === 1? 0 : 1,
+            checked: item.isPack === 1? true : false,
         })).sort((a, b) => b.isPack - a.isPack);
     },
 }

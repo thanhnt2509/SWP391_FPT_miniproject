@@ -78,6 +78,13 @@ module.exports = {
                     .query(`INSERT INTO [BookingDetail] (booking_id, service_id, quantity, booked_price, remain) \n`
                         + `VALUES (@booking_id, @service_id, @quantity, @booked_price, @remain)`);
             }
+
+            // creat a bill for this booking with empty data
+            await transaction.request()
+                .input('booking_id', sql.Int, booking_id.recordset[0].lastId)
+                .query(`INSERT INTO [Bill] (booking_id) \n`
+                    + `VALUES (@booking_id)`);
+
             await transaction.commit();
 
             return true;

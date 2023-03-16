@@ -195,10 +195,10 @@ export default {
           title: 'Oasis training system',
           content: 'Bird training involves teaching birds to perform specific behaviors on command through positive reinforcement techniques. This can include anything from basic obedience training to teaching tricks and advanced behaviors.'
         },
-        {
-          title: 'Oasis Boarding system',
-          content: 'Boarding birds is the act of temporarily housing birds in a specialized facility or with a professional caregiver while their owners are away. This ensures that the birds receive proper care and attention in their owner sabsence'
-        },
+        // {
+        //   title: 'Oasis Boarding system',
+        //   content: 'Boarding birds is the act of temporarily housing birds in a specialized facility or with a professional caregiver while their owners are away. This ensures that the birds receive proper care and attention in their owner sabsence'
+        // },
       ]
 
     }
