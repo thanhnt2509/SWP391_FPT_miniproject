@@ -15,6 +15,7 @@ module.exports = {
             console.log(billContent[0].service);
             // console.log(`bill service`);
             // console.log(billService);
+            res.status(200).send(billContent)
         } catch (error) {
            console.log(error.message);
            res.status(500).send("Internal server error");
