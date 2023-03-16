@@ -1,4 +1,6 @@
 <template>
+
+<!-- getCurrentBill: {{seed}} -->
   <div class="" style="padding-left: 17%; padding-right: 10%">
     <div class="has-text-centered">
       <h1 class="title">Checkout for booking {{ fields.booking_id }}</h1>
@@ -14,7 +16,11 @@
           <table class="table is-striped is-narrow is-hoverable is-fullwidth">
             <tr>
               <td>Customer name</td>
-              <td>{{ seed?.user?.user_name }}</td>
+              <td>{{ seed?.user?.name }}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{ seed?.user?.email }}</td>
             </tr>
             <tr>
               <td>Address</td>
@@ -32,12 +38,16 @@
           <h2 class="subtitle title_info label">Bird info</h2>
           <table class="table is-striped is-narrow is-hoverable is-fullwidth">
             <tr>
-              <td>Bird ID</td>
-              <td>{{ seed?.bird?.bird_id }}</td>
-            </tr>
-            <tr>
               <td>Bird name</td>
               <td>{{ seed?.bird?.bird_name }}</td>
+            </tr>
+            <tr>
+              <td>Gender</td>
+              <td>{{ seed?.bird?.gender === 1 ? 'Male' : 'Female' }}</td>
+            </tr>
+            <tr>
+              <td>Image</td>
+              <td><img :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`" class="bird_image" alt=""></td>
             </tr>
           </table>
         </div>
@@ -50,18 +60,21 @@
               <tr>
                 <th>Service name</th>
                 <th style="text-align: right">Booked price</th>
+                <th style="text-align: right">Quantity</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="service in seed?.services">
-                <td>{{ service.service_name }}</td>
+              <tr v-for="service in seed?.service">
+                <td>{{ service.name }}</td>
                 <td>{{ service.booked_price }}$/pack</td>
+                <td style="text-align: right">{{ service.isPack === 0 ? service.quantity : 'Pack' }}</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <th>Total amount</th>
-                <td>{{ seed?.bill?.total_amount }}$</td>
+                <th></th>
+                <td style="text-align: right">{{ seed?.total_service_amount }}$</td>
               </tr>
             </tfoot>
           </table>
@@ -195,7 +208,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("publishBill", this.$route.params.booking_id);
+    // this.$store.dispatch("publishBill", this.$route.params.booking_id);
     this.$store.dispatch("fetchCurrentBill", this.$route.params.booking_id);
   },
 };
@@ -214,5 +227,12 @@ tr td:nth-child(2) {
   display: flex;
   justify-content: space-between;
   align-content: center;
+}
+.bird_image{
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
 }
 </style>

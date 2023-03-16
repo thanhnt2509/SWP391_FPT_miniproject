@@ -12,7 +12,7 @@
             <router-link class="navbar-item" to="/service">Service</router-link>
             <router-link class="navbar-item" to="/facilities">Facilities</router-link>
             <!-- <router-link class="navbar-item" to="/about">About</router-link> -->
-            <router-link class="navbar-item" to="/post">Post</router-link>
+            <router-link class="navbar-item" to="/post">Article</router-link>
             <router-link class="navbar-item" to="/booking">Booking</router-link>
 
             <div v-if="getUser" class="navbar-item has-dropdown is-hoverable">
