@@ -91,7 +91,7 @@ module.exports = {
         //code here
     },
     checkoutBooking: async (payload) => {
-        const { booking_id, checkout_date, payment_method, checkout_img_filename } = payload;
+        const { booking_id, checkout_date, payment_method, checkout_img_filename, total_service_amount } = payload;
         let con = await config.connection();
         const request = con.request();
         const successCheckoutStatus = 1;
@@ -102,7 +102,8 @@ module.exports = {
             .input("payment_method", sql.NVarChar, payment_method)
             .input("payment_status", sql.Int, successCheckoutStatus)
             .input("checkout_img", sql.NVarChar, checkout_img_filename)
-            .query("UPDATE [Bill] SET checkout_date = @checkout_date, payment_status = @payment_status, payment_method = @payment_method, checkout_img = @checkout_img WHERE booking_id = @booking_id");
+            .input("total_service_amount", sql.Int, total_service_amount)
+            .query("UPDATE [Bill] SET total_service_amount = @total_service_amount, checkout_date = @checkout_date, payment_status = @payment_status, payment_method = @payment_method, checkout_img = @checkout_img WHERE booking_id = @booking_id");
 
         // upload booking status as successful
         const changeStatus = await con.request()

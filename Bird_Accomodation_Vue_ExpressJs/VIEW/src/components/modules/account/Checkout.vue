@@ -1,6 +1,5 @@
 <template>
-
-<!-- getCurrentBill: {{seed}} -->
+getCurrentBill: {{seed}}
   <div class="" style="padding-left: 17%; padding-right: 10%">
     <div class="has-text-centered">
       <h1 class="title">Checkout for booking {{ fields.booking_id }}</h1>
@@ -87,7 +86,7 @@
 
 
         </div>
-        <h2 class="subtitle title_info label">Booking info</h2>
+        <h2 class="subtitle title_info label">Check-out info</h2>
         <table class="table is-striped is-narrow is-hoverable is-fullwidth">
           <tr>
             <td>Start date</td>
@@ -101,6 +100,14 @@
             <td>Payment status</td>
             <td>{{ seed?.booking?.status === 1 ? "complete" : "Not check-out yet" }}</td>
           </tr>
+          <tr>
+            <td>Check-out date</td>
+            <td>(today){{ new Date(seed?.bill?.checkout_date).getMilliseconds() == new Date(0).getMilliseconds() ? 'Not check-out yet' : fields.today}}</td>
+          </tr>
+          <!-- <tr>
+            <td>Total amount</td>
+            <td>{{ seed?.bill?.total_amount }}</td>
+          </tr> -->
           <tr>
             <td>Select Payment method</td>
             <td>
@@ -149,6 +156,7 @@ export default {
         today: new Date().toISOString().slice(0, 10),
         booking_id: this.$route.params.booking_id,
         imgCheckout: null,
+        total_service_amount: 0,
       }
 
     };
@@ -185,6 +193,8 @@ export default {
               h('p', 'Thank you for using our service !'),
             ]),
           });
+          // redirect to manager page
+          this.$router.push('/manager');
         }
       }, 2000);
     },
@@ -193,6 +203,7 @@ export default {
       formData.append("booking_id", this.fields.booking_id);
       formData.append("payment_method", this.fields.payment_method);
       formData.append("checkout_date", this.fields.today);
+      formData.append("total_service_amount", this.seed?.total_service_amount);
       formData.append("file", this.fields.imgCheckout);
       return formData;
     },
@@ -210,6 +221,7 @@ export default {
   created() {
     // this.$store.dispatch("publishBill", this.$route.params.booking_id);
     this.$store.dispatch("fetchCurrentBill", this.$route.params.booking_id);
+    // this.fields.total_service_amount = this.seed?.total_service_amount;
   },
 };
 </script>

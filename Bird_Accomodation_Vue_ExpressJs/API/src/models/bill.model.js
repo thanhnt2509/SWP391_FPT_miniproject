@@ -37,8 +37,8 @@ module.exports = {
                     bill_id: data.bill_id,
                     total_amount: data.total_service_amount,
                     checkout_date: config.dateFormat(data.checkout_date),
-                    pament_method: data.payment_method,
-                    pament_status: data.payment_status
+                    payment_method: data.payment_method,
+                    payment_status: data.payment_status
                 }
             })
         })

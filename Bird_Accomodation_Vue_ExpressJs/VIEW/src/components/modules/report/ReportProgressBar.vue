@@ -4,14 +4,14 @@
         <table style="width: 100%;">
             <thead>
                 <th>Name</th>
+                <th class="has-text-centered">Completed</th>
                 <th>Progress</th>
-                <th>Completed / Quantity</th>
             </thead>
             <tr v-for="service in getBookingServices">
                 <td width="100px" style="overflow: hidden;"><p style="width: inherit;">{{ service.name }}</p></td>
-                <td><a-progress :percent="serviceRemainPercent(service)" :show-info="true" /></td>
                 <td class="has-text-centered" v-if="service.isPack === 0">{{ service.quantity - service.remain }} / {{ service.quantity }}</td>
                 <td class="has-text-centered" v-else>Pack selected</td>
+                <td><a-progress :percent="serviceRemainPercent(service)" :show-info="true" /></td>
             </tr>
         </table>
 

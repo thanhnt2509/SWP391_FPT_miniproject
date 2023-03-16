@@ -89,7 +89,7 @@ exports.uploadCheckout = multer({
     }
 });
 
-exports.uploadCheckout = multer({
+exports.uploadAvatar = multer({
     storage: storageAvatar,
     limits: {
         // 5Mbs

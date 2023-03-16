@@ -1,7 +1,9 @@
 <template>
     <div>
         <!-- <h1 class="title">Customize your service</h1> -->
-        <a-button style="font-size: medium; margin-left: 27%;" type="primary" @click="showModal">Register new service</a-button>
+        <div class="has-text-centered">
+            <button class="button is-primary" type="primary" @click="showModal">Register new service</button>
+        </div>
         <a-modal width="1000px" v-model:visible="visible" title="Add new Service" :confirm-loading="confirmLoading" @ok="handleOk">
             <!-- <p>{{ modalText }}</p> -->
             <TransactionNewServiceList />

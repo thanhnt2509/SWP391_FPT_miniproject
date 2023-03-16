@@ -17,7 +17,7 @@
                     <div class="content  is-three-quarters">
                         <div style="text-align: center;">
                             <h3 class="title">{{ service.name }}</h3>
-                            <p class="subtitle" v-if="service.isHighlight" style="color: red">Best seller option</p>
+                            <p class="subtitle" v-if="service.isHighlight" style="color: red">Best Select option</p>
                             <p style="text-align: left;">{{ service.description }}</p>
                             <button disabled class="button is-info">Price: {{ service.price }}$ {{ service.isPack ? '/pack' : '' }}</button>
                         </div>

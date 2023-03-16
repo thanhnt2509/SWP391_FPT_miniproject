@@ -157,10 +157,10 @@ module.exports = {
     checkoutBooking: async(req, res) => {
         try {
             const { booking_id } = req.params;
-            const { checkout_date, payment_method } = req.body;
+            const { checkout_date, payment_method, total_service_amount } = req.body;
             const checkout_img_filename = req.file.filename;
 
-            const payload = { booking_id, checkout_date, payment_method, checkout_img_filename }
+            const payload = { booking_id, checkout_date, payment_method, checkout_img_filename, total_service_amount }
             // console.log(req.params.booking_id);
             // console.log(req.body);
             // console.log(checkout_img_filename);

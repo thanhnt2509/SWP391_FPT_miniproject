@@ -1,22 +1,28 @@
 <template>
- <!-- reportData: {{ reportData }} -->
+  <!-- reportData: {{ reportData }} -->
+  <!-- {{ reportData.images[0]?.service_report_image}} -->
   <div class="main columns">
     <!--      report text -->
     <div class="column is-6" style="padding-left: 61px;">
       <h1 class="title">Report Message</h1>
-      <a-textarea disabled="" v-model:value="reportData.service_report_text" placeholder="Basic usage" :rows="7"/>
+      <a-textarea disabled="" v-model:value="reportData.service_report_text" placeholder="Basic usage" :rows="7" />
 
 
       <h1 class="title">Place a feedback</h1>
-      <a-textarea v-model:value="reportData.feedback_content" placeholder="Basic usage" :rows="7"/>
+      <a-textarea v-model:value="reportData.feedback_content" placeholder="Basic usage" :rows="7" />
     </div>
 
     <!--      report img-->
     <div class="column is-6">
       <h1 class="title">Report Image</h1>
-      <a-carousel autoplay dots-class="slick-dots slick-thumb" :dot-position="'top'" style="padding-top: 40px; background-color: #d5e28a;">
-        <div v-for="item in reportData.images" :key="item" class="image_report">
-          <img :src="getImgUrl(item.service_report_image)" :alt="item.service_report_image"/>
+      <a-carousel dots-class="slick-dots slick-thumb">
+        <template #customPaging="props">
+          <a>
+            <img :src="getImgUrl(reportData.images[props.i]?.service_report_image)" />
+          </a>
+        </template>
+        <div v-for="item in reportData.images" :key="item">
+          <img class="img_report" :src="getImgUrl(item.service_report_image)" />
         </div>
       </a-carousel>
     </div>
@@ -70,7 +76,7 @@ export default {
 }
 
 .ant-carousel :deep(.slick-slide img) {
-  border: 5px solid #b39b31;
+  /* border: 5px solid #ffffff; */
   display: block;
   margin: auto;
   max-width: 80%;
@@ -99,14 +105,10 @@ export default {
 .ant-carousel :deep .slick-thumb li.slick-active img {
   filter: grayscale(0%);
 }
-.image_report{
-  width: 369px;
-  height: 371px;
-}
 
-.image_report{
-  width: 100%;
-  height: 100%;
+.img_report {
+  width: 424px;
+  height: 424px;
   object-fit: cover;
 }
 </style>
