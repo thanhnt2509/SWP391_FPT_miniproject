@@ -18,11 +18,11 @@
                 </template>
                 <template v-else-if="column.key === 'status'">
                     <span>
-                        <!-- <a-tag :color="bookingState[record.status].color">
+                        <a-tag style="padding: 5px 20px; border-radius: 20px;" :color="bookingState[record.status].color">
                             {{ bookingState[record.status].state }}
-                        </a-tag> -->
+                        </a-tag>
                         <!-- :style="`color: ${bookingState[record.status].color}`" -->
-                        <p>{{ bookingState[record.status].state }}</p>
+                        <!-- <p>{{ bookingState[record.status].state }}</p> -->
                     </span>
                 </template>
                 <template v-else-if="column.key === 'action'">

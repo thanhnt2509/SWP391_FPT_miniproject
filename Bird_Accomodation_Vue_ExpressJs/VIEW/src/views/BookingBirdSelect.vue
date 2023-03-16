@@ -7,7 +7,10 @@
                     <select v-model="bird_selected" class="input select">
                         <option disabled>Please select your bird to boarding</option>
                         <!-- <option value="">NULL data to test</option> -->
-                        <option v-for="bird in getBirds" :value="bird">{{ bird.bird_name }}</option>
+                        <option :disabled="bird.is_boarding" v-for="bird in getBirds" :value="bird">
+                            <p v-if="bird.is_boarding">{{ bird.bird_name }} - Boarding</p>
+                            <p v-else>{{ bird.bird_name }}</p>
+                        </option>
                     </select>
                 </td>
             </tr>
@@ -72,9 +75,9 @@ export default {
     methods: {
         ageConvert(age) {
             let res = 'Young'
-            if(age >= 1 && age < 3) res = 'Young'
-            else if(age >= 3 && age <= 4) res = 'Adult'
-            else if(age >= 5 ) res = 'Old'
+            if (age >= 1 && age < 3) res = 'Young'
+            else if (age >= 3 && age <= 4) res = 'Adult'
+            else if (age >= 5) res = 'Old'
             return res
         }
     },

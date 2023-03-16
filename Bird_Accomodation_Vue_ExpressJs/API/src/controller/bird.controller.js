@@ -12,21 +12,10 @@ module.exports = {
                     message: "No bird found"
                 })
             } else {
-                const birdList = result.map(item => ({
-                    bird_id: item.bird_id,
-                    type_name: item.type_name,
-                    age: item.age,
-                    bird_name: item.bird_name,
-                    breed: item.breed,
-                    gender: item.gender,
-                    image: item.image,
-                    description: item.description,
-                    // boarding: item.boarding
-                }))
                 res.status(200).send({
                     exitcode: 0,
                     message: "Get bird list successfully",
-                    birds: birdList
+                    birds: result
                 })
             }
         } catch (error) {

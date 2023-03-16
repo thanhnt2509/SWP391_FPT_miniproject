@@ -8,6 +8,7 @@
             </div>
         </div><br>
         <!-- birdlist -->
+        <!-- getBirds : {{ getBirds }} -->
         <div class="columns">
             <div class="column is-four-fifths columns is-multiline is-mobile">
                 <div class="column is-one-third bird_info_contain" v-for="bird in getBirds">

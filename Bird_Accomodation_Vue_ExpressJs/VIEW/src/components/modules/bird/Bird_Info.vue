@@ -17,8 +17,8 @@
 
         <!-- bird image -->
         <div>
-            <img class="bird_img" :src="`http://localhost:5000/file/get_bird_img/${bird?.image}`"
-                alt="bird image goes here" style="max-width: 60%%;">
+            <img class="bird_img" :src="`http://localhost:5000/file/get_bird_img/${bird?.image}`" alt="bird image goes here"
+                style="max-width: 60%%;">
         </div>
 
         <!-- bird property -->
@@ -48,11 +48,13 @@
                     <td>Description</td>
                     <td>{{ bird?.description || '' }}</td>
                 </tr>
-                <!-- <tr>
+                <tr>
                     <td>Boarding</td>
-                    <td><button :class="{ 'is-link': bird?.boarding === true, 'is-light': bird?.boarding === false }"
-                            class="button">{{ bird?.boarding ? 'On-going' : 'Pending' || '' }}</button></td>
-                </tr> -->
+                    <td>
+                        <a-tag style="padding: 5px 20px; border-radius: 20px;" v-if="bird?.is_boarding" color="blue">Boarding</a-tag>
+                        <a-tag style="padding: 5px 20px; border-radius: 20px;" v-else color="red">Not Boarding</a-tag>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -94,7 +96,7 @@ export default {
     margin: 10px;
 }
 
-.bird_img{
+.bird_img {
     width: 288px;
     height: 288px;
     object-fit: fill;

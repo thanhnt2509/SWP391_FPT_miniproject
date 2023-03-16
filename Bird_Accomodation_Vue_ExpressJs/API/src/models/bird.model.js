@@ -5,12 +5,25 @@ module.exports = {
     getAllRegistedBird: async (email) => {
         let con = await config.connection();
         const request = con.request();
-        const returnData = await request
+        const data = await request
             .input("email", sql.VarChar, email)
             .query("SELECT B.*, BT.name as type_name FROM [Bird] B \n" +
                 "LEFT JOIN [BirdType] BT ON B.type_id = BT.btype_id \n" +
                 "WHERE user_id = (SELECT user_id FROM [User] WHERE email = @email collate latin1_general_cs_as)")
-        return (await returnData).recordset || null;
+
+        // check if each bird that currently boarding
+        for(let i = 0; i < data.recordset.length; i++) {
+            const boardingData = await con.request()
+                .input("bird_id", sql.Int, data.recordset[i].bird_id)
+                .query("SELECT * FROM [Booking] WHERE bird_id = @bird_id")
+            if(boardingData.recordset.length > 0) {
+                data.recordset[i].is_boarding = true;
+            } else {
+                data.recordset[i].is_boarding = false;
+            }
+        }
+
+        return data.recordset || null;
     },
     deleteBirdById: async (bird_id) => {
         let con = await config.connection();
