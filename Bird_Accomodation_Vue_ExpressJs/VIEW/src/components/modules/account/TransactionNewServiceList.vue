@@ -1,7 +1,7 @@
 <template>
     <!-- booking service: {{ getBookingServices }} <br>
     remainService: {{ remainService }} -->
-    getNewServiceRegisterList: {{ getNewServiceRegisterList }}
+    <!-- getNewServiceRegisterList: {{ getNewServiceRegisterList }} -->
     <!-- service update : {{ serviceUpdate }} -->
     <div class="columns">
         <div class="column">

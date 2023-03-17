@@ -14,6 +14,10 @@ module.exports = {
                 isHighlight: item.isHighlight,  // need to fix database name
                 isPack: item.isPack,
             }))
+
+            // create error to test on this route
+            // throw new Error("This is a test error");
+
             res.status(200).send({
                 exitcode: 0,
                 message: "Get service list successfully",
