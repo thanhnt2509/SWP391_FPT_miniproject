@@ -1,5 +1,5 @@
 <template>
-  reportData: {{ reportData }}
+  <!-- reportData: {{ reportData }} -->
   <!-- {{ reportData.images[0]?.service_report_image}} -->
   <div class="main columns">
     <!--      report text -->

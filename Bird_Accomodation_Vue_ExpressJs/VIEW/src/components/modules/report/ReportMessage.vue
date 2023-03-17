@@ -33,7 +33,7 @@
                 <p v-if="reportData.feedback_content">{{ reportData.feedback_content }}</p>
             </div>
         </div>
-        <a-input-group compact width="100%">
+        <a-input-group compact width="100%" v-if="$store.getters.getUser.role === 0">
             <a-input v-if="reportData.feedback_content !== null" disabled v-model:value="reportData.feedback_content"
                 placeholder="Leave your daily feedback here !" style="width: calc(100% - 67px)" />
 
@@ -126,7 +126,7 @@ export default {
 .report_title {
     height: 35px;
     width: 100%;
-    background-color: #3FA9FF;
+    background-color: #3FA9FF;    opacity: 0.3;
     color: white;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -187,7 +187,7 @@ export default {
     overflow: hidden;
     width: 70%;
     border-radius: 20px;
-    top: 85%;
+    top: 82%;
     left: 20%;
 }
 
