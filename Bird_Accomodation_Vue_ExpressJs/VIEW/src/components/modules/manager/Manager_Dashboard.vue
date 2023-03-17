@@ -8,6 +8,9 @@
                     <ChartBar />
                 </div>
                 <div class="column is-6">
+                    <VerticalBar />
+                </div>
+                <div class="column is-6">
                     <ChartLine />
                 </div>
                 <div class="column is-6">
@@ -16,6 +19,9 @@
                 <div class="column is-6">
                     <PolarArea />
                 </div>
+                <div class="column is-6">
+                    <PolarArea_labelCenter />
+                </div> 
             </div>
         </div>
     </div>
@@ -23,16 +29,20 @@
 
 <script>
 import ChartBar from './chart/ChartBar.vue'
+import VerticalBar from './chart/VerticalBar.vue';
 import ChartLine from './chart/ChartLine.vue'
 import Doughnut from './chart/Doughnut.vue';
 import PolarArea from './chart/PolarArea.vue';
+import PolarArea_labelCenter from './chart/PolarArea_labelCenter.vue';
 export default {
     name: "Manager_Dashboard",
     components: {
         ChartBar,
+        VerticalBar,
         ChartLine,
         Doughnut,
-        PolarArea
+        PolarArea,
+        PolarArea_labelCenter
     },
 }
 </script>
