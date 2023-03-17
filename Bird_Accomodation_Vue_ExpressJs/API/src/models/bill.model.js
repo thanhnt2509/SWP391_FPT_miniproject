@@ -8,7 +8,7 @@ module.exports = {
         const dataContent = await request
             .input('booking_id', sql.Int, booking_id)
             .query("select u.name as user_name, u.email, u.address, u.phone, bi.bird_name, bi.gender, bi.image, b.booking_id, b.date_from, b.date_to, bil.bill_id, \n" +
-                "bil.total_service_amount, bil.checkout_date, bil.payment_method, bil.payment_status \n" +
+                "bil.total_service_amount, bil.checkout_date, bil.payment_method, bil.payment_status, bil.checkout_img \n" +
                 "from Booking b join [User] u on b.user_id = u.user_id \n" +
                 "join Bird bi on b.bird_id = bi.bird_id \n" +
                 "join Bill bil on bil.booking_id = b.booking_id \n" +
@@ -37,6 +37,7 @@ module.exports = {
                     bill_id: data.bill_id,
                     total_amount: data.total_service_amount,
                     checkout_date: config.dateFormat(data.checkout_date),
+                    checkout_image: data.checkout_img,
                     payment_method: data.payment_method,
                     payment_status: data.payment_status
                 }

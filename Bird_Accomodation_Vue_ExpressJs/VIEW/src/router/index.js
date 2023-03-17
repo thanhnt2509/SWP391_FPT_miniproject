@@ -109,12 +109,12 @@ const router = createRouter({
 			component: Report,
 			beforeEnter: isAuth
 		},
-		// {
-		// 	path: "/bill/:booking_id",
-		// 	name: "get bill by booking_id",
-		// 	component: Bill,
-		// 	beforeEnter: isAuth
-		// },
+		{
+			path: "/bill/:booking_id",
+			name: "get bill by booking_id",
+			component: Bill,
+			beforeEnter: isAuth
+		},
 		{
 			path: "/account",
 			name: "account",

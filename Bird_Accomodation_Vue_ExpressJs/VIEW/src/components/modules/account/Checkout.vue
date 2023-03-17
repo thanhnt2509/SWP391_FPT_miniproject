@@ -219,27 +219,17 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch("publishBill", this.$route.params.booking_id);
     this.$store.dispatch("fetchCurrentBill", this.$route.params.booking_id);
-    // this.fields.total_service_amount = this.seed?.total_service_amount;
   },
 };
 </script>
 
 <style scoped>
-.title_info {
-  margin: 20px 0px 10px 0px;
-}
 
 tr td:nth-child(2) {
   text-align: right;
 }
 
-.main {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-}
 .bird_image{
   width: 300px;
   height: 300px;
