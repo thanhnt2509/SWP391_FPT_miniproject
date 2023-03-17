@@ -11,13 +11,16 @@
         <!-- services -->
         <div class="columns is-multiline">
             <!-- each service -->
-            <div class="column is-4 " v-for="(service, index) in serviceItems" :key="service.service_id">
+            <div class="column is-4 " v-for="(service, index) in serviceItems.sort((a, b) => {
+                if (a.isHighlight && !b.isHighlight) return -1;
+                if (!a.isHighlight && b.isHighlight) return 1;
+                return 0;
+            })" :key="service.service_id">
                 <div class="service">
                     <img class="img_service" :src="'/images/' + service.image + '.jpg'" :alt="service.name">
                     <div class="content  is-three-quarters">
                         <div style="text-align: center;">
-                            <h3 class="title">{{ service.name }}</h3>
-                            <p class="subtitle" v-if="service.isHighlight" style="color: red">Best Select option</p>
+                            <h3 class="title">{{ service.name }} <abbr v-if="service.isHighlight" title="Best selection"><i class="fa-solid fa-crown"></i></abbr></h3>
                             <p style="text-align: left;">{{ service.description }}</p>
                             <button disabled class="button is-info">Price: {{ service.price }}$ {{ service.isPack ? '/pack' : '' }}</button>
                         </div>

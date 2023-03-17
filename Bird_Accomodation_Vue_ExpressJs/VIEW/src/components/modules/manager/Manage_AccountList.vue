@@ -1,5 +1,5 @@
 <template>
-    <!-- {{ getAllUserItems }} -->
+    {{ getAllUserItems }}
     <a-table :columns="columns" :data-source="data">
         <template #headerCell="{ column }">
             <!-- <template v-if="column.key === 'name'">
@@ -11,11 +11,14 @@
         </template>
 
         <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'user_img'">
+                <a-image width="100px" height="100px" :src="`http://localhost:5000/file/get_user_img/${record?.user_img}`"></a-image>
+            </template>
             <template v-if="column.key === 'status'">
-                <!-- <a-tag :color="record.status === 1 ? 'green' : 'red'">
-                    {{ record.status === 1 ? 'Active' : 'Inactive' }}
-                </a-tag> -->
-                <p>{{ record.status === 1 ? 'Active' : 'Inactive' }}</p>
+                <a-tag style="padding: 5px 20px; border-radius: 20px;" :color="record.status === 1 ? 'green' : 'red'">
+                    {{ record.status === 1 ? 'Active' : 'In-active' }}
+                </a-tag>
+                <!-- <p>{{ record.status === 1 ? 'Active' : 'Inactive' }}</p> -->
             </template>
             <template v-if="column.key === 'role'">
                 {{ record.role === 1 ? 'Admin' : 'Customer' }}

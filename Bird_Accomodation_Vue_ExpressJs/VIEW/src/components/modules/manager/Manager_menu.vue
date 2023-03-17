@@ -10,6 +10,10 @@
             <a-layout style="padding: 24px 0; background: #fff">
                 <a-layout-sider width="200" style="background: #fff">
                     <a-menu v-model:selectedKeys="selectedKeys" mode="inline" style="height: 100%">
+                        <a-menu-item key="dashboard">
+                            <account-book-outlined />
+                            <span>Dashboard</span>
+                        </a-menu-item>
                         <a-menu-item key="transaction">
                             <account-book-outlined />
                             <span>Manage Transaction</span>
@@ -29,6 +33,7 @@
                     </a-menu>
                 </a-layout-sider>
                 <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+                    <Manager_Dashboard v-if="selectedKeys == 'dashboard'" />
                     <Manage_Transaction v-if="selectedKeys == 'transaction'" />
                     <Manage_Service v-if="selectedKeys == 'service'" />
                     <Manage_Account v-if="selectedKeys == 'account'" />
@@ -40,6 +45,7 @@
 <script>
 import { AccountBookOutlined, VideoCameraOutlined, SolutionOutlined, FundViewOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import Manager_Dashboard from './Manager_Dashboard.vue';
 import Manage_Transaction from './Manage_Transaction.vue';
 import Manage_Service from './Manage_Service.vue';
 import Manage_Account from './Manage_Account.vue';
@@ -49,13 +55,14 @@ export default defineComponent({
         VideoCameraOutlined,
         SolutionOutlined,
         FundViewOutlined,
+        Manager_Dashboard,
         Manage_Transaction,
         Manage_Service,
         Manage_Account
     },
     setup() {
         return {
-            selectedKeys: ref(['transaction']),
+            selectedKeys: ref(['dashboard']),
         };
     },
 });

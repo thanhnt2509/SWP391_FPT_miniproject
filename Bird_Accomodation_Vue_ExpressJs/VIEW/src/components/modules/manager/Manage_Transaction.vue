@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <TransactionList :sort_by="sort_by"/>
+        <TransactionList :sort_by="sort_by" />
     </div>
 </template>
 
