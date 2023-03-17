@@ -15,7 +15,7 @@ module.exports = {
         for(let i = 0; i < data.recordset.length; i++) {
             const boardingData = await con.request()
                 .input("bird_id", sql.Int, data.recordset[i].bird_id)
-                .query("SELECT * FROM [Booking] WHERE bird_id = @bird_id")
+                .query("SELECT * FROM [Booking] WHERE bird_id = @bird_id and status = 2")
             if(boardingData.recordset.length > 0) {
                 data.recordset[i].is_boarding = true;
             } else {

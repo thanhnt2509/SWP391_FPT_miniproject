@@ -75,4 +75,19 @@ module.exports = {
             res.status(500).send("Internal server error");
         }
     },
+    updateFeedback: async (req, res, next) => {
+        try {
+            const dreport_id = req.params.dreport_id;
+            const {feedback_content} = req.body;
+            const result = await reportModel.updateFeedback(dreport_id, feedback_content);
+            if(result.affectedRows === 0){
+                res.status(400).send("Update feedback failed !");
+            }else{
+                res.status(201).send("Update feedback successfully !")
+            }
+        } catch (error) {
+           console.error(error.message);
+            res.status(500).send("Internal server error");
+        }
+    }
 };

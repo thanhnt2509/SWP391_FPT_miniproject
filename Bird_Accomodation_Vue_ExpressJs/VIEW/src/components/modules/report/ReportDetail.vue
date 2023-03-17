@@ -1,15 +1,10 @@
 <template>
-  <!-- reportData: {{ reportData }} -->
+  reportData: {{ reportData }}
   <!-- {{ reportData.images[0]?.service_report_image}} -->
   <div class="main columns">
     <!--      report text -->
     <div class="column is-6" style="padding-left: 61px;">
-      <h1 class="title">Report Message</h1>
-      <a-textarea disabled="" v-model:value="reportData.service_report_text" placeholder="Basic usage" :rows="7" />
-
-
-      <h1 class="title">Place a feedback</h1>
-      <a-textarea v-model:value="reportData.feedback_content" placeholder="Basic usage" :rows="7" />
+      <ReportMessage :reportData="reportData"/>
     </div>
 
     <!--      report img-->
@@ -32,6 +27,7 @@
 <script>
 const baseUrl = 'http://localhost:5000/file/get_report_img/'
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
+import ReportMessage from './ReportMessage.vue';
 export default {
   name: "Report Detail",
   data() {
@@ -39,7 +35,8 @@ export default {
   },
   components: {
     LeftCircleOutlined,
-    RightCircleOutlined
+    RightCircleOutlined,
+    ReportMessage
   },
   props: {
     reportData: {

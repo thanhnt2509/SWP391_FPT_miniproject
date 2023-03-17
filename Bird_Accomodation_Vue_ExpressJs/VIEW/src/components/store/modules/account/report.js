@@ -8,7 +8,8 @@ const state = {
         content: undefined,
         images: undefined,
         updateList: [],
-    }
+    },
+    newReportFeedback: '',
 }
 
 const mutations = {
@@ -26,6 +27,9 @@ const mutations = {
     },
     SET_BOOKING_SERVICE(state, bookingServices) {
         state.bookingServices = bookingServices
+    },
+    SET_NEW_REPORT_FEEDBACK(state, feedback) {
+        state.newReportFeedback = feedback
     }
 }
 
@@ -50,8 +54,6 @@ const actions = {
                     "x-access-token": localStorage.getItem("token"),
                 },
             });
-
-
 
             done = response.status === 200;
         } catch (e) {
@@ -84,11 +86,31 @@ const actions = {
         }
         return done
     },
+    async submitNewReportFeedback({ commit }, payload) {
+        let done = false
+        try {
+            const response = await axios.post(`http://localhost:5000/report/updateFeedback/${payload.dreport_id}`, 
+            payload, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-access-token": localStorage.getItem("token"),
+                },
+            }); 
+            done = response.status === 201;
+        } catch (error) {
+            console.log(error);
+        }
+
+        return done;
+    },
     clearNewReport({ commit }) {
         commit("SET_NEW_REPORT_CONTENT", undefined);
         commit("SET_NEW_REPORT_IMAGES", undefined);
         commit("SET_NEW_REPORT_UPDATE_LIST", []);
         commit("SET_BOOKING_SERVICE", [])
+    },
+    clearNewReportFeedback({ commit }) {
+        commit("SET_NEW_REPORT_FEEDBACK", undefined);
     }
 }
 
@@ -98,7 +120,8 @@ const getters = {
     getNewReportContent: state => state.new_report.content,
     getNewReportImages: state => state.new_report.images,
     getNewReportUpdateList: state => state.new_report.updateList,
-    getBookingServices: state => state.bookingServices
+    getBookingServices: state => state.bookingServices,
+    getNewReportFeedback: state => state.newReportFeedback,
 }
 
 const reportModule = {

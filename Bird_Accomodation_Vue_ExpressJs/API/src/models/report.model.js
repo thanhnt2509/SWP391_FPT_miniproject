@@ -133,4 +133,15 @@ module.exports = {
         }
         return returnData
     },
+    updateFeedback: async (dreport_id, feedback_content) => {
+        let con = await config.connection();
+        const request = con.request();
+        const returnData = await request
+            .input("dreport_id", sql.Int, dreport_id)
+            .input("feedback_content", sql.NVarChar, feedback_content)
+            .query("UPDATE DailyReport \n" +
+                "SET feedback_content = @feedback_content \n" +
+                "WHERE dreport_id = @dreport_id")
+        return returnData.rowsAffected.length
+    }
 };

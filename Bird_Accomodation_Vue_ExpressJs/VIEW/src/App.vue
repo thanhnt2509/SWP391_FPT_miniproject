@@ -37,6 +37,6 @@ export default {
 
 <style >
 *{
-  font-size: large;
+  font-size: medium;
 }  
 </style>

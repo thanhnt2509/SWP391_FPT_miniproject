@@ -1,7 +1,8 @@
 <template>
     <div class="content" style="padding-left: 6%; padding-right: 6%;">
         <div class="has-text-centered">
-            <h1 class="title ">Report History for Booking_{{ $route.params.booking_id }}</h1>
+            <h1 class="title ">Report History </h1>
+            <!-- for Booking_{{ $route.params.booking_id }} -->
             <p class="subtitle">date_from - date_to</p>
         </div>
          <!-- <p>TEST: {{ getReportItem }}</p> -->
