@@ -1,6 +1,7 @@
 <template>
     <div class="main">
-        <h1 class="title has-text-centered">Service remain</h1>
+        <h1 class="title has-text-centered">On-use Service info</h1>
+        <p class="has-text-centered subtitle">Infomation about the service are used during boarding</p>
         <table style="width: 100%;">
             <thead>
                 <th>Name</th>

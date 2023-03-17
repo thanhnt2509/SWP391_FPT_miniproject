@@ -28,7 +28,7 @@
                     </td>
                     <td>
                         <a-input-number type="number" v-if="!service.isPack" v-model:value="serviceSelectedList[index].quantity"
-                            style="width: 100px; border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;" min="1"/>
+                            style="width: 100px; border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;" min="1" max="2"/>
                         <p v-else style="border: 0.2px solid #D7E9FF; border-radius: 10px; padding: 8px;">is Pack</p>
                     </td>
                 </tr>

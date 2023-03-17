@@ -51,7 +51,7 @@ module.exports = {
         // console.log(await getImageByDreportId(116))
     },
 
-   getImageByDreportId:  async (dreport_id) => {
+    getImageByDreportId: async (dreport_id) => {
 
         let con = await config.connection();
         const request = con.request();
@@ -82,15 +82,15 @@ module.exports = {
 
         // console.log(lastInsertedId.recordset[0].lastId)
 
-        return { affected: dailyReport.rowsAffected.length, dreport_id: lastInsertedId.recordset[0].lastId}
+        return {affected: dailyReport.rowsAffected.length, dreport_id: lastInsertedId.recordset[0].lastId}
     },
     addNewReportImage: async (dreport_id, imagePaths) => {
         let con = await config.connection();
         const returnData = [];
-        for(let i=0; i<imagePaths.length; i++){
+        for (let i = 0; i < imagePaths.length; i++) {
             // console.log(imagePaths[i]);
             let result = await con.request()
-                .input("dreport_id", sql.Int , dreport_id)
+                .input("dreport_id", sql.Int, dreport_id)
                 .input("service_report_image", sql.NVarChar, imagePaths[i].imgPath)
                 .query("INSERT INTO DailyReportImage (dreport_id, service_report_image) \n" +
                     "VALUES (@dreport_id, @service_report_image)")
@@ -110,55 +110,27 @@ module.exports = {
     },
     // need to update this function, because it's high workload
     updateReport: async (booking_id, {date, service_report_text}, origin) => {
-        let con = await config.connection();
-        const request = con.request();
-        if(date === '' || !date) date = origin.date
-        if(service_report_text === '' || !service_report_text) service_report_text = origin
-        const returnData = await request
-            .input("booking_id", sql.Int, booking_id)
-            .input("date", sql.Date, date)
-            .input("service_report_text", sql.NVarChar, service_report_text)
-            .query("UPDATE DailyReport \n" +
-                    "SET service_report_text = @service_report_text \n" +
-                    "WHERE booking_id = @booking_id and date = @date")
-        return returnData.recordset
+
+
     },
     // handle for update report service on both customer and admin side
-    updateReportServiceByBooking_id: async (booking_id, service_report_update) => {
+    updateBookingServiceByBooking_id: async (booking_id, service_report_update) => {
         // const { service_id, quantity, remain, isPack } = service_report_update
         let con = await config.connection();
         const returnData = [];
-        for(let i=0; i<service_report_update.length; i++){
-            const isExistBookingService = await con.request()
-                .query(`select * from BookingDetail where booking_id = ${booking_id} and service_id = ${service_report_update[i].service_id}`)
-                // .input("booking_id", sql.Int, booking_id)
-                // .input("service_id", sql.Int, service_report_update[i].service_id)
+        for (let i = 0; i < service_report_update.length; i++) {
+            // exist the service_id of booking_id in BookingDetail -> update
+            const query = await con.request()
+                .input("booking_id", sql.Int, booking_id)
+                .input("service_id", sql.Int, service_report_update[i].service_id)
+                .input("quantity", sql.Int, service_report_update[i].quantity)
+                .input("remain", sql.Int, service_report_update[i].remain)
+                .query("UPDATE BookingDetail \n" +
+                    "SET quantity = @quantity, remain = @remain \n" +
+                    "WHERE booking_id = @booking_id and service_id = @service_id")
+            returnData.push(query.rowsAffected.length)
 
-
-            // does not exist the service_id of booking_id in BookingDetail -> insert
-            if(isExistBookingService.recordset.length === 0 || !isExistBookingService.recordset){
-                const insertBookingService = await con.request()
-                    .input("booking_id", sql.Int, booking_id)
-                    .input("service_id", sql.Int, service_report_update[i].service_id)
-                    .input("quantity", sql.Int, service_report_update[i].quantity)
-                    .input("remain", sql.Int, service_report_update[i].remain)
-                    .query("INSERT INTO BookingDetail (booking_id, service_id, quantity, remain) \n" +
-                        "VALUES (@booking_id, @service_id, @quantity, @remain)")
-            }else {
-                // exist the service_id of booking_id in BookingDetail -> update
-                const query = await con.request()
-                    .input("booking_id", sql.Int, booking_id)
-                    .input("service_id", sql.Int, service_report_update[i].service_id)
-                    .input("quantity", sql.Int, service_report_update[i].quantity)
-                    .input("remain", sql.Int, service_report_update[i].remain)
-                    .query("UPDATE BookingDetail \n" +
-                        "SET quantity = @quantity, remain = @remain \n" +
-                        "WHERE booking_id = @booking_id and service_id = @service_id")
-                returnData.push(query.rowsAffected.length)
-            }
         }
-
-
         return returnData
-    }
+    },
 };

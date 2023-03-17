@@ -9,10 +9,10 @@ module.exports = {
             const billService = await billModel.getBillServiceOfBooking_id(booking_id);
             billContent[0].service = billService.service
             billContent[0].total_service_amount = billService.total_service_amount
-            console.log(`bill content`);
-            console.log(billContent);
-            console.log(`detail booking content service`);
-            console.log(billContent[0].service);
+            // console.log(`bill content`);
+            // console.log(billContent);
+            // console.log(`detail booking content service`);
+            // console.log(billContent[0].service);
             // console.log(`bill service`);
             // console.log(billService);
             res.status(200).send(billContent)

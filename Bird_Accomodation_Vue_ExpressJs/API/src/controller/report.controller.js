@@ -40,12 +40,22 @@ module.exports = {
         }
     },
     updateReportList: async (req, res, next) => {
-        const { booking_id, updateList } = req.body;
+        const { booking_id, date,  updateList } = req.body;
         try {
-            const result = await reportModel.updateReportServiceByBooking_id(booking_id, updateList);
-            // console.log(booking_id);
-            // console.log(updateList);
-            res.status(200).send("Update report list successfully !");
+            const reportExist = await reportModel.isExistReportDate(booking_id, date);
+            if(reportExist.length !== 0){
+                console.log(`report are existed !`);
+                console.log(reportExist);
+                // need to update this function, because it's high workload
+                // const updateReport = await reportModel.updateReport(booking_id, {date, service_report_text} ,reportExist)
+                // res.status(201).send("update report successfully !!")
+                res.status(400).send("Report are existed !");
+            }else {
+                const result = await reportModel.updateBookingServiceByBooking_id(booking_id, updateList);
+                // console.log(booking_id);
+                // console.log(updateList);
+                res.status(200).send("Update report list successfully !");
+            }
         }catch (e) {
             console.log(e.message)
             res.status(500).send("Internal server error");

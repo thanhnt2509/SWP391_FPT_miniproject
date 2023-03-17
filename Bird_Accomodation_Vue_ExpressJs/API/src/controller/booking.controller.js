@@ -184,5 +184,23 @@ module.exports = {
             console.log(error.message);
             res.status(500).send(error.message);
         }
+    },
+    registerNewBookingService: async (req, res) => {
+        try {
+            const newBookingService = req.body;   // array of service
+            const booking_id = req.params.booking_id;
+            const result = await bookingModel.registerNewBookingService(booking_id, newBookingService);
+            if (result === false) {
+                res.status(400).send('Register new booking service failed');
+            } else {
+                res.status(201).send({
+                    exitcode: 0,
+                    message: 'Register new booking service successfully',
+                });
+            }
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).send("Internal server error");
+        }
     }
 }

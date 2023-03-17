@@ -98,9 +98,6 @@ module.exports = {
             return false;
         }
     },
-    getBooking: async (booking_status) => {
-        //code here
-    },
     checkoutBooking: async (payload) => {
         const { booking_id, checkout_date, payment_method, checkout_img_filename, total_service_amount } = payload;
         let con = await config.connection();
@@ -123,5 +120,32 @@ module.exports = {
             .query("UPDATE [Booking] SET status = @status WHERE booking_id = @booking_id");
 
         return returnData.rowsAffected[0];
+    },
+    registerNewBookingService: async (booking_id, newBookingService) => {
+        let con = await config.connection();
+        const result = [];
+
+        // process service list add to Booking Detail
+        newBookingService = newBookingService.map(service => {
+            return {
+                service_id: service.service_id,
+                quantity: service.quantity,
+                price: service.price,
+                checked: service.checked,
+            }
+        }).filter(service => service.checked === true);
+
+        for(let i = 0; i < newBookingService.length; i++) {
+            const query = await con.request()
+                .input("booking_id", sql.Int, booking_id)
+                .input("service_id", sql.Int, newBookingService[i].service_id)
+                .input("quantity", sql.Int, newBookingService[i].quantity)
+                .input("booked_price", sql.Int, newBookingService[i].price)
+                .input("remain", sql.Int, newBookingService[i].quantity)
+                .query("INSERT INTO [BookingDetail] (booking_id, service_id, quantity, booked_price, remain) \n" +
+                    "VALUES (@booking_id, @service_id, @quantity, @booked_price, @remain)");
+            result.push(query.rowsAffected[0]);
+        }
+        return result.length !== 0;
     }
 }

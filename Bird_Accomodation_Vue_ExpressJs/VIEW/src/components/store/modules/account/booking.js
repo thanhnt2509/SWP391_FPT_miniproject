@@ -8,6 +8,7 @@ const state = {
         date_from: '',
         date_to: '',
     },
+    getNewServiceRegisterList: [],
 }
 
 const mutations = {
@@ -23,6 +24,9 @@ const mutations = {
     SET_BOOKING_DATE(state, payload) {
         state.newBooking.date_from = payload.date_from;
         state.newBooking.date_to = payload.date_to;
+    },
+    SET_NEW_SERVICE_REGISTER_LIST(state, payload) {
+        state.getNewServiceRegisterList = payload;
     }
 }
 
@@ -68,7 +72,17 @@ const actions = {
         done = response.status === 200;
         return done;
     },
-
+    async registerNewBookingService({ commit }, payload) {
+        let done = false;
+        try {
+            const response = await api.post(`/booking/${payload.booking_id}/registerNewBookingService`, payload.data);
+            commit("SET_NEW_SERVICE_REGISTER_LIST", response.data);
+            done = response.status === 201;
+        } catch (error) {
+            console.log(error);
+        }
+        return done;
+    }
 }
 
 const getters = {
@@ -77,7 +91,7 @@ const getters = {
     getNewBooking_service: state => state.newBooking.service_selected,
     getNewBooking_date: state => ([state.newBooking.date_from, state.newBooking.date_to]),
     newBookingisOk: state => (state.newBooking.bird_selected_id !== '' && state.newBooking.service_selected.length > 0 && state.newBooking.date_from !== '' && state.newBooking.date_to !== ''),
-
+    getNewServiceRegisterList: state => state.getNewServiceRegisterList,
 }
 
 

@@ -1,5 +1,5 @@
 <template>
-getCurrentBill: {{seed}}
+<!-- getCurrentBill: {{seed}} -->
   <div class="" style="padding-left: 17%; padding-right: 10%">
     <div class="has-text-centered">
       <h1 class="title">Checkout for booking {{ fields.booking_id }}</h1>

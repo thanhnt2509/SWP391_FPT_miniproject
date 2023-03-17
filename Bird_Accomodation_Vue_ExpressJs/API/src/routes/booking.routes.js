@@ -22,6 +22,8 @@ router.route('/:booking_id/:state')
 router.route('/:booking_id/checkout')
     .post(multerInstance.uploadCheckout.single('file') ,booking.checkoutBooking)
 
+router.route('/:booking_id/registerNewBookingService')
+    .post(booking.registerNewBookingService)
 
 
 

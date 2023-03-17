@@ -69,6 +69,7 @@ const actions = {
             // upload update list to server
             const reponseUpload = await axios.post(`http://localhost:5000/report/newReport/updateReportList`, {
                 booking_id: payload.booking_id,
+                date: payload.date,
                 updateList: payload.updateList,
             }, {
                 headers: {

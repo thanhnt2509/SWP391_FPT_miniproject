@@ -12,7 +12,7 @@ module.exports = {
                 "from Booking b join [User] u on b.user_id = u.user_id \n" +
                 "join Bird bi on b.bird_id = bi.bird_id \n" +
                 "join Bill bil on bil.booking_id = b.booking_id \n" +
-                "where b.booking_id = 13")
+                "where b.booking_id = @booking_id")
 
         const result = [];
         dataContent.recordset.forEach(data => {

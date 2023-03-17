@@ -87,6 +87,7 @@ export default {
         const formData = this.handleContentForm();
         const uploadReportListPayload = {
           booking_id: this.$route.params.booking_id,
+          date: new Date().toISOString().slice(0, 10),
           updateList: this.$store.getters.getNewReportUpdateList,}
         const success = 
           this.$store.dispatch('submitNewReport', formData) && 
