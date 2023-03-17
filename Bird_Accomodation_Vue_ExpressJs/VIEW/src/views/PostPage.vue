@@ -2,25 +2,17 @@
   <h1 class="title has-text-centered">Fresh Content</h1>
   <div class="container content">
     <div class="columns is-multiline">
+      <!-- {{ postItems }} -->
       <div v-for="post in postItems" :key="`post_` + post?.post_id" class="column each_post">
-        <!-- {{ post }} -->
         <div>
-          <img class=""
-            src="../../public/images/bird-fac2.jpg" />
+          <img class="" src="../../public/images/bird-fac2.jpg" />
         </div>
-        <label style="text-align: left; width: 100%;" class="title">{{ post?.title }}</label>
-        <div class="each_post_content">
-          {{ post?.content }}
-        </div>
+        <h2 class="title">{{ post?.title }}</h2>
         <div>
-          <div class="has-text-centered">
-            <button class="button is-primary" @click="isActive = true">Show more</button>
-          </div>
-          <div>
-            <a-modal v-model:visible="isActive" width="1000px" title="Basic Modal">
-              <PostDetail />
-            </a-modal>
-          </div>
+          <button class="button is-info is-light" @click="isActive = true">Show more</button>
+          <a-modal v-model:visible="isActive" width="1000px" :title="post?.title">
+            <PostDetail :post="post"/>
+          </a-modal>
         </div>
       </div>
     </div>
@@ -47,22 +39,28 @@ export default {
 </script>
 
 <style scoped>
-.each_post{
-  padding: 20px;
-  margin-top: 20px;
-  background-color: rgb(230, 230, 230);
-  margin-right: 10px;
-  margin-bottom: 50px;
-  border: 0.3px solid rgb(202, 200, 200);
-  border-radius: 20px;
-}
-.each_post_content {
-  text-align: left;
-  padding: 20px;
+.each_post {
+  position: relative;
   width: 100%;
-  height: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-justify: kashida;
+  height: 390px;
+  margin: 10px;
+  padding: 0;
+  border: 0.2px solid #ccc;
+}
+
+.each_post h2 {
+  padding-top: 8px;
+  margin: 0;
+  color: #000;
+  text-align: center;
+}
+.each_post button{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
 }
 </style>

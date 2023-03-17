@@ -14,7 +14,7 @@
       
 
       <!--        button to add a report-->
-      <div v-if="$store.getters.getUser.role === 1">
+      <div v-if="$store.getters.getUser?.role === 1">
         <button class="button is-primary add_report_button" @click="showModal">Add Report</button>
         <a-modal width="1000px" v-model:visible="visible"
           :title="`Update Report ${new Date().toISOString().slice(0, 10)}`" :confirm-loading="confirmLoading"
