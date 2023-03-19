@@ -58,6 +58,7 @@ img {
 }
 
 .service {
+    height: 595px;
     margin: 20px;
     border-radius: 40px;
     background-color: #f5f5f5;

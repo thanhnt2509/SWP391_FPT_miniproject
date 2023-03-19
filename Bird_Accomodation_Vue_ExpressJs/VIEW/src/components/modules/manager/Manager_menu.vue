@@ -37,6 +37,7 @@
                     <Manage_Transaction v-if="selectedKeys == 'transaction'" />
                     <Manage_Service v-if="selectedKeys == 'service'" />
                     <Manage_Account v-if="selectedKeys == 'account'" />
+                    <Manage_Post v-if="selectedKeys == 'post'" />
                 </a-layout-content>
             </a-layout>
         </a-layout-content>
@@ -49,6 +50,7 @@ import Manager_Dashboard from './Manager_Dashboard.vue';
 import Manage_Transaction from './Manage_Transaction.vue';
 import Manage_Service from './Manage_Service.vue';
 import Manage_Account from './Manage_Account.vue';
+import Manage_Post from './Manage_Post.vue';
 export default defineComponent({
     components: {
         AccountBookOutlined,
@@ -58,7 +60,8 @@ export default defineComponent({
         Manager_Dashboard,
         Manage_Transaction,
         Manage_Service,
-        Manage_Account
+        Manage_Account,
+        Manage_Post
     },
     setup() {
         return {

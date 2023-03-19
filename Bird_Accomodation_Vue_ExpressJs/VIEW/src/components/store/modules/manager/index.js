@@ -6,7 +6,7 @@ const state = {
 	allUsers: [],
 	// allBirds: [],
 	allBookings: [],
-	// allPosts: [],
+	allPosts: [],
 	// allReviews: [],
 };
 
@@ -23,6 +23,9 @@ const mutations = {
 	UPDATE_BOOKING_ITEM(state, payload){
 		state.allBookings = payload;
 	},
+	UPDATE_POST_ITEM(state, payload){
+		state.allPosts = payload;
+	}
 };
 
 const actions = {
@@ -33,6 +36,10 @@ const actions = {
 	async getAllUsers({ commit }) {
 		const response = await api.get("/account");
 		commit("UPDATE_USER_ITEM", response.data.accounts);
+	},
+	async getAllPosts({ commit }) {
+		const response = await api.get("/post");
+		commit("UPDATE_POST_ITEM", response.data.posts);
 	},
 	// async getAllBirds({ commit }) {
 	// 	const response = await api.get("/bird");
@@ -85,7 +92,7 @@ const getters = {
 	allBookingItems_ongoing: state => state.allBookings.filter(booking => booking.status == 2),
 	allBookingItems_completed: state => state.allBookings.filter(booking => booking.status == 3),
 	allBookingItems_canceled: state => state.allBookings.filter(booking => booking.status == 4),
-	// allPostItems: state => state.allPosts,
+	allPostItems: state => state.allPosts,
 	// allReviewItems: state => state.allReviews,
 };
 

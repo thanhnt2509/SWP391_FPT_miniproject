@@ -16,7 +16,7 @@ export default {
         this.$store.dispatch('getAllServices');
         this.$store.dispatch('getAllUsers');
         this.$store.dispatch('getAllBookings');
-
+        this.$store.dispatch('getAllPosts');
     }
 }
 </script>

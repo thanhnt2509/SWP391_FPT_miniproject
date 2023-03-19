@@ -2,6 +2,7 @@
   <div>
     {{ post }}
     jdsk
+    
   </div>
 </template>
 
