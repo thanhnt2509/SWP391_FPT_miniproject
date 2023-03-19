@@ -17,7 +17,7 @@
                 return 0;
             })" :key="service.service_id">
                 <div class="service">
-                    <img class="img_service" :src="'/images/' + service.image + '.jpg'" :alt="service.name">
+                    <img class="img_service" :src="`http://localhost:5000/file/get_service_img/${service.image}`" :alt="service.name">
                     <div class="content  is-three-quarters">
                         <div style="text-align: center;">
                             <h3 class="title">{{ service.name }} <abbr v-if="service.isHighlight" title="Best selection"><i class="fa-solid fa-crown"></i></abbr></h3>

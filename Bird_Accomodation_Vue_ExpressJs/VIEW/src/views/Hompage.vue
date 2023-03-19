@@ -64,8 +64,9 @@
         </div>
       </div>
 
+      <!-- services:{{ services }} -->
       <!-- list all service -->
-      <ServiceList :services="services"/>
+      <ServiceList :services="$store.getters.highlightedServiceItems"/>
     </div>
 
     <!-- Highlight section -->
@@ -104,50 +105,17 @@
         <h1 class="title" style="margin-top: -35px;">Testimonials from Bird Owners</h1>
         <p>We are always listening to service thoughts to help us provide you with better services.</p>
       </div>
-
-      <div class="columns" style="margin-bottom: 50px;">
-        <article class="column columns is-half message feedback">
-          <div class="message-body column feedback_img">
-            <img src="/images/bird-housing.jpg" alt="">
-          </div>
-          <div class="column feedback_content">
-            <h2>Jhon love parrot!</h2>
-            <div>
-              <a-rate :value="4.5" disabled allow-half/>
-            </div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>,
-            tempus
-            quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
-            diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis
-            lectus.
-          </div>
-        </article>
-        <article class="column columns is-half message feedback">
-          <div class="message-body column feedback_img">
-            <img src="/images/bird-housing.jpg" alt="">
-          </div>
-          <div class="column feedback_content">
-            <h2>Jhon love parrot!</h2>
-            <div>
-              <a-rate :value="4.5" disabled allow-half/>
-            </div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>,
-            tempus
-            quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
-            diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis
-            lectus.
-          </div>
-        </article>
-      </div>
+      <ReviewList :reviews="$store.getters.reviewItems" />
+      
     </div>
   </div>
 </template>
 
 <script>
 import ServiceList from './ServiceList.vue';
+import ReviewList from './ReviewList.vue';
 import PostPage from './PostPage.vue';
 import {LeftCircleOutlined, RightCircleOutlined} from '@ant-design/icons-vue';
-import axios from 'axios';
 export default {
   name: 'Homepage',
   data() {
@@ -160,28 +128,7 @@ export default {
         '/images/bird-food2-crop.jpg',
         '/images/Bird Photography.jpg',
       ],
-      services: [
-        {
-          name: 'Boarding',
-          image: '/images/bird-tree-hotel.jpg',
-          description: 'What makes us the best dog hotel for your furry.'
-        },
-        {
-          name: 'Training',
-          image: '/images/bird-training.jpg',
-          description: 'What makes us the best dog hotel for your furry friend? '
-        },
-        {
-          name: 'Photography',
-          image: '/images/bird-photography.jpg',
-          description: 'What makes us the best dog hotel for your furry.'
-        },
-        {
-          name: 'Play area',
-          image: '/images/bird-play-area.jpg',
-          description: 'What makes us the best dog hotel for your furry friend? '
-        },
-      ],
+      services: [],
       hItems: [
         {
           title: 'Oasis Care system',
@@ -192,13 +139,9 @@ export default {
           content: 'We are proud to lead the way in the luxury pet hospitality industry, and provide world class accommodations and service to our guests so that your dog is happy, comfortable, and relaxed.'
         },
         {
-          title: 'Oasis training system',
-          content: 'Bird training involves teaching birds to perform specific behaviors on command through positive reinforcement techniques. This can include anything from basic obedience training to teaching tricks and advanced behaviors.'
+          title: 'Oasis Boarding system',
+          content: 'Boarding birds is the act of temporarily housing birds in a specialized facility or with a professional caregiver while their owners are away. This ensures that the birds receive proper care and attention in their owner sabsence'
         },
-        // {
-        //   title: 'Oasis Boarding system',
-        //   content: 'Boarding birds is the act of temporarily housing birds in a specialized facility or with a professional caregiver while their owners are away. This ensures that the birds receive proper care and attention in their owner sabsence'
-        // },
       ]
 
     }
@@ -229,7 +172,8 @@ components: {
   LeftCircleOutlined,
       RightCircleOutlined,
       ServiceList,
-      PostPage
+      PostPage,
+      ReviewList
 },
 
 }

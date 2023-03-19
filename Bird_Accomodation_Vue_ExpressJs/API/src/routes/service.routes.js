@@ -9,10 +9,8 @@ router.route('/')
     .get(service.getAllServices)
     .post(verifyLogin, verifyAdmin, service.addService);
 
-// router.route('/:service_name')
-//     .get(service.getServiceByName)
-//     .put(service.updateServiceByName)
-//     .delete(service.deleteServiceByName);
+router.route('/highlight')
+    .get(service.getAllHighLightServices);
 
 router.route('/:service_id')
     .get(service.getServiceById)

@@ -59,4 +59,13 @@ router.get('/get_checkout_img/:img_path', function(req, res, next) {
         res.status(500).send(e);
     }
 })
+
+router.get('/get_service_img/:img_path', function(req, res, next) {
+    const { img_path } = req.params;
+    try {
+        res.status(200).sendFile(img_path, { root: './store/services' });
+    }catch (e) {
+        res.status(500).send(e);
+    }
+})
 module.exports = router

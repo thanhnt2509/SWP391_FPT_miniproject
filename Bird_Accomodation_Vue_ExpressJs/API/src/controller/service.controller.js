@@ -11,12 +11,10 @@ module.exports = {
                 status: item.status,
                 price: item.price,
                 image: item.image,
-                isHighlight: item.isHighlight,  // need to fix database name
+                isHighlight: item.isHighlight,
                 isPack: item.isPack,
             }))
 
-            // create error to test on this route
-            // throw new Error("This is a test error");
 
             res.status(200).send({
                 exitcode: 0,
@@ -25,6 +23,31 @@ module.exports = {
             })
         } catch (error) {
           console.log(error.message);
+            res.status(500).send("Internal server error");
+        }
+    },
+    getAllHighLightServices: async (req, res, next) => {
+        try {
+            const result = await servicesModel.getAllServiceHightLights();
+            const serviceList = result.map(item => ({
+                service_id: item.service_id,
+                name: item.name,
+                description: item.description,
+                status: item.status,
+                price: item.price,
+                image: item.image,
+                isHighlight: item.isHighlight,
+                isPack: item.isPack,
+            }))
+
+
+            res.status(200).send({
+                exitcode: 0,
+                message: "Get service list successfully",
+                services: serviceList
+            })
+        } catch (error) {
+            console.log(error.message);
             res.status(500).send("Internal server error");
         }
     },

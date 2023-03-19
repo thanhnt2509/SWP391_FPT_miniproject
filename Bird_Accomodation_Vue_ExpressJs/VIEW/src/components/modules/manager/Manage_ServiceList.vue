@@ -42,7 +42,7 @@
                 <span v-else>Service Quantity</span>
             </template>
             <template v-if="column.key === 'image'">
-                <a-image width="100px" height="100px" :src="`/public/images/${record.image}.jpg`"></a-image>
+                <a-image width="100px" height="100px" :src="`http://localhost:5000/file/get_service_img/${record.image}`"></a-image>
             </template>
             <template v-else-if="column.key === 'action'">
                 <span>

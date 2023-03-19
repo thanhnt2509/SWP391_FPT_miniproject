@@ -22,8 +22,9 @@ export default {
   created() {
     // localStorage.setItem('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IlUyQGdtYWlsLmNvbSIsImlhdCI6MTY3Nzg0MjE2MywiZXhwIjoxNjc3ODQ1NzYzfQ.JA5WroIVas2nKcHau__jSa5G4kjICpxQQhGDJrb0asU')
     // call api to sync data
-    // this.$store.dispatch("getReviewItem");
+    this.$store.dispatch("getReviewItem");
     this.$store.dispatch("getServiceItem");
+    this.$store.dispatch("getHighLightedServiceItem");
     this.$store.dispatch("getBirdTypeItem");
     this.$store.dispatch("getPostItem");
   },

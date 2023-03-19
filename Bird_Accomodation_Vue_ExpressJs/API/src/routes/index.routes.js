@@ -21,6 +21,7 @@ const router = express.Router();
 router.use('/post', post);
 router.use('/auth', auth);
 router.use('/service', service);
+router.use('/review', review);
 
 router.use('/account', verifyLogin, account);
 router.use('/bird', bird);
