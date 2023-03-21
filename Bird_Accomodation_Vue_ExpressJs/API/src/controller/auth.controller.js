@@ -34,19 +34,6 @@ module.exports = {
     register: async (req, res, next) => {
         try {
             const { email, password, name, address, phone } = req.body;
-            const validateEmail = await accountModel.validateEmail(email);
-            // validate email
-            if (validateEmail) {
-                res.status(409).send({message: "Email already exists"
-                });
-                return;
-            }
-            // validate phone
-            const validatePhone = await accountModel.validatePhone(phone);
-            if (validatePhone) {
-                res.status(409).send({message: "Phone already exists"});
-                return;
-            }
             const registerDetail = {
                 email: email,
                 password: password,
@@ -62,6 +49,25 @@ module.exports = {
             }
         } catch (error) {
            console.log(error.message);
+            res.status(500).send("Internal server error");
+        }
+    },
+    isAccountExist: async (req, res, next) => {
+        try {
+            const { email, phone } = req.body;
+            const validateEmail = await accountModel.validateEmail(email);
+            const validatePhone = await accountModel.validatePhone(phone);
+            if (validateEmail) {
+                res.status(409).send({message: "Email already exists"});
+                return;
+            }
+            if (validatePhone) {
+                res.status(409).send({message: "Phone already exists"});
+                return;
+            }
+            res.status(200).send({message: "Email and phone does not exist"});
+        } catch (error) {
+            console.log(error.message);
             res.status(500).send("Internal server error");
         }
     }

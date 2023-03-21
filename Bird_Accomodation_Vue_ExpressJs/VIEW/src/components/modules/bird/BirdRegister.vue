@@ -120,6 +120,7 @@ export default {
 
           this.$store.dispatch('getAllBirds')
           message.success('Bird added successfully');
+          this.$router.push('/account/bird/list');
         } catch (error) {
           message.error('Something went wrong');
         }

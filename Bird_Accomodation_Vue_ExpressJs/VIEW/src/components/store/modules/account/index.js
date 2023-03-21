@@ -13,30 +13,7 @@ const state = {
 	// 	user_img: null,
 	// },
 	user: undefined,
-	birds: [
-		{
-			bird_id: 1,
-			type_name: 'Parrot',
-			age: 2,
-			bird_name: 'RaeKyo',
-			breed: 'Indian Ringneck',
-			gender: 0,
-			image: 'death.jpg',
-			description: 'none',
-			boarding: true
-		},
-		{
-			bird_id: 2,
-			type_name: 'Parrot',
-			age: 4,
-			bird_name: 'RaeKyo2',
-			breed: 'African Grey',
-			gender: 1,
-			image: 'death.jpg',
-			description: 'none',
-			boarding: false
-		},
-	],
+	birds: [],
 	bookings: [],
 };
 
@@ -64,12 +41,12 @@ const actions = {
 			console.log("after login user: ", state.user);
 		}
 		// a user login
-		if (state.user.role === 0) {
-			await this.dispatch("getAllBirds");
-			console.log("after get all birds: ", state.birds);
-			await this.dispatch("getAllBooking");
-			console.log("after get all bookings: ", state.bookings);
-		}
+		// if (state.user.role === 0) {
+		// 	await this.dispatch("getAllBirds");
+		// 	console.log("after get all birds: ", state.birds);
+		// 	await this.dispatch("getAllBooking");
+		// 	console.log("after get all bookings: ", state.bookings);
+		// }
 	},
 	async logout({ commit }) {
 		if (state.user) {
@@ -83,7 +60,9 @@ const actions = {
 	},
 	async getAllBirds({ commit }) {
 		const response = await api.get(`/bird`, state.user.email);
-		commit("UPDATE_BIRDS", response.data.birds);
+		if(response.status != 404){
+			commit("UPDATE_BIRDS", response.data.birds);
+		}
 	},
 	async addNewBird({ commit }, formData) {
 		const response = await api.post(`/bird`, formData, {
@@ -96,7 +75,9 @@ const actions = {
 	},
 	async getAllBooking({ commit }) {
 		const response = await api.get(`/booking`, state.user.email);
-		commit("UPDATE_BOOKINGS", response.data.bookings);
+		if(response.status != 404){
+			commit("UPDATE_BOOKINGS", response.data.bookings);
+		}
 	},
 };
 
