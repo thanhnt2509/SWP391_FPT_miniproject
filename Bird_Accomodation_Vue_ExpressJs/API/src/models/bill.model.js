@@ -7,10 +7,11 @@ module.exports = {
         const request = con.request();
         const dataContent = await request
             .input('booking_id', sql.Int, booking_id)
-            .query("select u.name as user_name, u.email, u.address, u.phone, bi.bird_name, bi.gender, bi.image, b.booking_id, b.date_from, b.date_to, bil.bill_id, \n" +
+            .query("select u.name as user_name, u.email, u.address, u.phone, bi.bird_name, bt.name as type, bi.gender, bi.description, bi.image, b.booking_id, b.date_from, b.date_to, bil.bill_id, \n" +
                 "bil.total_service_amount, bil.checkout_date, bil.payment_method, bil.payment_status, bil.checkout_img \n" +
                 "from Booking b join [User] u on b.user_id = u.user_id \n" +
                 "join Bird bi on b.bird_id = bi.bird_id \n" +
+                "join BirdType bt on bi.type_id = bt.btype_id \n" +
                 "join Bill bil on bil.booking_id = b.booking_id \n" +
                 "where b.booking_id = @booking_id")
 
@@ -25,8 +26,10 @@ module.exports = {
                 },
                 bird: {
                     bird_name: data.bird_name,
+                    bird_type: data.type,
                     gender: data.gender,
-                    image: data.image
+                    image: data.image,
+                    description: data.description
                 },
                 booking: {
                     booking_id: data.booking_id,

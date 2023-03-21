@@ -9,4 +9,5 @@ const router = express.Router();
 
 router.route('/:booking_id')
     .get(bill.getBill)
+
 module.exports = router
