@@ -33,6 +33,12 @@
                     <a href="#">{{ record.bird_name }}</a>
                 </span>
             </template>
+            <template v-if="column.key === 'booking_id'">
+                <span>
+                    <a href="#">{{ record.booking_id }}</a>
+                </span>
+            </template>
+
             <template v-if="column.key === 'status'">
                 <span>
                     <a-tag style="padding: 5px 20px; border-radius: 20px;" :color="bookingState[record.status].color">

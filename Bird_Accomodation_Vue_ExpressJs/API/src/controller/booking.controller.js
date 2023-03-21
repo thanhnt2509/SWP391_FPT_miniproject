@@ -83,7 +83,7 @@ module.exports = {
             }
             if (result.length === 0) {
                 console.log('No booking found');
-                res.status(400).send('No booking found');
+                res.status(404).send('No booking found');
 
             } else {
                 const bookingList = result.map(item => ({

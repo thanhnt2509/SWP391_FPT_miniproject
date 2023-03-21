@@ -9,4 +9,7 @@ router.route('/login')
 router.route('/register')
     .post(auth.register);
 
+router.route('/isExistAccount')
+    .post(auth.isAccountExist);
+
 module.exports = router;

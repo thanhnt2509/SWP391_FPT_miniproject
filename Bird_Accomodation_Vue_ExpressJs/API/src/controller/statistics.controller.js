@@ -1,4 +1,4 @@
-const statistics = require('../model/statistics.model')
+const statistics = require('../models/statistics.model')
 
 module.exports = {
     getTotalRevenueDay: async (req, res) => {
