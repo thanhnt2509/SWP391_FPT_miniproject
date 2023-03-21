@@ -39,9 +39,6 @@ export default {
         BirdRegister,
         Bird_Info
     },
-    created() {
-        this.$store.dispatch('getAllBirds')
-    },
     updated() {
         this.$store.dispatch('getAllBirds')
     }

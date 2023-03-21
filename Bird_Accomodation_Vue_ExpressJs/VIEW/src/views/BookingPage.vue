@@ -79,7 +79,7 @@ export default {
                         });
 
                         this.$store.dispatch('clearBooking')
-                        this.$router.push('/account/transaction');   
+                        this.$router.push('/');   
                     }else{
                         message.error('Something went wrong !');
                     }
@@ -95,6 +95,9 @@ export default {
         BookingUserInfo,
         BookingBirdSelect,
         BookingServiceSelect
+    },
+    updated() {
+        this.$store.dispatch('clearBooking')
     }
 }
 </script>

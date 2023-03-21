@@ -41,12 +41,12 @@ const actions = {
 			console.log("after login user: ", state.user);
 		}
 		// a user login
-		// if (state.user.role === 0) {
-		// 	await this.dispatch("getAllBirds");
-		// 	console.log("after get all birds: ", state.birds);
-		// 	await this.dispatch("getAllBooking");
-		// 	console.log("after get all bookings: ", state.bookings);
-		// }
+		if (state.user.role === 0) {
+			await this.dispatch("getAllBirds");
+			console.log("after get all birds: ", state.birds);
+			await this.dispatch("getAllBooking");
+			console.log("after get all bookings: ", state.bookings);
+		}
 	},
 	async logout({ commit }) {
 		if (state.user) {

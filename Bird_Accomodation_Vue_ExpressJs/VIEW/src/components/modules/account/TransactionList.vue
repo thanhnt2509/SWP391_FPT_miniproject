@@ -159,6 +159,9 @@ export default defineComponent({
             cancelBooking
         };
     },
+    updated() {
+        this.$store.dispatch('getAllBooking')
+    }
 
 });
 </script>

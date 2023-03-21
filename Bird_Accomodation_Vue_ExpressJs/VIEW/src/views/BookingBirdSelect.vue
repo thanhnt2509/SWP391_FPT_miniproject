@@ -63,7 +63,7 @@ export default {
     watch: {
         bird_selected: {
             handler: function (val, oldVal) {
-                this.$store.dispatch('setBirdSelected', this.bird_selected.bird_id)
+                this.$store.dispatch('setBirdSelected', this.bird_selected?.bird_id)
             },
             deep: true
         }
@@ -81,9 +81,7 @@ export default {
             return res
         }
     },
-    components: {
 
-    }
 }
 </script>
 
@@ -105,5 +103,6 @@ export default {
 
 .main {
     padding: 10px 40px 30px 0;
+    height: fit-content;
 }
 </style>
