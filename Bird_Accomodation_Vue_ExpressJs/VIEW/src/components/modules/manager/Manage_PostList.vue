@@ -2,14 +2,14 @@
     <!-- allServiceItems: {{ getAllServices }} -->
     <a-table :columns="columns" :data-source="data">
         <template #headerCell="{ column }">
-            <template v-if="column.key === 'name'">
-                <span>
-                    Service
-                </span>
-            </template>
             <template v-if="column.key === 'status'">
                 <span>
                     Status
+                </span>
+            </template>
+            <template v-if="column.key === 'title'">
+                <span>
+                    Title
                 </span>
             </template>
         </template>

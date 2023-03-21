@@ -36,7 +36,7 @@
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'bird_name'">
                 <span>
-                    <a href="#">{{ record.bird_name }}</a>
+                    {{ record.bird_name }}
                 </span>
             </template>
             <template v-if="column.key === 'booking_id'">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ post }}
+
     jdsk
     
   </div>
@@ -10,7 +10,7 @@
 export default {
     name: 'post detail',
     props: {
-        post: Object
+
     }
 };
 </script>

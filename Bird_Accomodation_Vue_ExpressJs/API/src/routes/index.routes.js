@@ -33,7 +33,7 @@ router.use('/reportDetail', verifyLogin, reportDetail);
 router.use('/bill', verifyLogin, bill);
 router.use('/file', handleFile);
 
-router.use('/statistics', verifyLogin,statistics)
+router.use('/statistics', verifyLogin, statistics)
 
 // export router
 module.exports = router;

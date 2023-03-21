@@ -1,9 +1,40 @@
 const statistics = require('../models/statistics.model')
+const config = require('../config/config')
 
 module.exports = {
     getTotalRevenueDay: async (req, res) => {
         try {
-            const result = await statistics.getTotalRevenueDay();
+            let result = await statistics.getTotalRevenueDay();
+            if (result) {
+                result = result.map(item  => ({
+                    ...item,
+                    checkout_date: config.dateFormat(new Date(item.checkout_date))
+                }))
+                res.status(200).json(result);
+            } else {
+                res.status(404).json({ message: 'Not found' });
+            }
+        } catch (e) {
+            console.log(e)
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    },
+    getTotalRevenueMonth: async (req, res) => {
+        try {
+            const result = await statistics.getTotalRevenueMonth();
+            if (result) {
+                res.status(200).json(result);
+            } else {
+                res.status(404).json({ message: 'Not found' });
+            }
+        } catch (e) {
+            console.log(e)
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    },
+    getTotalRevenueYear: async (req, res) => {
+        try {
+            const result = await statistics.getTotalRevenueYear();
             if (result) {
                 res.status(200).json(result);
             } else {
@@ -29,7 +60,7 @@ module.exports = {
         }
     },
     //GET completion rate of quantity and remain
-    getCompletionRateOfQuantityAndRemain: async (req, res) => {
+    getCompletionRateOfQuantityAndRemain: async (req, res) => { // need service_name and completion_rate
         try {
             const result = await statistics.getCompletionRateOfQuantityAndRemain();
             if (result) {

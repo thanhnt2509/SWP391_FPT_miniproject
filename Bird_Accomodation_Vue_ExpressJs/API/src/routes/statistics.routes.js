@@ -6,16 +6,22 @@ const router = express.Router()
 router.route("/total-revenue/day")
     .get(stat.getTotalRevenueDay)
 
+router.route("/total-revenue/month")
+    .get(stat.getTotalRevenueMonth)
+
+router.route("/total-revenue/year")
+    .get(stat.getTotalRevenueYear)
+
 router.route("/most-used-service")
     .get(stat.getTheMostUsedService)
 
-router.route("/completion-rate/quantity-remain")
+router.route("/completion-rate/quantity-remain")    // wrong output
     .get(stat.getCompletionRateOfQuantityAndRemain)
 
 router.route("/bird-type-frequently-booked")
     .get(stat.getBirdTypeFrequentlyBooked)
 
-router.route("/completion-rate")
+router.route("/completion-rate")       // wrong output -> data is not correct
     .get(stat.getCompletionRate)
 
 //Mange transaction
@@ -25,10 +31,10 @@ router.route("/transaction/number-booking-status")
 router.route("/transaction/number-bill-status")
     .get(stat.getNumberOfBillsInEachPaymentMethod)
 
-router.route("/transaction/number-booking-month")
+router.route("/transaction/number-booking-month") // wrong output
     .get(stat.getNumberOfBookingsInEachMonth)
 
-router.route("/transaction/number-bird-month")
+router.route("/transaction/number-bird-month")  // wrong output
     .get(stat.getNumberOfBirdBookedInThisMonth)
 
 //Need more data
@@ -36,10 +42,10 @@ router.route("/transaction/number-bird-month")
 //     .get(stat.getTop5UserWhoSpendTheMost)
 
 //Manage Account
-router.route("/account/number-account-status")
+router.route("/account/number-account-status")// wrong output
     .get(stat.getNumberOfUserInEachStatus)
 
-router.route("/account/number-account-role")
+router.route("/account/number-account-role")// wrong output
     .get(stat.getNumberOfUserInEachRole)
 
 module.exports = router

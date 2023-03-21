@@ -9,15 +9,30 @@ module.exports = {
             .query("select checkout_date, sum(total_service_amount) as total_revenue\n" +
                 "from Bill\n" +
                 "where checkout_date between '2023-01-01' and GETDATE()\n" +
-                "group by checkout_date\n" +
-                "go");
+                "group by checkout_date");
         return (await returnData).recordset || null;
     },
     getTotalRevenueMonth: async () => {
-
+        let con = await config.connection();
+        const request = con.request();
+        const returnData = await request
+            .query("select MONTH(checkout_date) AS month, YEAR(checkout_date) AS year, sum(total_service_amount) as total_revenue\n" +
+                "        from Bill\n" +
+                "        where checkout_date >= '2023-01-01'\n" +
+                "        GROUP BY YEAR(checkout_date), MONTH(checkout_date)\n" +
+                "        ORDER BY YEAR(checkout_date), MONTH(checkout_date)");
+        return (await returnData).recordset || null;
     },
     getTotalRevenueYear: async () => {
-
+        let con = await config.connection();
+        const request = con.request();
+        const returnData = await request
+            .query("SELECT YEAR(checkout_date) AS year, SUM(total_service_amount) AS revenue\n" +
+                "        FROM Bill\n" +
+                "        WHERE checkout_date >= '2023-01-01'\n" +
+                "        GROUP BY YEAR(checkout_date)\n" +
+                "        ORDER BY YEAR(checkout_date)");
+        return (await returnData).recordset || null;
     },
     //GET the most used service
     //return: service_name, booking_count

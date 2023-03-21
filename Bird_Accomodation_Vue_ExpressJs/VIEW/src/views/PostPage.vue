@@ -3,16 +3,16 @@
   <div class="container content">
     <div class="columns is-multiline">
       <!-- {{ postItems }} -->
+      <a-modal v-model:visible="isActive" width="1000px" :title="post?.title">
+        <PostDetail />
+      </a-modal>
       <div v-for="post in postItems" :key="`post_` + post?.post_id" class="column each_post">
         <div>
           <img class="" src="../../public/images/bird-fac2.jpg" />
         </div>
         <h2 class="title">{{ post?.title }}</h2>
         <div>
-          <button class="button is-info is-light" @click="isActive = true">Show more</button>
-          <a-modal v-model:visible="isActive" width="1000px" :title="post?.title">
-            <PostDetail :post="post"/>
-          </a-modal>
+          <button class="button is-light" @click="isActive = true">Show more</button>
         </div>
       </div>
     </div>
@@ -54,7 +54,8 @@ export default {
   color: #000;
   text-align: center;
 }
-.each_post button{
+
+.each_post button {
   position: absolute;
   bottom: 0;
   left: 0;
