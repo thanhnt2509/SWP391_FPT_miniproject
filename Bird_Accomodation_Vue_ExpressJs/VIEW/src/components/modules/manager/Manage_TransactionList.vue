@@ -3,7 +3,7 @@
     visible: {{ visible }}
     <a-modal width="1000px" v-model:visible="visible" :title="`Detail for booking ${booking_idSelected}`">
         <template #footer></template>
-        <Manage_TrannsactionDetail :booking_id="booking_idSelected + ''" />
+        <Manage_TrannsactionDetail />
     </a-modal>
     <!-- getAllBookings: {{ getAllBookings }} -->
     <a-table :columns="columns" :data-source="data">
@@ -202,8 +202,9 @@ export default defineComponent({
         const checkin_Booking = (booking_id) => store.dispatch('checkin_Booking', booking_id)
         const showDetail = (e, booking_id) => {
             e.preventDefault()
-            visible.value = !visible.value
+            visible.value = true
             booking_idSelected.value = booking_id
+            store.dispatch('fetchCurrentBill', booking_idSelected.value)
         }
 
         return {
