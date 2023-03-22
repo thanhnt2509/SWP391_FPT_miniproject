@@ -2,7 +2,7 @@ const express = require('express');
 const service = require('../controller/service.controller');
 const { verifyLogin } = require('../middlewares/verifyLogin.mdw');
 const { verifyAdmin } = require('../middlewares/verifyAdmin.mdw');
-
+const multerInstance = require('../middlewares/multer')
 const router = express.Router();
 
 router.route('/')
@@ -14,7 +14,7 @@ router.route('/highlight')
 
 router.route('/:service_id')
     .get(service.getServiceById)
-    .put(verifyLogin, verifyAdmin, service.updateServiceById)
+    .put(verifyLogin, verifyAdmin, multerInstance.uploadService.single('file'), service.updateServiceById)
     .delete(verifyLogin, verifyAdmin, service.deleteServiceById);
 
 
