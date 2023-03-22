@@ -4,22 +4,22 @@
             <h1 class="label has-text-centered">Dashboard</h1>
             <div class="columns is-multiline">
                 <!--  is-two-thirds -->
-                <div class="column is-4">
+                <div class="column is-6">
                     <TotalRevenueDay />
                 </div>
-                <div class="column is-4">
+                <div class="column is-6">
 
                 </div>
-                <div class="column is-4">
+                <div class="column is-6">
                     <NumberBillByStatus />
                 </div>
-                <div class="column is-4">
+                <div class="column is-6">
                     <FrequentBirdTypeBooked />
                 </div>
-                <div class="column is-4">
+                <div class="column is-6">
                     <MostUsedService />
                 </div>
-                <div class="column is-4">
+                <div class="column is-6">
                     <NumberBookingStatus />
                 </div> 
             </div>

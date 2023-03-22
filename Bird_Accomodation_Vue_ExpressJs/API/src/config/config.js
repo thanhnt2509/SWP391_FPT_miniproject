@@ -48,7 +48,7 @@ module.exports = {// export mssql module
         ACTIVE: 1,
     },
     //jwt
-    JWT_EXP_TIME: 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60 * 60,
+    JWT_EXP_TIME: 60 * 20,
     JWT_SECRET: process.env.JWT_SECRET,
 
 }

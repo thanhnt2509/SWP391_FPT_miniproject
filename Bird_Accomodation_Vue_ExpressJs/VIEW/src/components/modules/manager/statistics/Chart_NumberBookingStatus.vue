@@ -33,6 +33,7 @@ export default {
                 plugins: {
                     legend: {
                         position: 'top',
+                        display: false
                     },
                     title: {
                         display: true,
