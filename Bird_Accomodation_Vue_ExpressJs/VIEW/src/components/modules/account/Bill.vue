@@ -1,14 +1,14 @@
 <template>
-    <div class="" style="padding-left: 17%; padding-right: 10%">
+    <div class="">
         <div class="has-text-centered">
             <h1 class="title">Bill information {{ $route.params.booking_id }}</h1>
         </div>
-        <div class="container columns" style="">
+        <div class="columns" style="margin-left: 8%; margin-right: 8%">
             <!-- {{ seed }} -->
-            <div class="column is-half">
+            <div class="column">
                 <!-- user info -->
                 <div>
-                    <h2 class="subtitle title_info label">Customer info</h2>
+                    <h2 class=" title_info label">Customer info</h2>
                     <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                         <tr>
                             <td>Customer name</td>
@@ -31,7 +31,7 @@
 
                 <!-- bird info -->
                 <div>
-                    <h2 class="subtitle label">Bird info</h2>
+                    <h2 class=" label">Bird info</h2>
                     <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                         <tr>
                             <td>Bird name</td>
@@ -42,44 +42,45 @@
                             <td>{{ seed?.bird?.gender === 1 ? 'Male' : 'Female' }}</td>
                         </tr>
                         <tr>
-                            <td>Check-in Image</td>
-                            <td><a-image :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`"
-                                    class="bird_image" alt="" width="300px" height="300px"/></td>
+                            <td style="border: unset;">Check-in Image</td>
+                            <td style="border: unset;"><a-image :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`"
+                                    class="bird_image" alt="" width="300px" height="300px" /></td>
                         </tr>
                     </table>
                 </div>
-
-                <!-- service info -->
-                <div>
-                    <h2 class="subtitle title_info label">Service picked info</h2>
-                    <table class="table is-striped is-narrow is-hoverable is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th>Service name</th>
-                                <th style="text-align: right">Booked price</th>
-                                <th style="text-align: right">Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="service in seed?.service">
-                                <td>{{ service.name }}</td>
-                                <td>{{ service.booked_price }}$/pack</td>
-                                <td style="text-align: right">{{ service.isPack === 0 ? service.quantity : 'Pack' }}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Total amount</th>
-                                <th></th>
-                                <td style="text-align: right">{{ seed?.total_service_amount }}$</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
             </div>
+
+            <!-- service info -->
+            <div class="column">
+                <h2 class=" title_info label">Service picked info</h2>
+                <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Service name</th>
+                            <th style="text-align: right">Booked price</th>
+                            <th style="text-align: right">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="service in seed?.service">
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.booked_price }}$/pack</td>
+                            <td style="text-align: right">{{ service.isPack === 0 ? service.quantity : 'Pack' }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total amount</th>
+                            <th></th>
+                            <td style="text-align: right">{{ seed?.total_service_amount }}$</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
             <!-- booking info -->
             <div class="checkout_box column">
-                <h2 class="subtitle title_info label">Check-in info</h2>
+                <h2 class=" title_info label">Check-in info</h2>
                 <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                     <tr>
                         <td>Start date</td>
@@ -91,7 +92,7 @@
                     </tr>
                 </table>
 
-                <h2 class="subtitle title_info label">Check-out info</h2>
+                <h2 class=" title_info label">Check-out info</h2>
                 <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                     <tr>
                         <td>Payment status</td>
@@ -106,14 +107,14 @@
                         <td>Check-out date</td>
                         <td>{{ seed?.bill?.checkout_date }}</td>
                     </tr>
-                    <tr>
-                        <td>Check-out image</td>
-                        <td><a-image :src="`http://localhost:5000/file/get_checkout_img/${seed?.bill?.checkout_image}`" class="bird_image"
-                                alt="" width="300px" height="300px" /></td>
+                    <tr >
+                        <td style="border: unset;">Check-out image</td>
+                        <td style="border: unset;"><a-image :src="`http://localhost:5000/file/get_checkout_img/${seed?.bill?.checkout_image}`"
+                                class="bird_image" alt="" width="300px" height="300px" /></td>
                     </tr>
                 </table>
-
             </div>
+
         </div>
     </div>
 </template>
@@ -144,8 +145,10 @@ tr td:nth-child(2) {
     text-align: right;
 }
 
-h2{
+h2 {
     margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .bird_image {

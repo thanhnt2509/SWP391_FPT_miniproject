@@ -48,7 +48,6 @@
 <script>
 import { UserOutlined } from '@ant-design/icons-vue';
 import { Modal } from 'ant-design-vue';
-import { setTransitionHooks } from 'vue';
 import { mapGetters } from 'vuex';
 export default {
     name: "ReportMessage",
@@ -126,7 +125,7 @@ export default {
 .report_title {
     height: 35px;
     width: 100%;
-    background-color: #3FA9FF;    opacity: 0.3;
+    background-color: #3FA9FF;
     color: white;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;

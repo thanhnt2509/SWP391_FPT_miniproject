@@ -1,6 +1,6 @@
 <template>
     SORT BY: {{ sort_by }} <br>
-    visible: {{ visible }}
+    <!-- visible: {{ visible }} -->
     <a-modal width="1000px" v-model:visible="visible" :title="`Detail for booking ${booking_idSelected}`">
         <template #footer></template>
         <Manage_TrannsactionDetail />
@@ -162,12 +162,19 @@ export default defineComponent({
         Manage_TrannsactionDetail
     },
     props: {
-        sort_by: String
+        sort_by: String,
+        dateRangeSelected: Array
     },
     setup(props) {
         const store = useStore();
 
         const getAllBookings = computed(() => {
+            if (props.dateRangeSelected){
+                console.log('dateRangeSelected');
+                console.log(props.dateRangeSelected);
+                // return store.getters['allBookingItems_dateRange', rangeDateFormat]
+            }
+
             if (props.sort_by === 'All') {
                 return store.getters['allBookingItems']
             } else if (props.sort_by === 'Pending') {
