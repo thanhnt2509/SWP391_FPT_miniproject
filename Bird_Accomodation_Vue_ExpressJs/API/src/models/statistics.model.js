@@ -9,11 +9,7 @@ module.exports = {
             .query("select checkout_date, sum(total_service_amount) as total_revenue\n" +
                 "from Bill\n" +
                 "where checkout_date between '2023-01-01' and GETDATE()\n" +
-<<<<<<< HEAD
-                "group by checkout_date\n");
-=======
                 "group by checkout_date");
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
         return (await returnData).recordset || null;
     },
 
@@ -22,28 +18,17 @@ module.exports = {
         const request = con.request();
         const returnData = await request
             .query("select MONTH(checkout_date) AS month, YEAR(checkout_date) AS year, sum(total_service_amount) as total_revenue\n" +
-<<<<<<< HEAD
-                "from Bill " +      
-                "WHERE checkout_date >= '2023-01-01'\n" +
-                "GROUP BY YEAR(checkout_date), MONTH(checkout_date)\n" +
-                "ORDER BY YEAR(checkout_date), MONTH(checkout_date)");
-        return (await returnData).recordset || null;
-    },
-
-=======
                 "        from Bill\n" +
                 "        where checkout_date >= '2023-01-01'\n" +
                 "        GROUP BY YEAR(checkout_date), MONTH(checkout_date)\n" +
                 "        ORDER BY YEAR(checkout_date), MONTH(checkout_date)");
         return (await returnData).recordset || null;
     },
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
     getTotalRevenueYear: async () => {
         let con = await config.connection();
         const request = con.request();
         const returnData = await request
             .query("SELECT YEAR(checkout_date) AS year, SUM(total_service_amount) AS revenue\n" +
-<<<<<<< HEAD
                 "from Bill" +
                 "WHERE checkout_date >= '2023-01-01'\n" +
                 "GROUP BY YEAR(checkout_date)\n" +
@@ -92,12 +77,6 @@ module.exports = {
             "GROUP BY YEAR(b.checkout_date), s.name\n" +
             "ORDER BY YEAR(b.checkout_date), used_quantity ASC");
         return (await returnData).recordset || null;    
-=======
-                "        FROM Bill\n" +
-                "        WHERE checkout_date >= '2023-01-01'\n" +
-                "        GROUP BY YEAR(checkout_date)\n" +
-                "        ORDER BY YEAR(checkout_date)");
-        return (await returnData).recordset || null;
     },
     //GET the most used service
     //return: service_name, booking_count
@@ -157,7 +136,6 @@ module.exports = {
                     LEFT JOIN Booking AS b ON dr.date >= b.date_from AND dr.date <= b.date_to
                     GROUP BY dr.date`);
         return (await returnData).recordset || null;
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
     },
 
     // Manage Transaction

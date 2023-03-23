@@ -1,24 +1,15 @@
-<<<<<<< HEAD
-const statisticsModel = require('../models/statistics.model');
-=======
 const statistics = require('../models/statistics.model')
 const config = require('../config/config')
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
 
 module.exports = {
     getTotalRevenueDay: async (req, res) => {
         try {
-<<<<<<< HEAD
-            const result = await statisticsModel.getTotalRevenueDay();
-            if(result) {
-=======
             let result = await statistics.getTotalRevenueDay();
             if (result) {
                 result = result.map(item  => ({
                     ...item,
                     checkout_date: config.dateFormat(new Date(item.checkout_date))
                 }))
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
                 res.status(200).json(result);
             } else {
                 res.status(404).json({ message: 'Not found' });
@@ -211,12 +202,11 @@ module.exports = {
             console.log(e)
             res.status(500).json({ message: 'Internal server error' });
         }
-<<<<<<< HEAD
     },
 
     getTotalRevenueMonth: async (req, res) => {
         try {
-            const result = await statisticsModel.getTotalRevenueMonth();
+            const result = await statistics.getTotalRevenueMonth();
             if(result){
                 res.status(200).json(result);
             } else{
@@ -230,7 +220,7 @@ module.exports = {
 
     getTotalRevenueYear: async (req, res) => {
         try {
-            const result = await statisticsModel.getTotalRevenueYear();
+            const result = await statistics.getTotalRevenueYear();
             if(result){
                 res.status(200).json(result);
             } else{
@@ -244,7 +234,7 @@ module.exports = {
 
     getServiceByDay: async(req, res) =>{
         try {
-            const result = await statisticsModel.getServiceByDate();
+            const result = await statistics.getServiceByDate();
             if(result){
                 res.status(200).json(result);
             } else{
@@ -258,7 +248,7 @@ module.exports = {
 
     getServiceByMonth: async(req, res) =>{
         try {
-            const result = await statisticsModel.getServiceByMonth();
+            const result = await statistics.getServiceByMonth();
             if(result){
                 res.status(200).json(result);
             } else{
@@ -272,7 +262,7 @@ module.exports = {
 
     getServiceByYear: async(req, res) =>{
         try {
-            const result = await statisticsModel.getServiceByYear();
+            const result = await statistics.getServiceByYear();
             if(result){
                 res.status(200).json(result);
             } else{
@@ -284,8 +274,4 @@ module.exports = {
         }
     },
     
-=======
     }
-
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
-}

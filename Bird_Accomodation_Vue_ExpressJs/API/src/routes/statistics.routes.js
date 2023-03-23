@@ -12,7 +12,6 @@ router.route("/total-revenue/month")
 router.route("/total-revenue/year")
     .get(stat.getTotalRevenueYear)
 
-<<<<<<< HEAD
 router.route("/use-services/day")
     .get(stat.getServiceByDay)
 
@@ -21,7 +20,6 @@ router.route("/use-services/month")
 
 router.route("/use-services/year")
     .get(stat.getServiceByYear)
-=======
 router.route("/most-used-service")
     .get(stat.getTheMostUsedService)
 
@@ -57,6 +55,5 @@ router.route("/account/number-account-status")// wrong output
 
 router.route("/account/number-account-role")// wrong output
     .get(stat.getNumberOfUserInEachRole)
->>>>>>> 186e5bedaa628e4fdd2b331239890de4f88b664c
 
 module.exports = router
