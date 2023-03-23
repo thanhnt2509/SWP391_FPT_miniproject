@@ -8,6 +8,7 @@ import Register from "../views/RegisterPage.vue";
 import Booking from "../views/BookingPage.vue";
 import Post from "../views/PostPage.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
+import BirdPriceList from '../views/BirdPriceList.vue'
 
 import Profile from "../components/modules/account/Profile.vue";
 import BirdList from "../components/modules/bird/BirdList.vue";
@@ -86,6 +87,11 @@ const router = createRouter({
 			name: "booking",
 			component: Booking,
 			beforeEnter: isAuth
+		},
+		{
+			path: "/birdPriceList",
+			name: "birdPriceList",
+			component: BirdPriceList,
 		},
 		{
 			path: "/post",

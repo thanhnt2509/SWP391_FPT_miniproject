@@ -2,29 +2,26 @@
   <!-- banner and image -->
   <section>
     <!--  test input image-->
-    <form>
+    <form></form>
+    <!--    <input id="browse" type="file" @change="evt => {img_upload = evt.target}" multiple/>-->
+    <!--    <input type="submit" @click="onUploadImg">-->
 
-    </form>
-<!--    <input id="browse" type="file" @change="evt => {img_upload = evt.target}" multiple/>-->
-<!--    <input type="submit" @click="onUploadImg">-->
-
-<!--    img preview -->
-<!--    <img src="http://localhost:5000/file/get_img/avatar_user.jpg">-->
+    <!--    img preview -->
+    <!--    <img src="http://localhost:5000/file/get_img/avatar_user.jpg">-->
 
     <div class="banner-text hero-body has-text-centered">
-      <p class="title">
-        TREAT WITH CARE
-      </p>
-      <p class="subtitle">
-        The place where you found the bird oasis !
-      </p>
-      <button @click="$router.push('/login')" class="button is-light has-text-centered banner-text-button">
+      <p class="title">TREAT WITH CARE</p>
+      <p class="subtitle">The place where you found the bird oasis !</p>
+      <button
+        @click="$router.push('/login')"
+        class="button is-light has-text-centered banner-text-button"
+      >
         Start a journey
       </button>
     </div>
     <div>
       <a-carousel autoplay>
-        <img class="img_banner" v-for="img in bannerImg" :src="img" alt="">
+        <img class="img_banner" v-for="img in bannerImg" :src="img" alt="" />
       </a-carousel>
     </div>
   </section>
@@ -35,13 +32,15 @@
         <div class="">
           <h1 class="title">Bird Oasis</h1>
         </div>
-        <p style="padding-left: 17%; padding-right: 17%;">Bird Oais is the pethouse for bird, provide various
-          service and safe place for bird accommodation
-          With the well-trainer staff have experience in take care of various types of bird, we ensure that we
-          will
-          bring the best place and service for your bird</p>
+        <p style="padding-left: 17%; padding-right: 17%">
+          Bird Oais is the pethouse for bird, provide various service and safe place for
+          bird accommodation With the well-trainer staff have experience in take care of
+          various types of bird, we ensure that we will bring the best place and service
+          for your bird
+        </p>
         <button class="button is-info" @click="$router.push('/about')">
-          <i class="fa-solid fa-plus" style="padding: 0px; padding-right: 10px;"></i>More Information
+          <i class="fa-solid fa-plus" style="padding: 0px; padding-right: 10px"></i>More
+          Information
         </button>
       </div>
     </div>
@@ -50,35 +49,41 @@
     <div>
       <div class="columns">
         <div class="column is-four-fifths">
-          <h1 class="title" style="padding-left: 200px;">Our Feathered Guests' Services</h1>
-          <p style="">Our Feathered Guests' Services" include clean and spacious cages, fresh food and water
-            daily,
-            bird-safe toys, and caring staff to monitor your bird's health and behavior. We also offer bird
-            grooming, exercise and socialization opportunities, and personalized care to ensure your bird is
-            comfortable and happy. Contact us today to learn more!</p>
+          <h1 class="title" style="padding-left: 200px">
+            Our Feathered Guests' Services
+          </h1>
+          <p style="">
+            Our Feathered Guests' Services" include clean and spacious cages, fresh food
+            and water daily, bird-safe toys, and caring staff to monitor your bird's
+            health and behavior. We also offer bird grooming, exercise and socialization
+            opportunities, and personalized care to ensure your bird is comfortable and
+            happy. Contact us today to learn more!
+          </p>
         </div>
         <div class="column">
-          <button class="button is-info is-light" @click="$router.push('/service')">Detail
-            Serivice
+          <button class="button is-info is-light" @click="$router.push('/service')">
+            Detail Serivice
           </button>
         </div>
       </div>
 
       <!-- services:{{ services }} -->
       <!-- list all service -->
-      <ServiceList :services="$store.getters.highlightedServiceItems"/>
+      <ServiceList :services="$store.getters.highlightedServiceItems" />
     </div>
 
     <!-- Highlight section -->
-    <div style="margin: 50px;">
+    <div style="margin: 50px">
       <div>
         <div>
-          <h1 style="margin-bottom: 41px;" class="title has-text-centered">What Sets Us Apart</h1>
+          <h1 style="margin-bottom: 41px" class="title has-text-centered">
+            What Sets Us Apart
+          </h1>
         </div>
         <div>
           <div class="h columns">
             <div class="h_img column is-two-thirds">
-              <img src="/images/big-treehouse.jpg" alt="">
+              <img src="/images/big-treehouse.jpg" alt="" />
             </div>
             <div class="h_list column">
               <div class="h_list_item" v-for="h in hItems">
@@ -93,58 +98,61 @@
           </div>
         </div>
       </div>
-
     </div>
     <!-- test post page added -->
     <!-- <PostPage /> -->
-
+    <PostPage />
 
     <!-- feedback from user -->
     <div>
-      <div style="margin-bottom: 50px;">
-        <h1 class="title" style="margin-top: -35px;">Testimonials from Bird Owners</h1>
-        <p>We are always listening to service thoughts to help us provide you with better services.</p>
+      <div style="margin-bottom: 100px">
+        <h1 class="title" style="margin-top: -35px">Testimonials from Bird Owners</h1>
+        <p>
+          We are always listening to service thoughts to help us provide you with better
+          services.
+        </p>
       </div>
-      <ReviewList :reviews="$store.getters.reviewItems" />
-      
     </div>
+    <ReviewList :reviews="$store.getters.reviewItems" />
   </div>
 </template>
 
 <script>
-import ServiceList from './ServiceList.vue';
-import ReviewList from './ReviewList.vue';
-import PostPage from './PostPage.vue';
-import {LeftCircleOutlined, RightCircleOutlined} from '@ant-design/icons-vue';
+import ServiceList from "./ServiceList.vue";
+import ReviewList from "./ReviewList.vue";
+import PostPage from "./PostPage.vue";
+import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons-vue";
 export default {
-  name: 'Homepage',
+  name: "Homepage",
   data() {
     return {
       img_upload: undefined,
       bannerImg: [
-        '/images/big-treehouse.jpg',
-        '/images/bird-tree-hotel.jpg',
-        '/images/bird-nesting.jpg',
-        '/images/bird-food2-crop.jpg',
-        '/images/Bird Photography.jpg',
+        "/images/big-treehouse.jpg",
+        "/images/bird-tree-hotel.jpg",
+        "/images/bird-nesting.jpg",
+        "/images/bird-food2-crop.jpg",
+        "/images/Bird Photography.jpg",
       ],
       services: [],
       hItems: [
         {
-          title: 'Oasis Care system',
-          content: 'we ensure our facilities are not only spotless, but fully sanitized, and smell clean, so that your dog stays healthy while in our care.'
+          title: "Oasis Care system",
+          content:
+            "we ensure our facilities are not only spotless, but fully sanitized, and smell clean, so that your dog stays healthy while in our care.",
         },
         {
-          title: 'Oasis Staff experience',
-          content: 'We are proud to lead the way in the luxury pet hospitality industry, and provide world class accommodations and service to our guests so that your dog is happy, comfortable, and relaxed.'
+          title: "Oasis Staff experience",
+          content:
+            "We are proud to lead the way in the luxury pet hospitality industry, and provide world class accommodations and service to our guests so that your dog is happy, comfortable, and relaxed.",
         },
         {
-          title: 'Oasis Boarding system',
-          content: 'Boarding birds is the act of temporarily housing birds in a specialized facility or with a professional caregiver while their owners are away. This ensures that the birds receive proper care and attention in their owner sabsence'
+          title: "Oasis Boarding system",
+          content:
+            "Boarding birds is the act of temporarily housing birds in a specialized facility or with a professional caregiver while their owners are away. This ensures that the birds receive proper care and attention in their owner sabsence",
         },
-      ]
-
-    }
+      ],
+    };
   },
   computed: {
     // ...mapGetters(['reviewItems'])
@@ -167,16 +175,15 @@ export default {
     //     console.log(error)
     //   }
     // }
-},
-components: {
-  LeftCircleOutlined,
-      RightCircleOutlined,
-      ServiceList,
-      PostPage,
-      ReviewList
-},
-
-}
+  },
+  components: {
+    LeftCircleOutlined,
+    RightCircleOutlined,
+    ServiceList,
+    PostPage,
+    ReviewList,
+  },
+};
 </script>
 
 <style scoped>
@@ -204,7 +211,6 @@ components: {
   width: 100%;
 }
 
-
 .h_list_item {
   padding: 10px;
   margin-bottom: 15px;
@@ -213,7 +219,6 @@ components: {
 .h_list_item_title {
   font-size: x-large;
 }
-
 
 .services_content {
   background-color: bisque;
@@ -225,7 +230,6 @@ components: {
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
 }
-
 
 .self_info {
   margin-top: 20px;
@@ -250,7 +254,7 @@ components: {
   font-family: sans-serif;
   font-weight: bold;
   text-transform: uppercase;
-  color: #906F45;
+  color: #906f45;
   text-shadow: 2px 2px #cfcc98;
 }
 
