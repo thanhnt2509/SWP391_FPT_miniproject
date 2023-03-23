@@ -63,7 +63,7 @@ export default {
                 email: 'U1@gmail.com',
                 password: '12345',
                 // user login
-                // email: 'U2@gmail.com',
+                // email: 'U3@gmail.com',
                 // password: '123456',
                 remember_me: false
             },

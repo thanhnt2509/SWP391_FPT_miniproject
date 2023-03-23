@@ -5,22 +5,22 @@
             <div class="columns is-multiline">
                 <!--  is-two-thirds -->
                 <div class="column is-6">
-                    <ChartBar />
+                    <TotalRevenueDay />
                 </div>
                 <div class="column is-6">
-                    <VerticalBar />
+
                 </div>
                 <div class="column is-6">
-                    <ChartLine />
+                    <NumberBillByStatus />
                 </div>
                 <div class="column is-6">
-                    <Doughnut />
+                    <FrequentBirdTypeBooked />
                 </div>
                 <div class="column is-6">
-                    <PolarArea />
+                    <MostUsedService />
                 </div>
                 <div class="column is-6">
-                    <PolarArea_labelCenter />
+                    <NumberBookingStatus />
                 </div> 
             </div>
         </div>
@@ -28,21 +28,21 @@
 </template>
 
 <script>
-import ChartBar from './chart/ChartBar.vue'
-import VerticalBar from './chart/VerticalBar.vue';
-import ChartLine from './chart/ChartLine.vue'
-import Doughnut from './chart/Doughnut.vue';
-import PolarArea from './chart/PolarArea.vue';
-import PolarArea_labelCenter from './chart/PolarArea_labelCenter.vue';
+import TotalRevenueDay from './statistics/Chart_TotalrevenueDay.vue'
+
+import NumberBillByStatus from './statistics/Chart_NumberBillByStatus.vue'
+import FrequentBirdTypeBooked from './statistics/Chart_BirdTypeFreBooked.vue';
+import MostUsedService from './statistics/Chart_MostUsedService.vue';
+import NumberBookingStatus from './statistics/Chart_NumberBookingStatus.vue';
 export default {
     name: "Manager_Dashboard",
     components: {
-        ChartBar,
-        VerticalBar,
-        ChartLine,
-        Doughnut,
-        PolarArea,
-        PolarArea_labelCenter
+        TotalRevenueDay,
+
+        NumberBillByStatus,
+        FrequentBirdTypeBooked,
+        MostUsedService,
+        NumberBookingStatus
     },
 }
 </script>

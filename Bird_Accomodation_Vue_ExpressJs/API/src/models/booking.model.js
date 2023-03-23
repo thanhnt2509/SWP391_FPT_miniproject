@@ -16,10 +16,11 @@ module.exports = {
         let con = await config.connection();
         const request = con.request();
         const returnData = await request
-            .query("SELECT b.*, bi.bird_name, u.address, u.name \n" +
+            .query("SELECT b.*, bi.bird_name, bt.name as bird_type, bi.gender, bi.image, bi.description, u.address, u.name, u.email \n" +
                 "FROM [Booking] AS b \n" +
                 "JOIN [Bird] AS bi ON b.bird_id = bi.bird_id \n" +
-                "JOIN [User] AS u ON b.user_id = u.user_id");
+                "JOIN [User] AS u ON b.user_id = u.user_id \n" +
+                "JOIN [BirdType] AS bt ON bi.type_id = bt.btype_id");
         return (await returnData).recordset || null;
     },
     getBookingServices: async (bookingId) => {

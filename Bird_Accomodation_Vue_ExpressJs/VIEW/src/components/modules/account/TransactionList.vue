@@ -1,5 +1,9 @@
 <template>
     <div>
+        <a-modal width="1000px" v-model:visible="visible" :title="`Detail for booking ${booking_idSelected}`">
+            <template #footer></template>
+            <Manage_TrannsactionDetail />
+        </a-modal>
         <a-table :columns="columns" :data-source="data">
             <template #headerCell="{ column }">
                 <template v-if="column.key === 'booking_id'">
@@ -11,6 +15,11 @@
             </template>
 
             <template #bodyCell="{ column, record }">
+                <template v-if="column.key === 'booking_id'">
+                    <span>
+                        <a href="#" @click="e => showDetail(e, record.booking_id)">{{ record.booking_id }}</a>
+                    </span>
+                </template>
                 <template v-if="column.key === 'bird'">
                     <a>
                         {{ record.bird }}
@@ -42,6 +51,7 @@
                                     <i style="padding-right: 10px" class="fa-solid fa-circle-xmark"></i>Cancel
                                 </button>
                             </a-popconfirm>
+
                         </a>
                         <a v-else-if="bookingState[record.status].state === 'Approved'">
                             <button disabled class="button is-success is-light"><i style="padding-right: 10px"
@@ -77,10 +87,11 @@
 </template>
 <script>
 import { SmileOutlined, DownOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { createVNode, defineComponent, computed } from 'vue';
+import Manage_TrannsactionDetail from '../manager/Manage_TrannsactionDetail.vue';
+import { createVNode, defineComponent, computed, ref } from 'vue';
 import { Modal } from 'ant-design-vue';
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const columns = [{
     name: 'Booking_Id',
     dataIndex: 'booking_id',
@@ -118,6 +129,7 @@ export default defineComponent({
     components: {
         SmileOutlined,
         DownOutlined,
+        Manage_TrannsactionDetail
     },
 
     setup() {
@@ -138,6 +150,7 @@ export default defineComponent({
 
         const store = useStore();
         const router = useRouter()
+        const route = useRoute()
 
         const getBooking = computed(() => store.getters['getBookings']);
 
@@ -145,20 +158,44 @@ export default defineComponent({
 
         const bookingState = store.getters['bookingStateItems']
 
+        const visible = ref(false)
+        const booking_idSelected = ref('')
+
+        const showDetail = (e, booking_id) => {
+            e.preventDefault()
+            visible.value = true
+            booking_idSelected.value = booking_id
+            store.dispatch('fetchCurrentBill', booking_idSelected.value)
+        }
+
         const cancelBooking = (booking_id) => {
-            store.dispatch('rejectBooking', booking_id)
-            store.dispatch('getAllBooking')
+            store.dispatch('rejectBooking', booking_id);
+            store.dispatch('getAllBooking');
+
+            Modal.success({
+                title: 'Cancel booking successfully',
+                content: 'You can re-booking this bird',
+            });
+            
             router.push('/account/transaction')
         }
+
         return {
             showConfirm,
             data,
             columns,
             getBooking,
             bookingState,
-            cancelBooking
+            cancelBooking,
+            showDetail,
+            visible,
+            booking_idSelected
         };
     },
+    mounted() {
+        this.$store.dispatch('getAllBooking');
+    },
+
 
 });
 </script>

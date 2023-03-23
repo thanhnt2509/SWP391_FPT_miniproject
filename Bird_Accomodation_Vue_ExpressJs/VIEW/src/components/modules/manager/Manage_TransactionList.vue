@@ -1,5 +1,11 @@
 <template>
-    SORT BY: {{ sort_by }}
+    SORT BY: {{ sort_by }} <br>
+    <!-- visible: {{ visible }} -->
+    <a-modal width="1000px" v-model:visible="visible" :title="`Detail for booking ${booking_idSelected}`">
+        <template #footer></template>
+        <Manage_TrannsactionDetail />
+    </a-modal>
+    <!-- getAllBookings: {{ getAllBookings }} -->
     <a-table :columns="columns" :data-source="data">
         <template #headerCell="{ column }">
             <template v-if="column.key === 'user_name'">
@@ -30,9 +36,15 @@
         <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'bird_name'">
                 <span>
-                    <a href="#">{{ record.bird_name }}</a>
+                    {{ record.bird_name }}
                 </span>
             </template>
+            <template v-if="column.key === 'booking_id'">
+                <span>
+                    <a href="#" @click="e => showDetail(e, record.booking_id)">{{ record.booking_id }}</a>
+                </span>
+            </template>
+
             <template v-if="column.key === 'status'">
                 <span>
                     <a-tag style="padding: 5px 20px; border-radius: 20px;" :color="bookingState[record.status].color">
@@ -106,8 +118,9 @@
     {{ bookingState }} -->
 </template>
 <script>
-import { SmileOutlined, DownOutlined} from '@ant-design/icons-vue';
-import { defineComponent, computed } from 'vue';
+import Manage_TrannsactionDetail from './Manage_TrannsactionDetail.vue';
+import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
+import { defineComponent, computed, ref, toRef } from 'vue';
 import { useStore } from 'vuex';
 const columns = [{
     name: 'Booking ID',
@@ -146,14 +159,22 @@ export default defineComponent({
     components: {
         SmileOutlined,
         DownOutlined,
+        Manage_TrannsactionDetail
     },
     props: {
-        sort_by: String
+        sort_by: String,
+        dateRangeSelected: Array
     },
     setup(props) {
         const store = useStore();
 
         const getAllBookings = computed(() => {
+            if (props.dateRangeSelected){
+                console.log('dateRangeSelected');
+                console.log(props.dateRangeSelected);
+                // return store.getters['allBookingItems_dateRange', rangeDateFormat]
+            }
+
             if (props.sort_by === 'All') {
                 return store.getters['allBookingItems']
             } else if (props.sort_by === 'Pending') {
@@ -169,13 +190,29 @@ export default defineComponent({
             }
         });
 
+        // add an property visible for each item
         const data = getAllBookings
+        // .value.map((item) => {
+        //     return {
+        //         ...item,
+        //         visible: false,
+        //     };
+        // });
+
+        const visible = ref(false)
+        const booking_idSelected = ref('')
 
         const bookingState = store.getters.bookingStateItems;
 
         const approveBooking = (booking_id) => store.dispatch('approveBooking', booking_id)
         const rejectBooking = (booking_id) => store.dispatch('rejectBooking', booking_id)
         const checkin_Booking = (booking_id) => store.dispatch('checkin_Booking', booking_id)
+        const showDetail = (e, booking_id) => {
+            e.preventDefault()
+            visible.value = true
+            booking_idSelected.value = booking_id
+            store.dispatch('fetchCurrentBill', booking_idSelected.value)
+        }
 
         return {
             data,
@@ -185,7 +222,10 @@ export default defineComponent({
             approveBooking,
             rejectBooking,
             checkin_Booking,
-            //checkout_Booking
+            showDetail,
+            visible,
+            booking_idSelected
+            //checkout_Booking,
         };
     },
     computed: {

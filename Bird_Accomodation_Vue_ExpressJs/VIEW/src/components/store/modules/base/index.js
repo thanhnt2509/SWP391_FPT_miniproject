@@ -55,7 +55,7 @@ const actions = {
 		const response = await api.get("/service/highlight");
 		console.log(response.data.services);
 		commit("UPDATE_HIGH_LIGHTED_SERVICE_ITEM", response.data.services);	
-	}
+	},
 };
 
 const getters = {

@@ -57,6 +57,17 @@ const storageAvatar = multer.diskStorage({
     }
 });
 
+const storageService = multer.diskStorage({
+    destination: function(req, file, cb)
+    {
+        cb(null, './store/services');
+    },
+    filename: function(req, file, cb)
+    {
+        cb(null, file.originalname);
+    }
+});
+
 exports.upload = multer({
     storage: storageFile,
     limits: {
@@ -91,6 +102,14 @@ exports.uploadCheckout = multer({
 
 exports.uploadAvatar = multer({
     storage: storageAvatar,
+    limits: {
+        // 5Mbs
+        fileSize: 1024 * 1024 * 5
+    }
+});
+
+exports.uploadService = multer({
+    storage: storageService,
     limits: {
         // 5Mbs
         fileSize: 1024 * 1024 * 5

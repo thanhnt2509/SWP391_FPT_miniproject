@@ -38,6 +38,9 @@ export default {
     components: {
         BirdRegister,
         Bird_Info
+    },
+    updated() {
+        this.$store.dispatch('getAllBirds')
     }
 }
 </script>

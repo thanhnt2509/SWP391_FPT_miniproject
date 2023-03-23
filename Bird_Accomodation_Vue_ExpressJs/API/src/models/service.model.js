@@ -40,17 +40,19 @@ module.exports = {
                 "VALUES (@name, @description, @status, @price, @isHighLight, @isPack)");
         return returnData.rowsAffected[0];
     },
-    updateServiceById: async (service_id, body) => {
-        //body includes: name, description, price
+    updateServiceById: async (service_id, content, imagePath) => {
+        //content includes: name, description, price
         let con = await config.connection();
         const request = con.request();
         const returnData = await request
             .input("service_id", sql.NVarChar, service_id)
-            .input("name", sql.NVarChar, body.name)
-            .input("description", sql.NVarChar, body.description)
-            .input("status", sql.Int, body.status)
-            .input("price", sql.Int, body.price)
-            .query("UPDATE Service SET status = @status, name = @name, description = @description, price = @price WHERE service_id = @service_id");
+            .input("name", sql.NVarChar, content.name)
+            .input("description", sql.NVarChar, content.description)
+            .input("price", sql.Int, content.price)
+            .input("isHighlight", sql.Int, content.isHighlight)
+            .input("isPack", sql.Int, content.isPack)
+            .input("image", sql.NVarChar, imagePath)
+            .query("UPDATE Service SET name = @name, description = @description, image = @image, isHighlight = @isHighlight, isPack = @isPack, price = @price WHERE service_id = @service_id");
         return returnData.rowsAffected[0];
     },
     deleteServiceById: async (service_id) => {

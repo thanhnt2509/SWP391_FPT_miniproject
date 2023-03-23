@@ -61,6 +61,10 @@ export default {
             deep: true
         }
     },
+    updated(){
+        this.date_from = '',
+        this.date_to = ''
+    }
 
 };
 </script>

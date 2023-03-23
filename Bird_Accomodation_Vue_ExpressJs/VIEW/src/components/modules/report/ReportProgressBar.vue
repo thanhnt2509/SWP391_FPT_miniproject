@@ -48,6 +48,9 @@ export default {
                 return Math.round((complete/quantity)*100);
             }
         }
+    },
+    mounted() {
+        this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
     }
 }
 </script>

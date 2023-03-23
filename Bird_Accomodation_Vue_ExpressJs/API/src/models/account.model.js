@@ -8,14 +8,14 @@ module.exports = {
         let con = await config.connection();
         const request = con.request();
         const returnData = await request
-            .input("email", con.NVarChar, body.email)
-            .input("password", con.NVarChar, body.password)
-            .input("name", con.NVarChar, body.name)
-            .input("address", con.NVarChar, body.address)
-            .input("phone", con.NVarChar, body.phone)
-            .input("role", con.Int, config.role.USER)
-            .input("status", con.Int, config.userStatus.ACTIVE)
-            .input("user_img", con.NVarChar, defaultUserImg)
+            .input("email", sql.NVarChar, body.email)
+            .input("password", sql.NVarChar, body.password)
+            .input("name", sql.NVarChar, body.name)
+            .input("address", sql.NVarChar, body.address)
+            .input("phone", sql.NVarChar, body.phone)
+            .input("role", sql.Int, config.role.USER)
+            .input("status", sql.Int, config.userStatus.ACTIVE)
+            .input("user_img", sql.NVarChar, defaultUserImg)
             .query("INSERT INTO [User] (email, password, name, address, phone, role, status, user_img) \n" +
                 "VALUES (@email, @password, @name, @address, @phone, @role, @status, @user_img)");
         return returnData.rowsAffected[0];
@@ -43,11 +43,11 @@ module.exports = {
     },
     validatePhone: async (phone) => {
         let con = await config.connection();
-        const request = new con.request();
+        const request = con.request();
         const returnData = await request
-            .input("phone", con.NVarChar, phone)
-            .query("SELECT [user_id],[phone] FROM [User] \n" +
-                "WHERE phone = @phone");
+            .input("phone", sql.NVarChar, phone)
+            .query("SELECT [user_id],[phone],[role] FROM [User] \n" +
+                "WHERE phone = @phone collate latin1_general_cs_as");
         return (await returnData).recordset.length > 0;
     },
     getAccountByID: async (user_id) => {
