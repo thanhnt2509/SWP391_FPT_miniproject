@@ -105,7 +105,7 @@
 
     <!-- feedback from user -->
     <div>
-      <div style="margin-bottom: 100px">
+      <div>
         <h1 class="title" style="margin-top: -35px">Testimonials from Bird Owners</h1>
         <p>
           We are always listening to service thoughts to help us provide you with better
