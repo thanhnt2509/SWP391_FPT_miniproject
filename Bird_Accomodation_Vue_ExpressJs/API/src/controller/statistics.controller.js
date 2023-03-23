@@ -19,32 +19,6 @@ module.exports = {
             res.status(500).json({ message: 'Internal server error' });
         }
     },
-    getTotalRevenueMonth: async (req, res) => {
-        try {
-            const result = await statistics.getTotalRevenueMonth();
-            if (result) {
-                res.status(200).json(result);
-            } else {
-                res.status(404).json({ message: 'Not found' });
-            }
-        } catch (e) {
-            console.log(e)
-            res.status(500).json({ message: 'Internal server error' });
-        }
-    },
-    getTotalRevenueYear: async (req, res) => {
-        try {
-            const result = await statistics.getTotalRevenueYear();
-            if (result) {
-                res.status(200).json(result);
-            } else {
-                res.status(404).json({ message: 'Not found' });
-            }
-        } catch (e) {
-            console.log(e)
-            res.status(500).json({ message: 'Internal server error' });
-        }
-    },
     //GET the most used service
     getTheMostUsedService: async (req, res) => {
         try {
