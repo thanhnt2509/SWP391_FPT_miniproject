@@ -12,6 +12,14 @@ router.route("/total-revenue/month")
 router.route("/total-revenue/year")
     .get(stat.getTotalRevenueYear)
 
+router.route("/use-services/day")
+    .get(stat.getServiceByDay)
+
+router.route("/use-services/month")
+    .get(stat.getServiceByMonth)
+
+router.route("/use-services/year")
+    .get(stat.getServiceByYear)
 router.route("/most-used-service")
     .get(stat.getTheMostUsedService)
 

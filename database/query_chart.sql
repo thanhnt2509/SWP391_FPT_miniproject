@@ -62,9 +62,61 @@ go
 
 
 
+/*-------------------------------------------------------------------------------------------------------------*/
+
+/*the most used service by date*/
+WITH service_usage AS (
+    SELECT 
+        s.name, 
+        CONVERT(date, b.checkout_date) AS usage_date, 
+        SUM(CASE WHEN s.isPack = 1 THEN 1 ELSE bd.quantity END) AS used_quantity
+    FROM BookingDetail bd
+    INNER JOIN service s ON bd.service_id = s.service_id
+	join Bill b on b.booking_id = bd.booking_id
+    GROUP BY s.name, CONVERT(date, b.checkout_date)
+), 
+max_usage AS (
+    SELECT 
+        usage_date, 
+        MAX(used_quantity) AS max_quantity
+    FROM service_usage
+    GROUP BY usage_date
+)
+SELECT 
+    s.usage_date, 
+    s.name,
+    s.used_quantity
+FROM service_usage s
+INNER JOIN max_usage m ON s.usage_date = m.usage_date AND s.used_quantity = m.max_quantity
+ORDER BY s.usage_date ASC
 
 
+/*the used service by date  */
+SELECT CONVERT(date, b.checkout_date) AS usage_date, s.name, SUM(CASE WHEN s.isPack = 1 THEN 0 ELSE bd.quantity END) AS used_quantity
+FROM BookingDetail bd
+INNER JOIN service s ON bd.service_id = s.service_id
+join Bill b on b.booking_id = bd.booking_id
+WHERE b.checkout_date BETWEEN '2023-01-01' AND GETDATE()
+GROUP BY CONVERT(date, b.checkout_date), s.name
+ORDER BY usage_date ASC, used_quantity ASC
 
+/*the used service by month*/
+SELECT YEAR(b.checkout_date) AS year, MONTH(b.checkout_date) AS month, s.name, SUM(CASE WHEN s.isPack = 1 THEN 1 ELSE bd.quantity END) AS used_quantity
+FROM BookingDetail bd
+INNER JOIN service s ON bd.service_id = s.service_id
+join Bill b on b.booking_id = bd.booking_id
+WHERE b.checkout_date >= '2023-01-01'
+GROUP BY YEAR(b.checkout_date), MONTH(b.checkout_date), s.name
+ORDER BY YEAR(b.checkout_date), MONTH(b.checkout_date), used_quantity asc
+
+/*the used service by year*/
+SELECT YEAR(b.checkout_date) AS year, s.name, SUM(CASE WHEN s.isPack = 1 THEN 1 ELSE bd.quantity END) AS used_quantity
+FROM BookingDetail bd
+INNER JOIN service s ON bd.service_id = s.service_id
+join Bill b on b.booking_id = bd.booking_id
+WHERE b.checkout_date >= '2023-01-01'
+GROUP BY YEAR(b.checkout_date), s.name
+ORDER BY YEAR(b.checkout_date), used_quantity asc
 
 
 
