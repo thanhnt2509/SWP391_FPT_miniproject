@@ -1,7 +1,6 @@
 <template>
   <div>
-
-    jdsk
+    postSelected: {{ postSelected }}
     
   </div>
 </template>
@@ -10,7 +9,10 @@
 export default {
     name: 'post detail',
     props: {
-
+      postSelected: {
+        type: Object,
+        default: () => {},
+      },
     }
 };
 </script>

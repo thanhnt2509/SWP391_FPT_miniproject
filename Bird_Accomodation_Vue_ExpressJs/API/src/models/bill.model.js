@@ -13,6 +13,7 @@ module.exports = {
                 "join Bird bi on b.bird_id = bi.bird_id \n" +
                 "join BirdType bt on bi.type_id = bt.btype_id \n" +
                 "join Bill bil on bil.booking_id = b.booking_id \n" +
+                // "join Review re on bil.booking_id = re.booking_id \n" +
                 "where b.booking_id = @booking_id")
 
         const result = [];
@@ -36,6 +37,10 @@ module.exports = {
                     date_from: config.dateFormat(data.date_from),
                     date_to: config.dateFormat(data.date_to),
                 },
+                // review: {
+                //     rating: data.rating,
+                //     comment: data.comment
+                // },
                 bill: {
                     bill_id: data.bill_id,
                     total_amount: data.total_service_amount,

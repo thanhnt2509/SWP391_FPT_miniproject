@@ -43,8 +43,9 @@
                         </tr>
                         <tr>
                             <td style="border: unset;">Check-in Image</td>
-                            <td style="border: unset;"><a-image :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`"
-                                    class="bird_image" alt="" width="300px" height="300px" /></td>
+                            <td style="border: unset;"><a-image
+                                    :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`" class="bird_image"
+                                    alt="" width="300px" height="300px" /></td>
                         </tr>
                     </table>
                 </div>
@@ -107,12 +108,24 @@
                         <td>Check-out date</td>
                         <td>{{ seed?.bill?.checkout_date }}</td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td style="border: unset;">Check-out image</td>
-                        <td style="border: unset;"><a-image :src="`http://localhost:5000/file/get_checkout_img/${seed?.bill?.checkout_image}`"
+                        <td style="border: unset;"><a-image
+                                :src="`http://localhost:5000/file/get_checkout_img/${seed?.bill?.checkout_image}`"
                                 class="bird_image" alt="" width="300px" height="300px" /></td>
                     </tr>
                 </table>
+
+                <div class="feedback_content" >
+                    <h2 class="title" style="margin-bottom: 5px; padding: 0;">Leave a feedback</h2>
+                    <a-rate v-model:value="ratingPoint" allow-half/>
+                    <input class="input" type="text" v-model="feedbackContent"
+                        placeholder="What is feed like when booking at Bird Oasis ?">
+                    <div style="display: flex;">
+                        <button class="button is-info" style="margin-top: 20px; margin-left: 40%;"
+                            @click="submitFeedback">Submit</button>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -121,17 +134,52 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { Modal } from 'ant-design-vue'
 export default {
     name: 'Bill',
     data() {
         return {
-
+            feedbackContent: '',
+            ratingPoint: 4,
         }
     },
     computed: {
         ...mapGetters({
             seed: 'getCurrentBill'
         })
+    },
+    methods: {
+        async submitFeedback() {
+            const payload = {
+                user_id: this.$store.getters.getUser.user_id,
+                booking_id: this.$route.params.booking_id,
+                comment: this.feedbackContent,
+                rating: this.ratingPoint
+            }
+
+            console.log(payload);
+            const response = await fetch(`http://localhost:5000/review/${payload.booking_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            if(response.status === 200){
+                Modal.success({
+                    title: 'Thank you for your feedback',
+                    content: 'Your feedback has been sent to Bird Oasis',
+                });
+
+                this.$router.push('/account/transaction');
+            }else{
+                Modal.error({
+                    title: 'Something went wrong',
+                    content: 'Please try again later',
+                });
+            }
+        }
     },
     created() {
         this.$store.dispatch("fetchCurrentBill", this.$route.params.booking_id);
