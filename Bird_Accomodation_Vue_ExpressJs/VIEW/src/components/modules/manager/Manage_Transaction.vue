@@ -12,23 +12,25 @@
         <p>Day: 1000$</p>
         <p>Month: 10000$</p>
         <p>Year: 100000$</p>
-        dateRangeSelected: {{ dateRangeSelected }}
       </div>
     </div>
     <div class="columns">
-      <h1 class="column is-4">Transaction list</h1>
+      <h1 class="column is-3">Transaction list</h1>
 
-      <div class="column is-4">
+      <div class="column is-6">
         <a-space :size="12">
-          <a-range-picker v-model:value="dateRangeSelected" />
+          From
+          <a-date-picker v-model:value="dateFrom" />
+          To
+          <a-date-picker v-model:value="dateTo" />
         </a-space>
-        <a-button class="button is-primary">
+        <a-button class="button is-primary" @click="handleSearchDate">
           <i style="margin-right: 10px" class="fa-solid fa-search"></i>
           Search
         </a-button>
       </div>
 
-      <div class="column demo-dropdown-wrap is-offset-1">
+      <div class="column demo-dropdown-wrap">
         <a-dropdown>
           <template #overlay>
             <a-menu @click="handleMenuClick">
@@ -66,7 +68,11 @@
       </div>
     </div>
 
-    <TransactionList :sort_by="sort_by" :dateRangeSelected="dateRangeSelected" />
+    <TransactionList
+      :sort_by="sort_by"
+      :dateFrom="dateFormat(dateFrom)"
+      :dateTo="dateFormat(dateTo)"
+    />
   </div>
 </template>
 
@@ -75,7 +81,6 @@ import TransactionList from "./Manage_TransactionList.vue";
 import { UserOutlined, DownOutlined } from "@ant-design/icons-vue";
 import { defineComponent, ref } from "vue";
 import { useStore } from "vuex";
-import dayjs from "dayjs";
 export default defineComponent({
   components: {
     UserOutlined,
@@ -84,7 +89,6 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const dateFormat = "YYYY-MM-DD";
 
     const bookingStateItems = store.getters.bookingStateItems;
 
@@ -98,16 +102,27 @@ export default defineComponent({
       sort_by.value = bookingStateItems[e.key]?.state || "All";
     };
 
-    const dateRangeSelected = ref([
-      dayjs("2023-01-01", dateFormat),
-      dayjs("2023-01-02", dateFormat),
-    ]);
+    const dateFrom = ref();
+    const dateTo = ref();
+    const dateFormat = (day) => {
+      return day?.toISOString().slice(0, 10);
+    };
+
+    const handleSearchDate = () => {
+      console.log(
+        `dateFrom: ${dateFormat(dateFrom.value)}, dateTo: ${dateFormat(dateTo.value)}`
+      );
+    };
 
     return {
       handleButtonClick,
       handleMenuClick,
       sort_by,
-      dateRangeSelected,
+      dateFormat,
+      handleSearchDate,
+      dateFrom,
+      dateTo,
+      dateRange,
       dateFormat,
     };
   },

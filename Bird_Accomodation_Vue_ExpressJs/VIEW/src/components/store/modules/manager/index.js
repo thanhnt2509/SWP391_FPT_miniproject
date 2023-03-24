@@ -93,8 +93,7 @@ const getters = {
 	allBookingItems_completed: state => state.allBookings.filter(booking => booking.status == 3),
 	allBookingItems_canceled: state => state.allBookings.filter(booking => booking.status == 4),
 	allPostItems: state => state.allPosts,
-	// allBookingItems_dateRange: (state, dateRangeSelected) => 
-	// allReviewItems: state => state.allReviews,
+
 };
 
 const accountModule = {
