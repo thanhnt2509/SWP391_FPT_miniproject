@@ -87,7 +87,7 @@ run.bat
 
 ## Demo
 <div align="center">
-  <a href="#"><img width="50%" src="./res/thumbnail.png" alt="thumbnail"/></a>
+  <a href="https://youtu.be/8FsN1yXuUq0"><img width="50%" src="./res/thumbnail.png" alt="thumbnail"/></a>
 </div>
 
 ## Contributions
