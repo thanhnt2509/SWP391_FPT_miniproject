@@ -137,9 +137,6 @@ module.exports = {
         try {
             const {service_id} = req.params;
             const image = req.file
-            // console.log(`request body`);
-            // console.log(req.body);
-            // console.log(image.path);
             const { name, price, isHighlight, isPack, description } = req.body
             const result = await servicesModel.updateServiceById(service_id, req.body, image.filename);
             const serviceDetail = await servicesModel.getServiceById(service_id);
