@@ -122,7 +122,6 @@ export default defineComponent({
       handleSearchDate,
       dateFrom,
       dateTo,
-      dateRange,
       dateFormat,
     };
   },

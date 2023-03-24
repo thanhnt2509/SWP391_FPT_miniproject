@@ -214,13 +214,15 @@ export default defineComponent({
 
     const getAllBookings = computed(() => {
       //handle search by date
-      if (props.dateFrom !== "" && props.dateTo !== "") {
-        const payload = {
-          dateFrom: props.dateFrom,
-          dateTo: props.dateTo,
-        };
-        return store.getters[("allBookingItems_date", payload)];
-      } else if (props.sort_by === "All") {
+      // if (props.dateFrom !== "" && props.dateTo !== "") {
+      //   const payload = {
+      //     dateFrom: props.dateFrom,
+      //     dateTo: props.dateTo,
+      //   };
+      //   return store.getters[("allBookingItems_date", payload)];
+      // }
+      // else
+      if (props.sort_by === "All") {
         return store.getters["allBookingItems"];
       } else if (props.sort_by === "Pending") {
         return store.getters["allBookingItems_pending"];
