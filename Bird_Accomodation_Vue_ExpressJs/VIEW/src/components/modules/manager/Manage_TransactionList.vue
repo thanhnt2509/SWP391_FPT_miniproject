@@ -2,11 +2,7 @@
   SORT BY: {{ sort_by }} <br />
   <!-- dateFrom: {{ dateFrom }} dateTo: {{ dateTo }} -->
   <!-- visible: {{ visible }} -->
-  <a-modal
-    width="1000px"
-    v-model:visible="visible"
-    :title="`Detail for booking ${booking_idSelected}`"
-  >
+  <a-modal width="1000px" v-model:visible="visible" :title="`Detail for booking ${booking_idSelected}`">
     <template #footer></template>
     <Manage_TrannsactionDetail />
   </a-modal>
@@ -50,10 +46,7 @@
 
       <template v-if="column.key === 'status'">
         <span>
-          <a-tag
-            style="padding: 5px 20px; border-radius: 20px"
-            :color="bookingState[record.status].color"
-          >
+          <a-tag style="padding: 5px 20px; border-radius: 20px" :color="bookingState[record.status].color">
             {{ bookingState[record.status].state }}
           </a-tag>
           <!-- <p>{{ bookingState[record.status].state }}</p> -->
@@ -62,13 +55,8 @@
       <template v-else-if="column.key === 'action'">
         <!-- approve and reject booking -->
         <span v-if="bookingState[record.status].state === 'Pending'">
-          <a-popconfirm
-            title="Are you sure to approve this booking ?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="approveBooking(record.booking_id)"
-            @cancel=""
-          >
+          <a-popconfirm title="Are you sure to approve this booking ?" ok-text="Yes" cancel-text="No"
+            @confirm="approveBooking(record.booking_id)" @cancel="">
             <button class="button is-success">
               <i style="padding-right: 10px" class="fa-solid fa-circle-check"></i>Approve
             </button>
@@ -76,13 +64,8 @@
 
           <a-divider type="vertical" />
 
-          <a-popconfirm
-            title="Are you sure to reject this booking ?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="rejectBooking(record.booking_id)"
-            @cancel=""
-          >
+          <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
+            @confirm="rejectBooking(record.booking_id)" @cancel="">
             <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
             <button class="button is-danger">
               <i style="padding-right: 10px" class="fa-solid fa-circle-xmark"></i>Reject
@@ -91,17 +74,11 @@
         </span>
         <!-- check-in  -->
         <span v-else-if="bookingState[record.status].state === 'Approved'">
-          <a-popconfirm
-            title="Are you sure to perform check-in on this booking ?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="checkin_Booking(record.booking_id)"
-            @cancel=""
-          >
+          <a-popconfirm title="Are you sure to perform check-in on this booking ?" ok-text="Yes" cancel-text="No"
+            @confirm="checkin_Booking(record.booking_id)" @cancel="">
             <!-- <template #icon><question-circle-outlined style="color: red" /></template> -->
             <button class="button is-info">
-              <i style="padding-right: 10px" class="fa-solid fa-calendar-check"></i
-              >Check-in
+              <i style="padding-right: 10px" class="fa-solid fa-calendar-check"></i>Check-in
             </button>
           </a-popconfirm>
         </span>
@@ -124,23 +101,15 @@
 
         <!-- update and check-out  -->
         <span v-else-if="bookingState[record.status].state === 'On-going'">
-          <router-link :to="`/manager/report/${record.booking_id}`"
-            ><button class="button is-link">
+          <router-link :to="`/manager/report/${record.booking_id}`"><button class="button is-link">
               <i style="padding-right: 10px" class="fa-solid fa-square-pen"></i>Update
-            </button></router-link
-          >
+            </button></router-link>
           <a-divider type="vertical" />
 
-          <a-popconfirm
-            title="Are you sure to reject this booking ?"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="$router.push(`/manager/checkout/${record.booking_id}`)"
-            @cancel=""
-          >
+          <a-popconfirm title="Are you sure to reject this booking ?" ok-text="Yes" cancel-text="No"
+            @confirm="$router.push(`/manager/checkout/${record.booking_id}`)" @cancel="">
             <button class="button is-primary">
-              <i style="padding-right: 10px" class="fa-regular fa-credit-card"></i
-              >Check-out
+              <i style="padding-right: 10px" class="fa-regular fa-credit-card"></i>Check-out
             </button>
           </a-popconfirm>
         </span>

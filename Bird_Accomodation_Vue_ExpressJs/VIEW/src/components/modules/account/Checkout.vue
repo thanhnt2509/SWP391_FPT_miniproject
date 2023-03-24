@@ -1,14 +1,14 @@
 <template>
-<!-- getCurrentBill: {{seed}} -->
+  <!-- getCurrentBill: {{seed}} -->
   <div class="" style="padding-left: 17%; padding-right: 10%">
     <div class="has-text-centered">
       <h1 class="title">Checkout for booking {{ fields.booking_id }}</h1>
-      <h2 class="subtitle">Date: {{ fields.today }}</h2>
+      <h3 class="subtitle" style="margin-bottom: 20px;">Date: {{ fields.today }}</h3>
     </div>
     <div class="container columns" style="">
       <!-- {{ seed }} -->
 
-      <div class="column is-half">
+      <div class="column">
         <!-- user info -->
         <div>
           <h2 class="subtitle title_info label">Customer info</h2>
@@ -46,39 +46,41 @@
             </tr>
             <tr>
               <td>Image</td>
-              <td><img :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`" class="bird_image" alt=""></td>
+              <td><img :src="`http://localhost:5000/file/get_bird_img/${seed?.bird?.image}`" class="bird_image" alt="">
+              </td>
             </tr>
           </table>
         </div>
-
-        <!-- service info -->
-        <div>
-          <h2 class="subtitle title_info label">Service picked info</h2>
-          <table class="table is-striped is-narrow is-hoverable is-fullwidth">
-            <thead>
-              <tr>
-                <th>Service name</th>
-                <th style="text-align: right">Booked price</th>
-                <th style="text-align: right">Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="service in seed?.service">
-                <td>{{ service.name }}</td>
-                <td>{{ service.booked_price }}$/pack</td>
-                <td style="text-align: right">{{ service.isPack === 0 ? service.quantity : 'Pack' }}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>Total amount</th>
-                <th></th>
-                <td style="text-align: right">{{ seed?.total_service_amount }}$</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
       </div>
+
+      <!-- service info -->
+      <div class="column">
+        <h2 class="subtitle title_info label">Service picked info</h2>
+        <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Service name</th>
+              <th style="text-align: right">Booked price</th>
+              <th style="text-align: right">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="service in seed?.service">
+              <td>{{ service.name }}</td>
+              <td>{{ service.booked_price }}$/pack</td>
+              <td style="text-align: right">{{ service.isPack === 0 ? service.quantity : 'Pack' }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Total amount</th>
+              <th></th>
+              <td style="text-align: right">{{ seed?.total_service_amount }}$</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
       <!-- booking info -->
       <div class="checkout_box column">
         <!-- show the fields to input an image upload for this checkout -->
@@ -102,7 +104,7 @@
           </tr>
           <tr>
             <td>Check-out date</td>
-            <td>(today){{ new Date(seed?.bill?.checkout_date).getMilliseconds() == new Date(0).getMilliseconds() ? 'Not check-out yet' : fields.today}}</td>
+            <td>(today){{ new Date(seed?.bill?.checkout_date).getMilliseconds() == new Date(0).getMilliseconds() ? 'Not check - out yet' : fields.today}}</td>
           </tr>
           <!-- <tr>
             <td>Total amount</td>
@@ -225,16 +227,19 @@ export default {
 </script>
 
 <style scoped>
-
 tr td:nth-child(2) {
   text-align: right;
 }
 
-.bird_image{
+.bird_image {
   width: 300px;
   height: 300px;
   object-fit: cover;
   object-position: center;
   border-radius: 20px;
+}
+h2{
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 </style>
