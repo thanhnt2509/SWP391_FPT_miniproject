@@ -17,7 +17,7 @@
     <div class="columns">
       <h1 class="column is-3">Transaction list</h1>
 
-      <div class="column is-6">
+      <!-- <div class="column is-6">
         <a-space :size="12">
           From
           <a-date-picker v-model:value="dateFrom" />
@@ -28,7 +28,7 @@
           <i style="margin-right: 10px" class="fa-solid fa-search"></i>
           Search
         </a-button>
-      </div>
+      </div> -->
 
       <div class="column demo-dropdown-wrap">
         <a-dropdown>
@@ -68,11 +68,8 @@
       </div>
     </div>
 
-    <TransactionList
-      :sort_by="sort_by"
-      :dateFrom="dateFormat(dateFrom)"
-      :dateTo="dateFormat(dateTo)"
-    />
+    <!-- dateFrom: {{ dateFormat(dateFrom) }} dateTo: {{ dateFormat(dateTo) }} -->
+    <TransactionList :sort_by="sort_by" />
   </div>
 </template>
 
@@ -102,27 +99,27 @@ export default defineComponent({
       sort_by.value = bookingStateItems[e.key]?.state || "All";
     };
 
-    const dateFrom = ref();
-    const dateTo = ref();
-    const dateFormat = (day) => {
-      return day?.toISOString().slice(0, 10);
-    };
+    // const dateFrom = ref();
+    // const dateTo = ref();
+    // const dateFormat = (day) => {
+    //   return day?.toISOString().slice(0, 10);
+    // };
 
-    const handleSearchDate = () => {
-      console.log(
-        `dateFrom: ${dateFormat(dateFrom.value)}, dateTo: ${dateFormat(dateTo.value)}`
-      );
-    };
+    // const handleSearchDate = () => {
+    //   console.log(
+    //     `dateFrom: ${dateFormat(dateFrom.value)}, dateTo: ${dateFormat(dateTo.value)}`
+    //   );
+    // };
 
     return {
       handleButtonClick,
       handleMenuClick,
       sort_by,
-      dateFormat,
-      handleSearchDate,
-      dateFrom,
-      dateTo,
-      dateFormat,
+      // dateFormat,
+      // handleSearchDate,
+      // dateFrom,
+      // dateTo,
+      // dateFormat,
     };
   },
 });

@@ -1,5 +1,6 @@
 <template>
   SORT BY: {{ sort_by }} <br />
+  <!-- dateFrom: {{ dateFrom }} dateTo: {{ dateTo }} -->
   <!-- visible: {{ visible }} -->
   <a-modal
     width="1000px"
@@ -147,9 +148,9 @@
     </template>
   </a-table>
   <!-- <p>all booking</p>
-    {{ getAllBookings }}
-    <p>state</p>
-    {{ bookingState }} -->
+  {{ getAllBookings }}
+  <p>state</p>
+  {{ bookingState }} -->
 </template>
 <script>
 import Manage_TrannsactionDetail from "./Manage_TrannsactionDetail.vue";
@@ -206,22 +207,26 @@ export default defineComponent({
   },
   props: {
     sort_by: String,
-    dateFrom: String,
-    dateTo: String,
+    // dateFrom: String,
+    // dateTo: String,
   },
   setup(props) {
     const store = useStore();
 
     const getAllBookings = computed(() => {
       //handle search by date
-      // if (props.dateFrom !== "" && props.dateTo !== "") {
+      // if (
+      //   props.dateFrom !== "" &&
+      //   props.dateTo !== "" &&
+      //   !props.dateFrom &&
+      //   !props.dateTo
+      // ) {
       //   const payload = {
       //     dateFrom: props.dateFrom,
       //     dateTo: props.dateTo,
       //   };
       //   return store.getters[("allBookingItems_date", payload)];
-      // }
-      // else
+      // } else
       if (props.sort_by === "All") {
         return store.getters["allBookingItems"];
       } else if (props.sort_by === "Pending") {
