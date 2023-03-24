@@ -46,10 +46,10 @@ export default defineComponent({
                     store.dispatch('getAllServiceOfBooking_id', route.params.booking_id);
 
                     Modal.success({
-                        title: 'Checkout successfully !',
+                        title: 'Register new service successfully !',
                         content: h('div', {}, [
-                            h('p', 'Money will be transfered to your account soon !'),
-                            h('p', 'Thank you for using our service !'),
+                            h('p', 'The new service registerd will automatically apply for your booking!'),
+                            h('p', 'Feel free to contact us to know more information !'),
                         ]),
                     });
 
