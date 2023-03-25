@@ -85,6 +85,12 @@ const getters = {
 	getUser: state => state.user,
 	getBirds: state => state.birds,
 	getBookings: state => state.bookings,
+	getBookingPending: state => state.bookings.filter(booking => booking.status === 0),
+	getBookingApproved: state => state.bookings.filter(booking => booking.status === 1),
+	getBookingOnGoing: state => state.bookings.filter(booking => booking.status === 2),
+	getBookingCompleted: state => state.bookings.filter(booking => booking.status === 3),
+	getBookingCanceled: state => state.bookings.filter(booking => booking.status === 4),
+
 };
 
 const accountModule = {

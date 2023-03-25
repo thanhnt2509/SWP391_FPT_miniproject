@@ -4,6 +4,25 @@
             <template #footer></template>
             <Manage_TrannsactionDetail />
         </a-modal>
+
+        <div id="sortingBar">
+            <h3>Sort by status</h3>
+            <!-- sortBy {{ sortBy }} -->
+            <div id="sortingBar_button">
+                <button @click="sortBy = 'all'" class="button is-dark is-light">All</button>
+                <button @click="sortBy = 'pending'" class="button is-warning"><i style="padding-right: 10px"
+                        class="fa-solid fa-circle-pause"></i>Pending</button>
+                <button @click="sortBy = 'approved'" class="button is-info"><i style="padding-right: 10px"
+                        class="fa-solid fa-calendar-check"></i>Approve</button>
+                <button @click="sortBy = 'on-going'" class="button is-link"><i style="padding-right: 10px"
+                        class="fa-solid fa-square-pen"></i>On-going</button>
+                <button @click="sortBy = 'completed'" class="button is-primary"><i style="padding-right: 10px"
+                        class="fa-solid fa-wallet"></i>Complete</button>
+                <button @click="sortBy = 'canceled'" class="button is-warning"><i style="padding-right: 10px"
+                        class="fa-brands fa-rev"></i>Cancel</button>
+            </div>
+        </div>
+
         <a-table :columns="columns" :data-source="data">
             <template #headerCell="{ column }">
                 <template v-if="column.key === 'booking_id'">
@@ -91,7 +110,7 @@ import Manage_TrannsactionDetail from '../manager/Manage_TrannsactionDetail.vue'
 import { createVNode, defineComponent, computed, ref } from 'vue';
 import { Modal } from 'ant-design-vue';
 import { useStore } from 'vuex';
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 const columns = [{
     name: 'Booking_Id',
     dataIndex: 'booking_id',
@@ -150,11 +169,25 @@ export default defineComponent({
 
         const store = useStore();
         const router = useRouter()
-        const route = useRoute()
 
-        const getBooking = computed(() => store.getters['getBookings']);
+        const sortBy = ref('all')
+        const getBooking = computed(() => {
+            if (sortBy.value === 'all')
+                return store.getters['getBookings']
+            else if (sortBy.value === 'pending')
+                return store.getters['getBookingPending']
+            else if (sortBy.value === 'approved')
+                return store.getters['getBookingApproved']
+            else if (sortBy.value === 'on-going')
+                return store.getters['getBookingOnGoing']
+            else if (sortBy.value === 'completed')
+                return store.getters['getBookingCompleted']
+            else if (sortBy.value === 'canceled')
+                return store.getters['getBookingCanceled']
 
-        const data = store.getters['getBookings']
+        });
+
+        let data = getBooking
 
         const bookingState = store.getters['bookingStateItems']
 
@@ -176,7 +209,7 @@ export default defineComponent({
                 title: 'Cancel booking successfully',
                 content: 'You can re-booking this bird',
             });
-            
+
             router.push('/account/transaction')
         }
 
@@ -189,7 +222,8 @@ export default defineComponent({
             cancelBooking,
             showDetail,
             visible,
-            booking_idSelected
+            booking_idSelected,
+            sortBy
         };
     },
     mounted() {
@@ -199,3 +233,19 @@ export default defineComponent({
 
 });
 </script>
+
+<style scoped>
+#sortingBar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#sortingBar h3 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#sortingBar_button button {
+    margin: 0 10px;
+}</style>
