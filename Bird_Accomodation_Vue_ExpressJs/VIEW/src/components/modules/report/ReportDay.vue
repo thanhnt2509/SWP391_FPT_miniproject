@@ -94,10 +94,9 @@ export default {
           this.$store.dispatch('submitNewReportUpdateList', uploadReportListPayload);
         if (success) {
           Modal.success({
-            title: 'Checkout successfully !',
+            title: 'Report upload successfully !',
             content: h('div', {}, [
-              h('p', 'Money will be transfered to your account soon !'),
-              h('p', 'Thank you for using our service !'),
+              h('p', 'Report was submited to customer !'),
             ]),
           });
           this.$store.dispatch('clearNewReport');

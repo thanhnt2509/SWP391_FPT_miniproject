@@ -32,8 +32,8 @@ export default {
                 // animation: false,
                 plugins: {
                     legend: {
-                        position: 'top',
-                        display: false
+                        position: 'right',
+                        display: true
                     },
                     title: {
                         display: true,

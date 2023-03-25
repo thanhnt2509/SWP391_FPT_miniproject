@@ -93,7 +93,8 @@ const getters = {
 	allBookingItems_completed: state => state.allBookings.filter(booking => booking.status == 3),
 	allBookingItems_canceled: state => state.allBookings.filter(booking => booking.status == 4),
 	allPostItems: state => state.allPosts,
-	allBookingItems_date: (state, payload) => console.log('ok')
+	// allBookingItems_date: (state, payload) => state.allBookings.filter(booking => new Date(booking.date_from).getTime() >= new Date(payload[0]).getTime()
+	// 													&& new Date(booking.date_to).getTime() <= new Date(payload[1]).getTime()),
 
 };
 

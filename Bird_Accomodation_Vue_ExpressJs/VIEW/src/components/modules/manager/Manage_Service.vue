@@ -5,15 +5,13 @@
   </div>
 </template>
 <script>
-import Manage_ServiceList from './Manage_ServiceList.vue';
+import Manage_ServiceList from "./Manage_ServiceList.vue";
 export default {
   components: {
-    Manage_ServiceList
+    Manage_ServiceList,
   },
   setup() {
-    return {
-    };
+    return {};
   },
-}
+};
 </script>
-

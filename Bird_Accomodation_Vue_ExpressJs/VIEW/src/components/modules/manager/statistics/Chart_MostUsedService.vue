@@ -29,8 +29,8 @@ export default {
                 // animation: false,
                 plugins: {
                     legend: {
-                        position: 'top',
-                        display: false
+                        position: 'right',
+                        display: true
                     },
                     title: {
                         display: true,
@@ -51,6 +51,8 @@ export default {
                             Utils.transparentize(Utils.CHART_COLORS.yellow, 0.5),
                             Utils.transparentize(Utils.CHART_COLORS.green, 0.5),
                             Utils.transparentize(Utils.CHART_COLORS.blue, 0.5),
+                            Utils.transparentize(Utils.CHART_COLORS.purple, 0.5),
+                            Utils.transparentize(Utils.CHART_COLORS.grey, 0.5),
                         ],
                     }
                 ]
