@@ -1,69 +1,62 @@
 <template>
-    <div class="origin">
-        <div class="main">
-            <div class="form_input">
-                <h1 class="title main_title has-text-centered">Register</h1>
-
-                <div class="field">
-                    <label class="label">Fullname</label>
-                    <div class="control has-icons-left">
-                        <input v-model="fields.name" class="input is-success" type="text" placeholder="Text input">
-                        <span class="icon is-small is-left">
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Email</label>
-                    <div class="control has-icons-left">
-                        <input v-model="fields.email" class="input is-danger" type="email" placeholder="example@gmail.com">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <span class="icon is-small is-right">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Password</label>
-                    <p class="control has-icons-left">
-                        <input v-model="fields.password" class="input" type="password" placeholder="Password">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </p>
-                </div>
-
-                <div class="field">
-                    <label class="label">Phone</label>
-                    <div class="control has-icons-left">
-                        <input v-model="fields.phone" class="input is-success" type="tel" placeholder="Phone">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Address</label>
-                    <div class="control has-icons-left">
-                        <input v-model="fields.address" class="input is-success" type="text" placeholder="Address">
-                        <span class="icon is-small is-left">
-                            <i class="fa-solid fa-address-book"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="has-text-centered">
-                    <button class="button is-success" @click="submitForm" :disabled="isLoading">Register <a-spin
-                            v-if="isLoading" /></button>
+    <section id="wrapper">
+        <h1>Register</h1>
+        <div id="fromData">
+            <div class="field">
+                <label class="label">Fullname</label>
+                <div class="control has-icons-left">
+                    <input v-model="fields.name" class="input" type="text" placeholder="Text input">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
                 </div>
             </div>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
+                    <input v-model="fields.email" class="input" type="email" placeholder="example@gmail.com">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <p class="control has-icons-left">
+                    <input v-model="fields.password" class="input" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="field">
+                <label class="label">Phone</label>
+                <div class="control has-icons-left">
+                    <input v-model="fields.phone" class="input" type="tel" placeholder="Phone">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Address</label>
+                <div class="control has-icons-left">
+                    <input v-model="fields.address" class="input" type="text" placeholder="Address">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-address-book"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-success" @click="submitForm" :disabled="isLoading">Register <a-spin
+                            v-if="isLoading" /></button>
+                </p>
+            </div>
         </div>
-    </div>
+    </section>
 </template>
 <script>
 import { Modal } from 'ant-design-vue';
@@ -163,27 +156,32 @@ export default {
 </script>
 
 <style scoped>
-.main {
-    padding: 15% 7% 15% 61%;
+* {
+    padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 auto;
+
 }
 
-.origin {
-    background-image: url('../../public/images/wallpaper-bird.jpg');
-    background-position: left;
-    background-blend-mode: darken;
-    background-size: cover;
+#wrapper {
+    margin-top: 40px;
 }
 
-.form_input {
-    background-color: rgb(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 20px;
+#wrapper h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
-.form_input h1,
-p,
-label {
-    color: white;
+span i {
+    margin-left: 15px;
+}
+
+#fromData {
+    margin-left: 14%;
 }
 </style>

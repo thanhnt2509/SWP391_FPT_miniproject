@@ -1,55 +1,36 @@
 <template>
-    <div class="origin">
-        <div class="main">
-            <div class="form_input">
-                <h1 class="has-text-centered">Login</h1>
-                <form @submit="submitForm">
-                    <div v-if="isIncorrect">
-                        <p style="color: red">Incorrect email or password</p>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <input class="input" type="email" v-model="fields.email" placeholder="example@gmail.com"
-                                required>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                            <span class="icon is-small is-right">
-                                <i class="fas fa-check"></i>
-                            </span>
-                        </p>
-                    </div>
-
-                    <div class="field">
-                        <p class="control has-icons-left">
-
-                            <input class="input" v-model="fields.password" type="password" placeholder="Password" required>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </p>
-                    </div>
-
-                    <div>
-                        <label class="checkbox">
-                            <input v-model="fields.remember_me" type="checkbox">
-                            Remember me
-                        </label>
-                    </div>
-
-                    <div class="field">
-                        <p class="control">
-                            <button type="submit" class="button is-success">
-                                <div v-if="loading" class="ui text loader" />
-                                Login
-                            </button>
-                            or <router-link to="/register">Sign up</router-link>
-                        </p>
-                    </div>
-                </form>
+    <section id="wrapper">
+        <h1>Login</h1>
+        <div id="fromData">
+            <div v-if="isIncorrect">
+                <p style="color: red">Incorrect email or password</p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                    <input v-model="fields.email" class="input" type="email" placeholder="Email">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input v-model="fields.password" class="input" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button @click="submitForm" type="submit" class="button is-success">
+                        <div v-if="loading" class="ui text loader" />
+                        Login
+                    </button>
+                </p>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -87,9 +68,9 @@ export default {
                     this.$router.push('/');
                     // if (res.status == 200) {
                     // } else {
-                        // this.loading = false;
-                        // this.isIncorrect = true;
-                        // message.error('Incorrect email or password');
+                    // this.loading = false;
+                    // this.isIncorrect = true;
+                    // message.error('Incorrect email or password');
                     // }
                 } catch (err) {
                     this.loading = false;
@@ -103,27 +84,32 @@ export default {
 </script>
 
 <style scoped>
-.main {
-    padding: 15% 7% 15% 61%;
+* {
+    padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 auto;
+
 }
 
-.origin {
-    background-image: url('/images/wallpaper-bird.jpg');
-    background-position: left;
-    background-blend-mode: darken;
-    background-size: cover;
+#wrapper {
+    margin-top: 40px;
 }
 
-.form_input {
-    background-color: rgb(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 20px;
+#wrapper h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
-.form_input h1,
-p,
-label {
-    color: white;
+span i {
+    margin-left: 15px;
+}
+
+#fromData {
+    margin-left: 14%;
 }
 </style>
