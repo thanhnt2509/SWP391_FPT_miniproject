@@ -1,17 +1,11 @@
 <template>
     <!-- services: {{ services }} -->
-    <div class="columns wrapper">
-        <div v-for="service in services" class="column wrapper_box">
-            <!-- service: {{ service }} -->
-            <div class="wapper_box_img">
-                <img :src="`http://localhost:5000/file/get_service_img/${service.image}`" alt="">
-            </div>
-            <div class="wapper_box_text">
-                {{service.name}} <abbr v-if="service.isHighlight" title="Best selection"><i class="fa-solid fa-crown"></i></abbr>
-            </div>
+    <section id="second_section">
+        <div class="each_service" v-for="service in services">
+            <img :src="`http://localhost:5000/file/get_service_img/${service.image}`" alt="">
+            <p>{{ service.name }}<span class="tag"><i class="fa-solid fa-crown" style="margin-right: 10px;"></i>Best Selection </span></p>
         </div>
-
-    </div>
+    </section>
 </template>
 
 <script>
@@ -31,37 +25,41 @@ export default {
 </script>
 
 <style scoped>
-.wrapper{
-
-}
-
-.wrapper_box{
+* {
     padding: 0;
     margin: 0;
-    width: 100%;
-    height: 100%;
-    height: 500px;
-    position: relative;
-}
-.wapper_box_img{
-    width: 100%;
-    height: 100%;
+    box-sizing: border-box;
 }
 
-.wapper_box_img img{
-    width: 100%;
-    height: 100%;
+#second_section {
+    width: 90%;
+    margin: 0 auto 60px auto;
+    display: flex;
 }
-.wapper_box_text{
-    width: 100%;
+
+.each_service {
+    position: relative;
+}
+
+.each_service img {
+    width: 400px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.each_service p {
     position: absolute;
-    bottom: 1%;
+    font-weight: 600;
+    font-size: 1.25rem;
     color: white;
-    font-weight: 700;
-    font-size: larger;
-    left: 0%;
-    word-wrap: break-word;
-    text-align: left;
-    padding-left: 10px;
+    left: 0;
+    bottom: 0;
+    padding: 0 0 20px 20px;
+}
+
+.tag{
+    background-color: #B8957B;
+    color: black;
+    margin-left: 20px;
 }
 </style>
