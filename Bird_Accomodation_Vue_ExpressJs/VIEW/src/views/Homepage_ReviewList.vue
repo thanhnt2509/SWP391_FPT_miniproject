@@ -7,7 +7,7 @@
             <div v-for="review in reviews" class="each_content">
                 <img class="each_content_img" :src="`http://localhost:5000/file/get_checkout_img/${review.checkout_img}`"
                     alt="">
-                <h3>{{ review.name }} <a-rate :value="review.rating" allow-half /></h3>
+                <h3>{{ review.name }} <a-rate disabled :value="review.rating" allow-half /></h3>
                 <p>{{ review.comment }}</p>
             </div>
         </div>

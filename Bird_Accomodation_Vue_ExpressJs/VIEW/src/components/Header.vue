@@ -6,8 +6,8 @@
       <!-- <a href="#">Contact</a> -->
       <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/about">About</router-link>
       <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/service">Service</router-link>
-      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser"  to="/post">Post</router-link>
-      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser"  to="/booking">Booking</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/post">Post</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/booking">Booking</router-link>
       <router-link v-if="!$store.getters.getUser" to="/login">Login</router-link>
       <router-link v-if="!$store.getters.getUser" to="/register">Register</router-link>
 
@@ -24,8 +24,6 @@
       <a href="#" v-if="$store.getters.getUser" @click="logoutClick">Logout</a>
     </nav>
   </header>
-
-  
 </template>
 
 <script>
@@ -43,6 +41,7 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleScroll);
+
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -57,7 +56,7 @@ export default {
         header.style.backgroundColor = "transparent";
       }
     },
-    logoutClick(){
+    logoutClick() {
       this.$store.dispatch('logout')
       this.$router.push('/')
     }
@@ -116,6 +115,4 @@ header {
   background: #B8957B;
   color: #fff;
 }
-
-
 </style>

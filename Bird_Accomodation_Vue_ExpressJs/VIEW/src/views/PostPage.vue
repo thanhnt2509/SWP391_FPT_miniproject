@@ -6,7 +6,8 @@
       <a-modal v-model:visible="isActive" width="1000px" :title="post?.title">
         <PostDetail :postSelected="postSelected"/>
       </a-modal>
-      <div v-for="post in postItems" :key="`post_` + post?.post_id" class="column each_post" @click="handleShowMore(post)">
+      <div v-for="post in postItems" :key="`post_` + post?.post_id" class="column each_post">
+      <!--  @click="handleShowMore(post)" -->
         <div>
           <img class="" src="../../public/images/bird-fac2.jpg" />
         </div>
