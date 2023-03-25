@@ -2,12 +2,26 @@
   <header id="header">
     <h2 class="logo">Bird Oasis</h2>
     <nav class="navigation">
-      <a href="#" class="active">Home</a>
-      <a href="#">About</a>
-      <a href="#">Service</a>
-      <a href="#">Contact</a>
-      <a href="#">Post</a>
-      <a href="#">Booking</a>
+      <router-link to="/" class="active">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <!-- <a href="#">Contact</a> -->
+      <router-link to="/service">Service</router-link>
+      <router-link to="/post">Post</router-link>
+      <router-link to="/booking">Booking</router-link>
+      <router-link v-if="!$store.getters.getUser" to="/login">Login</router-link>
+      <router-link v-if="!$store.getters.getUser" to="/register">Register</router-link>
+
+
+      <router-link v-if="$store.getters.getUser?.role === 0" to="/account/profile">Profile</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0" to="/account/transaction">Transaction</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0" to="/account/bird/list">Bird List</router-link>
+
+      <router-link v-if="$store.getters.getUser?.role === 1" to="/manager">Manager page</router-link>
+
+
+
+
+      <a href="#" v-if="$store.getters.getUser" @click="$store.dispatch('logout')">Logout</a>
     </nav>
   </header>
 
