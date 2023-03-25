@@ -1,25 +1,4 @@
 <template>
-  <!-- <footer style="text-align: left; padding-left: 300px;">
-    <div class="columns content">
-      <div class="column">
-        <h3><strong>Company</strong></h3>
-        <li><i class="fa-solid fa-address-card"></i> About us</li>
-        <li>Service</li>
-        <li>Gallery</li>
-      </div>
-      <div class="column">
-        <h3><strong>Support</strong></h3>
-        <li>FAQ</li>
-        <li>Terms of use</li>
-        <li>Privacy policy</li>
-      </div>
-      <div class="column">
-        <h3><strong>Follow us</strong></h3>
-        
-      </div>
-    </div>
-  </footer> -->
-
   <footer>
     <div id="self_intro">
       <div id="self_intro_content">

@@ -27,12 +27,12 @@
             </tr>
             <h3 style="white-space: nowrap;">Make a Reservation</h3>
             <tr>
-                <td>Check-in</td>
-                <td><input style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_from" type="date"></td>
+                <td style="border: unset;">Check-in</td>
+                <td ><input class="input" style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_from" type="date"></td>
             </tr>
             <tr>
-                <td>Check-out</td>
-                <td><input style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_to" type="date"></td>
+                <td style="border: unset;">Check-out</td>
+                <td style="border: unset;"><input class="input" style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_to" type="date"></td>
             </tr>
             <!-- {{ getNewBooking }} -->
         </table>

@@ -42,8 +42,8 @@
                         <td>{{ bird_selected?.gender === 1 ? 'Male' : 'Female' || '' }}</td>
                     </tr>
                     <tr>
-                        <td>Description</td>
-                        <td>{{ bird_selected?.description || '' }}</td>
+                        <td style="border: unset;">Description</td>
+                        <td style="border: unset;">{{ bird_selected?.description || '' }}</td>
                     </tr>
                     <!-- Bird selected: {{ bird_selected.bird_id }} -->
                 </table>
@@ -103,6 +103,6 @@ export default {
 
 .main {
     padding: 10px 40px 30px 0;
-    height: fit-content;
+    height: 655px;
 }
 </style>

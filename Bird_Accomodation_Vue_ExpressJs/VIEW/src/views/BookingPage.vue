@@ -17,7 +17,8 @@
         </div>
         <div class="has-text-centered">
             <!-- <button @click="submitForm" class="button is-dark">Book now</button> -->
-            <a-button style="padding: 15px; height: fit-content;" class="button is-dark" type="primary" @click="submitForm">Book now</a-button>
+            <a-button style="padding: 15px; height: fit-content;" class="button is-dark" type="primary"
+                @click="submitForm">Book now</a-button>
         </div>
     </div>
 </template>
@@ -79,8 +80,8 @@ export default {
                         });
 
                         this.$store.dispatch('clearBooking')
-                        this.$router.push('/');   
-                    }else{
+                        this.$router.push('/');
+                    } else {
                         message.error('Something went wrong !');
                     }
                 } catch (error) {
