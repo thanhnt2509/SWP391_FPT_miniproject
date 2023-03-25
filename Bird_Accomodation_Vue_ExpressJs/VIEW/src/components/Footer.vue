@@ -47,7 +47,6 @@
         <ul>
           <li><a href="https://github.com/tien-rayujin/SWP391_FPT_miniproject" target="_blank"><i class="fa-brands fa-square-github"></i>Github</a></li>
           <li><a href="https://www.youtube.com/watch?v=8FsN1yXuUq0" target="_blank"><i class="fa-brands fa-youtube"></i>Youtube</a></li>
-          <li>Privacy policy</li>
         </ul>
       </div>
       <div id="self_intro_map">
@@ -85,7 +84,11 @@ h2 {
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 10px;
-  text-decoration: underline;
+  background-color: rgba(255, 254, 253, 0.8);
+  color: #B8957B;
+  border-radius: 40px;
+  width: fit-content;
+  padding: 3px 20px;
 }
 
 ul li {

@@ -19,7 +19,7 @@
                 <div class="service">
                     <img class="img_service" :src="`http://localhost:5000/file/get_service_img/${service.image}`"
                         :alt="service.name">
-                    <h3>{{ service.name }} <span class="tag">Best Selection </span></h3>
+                    <h3>{{ service.name }} <span v-if="service.isHighlight" class="tag">Best Selection </span></h3>
                     <p>{{ service.description }}</p>
                     <button disabled class="button is-info">Price: {{ service.price }}$ {{ service.isPack ? '/pack' : '' }}</button>
                 </div>
