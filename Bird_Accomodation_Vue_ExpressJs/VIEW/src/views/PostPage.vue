@@ -1,81 +1,102 @@
 <template>
-  <h1 class="title has-text-centered">Fresh Content</h1>
-  <div class="container content" style="margin-bottom: 45px;">
-    <div class="columns is-multiline">
-      <!-- {{ postItems }} -->
-      <a-modal v-model:visible="isActive" width="1000px" :title="post?.title">
-        <PostDetail :postSelected="postSelected"/>
-      </a-modal>
-      <div v-for="post in postItems" :key="`post_` + post?.post_id" class="column each_post">
-      <!--  @click="handleShowMore(post)" -->
-        <div>
-          <img class="" src="../../public/images/bird-fac2.jpg" />
-        </div>
-        <h2 class="title">{{ post?.title }}</h2>
+  <div id="wrapper">
+    <h1>Fresh Content</h1>
+    <div id="post">
+      <div class="each_post" v-for="post in postDataList">
+        <img :src="post.img" :alt="post.title">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.date }}</p>
+        <button class="button is-info"><a :href="post.path" target="_blank">Read More</a></button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import PostDetail from "./PostDetail.vue";
 export default {
   name: "Post",
   computed: {
-    ...mapGetters(["postItems"]),
+
   },
   data() {
     return {
-      isActive: false,
-      postSelected: {},
+      postDataList: [
+        { path: 'https://www.northernparrots.com/blog/benefits-of-owning-a-pet-bird/', img: '/images/pic1.jpg', title: 'Benefits of Owning a Pet Bird', date: 'January 15, 2019' },
+        { path: 'https://petkeen.com/best-pet-birds-for-beginners/', img: '/images/pic2.jpg', title: 'The Top 5 Pet Bird Species for Beginners', date: 'January 26, 2019' },
+        { path: 'https://www.animalmedcenter-appleton.com/tips-keep-bird-happy-healthy/', img: '/images/pic3.jpg', title: 'How to Keep Your Pet Bird Happy and Healthy', date: 'January 30, 2019' },
+      ]
     };
   },
   methods: {
-    handleShowMore(post) {
-      this.postSelected = post;
-      this.isActive = true;
-    },
+
   },
   components: {
-    PostDetail,
+
   },
 };
 </script>
 
 <style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+#wrapper {
+  margin-top: 40px;
+}
+
+#wrapper h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#post {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+}
+
 .each_post {
   position: relative;
   width: 100%;
-  height: fit-content;
-  margin: 10px;
+  height: 100%;
+  margin: 0 10px;
+}
+
+.each_post h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
   padding: 0;
-  border: 0.2px solid #ccc;
-}
-
-.each_post:hover{
-  border: 2px solid #6f84b1;
-}
-
-.each_post h2 {
-  padding-top: 8px;
   margin: 0;
-  color: #000;
-  text-align: center;
-
 }
 
-.each_post h2:hover{
-  color: #6f84b1;
+.each_post p {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px 0 0 10px;
+}
+
+.each_post img {
+  width: 100%;
+  height: 520px;
 }
 
 .each_post button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  height: 50px;
-  font-size: 20px;
-  font-weight: 600;
+}
+
+.each_post button a {
+  color: white;
 }
 </style>
