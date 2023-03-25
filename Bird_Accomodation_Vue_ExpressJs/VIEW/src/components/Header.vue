@@ -3,11 +3,11 @@
     <h2 class="logo">Bird Oasis</h2>
     <nav class="navigation">
       <router-link to="/" class="active">Home</router-link>
-      <router-link to="/about">About</router-link>
       <!-- <a href="#">Contact</a> -->
-      <router-link to="/service">Service</router-link>
-      <router-link to="/post">Post</router-link>
-      <router-link to="/booking">Booking</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/about">About</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/service">Service</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser"  to="/post">Post</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser"  to="/booking">Booking</router-link>
       <router-link v-if="!$store.getters.getUser" to="/login">Login</router-link>
       <router-link v-if="!$store.getters.getUser" to="/register">Register</router-link>
 
@@ -21,16 +21,11 @@
 
 
 
-      <a href="#" v-if="$store.getters.getUser" @click="$store.dispatch('logout')">Logout</a>
+      <a href="#" v-if="$store.getters.getUser" @click="logoutClick">Logout</a>
     </nav>
   </header>
 
-  <section class="banner">
-    <img src="/images/bird-tree-hotel.jpg" alt="">
-    <h2 id="text">Bird Oasis</h2>
-    <!-- <h4 id="subtitle">Treat with care</h4> -->
-    <h4 id="subtitle">Bird Accommodation System</h4>
-  </section>
+  
 </template>
 
 <script>
@@ -61,6 +56,10 @@ export default {
       } else {
         header.style.backgroundColor = "transparent";
       }
+    },
+    logoutClick(){
+      this.$store.dispatch('logout')
+      this.$router.push('/')
     }
   }
 };
@@ -82,8 +81,7 @@ body {
 }
 
 header {
-  position: fixed;
-  top: 0;
+  position: relative;
   left: 0;
   width: 100%;
   padding: 10px 100px;
@@ -119,35 +117,5 @@ header {
   color: #fff;
 }
 
-.banner {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
-.banner img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
-}
-
-#text {
-  position: absolute;
-  font-size: 8em;
-  color: #ffffff;
-  text-shadow: 10px 10px 30px rgba(0, 0, 0, .2);
-}
-
-#subtitle {
-  position: absolute;
-  font-size: 2em;
-  color: #ffffff;
-  text-shadow: 10px 10px 30px rgba(0, 0, 0, .2);
-  margin-top: 15vh;
-}
 </style>

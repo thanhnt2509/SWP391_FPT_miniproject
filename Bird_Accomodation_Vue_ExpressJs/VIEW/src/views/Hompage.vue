@@ -1,5 +1,12 @@
 <template>
   <div>
+    <section class="banner">
+      <img src="/images/bird-tree-hotel.jpg" alt="">
+      <h2 id="text">Bird Oasis</h2>
+      <!-- <h4 id="subtitle">Treat with care</h4> -->
+      <h4 id="subtitle">Bird Accommodation System</h4>
+    </section>
+    
     <Homepage_Intro />
 
     <Homepage_Highlight />
@@ -41,5 +48,35 @@ export default {
 </script>
 
 <style scoped>
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.banner img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+#text {
+  position: absolute;
+  font-size: 8em;
+  color: #ffffff;
+  text-shadow: 10px 10px 30px rgba(0, 0, 0, .2);
+}
+
+#subtitle {
+  position: absolute;
+  font-size: 2em;
+  color: #ffffff;
+  text-shadow: 10px 10px 30px rgba(0, 0, 0, .2);
+  margin-top: 15vh;
+}
 </style>

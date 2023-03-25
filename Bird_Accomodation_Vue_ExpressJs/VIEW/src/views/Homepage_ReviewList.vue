@@ -46,8 +46,19 @@ export default {
 
 #wrapper_box{
     display: flex;
-    align-items: center;
+}
 
+.each_content{
+    width: 100%;
+    border: 0.2px solid rgb(129, 129, 129);
+    border-collapse: collapse;
+    padding: 20px;
+}
+
+.each_content h3{
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 20px 0px;
 }
 .each_content_img {
     width: 100px;
