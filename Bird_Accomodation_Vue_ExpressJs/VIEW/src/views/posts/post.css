@@ -1,0 +1,28 @@
+body,
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.left img {
+    width: 100%;
+    height: auto;
+}
+
+.right .Author {
+    border-bottom: 1px solid #000;
+}
+
+.right .content ._main {
+    text-align: justify;
+    text-indent: 30px;
+    padding-top: 10px;
+}
+
+.right .author_sign {
+    text-align: right;
+}
+
+.right .ref {
+    text-align: left;
+}
