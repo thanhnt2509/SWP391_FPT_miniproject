@@ -70,6 +70,8 @@ export default {
   padding: 0;
   margin: 0;
   width: 100%;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 footer {
