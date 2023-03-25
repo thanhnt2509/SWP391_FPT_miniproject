@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import ServiceList from "./ServiceList.vue";
+import ServiceList from "./Homepage_ServiceList.vue";
 export default {
     name: "Homepage_Intro",
     components: {

@@ -1,6 +1,6 @@
 <template>
-  <div class="container content">
-    <h1 class="label has-text-centered">Manage Service</h1>
+  <div>
+    <h1>Manage Service</h1>
     <Manage_ServiceList />
   </div>
 </template>
@@ -15,3 +15,5 @@ export default {
   },
 };
 </script>
+<style scoped>
+</style>
