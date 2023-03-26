@@ -80,24 +80,23 @@ export default {
                         dreport_id: this.reportData.dreport_id,
                         feedback_content: this.getNewReportFeedback
                     }
-                    const success = this.$store.dispatch('submitNewReportFeedback', payload); 
-                    if(success) {
+                    const success = this.$store.dispatch('submitNewReportFeedback', payload);
+                    if (success) {
                         Modal.success({
                             title: 'Success',
                             content: 'Your feedback has been sent!',
                         });
                         this.$store.dispatch('clearNewReportFeedback');
-                        this.$router.push(`/account/transaction`)
+                        this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
+                        this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
+                        this.$router.push(`/report/${this.$route.params.booking_id}`);
                     } else {
                         Modal.error({
                             title: 'Error',
                             content: 'Your feedback has not been sent!',
                         });
                     }
-                    
                 }
-                // console.log(`dreport_id: ${this.reportData.dreport_id}`);
-                // console.log(`feedback_content: ${this.getNewReportFeedback}`);
             }, 2000);
         }
     },
