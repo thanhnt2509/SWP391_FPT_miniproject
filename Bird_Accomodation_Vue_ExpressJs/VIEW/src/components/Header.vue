@@ -1,5 +1,5 @@
 <template>
-  <header id="header">
+  <header :class="{'header_fixed': $route.path === '/', 'header': $route.path != '/'}">
     <h2 class="logo">Bird Oasis</h2>
     <nav class="navigation">
       <router-link to="/" class="active">Home</router-link>
@@ -23,6 +23,11 @@
 
       <a href="#" v-if="$store.getters.getUser" @click="logoutClick">Logout</a>
     </nav>
+    
+    <div v-if="$store.getters.getUser" id="user">
+      <img :src="`http://localhost:5000/file/get_user_img/${$store.getters.getUser?.user_img}`" alt="">
+      <h2>{{ $store.getters.getUser?.name }}</h2>
+    </div>
   </header>
 </template>
 
@@ -49,7 +54,8 @@ export default {
   methods: {
     handleScroll() {
       const scrollY = window.scrollY;
-      const header = document.getElementById("header");
+      const header = document.getElementsByClassName('header_fixed')[0];
+      if(!header || !header.style) return;
       if (scrollY > 100) {
         header.style.backgroundColor = `rgba(255, 255, 255, 1)`;
       } else {
@@ -73,19 +79,24 @@ export default {
   font-family: 'Poppins', sans-serif;
 }
 
-body {
-  background: #f1f1f1;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-header {
+.header {
   position: relative;
   left: 0;
   width: 100%;
   padding: 10px 100px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.header_fixed {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 10px 100px;
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   z-index: 100;
 }
@@ -115,4 +126,21 @@ header {
   background: #B8957B;
   color: #fff;
 }
+
+#user{
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#user img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: fill;
+  border: 1px solid #B8957B;
+}
+
 </style>

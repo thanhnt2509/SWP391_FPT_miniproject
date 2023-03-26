@@ -1,23 +1,16 @@
 <template>
     <!-- page introduction -->
-    <div class="container content">
-        <div>
-            <div class="has-text-centered">
-                <h1>Bird List</h1>
-                <p>ALl your bird registered will show here !</p>
-            </div>
-        </div><br>
-        <!-- birdlist -->
+    <div id="wrapper">
+        <h1>Bird List</h1>
+        <p>ALl your bird registered will show here !</p>
         <!-- getBirds : {{ getBirds }} -->
         <div class="columns">
-            <div class="column is-four-fifths columns is-multiline is-mobile">
-                <div class="column is-one-third bird_info_contain" v-for="bird in getBirds">
-                    <!-- eachbird -->
-                    <Bird_Info :bird="bird" :main="true"/>
+            <div class="column is-four-fifths columns is-multiline">
+                <div class="column is-4" v-for="bird in getBirds">
+                    <Bird_Info :bird="bird" />
                 </div>
             </div>
             <div class="column">
-                <!-- register new bird -->
                 <BirdRegister />
             </div>
         </div>
@@ -46,5 +39,31 @@ export default {
 </script>
 
 <style scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
+#wrapper {
+    width: 80%;
+    background: #fffefe;
+    margin: 0 auto;
+}
+
+#wrapper h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+}
+
+#wrapper p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+    margin: 0 0 2rem 0;
+}
 </style>

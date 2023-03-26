@@ -1,65 +1,67 @@
 <template>
-  <form @submit="submitForm" class="container main" enctype="multipart/form-data">
-    <h1>Register new bird</h1>
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input class="input is-success" required v-model="fields.bird_name" type="tel" placeholder="Typhoon">
+  <div id="wrapper_register">
+    <form @submit="submitForm" enctype="multipart/form-data">
+      <h1>Register new bird</h1>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input is-success" required v-model="fields.bird_name" type="tel" placeholder="Typhoon">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label class="label">Upload bird image</label>
+      <div class="field">
+        <label class="label">Upload bird image</label>
         <input name="bird_image" type="file" accept="image/jpeg" @change="evt => fields.image = evt.target.files[0]">
-    </div>
-
-    <div class="field">
-      <label class="label">Species</label>
-      <select class="input select" v-model="fields.bird_type">
-        <!-- list of bird_type -->
-        <option disabled>Select bird type</option>
-        <option v-for="type in birdTypeItems" :value="type.type_id">{{ type.type_name }}</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label class="label">Age</label>
-      <select class="input select" required v-model="fields.age">
-        <!-- list of bird_age -->
-        <option disabled>Select bird age</option>
-        <option value="1">Young</option>
-        <option value="2">Mature</option>
-        <option value="3">Old</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label class="label">Gender</label>
-      <div class="control">
-        <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="1">Male
-        <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="0">Female
       </div>
 
-    </div>
+      <div class="field">
+        <label class="label">Species</label>
+        <select class="input select" v-model="fields.bird_type">
+          <!-- list of bird_type -->
+          <option disabled>Select bird type</option>
+          <option v-for="type in birdTypeItems" :value="type.type_id">{{ type.type_name }}</option>
+        </select>
+      </div>
 
-    <div class="field">
-      <label class="label">Breed</label>
-      <input class="input" v-model="fields.breed" type="text" placeholder="peace face, blue tail">
-    </div>
+      <div class="field">
+        <label class="label">Age</label>
+        <select class="input select" required v-model="fields.age">
+          <!-- list of bird_age -->
+          <option disabled>Select bird age</option>
+          <option value="1">Young</option>
+          <option value="2">Mature</option>
+          <option value="3">Old</option>
+        </select>
+      </div>
 
-    <div class="field">
-      <label class="label">Description</label>
-      <textarea class="textarea" v-model="fields.description" placeholder="Describe your bird"></textarea>
-    </div>
+      <div class="field">
+        <label class="label">Gender</label>
+        <div class="control">
+          <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="1">Male
+          <input class="radio" required v-model="fields.gender" type="radio" name="gender" value="0">Female
+        </div>
 
-    <div>
-      <button class="button is-primary" type="submit">Submit</button>
-    </div>
-  </form>
+      </div>
+
+      <div class="field">
+        <label class="label">Breed</label>
+        <input class="input" v-model="fields.breed" type="text" placeholder="peace face, blue tail">
+      </div>
+
+      <div class="field">
+        <label class="label">Description</label>
+        <textarea class="textarea" v-model="fields.description" placeholder="Describe your bird"></textarea>
+      </div>
+
+      <div class="submit_button">
+        <button class="button is-primary" type="submit">Add new bird</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import {message} from 'ant-design-vue';
+import { mapGetters } from 'vuex'
+import { message } from 'ant-design-vue';
 import axios from "axios";
 
 export default {
@@ -114,9 +116,9 @@ export default {
               'Content-Type': 'multipart/form-data'
             }
           })
-          .then(res => {
-            console.log(res)
-          })
+            .then(res => {
+              console.log(res)
+            })
 
           this.$store.dispatch('getAllBirds')
           message.success('Bird added successfully');
@@ -132,10 +134,20 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  width: 300px;
-  padding: 20px;
+#wrapper_register {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#wrapper_register h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+#wrapper_register .submit_button {
+  text-align: center;
 }
 </style>
