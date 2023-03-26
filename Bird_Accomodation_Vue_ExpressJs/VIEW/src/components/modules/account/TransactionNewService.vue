@@ -52,9 +52,9 @@ export default defineComponent({
                             h('p', 'Feel free to contact us to know more information !'),
                         ]),
                     });
-                    this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
-                    this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
-                    this.$store.dispatch('clearNewReport')
+                    store.dispatch('getAllReportOfBooking_id', route.params.booking_id);
+                    store.dispatch('getAllServiceOfBooking_id', route.params.booking_id);
+                    store.dispatch('clearNewReport')
                     router.push(`/report/${route.params.booking_id}`)
                 } else {
                     Modal.error({
