@@ -176,26 +176,12 @@ export default defineComponent({
   },
   props: {
     sort_by: String,
-    // dateFrom: String,
-    // dateTo: String,
   },
   setup(props) {
     const store = useStore();
 
     const getAllBookings = computed(() => {
-      //handle search by date
-      // if (
-      //   props.dateFrom !== "" &&
-      //   props.dateTo !== "" &&
-      //   !props.dateFrom &&
-      //   !props.dateTo
-      // ) {
-      //   const payload = {
-      //     dateFrom: props.dateFrom,
-      //     dateTo: props.dateTo,
-      //   };
-      //   return store.getters[("allBookingItems_date", payload)];
-      // } else
+
       if (props.sort_by === "All") {
         return store.getters["allBookingItems"];
       } else if (props.sort_by === "Lastest") {
@@ -215,12 +201,6 @@ export default defineComponent({
 
     // add an property visible for each item
     const data = getAllBookings;
-    // .value.map((item) => {
-    //     return {
-    //         ...item,
-    //         visible: false,
-    //     };
-    // });
 
     const visible = ref(false);
     const booking_idSelected = ref();

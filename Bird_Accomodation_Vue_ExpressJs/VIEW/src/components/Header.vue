@@ -85,7 +85,7 @@ export default {
   width: 100%;
   padding: 10px 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   z-index: 100;
 }
