@@ -41,11 +41,11 @@ export default {
         return {
             fields: {
                 // admin login
-                email: 'admin@gmail.com',
-                password: '12345',
-                // user login
-                // email: 'thanhnt@gmail.com',
+                // email: 'admin@gmail.com',
                 // password: '12345',
+                // user login
+                email: 'thanhnt@gmail.com',
+                password: '12345',
                 remember_me: false
             },
             isIncorrect: false,
@@ -95,6 +95,7 @@ export default {
 
 #wrapper {
     margin-top: 40px;
+    min-height: 44vh;
 }
 
 #wrapper h1 {
