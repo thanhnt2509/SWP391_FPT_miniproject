@@ -41,11 +41,11 @@ export default {
         return {
             fields: {
                 // admin login
-                // email: 'U1@gmail.com',
-                // password: '12345',
+                email: 'admin@gmail.com',
+                password: '12345',
                 // user login
-                email: 'U2@gmail.com',
-                password: '123456',
+                // email: 'thanhnt@gmail.com',
+                // password: '12345',
                 remember_me: false
             },
             isIncorrect: false,

@@ -59,7 +59,7 @@ export default {
       if (scrollY > 100) {
         header.style.backgroundColor = `rgba(255, 255, 255, 1)`;
       } else {
-        header.style.backgroundColor = "transparent";
+        header.style.backgroundColor = "rgba(255, 255, 255, 1)";
       }
     },
     logoutClick() {
@@ -88,6 +88,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   z-index: 100;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .header_fixed {
@@ -99,6 +100,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   z-index: 100;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .logo {
@@ -106,7 +108,7 @@ export default {
   font-weight: 800;
   color: #9b6c48;
   pointer-events: none;
-  margin-right: 270px;
+  margin-right: 150px;
   background-color: rgba(239, 238, 252, .2);
   padding: 6px 15px;
   border-radius: 20px;

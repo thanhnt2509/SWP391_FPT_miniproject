@@ -82,7 +82,7 @@ export default defineComponent({
     font-size: 2rem;
     font-weight: 600;
     width: 400px;
-    margin-right: 270px;
+    margin-right: 150px;
 }
 
 #sortingBar_button button {
