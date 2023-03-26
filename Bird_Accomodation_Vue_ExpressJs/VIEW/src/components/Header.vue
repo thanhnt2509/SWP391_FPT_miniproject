@@ -7,7 +7,7 @@
       <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/about">About</router-link>
       <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/service">Service</router-link>
       <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/post">Post</router-link>
-      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/booking">Booking</router-link>
+      <router-link v-if="$store.getters.getUser?.role === 0 || !$store.getters.getUser" to="/booking" class="special">Booking</router-link>
       <router-link v-if="!$store.getters.getUser" to="/login">Login</router-link>
       <router-link v-if="!$store.getters.getUser" to="/register">Register</router-link>
 
@@ -124,6 +124,16 @@ export default {
 .navigation a:hover,
 .navigation a.active {
   background: #B8957B;
+  color: #fff;
+}
+
+.navigation a.special {
+  border: 1px solid #B8957B;
+  color: #B8957B;
+}
+
+.navigation a.special:hover {
+  background-color: #B8957B;
   color: #fff;
 }
 

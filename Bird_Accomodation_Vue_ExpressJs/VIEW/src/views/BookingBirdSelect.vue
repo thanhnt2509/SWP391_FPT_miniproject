@@ -1,53 +1,42 @@
 <template>
-    <div class="main column is-one-third">
-        <h2 class="label has-text-centered">Find Your Feathered Friend</h2>
-        <table>
-            <tr>
-                <td>
-                    <select v-model="bird_selected" class="input select">
-                        <option disabled>Please select your bird to boarding</option>
-                        <!-- <option value="">NULL data to test</option> -->
-                        <option :disabled="bird.is_boarding" v-for="bird in getBirds" :value="bird">
-                            <p v-if="bird.is_boarding">{{ bird.bird_name }} - Boarding</p>
-                            <p v-else>{{ bird.bird_name }}</p>
-                        </option>
-                    </select>
-                </td>
-            </tr>
-        </table>
+    <div class="column" id="wrapper_birdSelect">
+        <h2>Find Your Feathered Friend</h2>
+        <select v-model="bird_selected" class="input">
+            <option disabled>Please select your bird to boarding</option>
+            <!-- <option value="">NULL data to test</option> -->
+            <option :disabled="bird.is_boarding" v-for="bird in getBirds" :value="bird">
+                <p v-if="bird.is_boarding">{{ bird.bird_name }} - Boarding</p>
+                <p v-else>{{ bird.bird_name }}</p>
+            </option>
+        </select>
         <!-- when selected -->
         <!-- bird_selected: {{ bird_selected }} -->
-        <div v-if="bird_selected">
-            <div class="bird_img">
-                <div class="bird_img_image">
-                    <img :src="`http://localhost:5000/file/get_bird_img/${bird_selected.image}`" alt="user bird">
-                </div>
+        <div v-if="bird_selected" id="wrapper_birdSelect_info">
+            <div id="wrapper_birdSelect_info_img">
+                <img :src="`http://localhost:5000/file/get_bird_img/${bird_selected.image}`" alt="user bird">
             </div>
-            <div class="bird_info">
-                <table>
-                    <tr>
-                        <td>Species</td>
-                        <td>{{ bird_selected.type_name }}</td>
-                    </tr>
-                    <tr>
-                        <td>Age</td>
-                        <td>{{ ageConvert(bird_selected.age) }}</td>
-                    </tr>
-                    <tr>
-                        <td>Breed</td>
-                        <td>{{ bird_selected?.breed || '' }}</td>
-                    </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td>{{ bird_selected?.gender === 1 ? 'Male' : 'Female' || '' }}</td>
-                    </tr>
-                    <tr>
-                        <td style="border: unset;">Description</td>
-                        <td style="border: unset;">{{ bird_selected?.description || '' }}</td>
-                    </tr>
-                    <!-- Bird selected: {{ bird_selected.bird_id }} -->
-                </table>
-            </div>
+            <table class="table is-fullwidth">
+                <tr>
+                    <td>Species</td>
+                    <td>{{ bird_selected.type_name }}</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>{{ ageConvert(bird_selected.age) }}</td>
+                </tr>
+                <tr>
+                    <td>Breed</td>
+                    <td>{{ bird_selected?.breed || '' }}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{ bird_selected?.gender === 1 ? 'Male' : 'Female' || '' }}</td>
+                </tr>
+                <tr>
+                    <td style="border: unset;">Description</td>
+                    <td style="border: unset;">{{ bird_selected?.description || '' }}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>
@@ -86,23 +75,28 @@ export default {
 </script>
 
 <style scoped>
-.bird_img {
+#wrapper_birdSelect {
     width: 100%;
-    height: 230px;
+    height: 100%;
+    margin: 0 40px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+#wrapper_birdSelect h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+#wrapper_birdSelect_info_img{
     text-align: center;
 }
 
-.bird_img_image img {
+#wrapper_birdSelect_info_img img {
     width: 200px;
     height: 200px;
-    object-fit: cover;
-    object-position: top;
     border-radius: 50%;
-    display: inline-block;
-}
-
-.main {
-    padding: 10px 40px 30px 0;
-    height: 655px;
+    margin: 20px 0 0 0;
 }
 </style>

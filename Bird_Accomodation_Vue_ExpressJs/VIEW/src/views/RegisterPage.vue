@@ -182,6 +182,6 @@ span i {
 }
 
 #fromData {
-    margin-left: 14%;
+    margin-left: 16%;
 }
 </style>

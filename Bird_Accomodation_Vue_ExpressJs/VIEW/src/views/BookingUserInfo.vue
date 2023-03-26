@@ -1,14 +1,10 @@
 <template>
-    <div class="main column is-one-third" >
-        <h1 class="label has-text-centered">User information</h1>
-        <div class="user_img">
-            <img class="user_img_image" src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
+    <div class="column" id="wrapper_userInfo">
+        <div id="wrapper_userInfo_title">
+            <h2>User information</h2>
+            <img src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
         </div>
-        <table>
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
+        <table class="table is-fullwidth">
             <tr>
                 <td>Fullname</td>
                 <td>{{ getUser?.name }}</td>
@@ -25,14 +21,14 @@
                 <td>Phone number</td>
                 <td>{{ getUser?.phone }}</td>
             </tr>
-            <h3 style="white-space: nowrap;">Make a Reservation</h3>
+            <h3>Make a Reservation</h3>
             <tr>
                 <td style="border: unset;">Check-in</td>
-                <td ><input class="input" style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_from" type="date"></td>
+                <td style="border: unset;"><input class="input" v-model="fields.date_from" type="date"></td>
             </tr>
             <tr>
                 <td style="border: unset;">Check-out</td>
-                <td style="border: unset;"><input class="input" style="width: 140px; padding-right: 5px; margin-right: 5px;" v-model="fields.date_to" type="date"></td>
+                <td style="border: unset;"><input class="input" v-model="fields.date_to" type="date"></td>
             </tr>
             <!-- {{ getNewBooking }} -->
         </table>
@@ -61,31 +57,40 @@ export default {
             deep: true
         }
     },
-    updated(){
+    updated() {
         this.date_from = '',
-        this.date_to = ''
+            this.date_to = ''
     }
 
 };
 </script>
 
 <style scoped>
-.main{
-    height: fit-content;
-}
-.user_img {
+#wrapper_userInfo {
+    margin: 0 40px;
     width: 100%;
-    height: 150px;
+}
+#wrapper_userInfo h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+#wrapper_userInfo h3{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+#wrapper_userInfo_title{
     text-align: center;
 }
 
-.user_img_image {
-    width: 150px;
-    height: 150px;
-    /* background-color: rgb(120, 131, 134); */
-    /* background-image: url('../../public/images/avatar_user.jpg'); */
-    object-position: center;
+#wrapper_userInfo_title img {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    display: inline-block;
+    object-fit: cover;
+    margin-bottom: 1rem;
 }
 </style>

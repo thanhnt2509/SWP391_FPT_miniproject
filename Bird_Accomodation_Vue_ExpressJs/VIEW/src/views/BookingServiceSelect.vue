@@ -1,6 +1,6 @@
 <template>
-    <div class="main column is-one-third">
-        <h2 class="label has-text-centered">Customize your service
+    <div class="column" id="wrapper_serviceSelect">
+        <h2>Customize your service
             <abbr title="The service pack selected will applies to your bird during boarding day">
                 <i style="padding-left: 10px;" class="fa-solid fa-circle-question"></i>
             </abbr>
@@ -73,12 +73,13 @@ export default {
 </script>
 
 <style scoped>
-.serviceList {
-    padding: 10px;
-    margin-top: 20px;
+#wrapper_serviceSelect{
+    margin: 0 40px;
 }
 
-.main {
-    padding: 10px 40px 30px 0;
+#wrapper_serviceSelect h2{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 </style>

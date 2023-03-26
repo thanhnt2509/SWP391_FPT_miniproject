@@ -1,13 +1,9 @@
 <template>
-    <div class="container content main">
-        <div class="has-text-centered">
-            <h1 class="title">Booking</h1>
-            <p>Here you can book your bird's stay at Bird Castle.</p>
-            <p>Information show as your account, edit your <router-link to="/account/profile">Profile</router-link> to
-                booking in different places !</p>
-        </div>
+    <div id="wrapper">
+        <h1>Booking</h1>
+        <p>Here you can book your bird's stay at Bird Oasis.</p>
         <!-- form -->
-        <div class="columns booking">
+        <div class="columns">
             <!-- part 1: user information -->
             <BookingUserInfo />
             <!-- part 2: bird selection -->
@@ -104,28 +100,30 @@ export default {
 </script>
 
 <style scoped>
-.main {
-    padding: 40px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.booking {
-    margin-top: 40px;
-    /* background-color: bisque; */
+#wrapper {
+    width: 80%;
+    margin: 0 auto;
 }
 
-.booking div {
-    background-color: rgb(255, 255, 255);
-    margin: 15px;
-    /*height: 649px;*/
-    overflow: hidden;
-    border: 0.6px solid rgb(230, 230, 230);
-    border-radius: 20px;
-
+#wrapper h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-.booking_info {}
-
-.booking_bird_select {}
-
-.booking_service_select {}
+#wrapper p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
 </style>
