@@ -1,14 +1,12 @@
 <template>
-    <div class="">
-        <div class="has-text-centered">
-            <h1 class="title">Bill information {{ $route.params.booking_id }}</h1>
-        </div>
-        <div class="columns" style="margin-left: 8%; margin-right: 8%">
+    <div id="wrapper">
+        <h1>Bill information _B{{ $route.params.booking_id }}</h1>
+        <div class="columns">
             <!-- {{ seed }} -->
             <div class="column">
                 <!-- user info -->
                 <div>
-                    <h2 class=" title_info label">Customer info</h2>
+                    <h2>Customer info</h2>
                     <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                         <tr>
                             <td>Customer name</td>
@@ -31,7 +29,7 @@
 
                 <!-- bird info -->
                 <div>
-                    <h2 class=" label">Bird info</h2>
+                    <h2>Bird info</h2>
                     <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                         <tr>
                             <td>Bird name</td>
@@ -53,7 +51,7 @@
 
             <!-- service info -->
             <div class="column">
-                <h2 class=" title_info label">Service picked info</h2>
+                <h2>Service picked info</h2>
                 <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                     <thead>
                         <tr>
@@ -80,8 +78,8 @@
             </div>
 
             <!-- booking info -->
-            <div class="checkout_box column">
-                <h2 class=" title_info label">Check-in info</h2>
+            <div class="column">
+                <h2>Check-in info</h2>
                 <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                     <tr>
                         <td>Start date</td>
@@ -93,7 +91,7 @@
                     </tr>
                 </table>
 
-                <h2 class=" title_info label">Check-out info</h2>
+                <h2>Check-out info</h2>
                 <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                     <tr>
                         <td>Payment status</td>
@@ -116,14 +114,13 @@
                     </tr>
                 </table>
 
-                <div class="feedback_content" >
-                    <h2 class="title" style="margin-bottom: 5px; padding: 0;">Leave a feedback</h2>
-                    <a-rate v-model:value="ratingPoint" allow-half/>
+                <div id="feedback">
+                    <h2>Leave a feedback</h2>
+                    <p>Rating: <a-rate v-model:value="ratingPoint" allow-half /></p>
                     <input class="input" type="text" v-model="feedbackContent"
                         placeholder="What is feed like when booking at Bird Oasis ?">
-                    <div style="display: flex;">
-                        <button class="button is-info" style="margin-top: 20px; margin-left: 40%;"
-                            @click="submitFeedback">Submit</button>
+                    <div id="feedback_button">
+                        <button class="button is-info" @click="submitFeedback">Submit</button>
                     </div>
                 </div>
             </div>
@@ -165,15 +162,15 @@ export default {
                 },
                 body: JSON.stringify(payload)
             });
-            
-            if(response.status === 200){
+
+            if (response.status === 200) {
                 Modal.success({
                     title: 'Thank you for your feedback',
                     content: 'Your feedback has been sent to Bird Oasis',
                 });
 
                 this.$router.push('/account/transaction');
-            }else{
+            } else {
                 Modal.error({
                     title: 'Something went wrong',
                     content: 'Please try again later',
@@ -189,21 +186,49 @@ export default {
 
 
 <style scoped>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Popins', sans-serif;
+}
+
+#wrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#wrapper h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
 tr td:nth-child(2) {
     text-align: right;
 }
 
 h2 {
-    margin-top: 20px;
-    font-weight: 700;
-    font-size: 1.5rem;
+    margin: 20px 0 0 0;
+    font-weight: 600;
+    font-size: 2rem;
 }
 
-.bird_image {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 20px;
+#feedback p{
+    font-size: 1.25rem;
+}
+
+#feedback input{
+    padding: 10px;
+}
+
+#feedback_button{
+    text-align: center;
+}
+
+#feedback_button button{
+    padding: 5px 20px;
+    margin-top: 10px;
 }
 </style>
