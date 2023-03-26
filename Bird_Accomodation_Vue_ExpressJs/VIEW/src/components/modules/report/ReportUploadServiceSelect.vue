@@ -7,7 +7,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Remain / Quantity</th>
+                <th>R/Quantity</th>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -58,3 +58,8 @@ export default {
     },
 }
 </script>
+<style scoped>
+thead th{
+    font-size: 1rem;
+}
+</style>

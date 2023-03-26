@@ -1,19 +1,24 @@
 <template>
-    <div class="main">
-        <h1 class="title has-text-centered">On-use Service info</h1>
-        <p class="has-text-centered subtitle">Infomation about the service are used during boarding</p>
-        <table style="width: 100%;">
+    <div id="wrapper_bar">
+        <h1>On-use Service info</h1>
+        <p>Infomation about the service are used during boarding</p>
+        <table class="table is-fullwidth">
             <thead>
                 <th>Name</th>
                 <th class="has-text-centered">Completed</th>
                 <th>Progress</th>
             </thead>
-            <tr v-for="service in getBookingServices">
-                <td width="100px" style="overflow: hidden;"><p style="width: inherit;">{{ service.name }}</p></td>
-                <td class="has-text-centered" v-if="service.isPack === 0">{{ service.quantity - service.remain }} / {{ service.quantity }}</td>
-                <td class="has-text-centered" v-else>Pack selected</td>
-                <td><a-progress :percent="serviceRemainPercent(service)" :show-info="true" /></td>
-            </tr>
+            <tbody>
+                <tr v-for="service in getBookingServices">
+                    <td width="100px" style="overflow: hidden;">
+                        <p style="width: inherit;">{{ service.name }}</p>
+                    </td>
+                    <td class="has-text-centered" v-if="service.isPack === 0">{{ service.quantity - service.remain }} / {{
+                        service.quantity }}</td>
+                    <td class="has-text-centered" v-else>Pack selected</td>
+                    <td><a-progress :percent="serviceRemainPercent(service)" :show-info="true" /></td>
+                </tr>
+            </tbody>
         </table>
 
         <!-- test {{ getBookingServices }} -->
@@ -30,7 +35,7 @@ export default {
     name: 'ReportProgressBar',
     data() {
         return {
-            
+
         };
     },
     computed: {
@@ -39,13 +44,13 @@ export default {
         })
     },
     methods: {
-        serviceRemainPercent(service){
-            if(service.isPack === 1) return 100;
+        serviceRemainPercent(service) {
+            if (service.isPack === 1) return 100;
             else {
                 let remain = service.remain;
                 let quantity = service.quantity;
                 let complete = quantity - remain;
-                return Math.round((complete/quantity)*100);
+                return Math.round((complete / quantity) * 100);
             }
         }
     },
@@ -61,8 +66,31 @@ export default {
 </script>
 
 <style scoped>
-.main{
-    padding: 10px;
-    margin-bottom: 40px;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Popins', sans-serif;
 }
-</style>
+
+#wrapper_bar {
+    padding: 0;
+    margin: 0 0 0 10%;
+}
+
+#wrapper_bar h1 {
+    font-weight: 650;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#wrapper_bar p {
+    font-size: 1rem;
+    text-align: center;
+}
+
+thead th {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+}</style>

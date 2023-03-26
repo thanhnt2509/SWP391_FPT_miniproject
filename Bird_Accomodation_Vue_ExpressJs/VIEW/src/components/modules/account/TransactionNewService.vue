@@ -54,8 +54,7 @@ export default defineComponent({
                     });
                     this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
                     this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
-                    // clear fields
-                    this.$store.commit('SET_NEW_REPORT_FEEDBACK', '');
+                    this.$store.dispatch('clearNewReport')
                     router.push(`/report/${route.params.booking_id}`)
                 } else {
                     Modal.error({

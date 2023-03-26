@@ -1,9 +1,9 @@
 <template>
+  <!--       report: {{ getReportItem }}-->
   <div class="column is-8">
-    <div class="container has-text-centered">
-      <!--       report: {{ getReportItem }}-->
+    <div>
       <div v-if="!getReportItem">
-        <h3 class="title">No report available</h3>
+        <h3 class="title" style="color: red; font-size: 3rem;">No report available</h3>
       </div>
       <a-tabs v-model:activeKey="activeKey" type="card">
         <a-tab-pane v-for="(data, index) in getReportItem" :key="index" :tab="data.date">
@@ -11,10 +11,9 @@
         </a-tab-pane>
       </a-tabs>
       
-
-      <!--        button to add a report-->
-      <div v-if="$store.getters.getUser?.role === 1">
-        <button class="button is-primary add_report_button" @click="showModal">Add Report</button>
+      <!-- button to add a report -->
+      <div v-if="$store.getters.getUser?.role === 1" id="addReport">
+        <button class="button is-primary" @click="showModal">Add Report</button>
         <a-modal width="1000px" v-model:visible="visible"
           :title="`Update Report`" :confirm-loading="confirmLoading"
           @ok="handleOk">
@@ -151,9 +150,21 @@ export default {
 </script>
 
 <style scoped>
-.add_report_button {
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Popins', sans-serif;
+}
+
+#addReport{
+  text-align: center;
+}
+
+#addReport button{
   margin-top: 20px;
-  padding: 30px;
-  font-size: 20px;
+  padding: 5px 20px;
+  font-weight: 600;
+  font-size: 1.25rem;
 }
 </style>

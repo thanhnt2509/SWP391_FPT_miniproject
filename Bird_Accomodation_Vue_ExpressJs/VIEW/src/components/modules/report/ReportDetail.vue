@@ -1,20 +1,17 @@
 <template>
   <!-- reportData: {{ reportData }} -->
   <!-- {{ reportData.images[0]?.service_report_image}} -->
-  <div class="main columns">
+  <div id="wrapper" class="columns">
     <!--      report text -->
     <div class="column is-6" style="padding-left: 61px;">
-      <ReportMessage :reportData="reportData"/>
+      <ReportMessage :reportData="reportData" />
     </div>
 
     <!--      report img-->
-    <div class="column is-6">
-      <h1 class="title">Report Image</h1>
+    <div class="column is-6" id="report_img">
       <a-carousel dots-class="slick-dots slick-thumb">
         <template #customPaging="props">
-          <a>
-            <img :src="getImgUrl(reportData.images[props.i]?.service_report_image)" />
-          </a>
+          <img class="img_report_paging" :src="getImgUrl(reportData.images[props.i]?.service_report_image)" />
         </template>
         <div v-for="item in reportData.images" :key="item">
           <img class="img_report" :src="getImgUrl(item.service_report_image)" />
@@ -58,7 +55,7 @@ export default {
 </script>
 
 <style scoped>
-.main {
+#wrapper {
   padding: 0;
   margin: 0;
   height: 597px;
@@ -103,9 +100,18 @@ export default {
   filter: grayscale(0%);
 }
 
+#report_img{
+  margin-top: 40px;
+}
+
 .img_report {
   width: 424px;
   height: 424px;
   object-fit: cover;
+}
+
+.img_report_paging{
+  margin-top: 20px;
+  cursor: pointer;
 }
 </style>
