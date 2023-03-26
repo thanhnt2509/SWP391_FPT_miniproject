@@ -1,10 +1,6 @@
 <template>
-    <div class="content" style="padding-left: 6%; padding-right: 6%;">
-        <div class="has-text-centered">
-            <h1 class="title">Report History for Booking_{{ $route.params.booking_id }}</h1>
-            <!-- <p class="subtitle">{{ getReportItem?.date_from }} - {{ getReportItem?.date_to }}</p> -->
-
-        </div>
+    <div id="wrapper_title">
+        <h1 class="title">Report History for Booking_{{ $route.params.booking_id }}</h1>
         <div class="columns">
             <ReportDay />
             <div class="column is-4">
@@ -37,5 +33,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#wrapper_title{
+    width: 80%;
+    margin: 0 auto;
+}
+
+#wrapper_title h1{
+    font-weight: 650;
+    font-size: 3rem;
+    text-align: center;
+}
 </style>

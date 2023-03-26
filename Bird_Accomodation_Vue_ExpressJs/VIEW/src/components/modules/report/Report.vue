@@ -1,10 +1,6 @@
 <template>
-    <div class="content" style="padding-left: 6%; padding-right: 6%;">
-        <div class="has-text-centered">
-            <h1 class="title ">Report History </h1>
-            <!-- for Booking_{{ $route.params.booking_id }} -->
-            <!-- <p class="subtitle">date_from - date_to</p> -->
-        </div>
+    <div id="wrapper">
+        <h1>Report History </h1>
          <!-- <p>TEST: {{ getReportItem }}</p> -->
          <!-- <p>get all service of booking: {{ getBookingServices }}</p> -->
         <!--<p>getUser test: {{ getUser }}</p> -->
@@ -45,4 +41,22 @@ export default {
 }                                                                                                                                                                     
 </script>
 
-<style scoped></style>
+<style scoped>
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Popins', sans-serif;
+}
+
+#wrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+
+#wrapper h1{
+    font-weight: 650;
+    font-size: 3rem;
+    text-align: center;
+}
+</style>

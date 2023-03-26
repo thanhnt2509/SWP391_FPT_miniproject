@@ -3,7 +3,7 @@
     <!-- newReportFeedback: {{ getNewReportFeedback }} -->
 
     <div class="report">
-        <h1 class="title">Report Message</h1>
+        <h1>Report Message</h1>
         <div class="report_title">
             <p>Bird Oasis</p>
         </div>
@@ -34,12 +34,12 @@
             </div>
         </div>
         <a-input-group compact width="100%" v-if="$store.getters.getUser.role === 0">
-            <a-input v-if="reportData.feedback_content !== null" disabled v-model:value="reportData.feedback_content"
-                placeholder="Leave your daily feedback here !" style="width: calc(100% - 67px)" />
+            <a-input class="feedback_input" v-if="reportData.feedback_content !== null" disabled v-model:value="reportData.feedback_content"
+                placeholder="Leave your daily feedback here !" style="width: calc(100% - 80px)" />
 
             <a-input v-else v-model:value="newFeedback" placeholder="Leave your daily feedback here !"
-                style="width: calc(100% - 67px)" />
-            <a-button type="primary" @click="onSendFeedback">Send</a-button>
+                style="width: calc(100% - 80px)" />
+            <a-button style="width: 80px;" type="primary" @click="onSendFeedback">Send</a-button>
         </a-input-group>
     </div>
 </template>
@@ -80,24 +80,23 @@ export default {
                         dreport_id: this.reportData.dreport_id,
                         feedback_content: this.getNewReportFeedback
                     }
-                    const success = this.$store.dispatch('submitNewReportFeedback', payload); 
-                    if(success) {
+                    const success = this.$store.dispatch('submitNewReportFeedback', payload);
+                    if (success) {
                         Modal.success({
                             title: 'Success',
                             content: 'Your feedback has been sent!',
                         });
                         this.$store.dispatch('clearNewReportFeedback');
-                        this.$router.push(`/account/transaction`)
+                        this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
+                        this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
+                        this.$router.push(`/report/${this.$route.params.booking_id}`);
                     } else {
                         Modal.error({
                             title: 'Error',
                             content: 'Your feedback has not been sent!',
                         });
                     }
-                    
                 }
-                // console.log(`dreport_id: ${this.reportData.dreport_id}`);
-                // console.log(`feedback_content: ${this.getNewReportFeedback}`);
             }, 2000);
         }
     },
@@ -121,7 +120,12 @@ export default {
     background-color: #fff;
 }
 
+.report h1{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
 .report_title {
+    text-align: center;
     height: 35px;
     width: 100%;
     background-color: #3FA9FF;
@@ -185,12 +189,12 @@ export default {
     overflow: hidden;
     width: 70%;
     border-radius: 20px;
-    top: 82%;
-    left: 20%;
+    bottom: 14%;
+    right: 10%;
 }
 
 .report_message_user_message p {
-    padding: 10px 20px;
+    padding: 5px 20px;
     color: white;
     text-align: left;
     word-wrap: break-word;
@@ -199,7 +203,12 @@ export default {
 
 .report_message_user_title {
     position: absolute;
-    top: 87%;
-    left: 91%;
+    bottom: 14%;
+    right: 2%;
+}
+
+.feedback_input{
+    position: relative;
+    width: 80%;
 }
 </style>

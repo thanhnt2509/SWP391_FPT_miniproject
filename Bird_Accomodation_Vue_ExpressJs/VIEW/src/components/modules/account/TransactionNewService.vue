@@ -52,9 +52,11 @@ export default defineComponent({
                             h('p', 'Feel free to contact us to know more information !'),
                         ]),
                     });
-
+                    store.dispatch('getAllReportOfBooking_id', route.params.booking_id);
+                    store.dispatch('getAllServiceOfBooking_id', route.params.booking_id);
+                    store.dispatch('clearNewReport')
                     router.push(`/report/${route.params.booking_id}`)
-                }else{
+                } else {
                     Modal.error({
                         title: 'Checkout failed !',
                         content: h('div', {}, [
