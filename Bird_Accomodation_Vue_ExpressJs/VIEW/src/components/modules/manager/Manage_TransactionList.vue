@@ -1,5 +1,5 @@
 <template>
-  SORT BY: {{ sort_by }} <br />
+  <!-- SORT BY: {{ sort_by }} <br /> -->
   <!-- dateFrom: {{ dateFrom }} dateTo: {{ dateTo }} -->
   <!-- visible: {{ visible }} -->
   <a-modal width="1000px" v-model:visible="visible" :title="`Detail for booking ${booking_idSelected}`">

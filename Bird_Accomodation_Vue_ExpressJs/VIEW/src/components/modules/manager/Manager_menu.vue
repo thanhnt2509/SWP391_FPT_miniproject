@@ -7,9 +7,9 @@
                 <a-breadcrumb-item>{{ `${selectedKeys[0].charAt(0).toUpperCase()}${selectedKeys[0].slice(1)}`
                 }}</a-breadcrumb-item>
             </a-breadcrumb>
-            <a-layout style="padding: 24px 0; background: #fff">
-                <a-layout-sider width="200" style="background: #fff">
-                    <a-menu v-model:selectedKeys="selectedKeys" mode="inline" style="height: 100%">
+            <a-layout style="background: #fff">
+                <a-layout-sider width="200">
+                    <a-menu v-model:selectedKeys="selectedKeys" mode="inline" style="height: 100%; padding-top: 40px;">
                         <a-menu-item key="dashboard">
                             <account-book-outlined />
                             <span>Dashboard</span>

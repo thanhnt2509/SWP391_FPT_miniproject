@@ -19,13 +19,14 @@
           <li>FAQ</li>
           <li>Terms of use</li>
           <li>Privacy policy</li>
+          <li>Hotline: 0982-912-123</li>
         </ul>
       </div>
       <div id="self_intro_reference">
         <h2>Follow us</h2>
         <ul>
-          <li><a href="https://github.com/tien-rayujin/SWP391_FPT_miniproject" target="_blank"><i class="fa-brands fa-square-github"></i>Github</a></li>
-          <li><a href="https://www.youtube.com/watch?v=8FsN1yXuUq0" target="_blank"><i class="fa-brands fa-youtube"></i>Youtube</a></li>
+          <li><a href="https://github.com/tien-rayujin/SWP391_FPT_miniproject" target="_blank"><i class="fa-brands fa-square-github" style="font-family: 'Font Awesome 5 Free'"></i>Github</a></li>
+          <li><a href="https://www.youtube.com/watch?v=8FsN1yXuUq0" target="_blank"><i style="font-family: 'Font Awesome 5 Free'" class="fa-brands fa-youtube"></i>Youtube</a></li>
         </ul>
       </div>
       <div id="self_intro_map">
@@ -75,6 +76,11 @@ ul li {
   margin-left: 20px;
   font-size: 1.25rem;
   cursor: pointer;
+}
+
+ul li:hover {
+  margin-left: 40px;
+  color: #7282B1;
 }
 
 li i{

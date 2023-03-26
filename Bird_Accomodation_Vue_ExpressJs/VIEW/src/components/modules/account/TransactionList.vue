@@ -248,4 +248,6 @@ export default defineComponent({
 
 #sortingBar_button button {
     margin: 0 10px;
-}</style>
+}
+
+</style>
