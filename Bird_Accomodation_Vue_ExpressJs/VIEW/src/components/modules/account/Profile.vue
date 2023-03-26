@@ -1,34 +1,31 @@
 <template>
-    <div class="wrapper container columns">
-        <div class="wrapper-info column is-8">
-            <h1 class="title">User information</h1>
+    <div class="columns" id="wrapper">
+        <div class="column is-8" id="wrapper_info">
+            <h1>User information</h1>
             <div class="field">
-                <label class="label">Name</label>
+                <h3>Name</h3>
                 <input class="input" type="text" v-model="fields.name">
             </div>
             <div class="field">
-                <label class="label">Email</label>
+                <h3>Email</h3>
                 <input disabled class="input" type="email" v-model="fields.email">
             </div>
             <div class="field">
-                <label class="label">Phone</label>
+                <h3>Phone</h3>
                 <input class="input" type="tel" v-model="fields.phone">
             </div>
             <div class="field">
-                <label class="label">Address</label>
+                <h3>Address</h3>
                 <input class="input" type="text" v-model="fields.address">
             </div>
         </div>
-        <div class="wrapper-avatar column is-4 ">
-            <div class="wrapper-avatar-img">
-                <img src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
-            </div>
+        <div class="column is-4" id="wrapper_img">
+            <img src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
         </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
     name: 'Profile',
     components: {
@@ -60,40 +57,40 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-    width: 100%;
-    height: fit-content;
-    margin: 3% 13% 3% 17%;
-    /* background-color: rgb(223, 221, 221); */
-    border: 0.4px solid #aaaaaa;
-    border-radius: 20px;
-    overflow: hidden;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Popins', sans-serif;
 }
 
-.wrapper-info {
-    background-color: #fff;
-    /* border-radius: 20px; */
+#wrapper{
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #B8957B;
+    border-radius: 10px;
+}
+
+#wrapper h1{
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+#wrapper_info h3{
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+#wrapper_info input{
     padding: 20px;
 }
 
-.wrapper-avatar{
-
-}
-
-.wrapper-avatar-img{
+#wrapper_img img{
     width: 100%;
     height: 100%;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.wrapper-avatar-img img{
-    width: 100%;
-    height: 100%;
-    object-fit: inherit;
-    border-radius: 20px;
+    padding: 10% 0 0 10%;
 }
 </style>
