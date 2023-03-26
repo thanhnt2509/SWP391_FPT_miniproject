@@ -90,6 +90,7 @@ const getters = {
 	getBookingOnGoing: state => state.bookings.filter(booking => booking.status === 2),
 	getBookingCompleted: state => state.bookings.filter(booking => booking.status === 3),
 	getBookingCanceled: state => state.bookings.filter(booking => booking.status === 4),
+	getBookingLatest: state => state.bookings.slice(Math.max(state.bookings.length - 5, 0)), 
 
 };
 

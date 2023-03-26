@@ -198,7 +198,9 @@ export default defineComponent({
       // } else
       if (props.sort_by === "All") {
         return store.getters["allBookingItems"];
-      } else if (props.sort_by === "Pending") {
+      } else if (props.sort_by === "Lastest") {
+        return store.getters["allBookingItems_latest"];
+      }else if (props.sort_by === "Pending") {
         return store.getters["allBookingItems_pending"];
       } else if (props.sort_by === "Approved") {
         return store.getters["allBookingItems_approved"];

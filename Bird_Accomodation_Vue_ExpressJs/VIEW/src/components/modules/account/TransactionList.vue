@@ -9,17 +9,18 @@
             <h3>Sort by status</h3>
             <!-- sortBy {{ sortBy }} -->
             <div id="sortingBar_button">
+                <button @click="sortBy = 'latest'" class="button is-primary">5 Latest booking</button>
                 <button @click="sortBy = 'all'" class="button is-dark is-light">All</button>
                 <button @click="sortBy = 'pending'" class="button is-warning"><i style="padding-right: 10px"
                         class="fa-solid fa-circle-pause"></i>Pending</button>
-                <button @click="sortBy = 'approved'" class="button is-info"><i style="padding-right: 10px"
-                        class="fa-solid fa-calendar-check"></i>Approve</button>
-                <button @click="sortBy = 'on-going'" class="button is-link"><i style="padding-right: 10px"
+                <button @click="sortBy = 'approved'" class="button is-success"><i style="padding-right: 10px"
+                        class="fa-solid fa-calendar-check"></i>Approved</button>
+                <button @click="sortBy = 'on-going'" class="button is-info"><i style="padding-right: 10px"
                         class="fa-solid fa-square-pen"></i>On-going</button>
-                <button @click="sortBy = 'completed'" class="button is-primary"><i style="padding-right: 10px"
-                        class="fa-solid fa-wallet"></i>Complete</button>
-                <button @click="sortBy = 'canceled'" class="button is-warning"><i style="padding-right: 10px"
-                        class="fa-brands fa-rev"></i>Cancel</button>
+                <button @click="sortBy = 'completed'" class="button is-link"><i style="padding-right: 10px"
+                        class="fa-solid fa-wallet"></i>Completed</button>
+                <button @click="sortBy = 'canceled'" class="button is-danger"><i style="padding-right: 10px"
+                        class="fa-brands fa-rev"></i>Canceled</button>
             </div>
         </div>
 
@@ -174,6 +175,8 @@ export default defineComponent({
         const getBooking = computed(() => {
             if (sortBy.value === 'all')
                 return store.getters['getBookings']
+            else if (sortBy.value === 'latest')
+                return store.getters['getBookingLatest']
             else if (sortBy.value === 'pending')
                 return store.getters['getBookingPending']
             else if (sortBy.value === 'approved')
@@ -249,5 +252,4 @@ export default defineComponent({
 #sortingBar_button button {
     margin: 0 10px;
 }
-
 </style>

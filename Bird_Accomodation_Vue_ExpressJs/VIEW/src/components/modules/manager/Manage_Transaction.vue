@@ -4,17 +4,18 @@
     <div id="sortingBar">
       <h3>Sort by status</h3>
       <div id="sortingBar_button">
+        <button @click="sort_by = 'Lastest'" class="button is-dark is-primary">10 Lastest Booking</button>
         <button @click="sort_by = 'All'" class="button is-dark is-light">All</button>
         <button @click="sort_by = 'Pending'" class="button is-warning"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
             class="fa-solid fa-circle-pause"></i>Pending</button>
-        <button @click="sort_by = 'Approved'" class="button is-info"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
-            class="fa-solid fa-calendar-check"></i>Approve</button>
-        <button @click="sort_by = 'On-going'" class="button is-link"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
+        <button @click="sort_by = 'Approved'" class="button is-success"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
+            class="fa-solid fa-calendar-check"></i>Approved</button>
+        <button @click="sort_by = 'On-going'" class="button is-info"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
             class="fa-solid fa-square-pen"></i>On-going</button>
-        <button @click="sort_by = 'Completed'" class="button is-primary"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
-            class="fa-solid fa-wallet"></i>Complete</button>
-        <button @click="sort_by = 'Canceled'" class="button is-warning"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
-            class="fa-solid fa-circle-xmark"></i>Cancel</button>
+        <button @click="sort_by = 'Completed'" class="button is-link"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
+            class="fa-solid fa-wallet"></i>Completed</button>
+        <button @click="sort_by = 'Canceled'" class="button is-danger"><i style="font-family: 'Font Awesome 5 Free'; padding-right: 10px"
+            class="fa-solid fa-circle-xmark"></i>Canceled</button>
       </div>
     </div>
   </div>
@@ -80,6 +81,8 @@ export default defineComponent({
 #sortingBar h3 {
     font-size: 2rem;
     font-weight: 600;
+    width: 400px;
+    margin-right: 270px;
 }
 
 #sortingBar_button button {

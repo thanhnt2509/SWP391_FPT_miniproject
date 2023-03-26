@@ -92,9 +92,9 @@ const getters = {
 	allBookingItems_ongoing: state => state.allBookings.filter(booking => booking.status == 2),
 	allBookingItems_completed: state => state.allBookings.filter(booking => booking.status == 3),
 	allBookingItems_canceled: state => state.allBookings.filter(booking => booking.status == 4),
+	allBookingItems_latest: state => state.allBookings.slice(Math.max(state.allBookings.length - 10, 0)), 
 	allPostItems: state => state.allPosts,
-	// allBookingItems_date: (state, payload) => state.allBookings.filter(booking => new Date(booking.date_from).getTime() >= new Date(payload[0]).getTime()
-	// 													&& new Date(booking.date_to).getTime() <= new Date(payload[1]).getTime()),
+	
 
 };
 
