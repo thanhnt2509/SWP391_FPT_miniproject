@@ -65,7 +65,7 @@ export default defineComponent({
     },
     setup() {
         return {
-            selectedKeys: ref(['dashboard']),
+            selectedKeys: ref(['transaction']),
         };
     },
 });
