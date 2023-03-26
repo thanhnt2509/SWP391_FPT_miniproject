@@ -51,7 +51,12 @@ export default {
     },
     mounted() {
         this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
-    }
+        this.getBookingServices = this.$store.getters.getBookingServices;
+    },
+    created() {
+        this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
+        this.getBookingServices = this.$store.getters.getBookingServices;
+    },
 }
 </script>
 

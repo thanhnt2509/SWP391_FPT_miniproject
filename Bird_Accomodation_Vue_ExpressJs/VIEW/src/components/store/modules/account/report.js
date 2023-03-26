@@ -7,6 +7,7 @@ const state = {
     new_report: {
         content: undefined,
         images: undefined,
+        date: undefined,
         updateList: [],
     },
     newReportFeedback: '',
@@ -21,6 +22,9 @@ const mutations = {
     },
     SET_NEW_REPORT_IMAGES(state, images) {
         state.new_report.images = images
+    },
+    SET_NEW_REPORT_DATE(state, date) {
+        state.new_report.date = date
     },
     SET_NEW_REPORT_UPDATE_LIST(state, updateList) {
         state.new_report.updateList = updateList
@@ -118,6 +122,7 @@ const getters = {
     getReportItem: state => state.report,
     getNewReport: state => state.new_report,
     getNewReportContent: state => state.new_report.content,
+    getNewReportDate: state => state.new_report.date,
     getNewReportImages: state => state.new_report.images,
     getNewReportUpdateList: state => state.new_report.updateList,
     getBookingServices: state => state.bookingServices,

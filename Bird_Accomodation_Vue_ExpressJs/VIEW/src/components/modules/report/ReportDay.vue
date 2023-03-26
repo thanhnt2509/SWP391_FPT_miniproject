@@ -7,7 +7,6 @@
       </div>
       <a-tabs v-model:activeKey="activeKey" type="card">
         <a-tab-pane v-for="(data, index) in getReportItem" :key="index" :tab="data.date">
-          <!--                 {{ data }}-->
           <ReportDetail :reportData="data" />
         </a-tab-pane>
       </a-tabs>
@@ -17,7 +16,7 @@
       <div v-if="$store.getters.getUser?.role === 1">
         <button class="button is-primary add_report_button" @click="showModal">Add Report</button>
         <a-modal width="1000px" v-model:visible="visible"
-          :title="`Update Report ${new Date().toISOString().slice(0, 10)}`" :confirm-loading="confirmLoading"
+          :title="`Update Report`" :confirm-loading="confirmLoading"
           @ok="handleOk">
           <!--        <p>{{ modalText }}</p>-->
             <!-- getNewReportContent: {{ getNewReportContent }} <br>
@@ -87,7 +86,7 @@ export default {
         const formData = this.handleContentForm();
         const uploadReportListPayload = {
           booking_id: this.$route.params.booking_id,
-          date: new Date().toISOString().slice(0, 10),
+          date: this.$store.getters.getNewReportDate,
           updateList: this.$store.getters.getNewReportUpdateList,}
         const success = 
           this.$store.dispatch('submitNewReport', formData) && 
@@ -100,6 +99,9 @@ export default {
             ]),
           });
           this.$store.dispatch('clearNewReport');
+          this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
+          this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
+          this.$router.push(`/manager/report/${this.$route.params.booking_id}`);
         } else {
           Modal.error({
             title: 'Something went wrong !',
@@ -113,7 +115,7 @@ export default {
     handleContentForm() {
       const formData = new FormData();
       formData.append('booking_id', this.$route.params.booking_id);
-      formData.append('date', new Date().toISOString().slice(0, 10));
+      formData.append('date', this.$store.getters.getNewReportDate);
       formData.append('service_report_text', this.$store.getters.getNewReportContent);
       // formData.append('service_report_update', this.$store.getters.getNewReportUpdateList); // can not upload array as form data
       const images = this.$store.getters.getNewReportImages;
@@ -126,7 +128,7 @@ export default {
     validateReportForm() {
       const newReport = this.$store.getters.getNewReport;
       console.log(newReport);
-      if (!newReport || !newReport.images || !newReport.content || newReport.content.length === 0) {
+      if (!newReport || !newReport.images || !newReport.date || !newReport.content || newReport.content.length === 0) {
         return false;
       }
       return true;
@@ -137,9 +139,13 @@ export default {
     ReportUpload,
     ReportUploadServiceSelect,
   },
-  created() {
+  mounted() {
     this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
-    this.$store.dispatch('getAllServiceOfBooking_id', this.$route.params.booking_id);
+    this.getReportItem = this.$store.getters.getReportItem;
+  },
+  created(){
+    this.$store.dispatch('getAllReportOfBooking_id', this.$route.params.booking_id);
+    this.getReportItem = this.$store.getters.getReportItem;
   }
 }
 </script>

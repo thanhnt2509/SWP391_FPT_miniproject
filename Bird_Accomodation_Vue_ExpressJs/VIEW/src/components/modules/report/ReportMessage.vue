@@ -14,7 +14,7 @@
                         <UserOutlined />
                     </template>
                 </a-avatar>
-                <p>Staff_01</p>
+                <p>Staff</p>
             </div>
             <div class="report_message_staff_message_box">
                 <div class="report_message_staff_message">
@@ -41,7 +41,6 @@
                 style="width: calc(100% - 67px)" />
             <a-button type="primary" @click="onSendFeedback">Send</a-button>
         </a-input-group>
-
     </div>
 </template>
 

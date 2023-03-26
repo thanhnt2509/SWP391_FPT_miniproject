@@ -9,13 +9,17 @@
     </div>
 
     <div class="field">
+      <label class="label">Date</label>
+      <input class="input" @input="handleInputDate" type="date">
+    </div>
+
+    <div class="field">
       <label class="label">Upload Images</label>
       <label class="subtitle">Hold Ctrl or Shift to select multiple file</label>
       <input type="file" accept="image/*" multiple @change="handleFileUpload">
     </div>
   </div>
 
-  <!-- new report : {{ $store.getters.getNewReport }} -->
 </template>
 
 <script>
@@ -32,6 +36,9 @@ export default {
     },
     handleInputContent(evt) {
       this.$store.commit('SET_NEW_REPORT_CONTENT', evt.target.value)
+    },
+    handleInputDate(evt) {
+      this.$store.commit('SET_NEW_REPORT_DATE', evt.target.value)
     }
   }
 }

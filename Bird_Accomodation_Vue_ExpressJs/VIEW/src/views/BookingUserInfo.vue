@@ -2,7 +2,7 @@
     <div class="column" id="wrapper_userInfo">
         <div id="wrapper_userInfo_title">
             <h2>User information</h2>
-            <img src="http://localhost:5000/file/get_user_img/bird-house-design.jpg" alt="">
+            <img :src="`http://localhost:5000/file/get_user_img/${$store.getters.getUser.user_img}`" alt="">
         </div>
         <table class="table is-fullwidth">
             <tr>
