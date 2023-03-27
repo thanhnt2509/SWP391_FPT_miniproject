@@ -114,7 +114,7 @@
                     </tr>
                 </table>
 
-                <div id="feedback">
+                <div id="feedback" v-if="$store.getters.getUser.role === 0">
                     <h2>Leave a feedback</h2>
                     <p>Rating: <a-rate v-model:value="ratingPoint" allow-half /></p>
                     <input class="input" type="text" v-model="feedbackContent"
