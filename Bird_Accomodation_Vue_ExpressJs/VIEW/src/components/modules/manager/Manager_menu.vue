@@ -30,6 +30,10 @@
                             <fund-view-outlined />
                             <span>Manage Post</span>
                         </a-menu-item>
+                        <!-- <a-menu-item key="review">
+                            <fund-view-outlined />
+                            <span>Manage Reivew</span>
+                        </a-menu-item> -->
                     </a-menu>
                 </a-layout-sider>
                 <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
@@ -38,6 +42,7 @@
                     <Manage_Service v-if="selectedKeys == 'service'" />
                     <Manage_Account v-if="selectedKeys == 'account'" />
                     <Manage_Post v-if="selectedKeys == 'post'" />
+                    <!-- <Manage_Review v-if="selectedKeys == 'review'" /> -->
                 </a-layout-content>
             </a-layout>
         </a-layout-content>
@@ -51,6 +56,7 @@ import Manage_Transaction from './Manage_Transaction.vue';
 import Manage_Service from './Manage_Service.vue';
 import Manage_Account from './Manage_Account.vue';
 import Manage_Post from './Manage_Post.vue';
+// import Manage_Review from './Manage_Review.vue';
 export default defineComponent({
     components: {
         AccountBookOutlined,
@@ -61,7 +67,8 @@ export default defineComponent({
         Manage_Transaction,
         Manage_Service,
         Manage_Account,
-        Manage_Post
+        Manage_Post,
+        // Manage_Review
     },
     setup() {
         return {

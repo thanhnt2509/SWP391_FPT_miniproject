@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- :confirm-loading="confirmLoading" @ok="handleOk" -->
-        serviceSelected: {{ serviceSelected }}
+        <!-- serviceSelected: {{ serviceSelected }} -->
         <table>
             <thead>
                 <tr>
