@@ -29,14 +29,14 @@
                         <td v-if="service.isPack === 1">
                             <a-switch :disabled="true" :checked="true" />
                         </td>
-                        <td v-else><a-input-number :disabled="true" v-model:value="service.quantity" :min="1" :max="2" />
+                        <td v-else><a-input-number :disabled="false" v-model:value="service.quantity" :min="1" :max="2" />
                         </td>
                         <!-- <td v-else><a-input-number v-model:value="service.quantity" :min="minQuantity" :max="2" /></td> -->
                     </tr>
                 </tbody>
             </table>
-            <b>Notes</b>: this function is not available yet
-                <br> <p><i>- You can still add new service to this booking but you can not change the quantity of service currently used</i></p>
+            <!-- <b>Notes</b>: this function is not available yet
+                <br> <p><i>- You can still add new service to this booking but you can not change the quantity of service currently used</i></p> -->
         </div>
 
         <div class="column">
